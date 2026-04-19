@@ -1,0 +1,189 @@
+.header {
+  background-color: var(--black);
+  color: var(--white);
+  padding: var(--space-md) 0;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.container {
+  position: relative;
+  display: flex;
+  align-items: center;
+  min-height: 2.75rem;
+}
+
+/* Одна строка: меню зліва й однакова «вага» з блоком дій — логотип рівно по центру шапки */
+.nav {
+  flex: 1;
+  display: flex;
+  justify-content: flex-start;
+  gap: var(--space-lg);
+  min-width: 0;
+}
+
+.logo {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  display: inline-flex;
+  align-items: center;
+  gap: 0.625rem;
+  white-space: nowrap;
+  line-height: 1;
+}
+
+.logoMark {
+  flex-shrink: 0;
+  width: 44px;
+  height: 44px;
+  object-fit: contain;
+}
+
+.logoText {
+  font-size: 1.5rem;
+  font-weight: 900;
+  letter-spacing: -0.02em;
+}
+
+.logoAmp {
+  color: var(--accent-color);
+}
+
+.actions {
+  flex: 1;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  gap: var(--space-lg);
+  min-width: 0;
+}
+
+.navLink {
+  text-transform: uppercase;
+  font-weight: 700;
+  font-size: 0.875rem;
+  letter-spacing: 0.05em;
+  opacity: 0.8;
+}
+
+.navLink:hover {
+  opacity: 1;
+  color: var(--accent-color);
+}
+
+.supportBtn {
+  background-color: var(--accent-color);
+  color: var(--white);
+  padding: 0.75rem 1.5rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  font-size: 0.875rem;
+  border-radius: 4px;
+}
+
+.supportBtn:hover {
+  background-color: var(--accent-color-hover);
+}
+
+@media (max-width: 1024px) {
+  .nav {
+    gap: var(--space-md);
+  }
+
+  .navLink {
+    font-size: 0.8125rem;
+    letter-spacing: 0.04em;
+  }
+
+  .supportBtn {
+    padding: 0.65rem 1.1rem;
+    font-size: 0.8125rem;
+  }
+
+  .actions {
+    gap: var(--space-md);
+  }
+}
+
+@media (max-width: 900px) {
+  .nav {
+    gap: 0.5rem;
+    overflow-x: auto;
+    overflow-y: hidden;
+    flex-wrap: nowrap;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+    mask-image: linear-gradient(90deg, #000 92%, transparent);
+  }
+
+  .nav::-webkit-scrollbar {
+    display: none;
+  }
+
+  .navLink {
+    flex-shrink: 0;
+  }
+}
+
+@media (max-width: 768px) {
+  .header {
+    padding-top: max(0.75rem, env(safe-area-inset-top));
+    padding-bottom: max(0.75rem, env(safe-area-inset-bottom));
+  }
+
+  .container {
+    min-height: 3rem;
+  }
+
+  .nav {
+    display: none;
+  }
+
+  .actions {
+    gap: 0.4rem;
+    flex-shrink: 0;
+  }
+
+  .supportBtn {
+    min-height: 44px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.5rem 0.85rem;
+    font-size: 0.6875rem;
+    max-width: 42vw;
+    text-align: center;
+    line-height: 1.15;
+  }
+
+  .logoText {
+    font-size: clamp(0.8125rem, 3.5vw, 1.125rem);
+  }
+
+  .logoMark {
+    width: 36px;
+    height: 36px;
+  }
+
+  .logo {
+    max-width: calc(100vw - 7.5rem);
+    justify-content: center;
+  }
+}
+
+@media (max-width: 380px) {
+  .logo {
+    gap: 0.4rem;
+    max-width: calc(100vw - 6.5rem);
+  }
+
+  .supportBtn {
+    padding: 0.45rem 0.55rem;
+    font-size: 0.625rem;
+    max-width: 38vw;
+  }
+}

@@ -1,0 +1,132 @@
+.main {
+  min-height: 100vh;
+  padding-bottom: var(--space-xl);
+}
+
+.header {
+  background-color: var(--black);
+  color: var(--white);
+  padding: var(--space-xl) 0;
+  margin-bottom: var(--space-xl);
+}
+
+.title {
+  font-size: 3rem;
+  margin-bottom: var(--space-md);
+}
+
+.description {
+  font-size: 1.25rem;
+  max-width: 700px;
+  opacity: 0.8;
+  line-height: 1.6;
+}
+
+.summarySection {
+  margin-bottom: var(--space-xl);
+}
+
+.summaryGrid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--space-lg);
+}
+
+.summaryCard {
+  background-color: var(--light-gray);
+  padding: var(--space-xl) var(--space-lg);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-xs);
+  border-radius: 4px;
+}
+
+.summaryLabel {
+  font-size: 0.875rem;
+  text-transform: uppercase;
+  font-weight: 700;
+  color: var(--accent-color);
+  opacity: 0.8;
+}
+
+.summaryValue {
+  font-size: 2.5rem;
+  font-weight: 900;
+  color: var(--black);
+}
+
+.historySection {
+  padding: var(--space-xl) 0;
+}
+
+.sectionTitle {
+  font-size: 2rem;
+  margin-bottom: var(--space-lg);
+}
+
+.reportList {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+}
+
+.reportItem {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: var(--space-lg);
+  background-color: var(--white);
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  border-radius: 4px;
+  transition: var(--transition-fast);
+}
+
+.reportItem:hover {
+  border-color: var(--accent-color);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+}
+
+.reportInfo {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.reportMonth {
+  font-size: 1.25rem;
+  font-weight: 800;
+  text-transform: uppercase;
+}
+
+.reportAmount {
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--accent-color);
+}
+
+.downloadBtn {
+  background-color: var(--black);
+  color: var(--white);
+  padding: 0.5rem 1.5rem;
+  font-weight: 800;
+  border-radius: 4px;
+}
+
+.downloadBtn:hover {
+  background-color: var(--accent-color);
+}
+
+@media (max-width: 768px) {
+  .summaryGrid {
+    grid-template-columns: 1fr;
+    gap: var(--space-md);
+  }
+
+  .title {
+    font-size: 2.5rem;
+  }
+
+  .summaryValue {
+    font-size: 2rem;
+  }
+}

@@ -1,0 +1,146 @@
+.main {
+  min-height: 100vh;
+  padding-bottom: var(--space-xl);
+}
+
+.header {
+  background-color: var(--black);
+  color: var(--white);
+  padding: var(--space-xl) 0;
+  margin-bottom: var(--space-xl);
+}
+
+.title {
+  font-size: 3.5rem;
+  margin-bottom: 0;
+  text-transform: uppercase;
+}
+
+.section {
+  padding: var(--space-xl) 0;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-xl);
+  align-items: center;
+}
+
+.sectionTitle {
+  font-size: 2.5rem;
+  margin-bottom: var(--space-md);
+  color: var(--black);
+}
+
+.text {
+  font-size: 1.125rem;
+  line-height: 1.6;
+  opacity: 0.8;
+}
+
+.imageWrapper {
+  position: relative;
+  aspect-ratio: 16 / 9;
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.image {
+  object-fit: cover;
+}
+
+.missionSection {
+  background-color: var(--bg-secondary);
+  padding: var(--space-xl) 0;
+  margin: var(--space-xl) 0;
+}
+
+.missionCard {
+  background-color: var(--accent-color);
+  color: var(--white);
+  padding: var(--space-xl);
+  border-radius: 4px;
+  text-align: center;
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.missionTitle {
+  font-size: 2.5rem;
+  margin-bottom: var(--space-md);
+}
+
+.missionText {
+  font-size: 1.5rem;
+  line-height: 1.4;
+  font-weight: 500;
+}
+
+.teamTitle {
+  font-size: 2.5rem;
+  text-align: center;
+  margin-bottom: var(--space-xl);
+}
+
+.teamGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  gap: var(--space-xl);
+}
+
+.teamMember {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.memberAvatar {
+  width: 150px;
+  height: 150px;
+  background-color: var(--light-gray);
+  border-radius: 50%;
+  margin-bottom: var(--space-md);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  border: 4px solid var(--white);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.avatarPlaceholder {
+  font-size: 3rem;
+  font-weight: 800;
+  color: var(--accent-color);
+}
+
+.memberName {
+  font-size: 1.25rem;
+  font-weight: 800;
+  margin-bottom: var(--space-xs);
+}
+
+.memberRole {
+  font-size: 0.875rem;
+  color: var(--text-secondary);
+  text-transform: uppercase;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+}
+
+@media (max-width: 768px) {
+  .grid {
+    grid-template-columns: 1fr;
+    gap: var(--space-lg);
+  }
+
+  .title {
+    font-size: 2.5rem;
+  }
+
+  .missionText {
+    font-size: 1.25rem;
+  }
+}

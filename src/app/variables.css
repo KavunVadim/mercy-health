@@ -1,0 +1,41 @@
+:root {
+  /* Colors - Inspired by fond-emblem.svg */
+  /* Blue variations from the logo */
+  --primary-blue: #1EA2FE;
+  --primary-blue-hover: #007DFF;
+  --secondary-blue: #22B3FE;
+  
+  /* Foundation palette */
+  --black: #000000;
+  --white: #ffffff;
+  --light-gray: #f5f5f5;
+  --dark-gray: #1a1a1a;
+  
+  /* Theme mapping */
+  --bg-primary: var(--white);
+  --bg-secondary: var(--light-gray);
+  --bg-dark: var(--black);
+  
+  /* Text */
+  --text-primary: var(--black);
+  --text-secondary: #4a4a4a;
+  --text-light: var(--white);
+  
+  /* Functional colors - using blue instead of green */
+  --accent-color: var(--primary-blue);
+  --accent-color-hover: var(--primary-blue-hover);
+  
+  /* Typography */
+  --font-main: var(--font-geist-sans), sans-serif;
+  --font-mono: var(--font-geist-mono), monospace;
+  
+  /* Spacing */
+  --space-xs: 0.25rem;
+  --space-sm: 0.5rem;
+  --space-md: 1rem;
+  --space-lg: 2rem;
+  --space-xl: 4rem;
+  
+  /* Transitions */
+  --transition-fast: 0.2s ease;
+}

@@ -1,0 +1,136 @@
+{
+  "navigation": {
+    "about": "About",
+    "projects": "Projects",
+    "reports": "Reporting",
+    "support": "Support"
+  },
+  "hero": {
+    "title": "Mercy and Health",
+    "description": "Saving lives and bringing victory closer by providing veterans and medics on the front line with everything they need.",
+    "cta": "Help Now"
+  },
+  "footer": {
+    "rights": "All rights reserved © 2026 CF \"Mercy and Health\"",
+    "columns": {
+      "contacts": "Contacts",
+      "socials": "Social Media",
+      "legal": "Legal Information"
+    },
+    "foundation_phone": "093-351-62-00",
+    "rehab_phone": "096-145-11-55",
+    "address_foundation": "Kyiv, Holosiivskyi District",
+    "address_rehab": "Kyiv, Obolonskyi District"
+  },
+  "about": {
+    "title": "About Our Foundation",
+    "history": {
+      "title": "Our History",
+      "content": "Founded in 2016, our foundation has grown from a local initiative into a large-scale organization. Since February 2022, we have been operating 24/7. Today, we are one of the largest suppliers of specialized transport for the Armed Forces of Ukraine."
+    },
+    "mission": {
+      "title": "Mission and Values",
+      "content": "We believe that no one should be left alone with their trouble. Our mission is to be a reliable rear for those on the front line and to provide comprehensive rehabilitation for those who have returned."
+    },
+    "team": {
+      "title": "Our Team",
+      "members": [
+        {
+          "name": "Oleksandr Yatsyna",
+          "role": "Founder of CF 'Mercy and Health'"
+        },
+        {
+          "name": "Yulia Ustich",
+          "role": "Executive Director of the Foundation"
+        },
+        {
+          "name": "Katya Bogadelnikova",
+          "role": "Director of the Rehabilitation Center"
+        },
+        {
+          "name": "Tetyana Makiyashyna",
+          "role": "Head Volunteer"
+        }
+      ]
+    }
+  },
+  "projects": {
+    "collected": "Collected",
+    "goal": "Goal",
+    "details": "Details",
+    "items": [
+      {
+        "id": "1",
+        "title": "Ambulances for the Front",
+        "description": "Over 200 specialized vehicles have already been delivered to save the lives of our defenders.",
+        "image": "https://images.unsplash.com/photo-1583321500900-82807e458f3c?auto=format&fit=crop&q=80&w=1000",
+        "collected": 210,
+        "goal": 300,
+        "unit": "vehicles"
+      },
+      {
+        "id": "2",
+        "title": "Project 'On the Shield'",
+        "description": "Providing refrigerated trucks for the dignified transportation of fallen Heroes.",
+        "image": "https://images.unsplash.com/photo-1576091160550-2173dad99978?auto=format&fit=crop&q=80&w=1000",
+        "collected": 850000,
+        "goal": 1500000
+      },
+      {
+        "id": "3",
+        "title": "Rehabilitation Center",
+        "description": "Free psychological and physical assistance to military personnel and their families.",
+        "image": "https://images.unsplash.com/photo-1579684385127-1ef15d508118?auto=format&fit=crop&q=80&w=1000",
+        "collected": 1200000,
+        "goal": 5000000
+      }
+    ]
+  },
+  "reports": {
+    "title": "Reporting",
+    "description": "We believe in full transparency. Our goal is to be a reliable rear for those on the front line.",
+    "summary": {
+      "total_collected": "Total Raised",
+      "donations_count": "Aid Delivered",
+      "avg_donation": "Ambulances"
+    },
+    "history": "Report History",
+    "months": {
+      "jan": "January",
+      "feb": "February",
+      "mar": "March"
+    }
+  },
+  "stats": {
+    "title": "Our Achievements",
+    "items": {
+      "collected": "Ambulances delivered",
+      "helped": "Project 'On the Shield'",
+      "donors": "Rehabilitation Centers"
+    }
+  },
+  "news": {
+    "title": "Our Activities",
+    "more": "All materials",
+    "items": [
+      {
+        "id": "1",
+        "date": "19.04.2026",
+        "title": "Mobile psychological groups operate in 4 regions of Ukraine",
+        "image": "https://images.unsplash.com/photo-1516574187841-cb9cc2ca948b?auto=format&fit=crop&q=80&w=1000"
+      },
+      {
+        "id": "2",
+        "date": "17.04.2026",
+        "title": "Support program for children of fallen defenders: teenage club",
+        "image": "https://images.unsplash.com/photo-1584622781564-1d9876a13d00?auto=format&fit=crop&q=80&w=1000"
+      },
+      {
+        "id": "3",
+        "date": "15.04.2026",
+        "title": "Assistance to orphanages and facilities for the elderly",
+        "image": "https://images.unsplash.com/photo-1583321500900-82807e458f3c?auto=format&fit=crop&q=80&w=1000"
+      }
+    ]
+  }
+}

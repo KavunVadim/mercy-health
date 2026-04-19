@@ -1,0 +1,29 @@
+.switcher {
+  display: flex;
+  gap: var(--space-sm);
+  align-items: center;
+}
+
+.link {
+  font-size: 0.875rem;
+  font-weight: 700;
+  padding: var(--space-xs) var(--space-sm);
+  border-radius: 4px;
+  color: var(--white);
+  opacity: 0.6;
+  min-width: 44px;
+  min-height: 44px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.link:hover {
+  opacity: 1;
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
+.link.active {
+  opacity: 1;
+  background-color: var(--accent-color);
+}

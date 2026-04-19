@@ -1,0 +1,158 @@
+.wrap {
+  display: none;
+  flex-shrink: 0;
+}
+
+@media (max-width: 768px) {
+  .wrap {
+    display: block;
+  }
+}
+
+.srOnly {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+.burger {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  padding: 0;
+  background: rgba(255, 255, 255, 0.08);
+  border-radius: 4px;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  color: var(--white);
+}
+
+.burger:focus-visible {
+  outline: 2px solid var(--accent-color);
+  outline-offset: 2px;
+}
+
+.burgerLines {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 5px;
+  width: 20px;
+}
+
+.burgerLines span {
+  display: block;
+  height: 2px;
+  width: 100%;
+  background: currentColor;
+  border-radius: 1px;
+  transition: transform 0.2s ease, opacity 0.2s ease;
+}
+
+.burgerLines[data-open="true"] span:nth-child(1) {
+  transform: translateY(7px) rotate(45deg);
+}
+
+.burgerLines[data-open="true"] span:nth-child(2) {
+  opacity: 0;
+}
+
+.burgerLines[data-open="true"] span:nth-child(3) {
+  transform: translateY(-7px) rotate(-45deg);
+}
+
+.backdrop {
+  position: fixed;
+  inset: 0;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.55);
+  z-index: 1001;
+  animation: fadeIn 0.2s ease;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.drawer {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: min(320px, 88vw);
+  height: 100vh;
+  height: 100dvh;
+  background: var(--black);
+  border-right: 1px solid rgba(255, 255, 255, 0.12);
+  z-index: 1002;
+  transform: translateX(-100%);
+  transition: transform 0.28s ease;
+  padding: calc(4.5rem + env(safe-area-inset-top, 0)) 1.25rem 1.5rem;
+  overflow-y: auto;
+  box-shadow: 8px 0 32px rgba(0, 0, 0, 0.35);
+}
+
+.drawer[data-open="true"] {
+  transform: translateX(0);
+}
+
+.drawerInner {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.drawerLink {
+  display: flex;
+  align-items: center;
+  padding: 0.875rem 0.75rem;
+  font-size: 0.9375rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  border-radius: 4px;
+  color: var(--white);
+  opacity: 0.9;
+  min-height: 48px;
+}
+
+.drawerLink:hover,
+.drawerLink:focus-visible {
+  background: rgba(255, 255, 255, 0.08);
+  opacity: 1;
+  color: var(--accent-color);
+}
+
+.drawerCta {
+  margin-top: 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 48px;
+  padding: 0.75rem 1rem;
+  background: var(--accent-color);
+  color: var(--white);
+  font-weight: 800;
+  font-size: 0.8125rem;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  border-radius: 4px;
+}
+
+.drawerCta:hover {
+  background: var(--accent-color-hover);
+}
