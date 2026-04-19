@@ -42,7 +42,9 @@ export default function Header({
         </nav>
 
         <div className={styles.actions}>
-          <LocaleSwitcher />
+          <div className={styles.localeDesktop}>
+            <LocaleSwitcher />
+          </div>
           <Link href={`/${lang}/support`} className={styles.supportBtn}>
             {dictionary.navigation.support}
           </Link>

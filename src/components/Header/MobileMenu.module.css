@@ -116,6 +116,16 @@
   gap: 0.25rem;
 }
 
+.localeBlock {
+  padding: 0 0.75rem 1rem;
+  margin-bottom: 0.5rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.localeBlock :global(a) {
+  min-width: 52px;
+}
+
 .drawerLink {
   display: flex;
   align-items: center;

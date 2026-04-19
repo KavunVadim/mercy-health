@@ -4,6 +4,7 @@ import Link from "next/link";
 import { useEffect, useId, useState } from "react";
 import styles from "./MobileMenu.module.css";
 import type { Locale } from "@/i18n-config";
+import LocaleSwitcher from "../LocaleSwitcher/LocaleSwitcher";
 
 export default function MobileMenu({
   dictionary,
@@ -83,6 +84,9 @@ export default function MobileMenu({
         inert={open ? undefined : true}
       >
         <div className={styles.drawerInner}>
+          <div className={styles.localeBlock}>
+            <LocaleSwitcher />
+          </div>
           <Link href={`/${lang}/about`} className={styles.drawerLink} onClick={close}>
             {dictionary.navigation.about}
           </Link>
