@@ -8,8 +8,8 @@ interface ProjectProps {
   image: string;
   collected: number;
   goal: number;
-  category: string;
-  status: string;
+  category?: string;
+  status?: string;
   dictionary: any;
   lang: Locale;
 }
@@ -27,6 +27,7 @@ export default function ProjectCard({
 }: ProjectProps) {
   const progress = Math.min(Math.round((collected / goal) * 100), 100);
   const numberLocale = lang === "uk" ? "uk-UA" : "en-US";
+  const hasMeta = Boolean(category || status);
 
   return (
     <article className={styles.card}>
@@ -35,10 +36,12 @@ export default function ProjectCard({
         <div className={styles.imageGradient} aria-hidden />
       </div>
       <div className={styles.content}>
-        <div className={styles.meta}>
-          <span className={styles.metaTag}>{category}</span>
-          <span className={styles.metaTagMuted}>{status}</span>
-        </div>
+        {hasMeta ? (
+          <div className={styles.meta}>
+            {category ? <span className={styles.metaTag}>{category}</span> : null}
+            {status ? <span className={styles.metaTagMuted}>{status}</span> : null}
+          </div>
+        ) : null}
         <h3 className={styles.title}>{title}</h3>
         <p className={styles.description}>{description}</p>
         
