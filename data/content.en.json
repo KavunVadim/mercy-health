@@ -1,0 +1,286 @@
+{
+  "site": {
+    "name": "Charitable Foundation «Mercy and Health»",
+    "tagline": "Together for Victory",
+    "description": "Charitable Foundation «Mercy and Health» — we support the army, rehabilitate veterans, and assist civilians affected by war.",
+    "phone_fund": "093-351-62-00",
+    "phone_center": "096-145-11-55",
+    "email": "info@fond.specter-it.site",
+    "address": "Vinnytsia, Ukraine",
+    "social": {
+      "facebook": "",
+      "instagram": "",
+      "telegram": ""
+    }
+  },
+  "nav": {
+    "fund": "Charitable Foundation",
+    "center": "Rehabilitation Center",
+    "about": "About Us",
+    "history": "Fund History",
+    "general_info": "General Information",
+    "gallery": "Photos",
+    "team": "Team",
+    "projects": "Projects",
+    "hospitals": "Hospitals",
+    "stab_points": "Stabilization Points",
+    "social_activity": "Social Activity",
+    "orphanages": "Orphanages",
+    "elderly_homes": "Elderly Care",
+    "animal_help": "Animal Aid",
+    "community": "Community Cooperation",
+    "tacmed": "TacMed",
+    "ambulances": "Ambulances",
+    "vehicles": "Special Vehicles",
+    "pickups": "Pickup Trucks",
+    "armored": "Armored Vehicles",
+    "inclusive_transport": "Inclusive Transport",
+    "na_shchiti": "«Na Shchiti» Program",
+    "fundraising": "Fundraising",
+    "communication": "Communications",
+    "drones": "Drones",
+    "reb": "Electronic Warfare",
+    "med_equipment": "Medical Equipment",
+    "partners": "Partners",
+    "reports": "Reports",
+    "contacts": "Contacts",
+    "donate": "Donate",
+    "center_about": "About",
+    "mission": "Mission",
+    "vision": "Vision",
+    "specialists": "Specialists",
+    "directions": "Services",
+    "psych_help": "Psychological Support for Veterans",
+    "phys_help": "Physical Rehabilitation",
+    "family_support": "Support for Families",
+    "children_support": "Support for Children of Fallen Soldiers",
+    "mobile_groups": "Mobile Groups",
+    "teen_club": "Teen Club",
+    "branches": "Branches"
+  },
+  "hero": {
+    "headline": "Supporting Those Who Defend Ukraine",
+    "subheadline": "Army support, veteran rehabilitation, community aid — every day since 2022",
+    "cta_primary": "Donate Now",
+    "cta_secondary": "Learn More",
+    "scroll_hint": "Scroll down"
+  },
+  "stats": {
+    "title": "Our Impact in Numbers",
+    "items": [
+      { "label": "Aid Provided", "value": 15000, "suffix": "+" },
+      { "label": "Partners", "value": 120, "suffix": "+" },
+      { "label": "Regions Covered", "value": 18, "suffix": "" },
+      { "label": "Volunteers", "value": 350, "suffix": "+" }
+    ]
+  },
+  "projects_section": {
+    "title": "Active Campaigns & Projects",
+    "subtitle": "Your support saves lives every day",
+    "view_all": "All Projects",
+    "filters": {
+      "all": "All",
+      "hospitals": "Hospitals",
+      "vehicles": "Vehicles",
+      "drones": "Drones",
+      "medical": "Medical",
+      "social": "Social"
+    },
+    "card": {
+      "raised": "Raised",
+      "goal": "Goal",
+      "donate_btn": "Support",
+      "completed": "Completed",
+      "of": "of"
+    }
+  },
+  "how_to_help": {
+    "title": "How to Help",
+    "subtitle": "Choose a convenient payment method",
+    "full_details": "Full Bank Details",
+    "methods": [
+      {
+        "id": "bank",
+        "icon": "building-2",
+        "title": "Bank Transfer",
+        "description": "Transfer to the foundation's account via any bank",
+        "details": "IBAN: UA12 3456 7890 1234 5678 9012 34",
+        "copy_label": "Copy Details",
+        "copied_label": "Copied!"
+      },
+      {
+        "id": "mono",
+        "icon": "credit-card",
+        "title": "Monobank / PrivatBank",
+        "description": "Fast transfer via Ukrainian mobile banks",
+        "details": "4441 1111 2222 3333",
+        "copy_label": "Copy Card Number",
+        "copied_label": "Copied!"
+      },
+      {
+        "id": "paypal",
+        "icon": "globe",
+        "title": "International Transfer",
+        "description": "PayPal and international transfers for overseas donors",
+        "details": "info@fond.specter-it.site",
+        "copy_label": "Copy Email",
+        "copied_label": "Copied!"
+      },
+      {
+        "id": "crypto",
+        "icon": "zap",
+        "title": "Cryptocurrency",
+        "description": "USDT, BTC, ETH — for international anonymous donations",
+        "details": "Contact us by email",
+        "copy_label": "Contact Us",
+        "copied_label": "Copied!"
+      }
+    ]
+  },
+  "about_fund": {
+    "title": "About the Foundation",
+    "subtitle": "Charitable Foundation «Mercy and Health»",
+    "history_title": "Our History",
+    "history_text": "Charitable Foundation «Mercy and Health» was established in response to Russia's full-scale invasion of Ukraine in 2022. The founders — activists, entrepreneurs, and veterans — united to systematically support the army and affected civilians.",
+    "mission_title": "Mission",
+    "mission_text": "Our mission is comprehensive support for Ukraine's defenders and societal recovery: from supplying the army with necessary equipment to rehabilitating the wounded and providing psychological support to their families.",
+    "values": [
+      { "icon": "shield", "title": "Reliability", "text": "Transparent reporting and responsible use of every donated dollar" },
+      { "icon": "users", "title": "Teamwork", "text": "Volunteers, partners, and donors — one united team" },
+      { "icon": "heart", "title": "Care", "text": "Every request represents a human story — and we never forget that" },
+      { "icon": "eye", "title": "Transparency", "text": "Regular reports and open finances for every donor" }
+    ]
+  },
+  "rehab_center": {
+    "title": "Rehabilitation Center",
+    "subtitle": "Restoring Body and Spirit",
+    "mission": "Psychological and physical rehabilitation of military personnel and their families — a path to returning to civilian life",
+    "phone": "096-145-11-55",
+    "services": [
+      {
+        "id": "psych",
+        "icon": "brain",
+        "title": "Psychological Support",
+        "description": "Individual and group sessions with experienced psychologists. Work with PTSD, anxiety, and depression"
+      },
+      {
+        "id": "physical",
+        "icon": "activity",
+        "title": "Physical Rehabilitation",
+        "description": "Recovery from injuries and physical exhaustion. Exercise therapy, massage, physiotherapy"
+      },
+      {
+        "id": "family",
+        "icon": "users",
+        "title": "Family Support",
+        "description": "Psychological help for spouses, parents, and children of military personnel"
+      },
+      {
+        "id": "children",
+        "icon": "star",
+        "title": "Children's Support",
+        "description": "Specialized work with children of fallen and wounded soldiers. Teen Club program"
+      }
+    ],
+    "mobile_groups": {
+      "title": "Mobile Psychological Groups",
+      "subtitle": "Field support in 4 regions of Ukraine",
+      "regions": [
+        { "name": "Donetsk Region", "slug": "donetsk" },
+        { "name": "Zaporizhzhia Region", "slug": "zaporizhzhia" },
+        { "name": "Kharkiv Region", "slug": "kharkiv" },
+        { "name": "Kyiv Region", "slug": "kyiv" }
+      ]
+    },
+    "cta_register": "Schedule a Consultation",
+    "cta_learn": "Learn More"
+  },
+  "reports": {
+    "title": "Reports & Transparency",
+    "subtitle": "We are open and accountable to every donor",
+    "download": "Download PDF",
+    "view_all": "All Reports"
+  },
+  "partners": {
+    "title": "Our Partners",
+    "subtitle": "Together we achieve more"
+  },
+  "contacts": {
+    "title": "Contact Us",
+    "fund_title": "Charitable Foundation «Mercy and Health»",
+    "center_title": "Rehabilitation Center",
+    "phone_label": "Phone",
+    "email_label": "Email",
+    "address_label": "Address",
+    "form_title": "Send Us a Message",
+    "form_name": "Your Name",
+    "form_email": "Email Address",
+    "form_subject": "Subject",
+    "form_message": "Your Message",
+    "form_submit": "Send Message",
+    "form_success": "Thank you! We will contact you shortly.",
+    "form_error": "Something went wrong. Please try again."
+  },
+  "donate_page": {
+    "title": "Donation Details",
+    "subtitle": "Every amount matters — together we win",
+    "bank_transfer": {
+      "title": "Bank Transfer (Ukraine)",
+      "org_name": "Charitable Foundation «Mercy and Health»",
+      "edrpou": "12345678",
+      "iban": "UA12 3456 7890 1234 5678 9012 34",
+      "bank": "JSC PrivatBank",
+      "mfo": "305299",
+      "purpose": "Charitable donation"
+    },
+    "international": {
+      "title": "International Transfer",
+      "swift": "PBANK UA2X",
+      "iban_usd": "UA12 3456 7890 1234 5678 9012 35",
+      "beneficiary": "Charitable Foundation Mercy and Health",
+      "address": "Vinnytsia, Ukraine"
+    },
+    "faq_title": "Frequently Asked Questions",
+    "faq": [
+      {
+        "q": "Where do the donations go?",
+        "a": "100% of raised funds go directly to project implementation. Administrative costs are covered separately through partners and grants."
+      },
+      {
+        "q": "How can I get donation confirmation?",
+        "a": "After receiving your transfer, we send confirmation to your email. All expenses are also reflected in our quarterly reports."
+      },
+      {
+        "q": "Can I make a recurring donation?",
+        "a": "Yes! You can set up recurring transfers through your bank or Monobank. This is the most convenient way to systematically support our foundation."
+      },
+      {
+        "q": "Are you a registered organization?",
+        "a": "Yes, we are an officially registered charitable foundation under Ukrainian law. All documents are available on the 'About Us' page."
+      }
+    ]
+  },
+  "footer": {
+    "tagline": "Together for Ukraine's Victory",
+    "fund_links_title": "Charitable Foundation",
+    "center_links_title": "Rehabilitation Center",
+    "info_links_title": "Information",
+    "contacts_title": "Contacts",
+    "copyright": "© 2024 Charitable Foundation «Mercy and Health». All rights reserved.",
+    "privacy": "Privacy Policy",
+    "terms": "Terms of Use",
+    "payment_title": "Payment Methods"
+  },
+  "common": {
+    "loading": "Loading...",
+    "error": "Error. Please try again.",
+    "back": "Back",
+    "read_more": "Read More",
+    "close": "Close",
+    "open_menu": "Open menu",
+    "close_menu": "Close menu",
+    "language_switch": "Українська",
+    "currency": "UAH",
+    "percent_done": "% raised"
+  }
+}

@@ -1,0 +1,195 @@
+{
+  "partners": [
+    {
+      "id": "p1",
+      "name": "USAID",
+      "logo": "/images/partners/usaid.png",
+      "url": "https://usaid.gov",
+      "category": "international"
+    },
+    {
+      "id": "p2",
+      "name": "Фонд «Повернись живим»",
+      "logo": "/images/partners/savelife.png",
+      "url": "https://savelife.in.ua",
+      "category": "local"
+    },
+    {
+      "id": "p3",
+      "name": "United24",
+      "logo": "/images/partners/united24.png",
+      "url": "https://u24.gov.ua",
+      "category": "international"
+    },
+    {
+      "id": "p4",
+      "name": "Monobank",
+      "logo": "/images/partners/monobank.png",
+      "url": "https://monobank.ua",
+      "category": "corporate"
+    },
+    {
+      "id": "p5",
+      "name": "Вінницька міська рада",
+      "logo": "/images/partners/vinnytsia-city.png",
+      "url": "https://vmr.gov.ua",
+      "category": "government"
+    },
+    {
+      "id": "p6",
+      "name": "Червоний Хрест України",
+      "logo": "/images/partners/redcross.png",
+      "url": "https://redcross.org.ua",
+      "category": "international"
+    }
+  ],
+  "reports": [
+    {
+      "id": "r2024-q3",
+      "title": {
+        "uk": "Звіт за III квартал 2024",
+        "en": "Q3 2024 Report"
+      },
+      "period": "2024-Q3",
+      "date": "2024-10-15",
+      "pdf_url": "/reports/q3-2024.pdf",
+      "summary": {
+        "uk": "За третій квартал 2024 року фондом залучено понад 2,3 млн грн та профінансовано 23 проєкти допомоги армії та цивільному населенню.",
+        "en": "In Q3 2024, the foundation raised over 2.3M UAH and funded 23 projects supporting the military and civilian population."
+      },
+      "stats": {
+        "raised": 2340000,
+        "spent": 2180000,
+        "projects_count": 23,
+        "beneficiaries": 1850
+      }
+    },
+    {
+      "id": "r2024-q2",
+      "title": {
+        "uk": "Звіт за II квартал 2024",
+        "en": "Q2 2024 Report"
+      },
+      "period": "2024-Q2",
+      "date": "2024-07-15",
+      "pdf_url": "/reports/q2-2024.pdf",
+      "summary": {
+        "uk": "За другий квартал 2024 року залучено 1,9 млн грн, реалізовано 18 проєктів.",
+        "en": "In Q2 2024, 1.9M UAH was raised and 18 projects were implemented."
+      },
+      "stats": {
+        "raised": 1900000,
+        "spent": 1750000,
+        "projects_count": 18,
+        "beneficiaries": 1240
+      }
+    },
+    {
+      "id": "r2024-q1",
+      "title": {
+        "uk": "Звіт за I квартал 2024",
+        "en": "Q1 2024 Report"
+      },
+      "period": "2024-Q1",
+      "date": "2024-04-15",
+      "pdf_url": "/reports/q1-2024.pdf",
+      "summary": {
+        "uk": "За перший квартал 2024 року залучено 1,5 млн грн, реалізовано 14 проєктів.",
+        "en": "In Q1 2024, 1.5M UAH was raised and 14 projects were implemented."
+      },
+      "stats": {
+        "raised": 1500000,
+        "spent": 1380000,
+        "projects_count": 14,
+        "beneficiaries": 980
+      }
+    },
+    {
+      "id": "r2023-annual",
+      "title": {
+        "uk": "Річний звіт 2023",
+        "en": "2023 Annual Report"
+      },
+      "period": "2023",
+      "date": "2024-01-31",
+      "pdf_url": "/reports/annual-2023.pdf",
+      "summary": {
+        "uk": "Підсумки роботи фонду за 2023 рік: понад 6 млн грн залучено, 52 проєкти реалізовано, 4200+ людей отримали допомогу.",
+        "en": "Foundation results for 2023: over 6M UAH raised, 52 projects completed, 4200+ people received aid."
+      },
+      "stats": {
+        "raised": 6100000,
+        "spent": 5850000,
+        "projects_count": 52,
+        "beneficiaries": 4200
+      }
+    }
+  ],
+  "branches": [
+    {
+      "id": "b1",
+      "city": { "uk": "Вінниця (головний офіс)", "en": "Vinnytsia (Main Office)" },
+      "address": { "uk": "вул. Соборна, 1", "en": "1 Soborna St." },
+      "phone": "096-145-11-55",
+      "email": "info@fond.specter-it.site",
+      "coordinates": { "lat": 49.2331, "lng": 28.4682 },
+      "is_main": true,
+      "working_hours": {
+        "uk": "Пн-Пт: 9:00 - 18:00",
+        "en": "Mon-Fri: 9:00 AM - 6:00 PM"
+      }
+    },
+    {
+      "id": "b2",
+      "city": { "uk": "Старокостянтинів", "en": "Starokostiantyniv" },
+      "address": { "uk": "вул. Незалежності, 5", "en": "5 Nezalezhnosti St." },
+      "phone": null,
+      "email": null,
+      "coordinates": { "lat": 49.7548, "lng": 27.2186 },
+      "is_main": false,
+      "working_hours": {
+        "uk": "Пн-Пт: 10:00 - 17:00",
+        "en": "Mon-Fri: 10:00 AM - 5:00 PM"
+      }
+    },
+    {
+      "id": "b3",
+      "city": { "uk": "Козятин", "en": "Kozyatyn" },
+      "address": { "uk": "вул. Центральна, 12", "en": "12 Tsentralna St." },
+      "phone": null,
+      "email": null,
+      "coordinates": { "lat": 49.7167, "lng": 28.8333 },
+      "is_main": false,
+      "working_hours": {
+        "uk": "Вт-Сб: 10:00 - 17:00",
+        "en": "Tue-Sat: 10:00 AM - 5:00 PM"
+      }
+    },
+    {
+      "id": "b4",
+      "city": { "uk": "Вінниця (Центр реабілітації)", "en": "Vinnytsia (Rehabilitation Center)" },
+      "address": { "uk": "вул. Театральна, 8", "en": "8 Teatralna St." },
+      "phone": "096-145-11-55",
+      "email": "center@fond.specter-it.site",
+      "coordinates": { "lat": 49.2328, "lng": 28.4701 },
+      "is_main": false,
+      "working_hours": {
+        "uk": "Пн-Пт: 9:00 - 20:00, Сб: 10:00 - 15:00",
+        "en": "Mon-Fri: 9:00 AM - 8:00 PM, Sat: 10:00 AM - 3:00 PM"
+      }
+    },
+    {
+      "id": "b5",
+      "city": { "uk": "Чернігів", "en": "Chernihiv" },
+      "address": { "uk": "вул. Мирна, 3", "en": "3 Myrna St." },
+      "phone": null,
+      "email": null,
+      "coordinates": { "lat": 51.4982, "lng": 31.2893 },
+      "is_main": false,
+      "working_hours": {
+        "uk": "Пн-Пт: 10:00 - 17:00",
+        "en": "Mon-Fri: 10:00 AM - 5:00 PM"
+      }
+    }
+  ]
+}

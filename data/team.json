@@ -1,0 +1,86 @@
+{
+  "fund_team": [
+    {
+      "id": "ft1",
+      "name": { "uk": "Олександр Петренко", "en": "Oleksandr Petrenko" },
+      "role": { "uk": "Голова фонду", "en": "Fund Director" },
+      "photo": "/images/team/fund/director.jpg",
+      "bio": {
+        "uk": "Волонтер з 2014 року, підприємець, організатор гуманітарних місій.",
+        "en": "Volunteer since 2014, entrepreneur, humanitarian mission organizer."
+      }
+    },
+    {
+      "id": "ft2",
+      "name": { "uk": "Марія Коваленко", "en": "Maria Kovalenko" },
+      "role": { "uk": "Координатор проєктів", "en": "Projects Coordinator" },
+      "photo": "/images/team/fund/coordinator.jpg",
+      "bio": {
+        "uk": "Відповідає за координацію всіх волонтерських та гуманітарних проєктів фонду.",
+        "en": "Responsible for coordinating all volunteer and humanitarian projects."
+      }
+    },
+    {
+      "id": "ft3",
+      "name": { "uk": "Андрій Сидоренко", "en": "Andriy Sydorenko" },
+      "role": { "uk": "Фінансовий директор", "en": "CFO" },
+      "photo": "/images/team/fund/cfo.jpg",
+      "bio": {
+        "uk": "Забезпечує прозорість фінансової звітності та ефективне використання коштів донорів.",
+        "en": "Ensures financial transparency and effective use of donor funds."
+      }
+    },
+    {
+      "id": "ft4",
+      "name": { "uk": "Ірина Бондаренко", "en": "Iryna Bondarenko" },
+      "role": { "uk": "PR та комунікації", "en": "PR & Communications" },
+      "photo": "/images/team/fund/pr.jpg",
+      "bio": {
+        "uk": "Відповідає за комунікацію з донорами, ЗМІ та партнерами фонду.",
+        "en": "Handles communication with donors, media, and foundation partners."
+      }
+    }
+  ],
+  "center_team": [
+    {
+      "id": "ct1",
+      "name": { "uk": "Олена Кравченко", "en": "Olena Kravchenko" },
+      "role": { "uk": "Директор центру", "en": "Center Director" },
+      "photo": "/images/team/center/director.jpg",
+      "specialization": {
+        "uk": "Клінічна психологія, організаційне управління",
+        "en": "Clinical psychology, organizational management"
+      }
+    },
+    {
+      "id": "ct2",
+      "name": { "uk": "Василь Мороз", "en": "Vasyl Moroz" },
+      "role": { "uk": "Провідний психолог", "en": "Lead Psychologist" },
+      "photo": "/images/team/center/psychologist-1.jpg",
+      "specialization": {
+        "uk": "ПТСР, травматерапія, кризова інтервенція",
+        "en": "PTSD, trauma therapy, crisis intervention"
+      }
+    },
+    {
+      "id": "ct3",
+      "name": { "uk": "Наталія Шевченко", "en": "Natalia Shevchenko" },
+      "role": { "uk": "Фізичний реабілітолог", "en": "Physical Rehabilitation Therapist" },
+      "photo": "/images/team/center/rehab.jpg",
+      "specialization": {
+        "uk": "Фізична терапія, ерготерапія, протезування",
+        "en": "Physical therapy, occupational therapy, prosthetics"
+      }
+    },
+    {
+      "id": "ct4",
+      "name": { "uk": "Дмитро Яковенко", "en": "Dmytro Yakovenko" },
+      "role": { "uk": "Дитячий психолог", "en": "Child Psychologist" },
+      "photo": "/images/team/center/child-psych.jpg",
+      "specialization": {
+        "uk": "Дитяча психологія, ігрова терапія, арт-терапія",
+        "en": "Child psychology, play therapy, art therapy"
+      }
+    }
+  ]
+}

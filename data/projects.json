@@ -1,0 +1,294 @@
+{
+  "projects": [
+    {
+      "id": "pickup-01",
+      "slug": "pikap-dlya-brigady",
+      "category": "vehicles",
+      "subcategory": "pickups",
+      "status": "active",
+      "priority": 1,
+      "featured": true,
+      "image": "/images/projects/pickup-01.jpg",
+      "title": {
+        "uk": "Пікап для бойового підрозділу",
+        "en": "Pickup Truck for Combat Unit"
+      },
+      "description": {
+        "uk": "Збір на закупівлю пікапу для евакуації поранених та логістики на передовій. Авто дозволить оперативно постачати боєприпаси та евакуювати поранених з зони бойових дій.",
+        "en": "Fundraising for a pickup truck for wounded evacuation and front-line logistics. The vehicle will enable rapid supply of ammunition and evacuation of casualties from the combat zone."
+      },
+      "goal": 850000,
+      "raised": 612000,
+      "currency": "UAH",
+      "donors_count": 342,
+      "created_at": "2024-10-01",
+      "deadline": "2024-12-31",
+      "bank_details": {
+        "iban": "UA12 3456 7890 1234 5678 9012 34",
+        "purpose": {
+          "uk": "На пікап для бойового підрозділу",
+          "en": "Pickup truck for combat unit"
+        }
+      },
+      "updates": [
+        {
+          "date": "2024-11-15",
+          "text": {
+            "uk": "Зібрано вже 72% від необхідної суми. Дякуємо всім донорам!",
+            "en": "Already 72% collected. Thank you to all donors!"
+          }
+        }
+      ]
+    },
+    {
+      "id": "hospital-01",
+      "slug": "obladnannia-dlia-hospitaliu",
+      "category": "hospitals",
+      "subcategory": null,
+      "status": "completed",
+      "priority": 2,
+      "featured": true,
+      "image": "/images/projects/hospital-01.jpg",
+      "title": {
+        "uk": "Обладнання для військового госпіталю",
+        "en": "Equipment for Military Hospital"
+      },
+      "description": {
+        "uk": "Купівля медичного обладнання для стабілізаційних пунктів поблизу лінії фронту. Дефібрилятори, апарати ШВЛ та хірургічний інструментарій.",
+        "en": "Purchasing medical equipment for stabilization points near the front line. Defibrillators, ventilators, and surgical instruments."
+      },
+      "goal": 500000,
+      "raised": 500000,
+      "currency": "UAH",
+      "donors_count": 890,
+      "created_at": "2024-08-01",
+      "deadline": "2024-10-01",
+      "bank_details": {
+        "iban": "UA12 3456 7890 1234 5678 9012 34",
+        "purpose": {
+          "uk": "На обладнання для госпіталю",
+          "en": "Hospital equipment"
+        }
+      },
+      "updates": [
+        {
+          "date": "2024-10-05",
+          "text": {
+            "uk": "Збір завершено! Обладнання передано госпіталю. Дякуємо 890 донорам!",
+            "en": "Campaign completed! Equipment delivered to the hospital. Thank you to 890 donors!"
+          }
+        }
+      ]
+    },
+    {
+      "id": "drone-01",
+      "slug": "fpv-drony-paketnyi-zbir",
+      "category": "drones",
+      "subcategory": "fpv",
+      "status": "active",
+      "priority": 3,
+      "featured": true,
+      "image": "/images/projects/drones-01.jpg",
+      "title": {
+        "uk": "FPV-дрони — пакетний збір",
+        "en": "FPV Drones — Batch Campaign"
+      },
+      "description": {
+        "uk": "Регулярний збір на закупівлю FPV-дронів для розвідки та ударних операцій. Кожен дрон — це очі та захист для наших солдат на передовій.",
+        "en": "Regular fundraising for FPV drones for reconnaissance and strike operations. Each drone provides eyes and protection for our soldiers on the front line."
+      },
+      "goal": 300000,
+      "raised": 187000,
+      "currency": "UAH",
+      "donors_count": 521,
+      "created_at": "2024-09-15",
+      "deadline": null,
+      "recurring": true,
+      "bank_details": {
+        "iban": "UA12 3456 7890 1234 5678 9012 34",
+        "purpose": {
+          "uk": "На FPV-дрони",
+          "en": "FPV drones"
+        }
+      },
+      "updates": []
+    },
+    {
+      "id": "reb-01",
+      "slug": "systemy-reb",
+      "category": "drones",
+      "subcategory": "reb",
+      "status": "active",
+      "priority": 4,
+      "featured": false,
+      "image": "/images/projects/reb-01.jpg",
+      "title": {
+        "uk": "Системи РЕБ",
+        "en": "Electronic Warfare Systems"
+      },
+      "description": {
+        "uk": "Збір на закупівлю та доставку систем радіоелектронної боротьби для захисту наших підрозділів від ворожих дронів.",
+        "en": "Fundraising for procurement and delivery of electronic warfare systems to protect our units from enemy drones."
+      },
+      "goal": 1200000,
+      "raised": 430000,
+      "currency": "UAH",
+      "donors_count": 215,
+      "created_at": "2024-11-01",
+      "deadline": null,
+      "bank_details": {
+        "iban": "UA12 3456 7890 1234 5678 9012 34",
+        "purpose": {
+          "uk": "На системи РЕБ",
+          "en": "Electronic warfare systems"
+        }
+      },
+      "updates": []
+    },
+    {
+      "id": "reanimobile-01",
+      "slug": "reanimobil-dla-frontu",
+      "category": "vehicles",
+      "subcategory": "ambulances",
+      "status": "active",
+      "priority": 5,
+      "featured": false,
+      "image": "/images/projects/ambulance-01.jpg",
+      "title": {
+        "uk": "Реанімобіль для фронту",
+        "en": "Ambulance for the Front Line"
+      },
+      "description": {
+        "uk": "Придбання реанімобіля з повним медичним оснащенням для евакуації тяжкопоранених з зони бойових дій до шпиталів.",
+        "en": "Purchase of a fully equipped ambulance for evacuating severely wounded soldiers from combat zones to hospitals."
+      },
+      "goal": 2200000,
+      "raised": 890000,
+      "currency": "UAH",
+      "donors_count": 445,
+      "created_at": "2024-07-01",
+      "deadline": "2025-01-31",
+      "bank_details": {
+        "iban": "UA12 3456 7890 1234 5678 9012 34",
+        "purpose": {
+          "uk": "На реанімобіль",
+          "en": "Ambulance vehicle"
+        }
+      },
+      "updates": [
+        {
+          "date": "2024-10-20",
+          "text": {
+            "uk": "Зібрано 40%. Продовжуємо збір!",
+            "en": "40% collected. Campaign continues!"
+          }
+        }
+      ]
+    },
+    {
+      "id": "social-01",
+      "slug": "pidtrymka-dytbud",
+      "category": "social",
+      "subcategory": "orphanages",
+      "status": "active",
+      "priority": 6,
+      "featured": false,
+      "image": "/images/projects/orphanage-01.jpg",
+      "title": {
+        "uk": "Підтримка дитячого будинку",
+        "en": "Orphanage Support"
+      },
+      "description": {
+        "uk": "Щомісячна допомога продуктами, одягом та іграшками для дітей-сиріт. Також організовуємо майстер-класи та психологічну підтримку.",
+        "en": "Monthly aid with food, clothing, and toys for orphaned children. We also organize workshops and psychological support."
+      },
+      "goal": 50000,
+      "raised": 38000,
+      "currency": "UAH",
+      "donors_count": 162,
+      "created_at": "2024-01-01",
+      "deadline": null,
+      "recurring": true,
+      "bank_details": {
+        "iban": "UA12 3456 7890 1234 5678 9012 34",
+        "purpose": {
+          "uk": "На підтримку дитячого будинку",
+          "en": "Orphanage support"
+        }
+      },
+      "updates": []
+    },
+    {
+      "id": "tacmed-01",
+      "slug": "takmedychna-pidhotovka",
+      "category": "medical",
+      "subcategory": "tacmed",
+      "status": "active",
+      "priority": 7,
+      "featured": false,
+      "image": "/images/projects/tacmed-01.jpg",
+      "title": {
+        "uk": "Тактична медицина — навчання та набори",
+        "en": "Tactical Medicine — Training & Kits"
+      },
+      "description": {
+        "uk": "Закупівля тактичних медичних наборів IFAK та проведення навчань з тактичної медицини для військових і цивільних волонтерів.",
+        "en": "Procurement of IFAK tactical medical kits and conducting tactical medicine training for military and civilian volunteers."
+      },
+      "goal": 180000,
+      "raised": 95000,
+      "currency": "UAH",
+      "donors_count": 287,
+      "created_at": "2024-06-01",
+      "deadline": null,
+      "bank_details": {
+        "iban": "UA12 3456 7890 1234 5678 9012 34",
+        "purpose": {
+          "uk": "На тактичну медицину",
+          "en": "Tactical medicine"
+        }
+      },
+      "updates": []
+    },
+    {
+      "id": "armored-01",
+      "slug": "broniovyk-dlya-pidrozdilu",
+      "category": "vehicles",
+      "subcategory": "armored",
+      "status": "active",
+      "priority": 8,
+      "featured": false,
+      "image": "/images/projects/armored-01.jpg",
+      "title": {
+        "uk": "Броньований автомобіль",
+        "en": "Armored Vehicle"
+      },
+      "description": {
+        "uk": "Збір на закупівлю броньованого автомобіля для захищеного переміщення особового складу в умовах ворожого вогню.",
+        "en": "Fundraising for an armored vehicle for protected movement of personnel under enemy fire."
+      },
+      "goal": 3500000,
+      "raised": 1200000,
+      "currency": "UAH",
+      "donors_count": 612,
+      "created_at": "2024-11-10",
+      "deadline": null,
+      "bank_details": {
+        "iban": "UA12 3456 7890 1234 5678 9012 34",
+        "purpose": {
+          "uk": "На броньований автомобіль",
+          "en": "Armored vehicle"
+        }
+      },
+      "updates": []
+    }
+  ],
+  "categories": [
+    { "id": "all", "label": { "uk": "Усі", "en": "All" } },
+    { "id": "vehicles", "label": { "uk": "Авто", "en": "Vehicles" } },
+    { "id": "hospitals", "label": { "uk": "Лікарні", "en": "Hospitals" } },
+    { "id": "drones", "label": { "uk": "Дрони/РЕБ", "en": "Drones/EW" } },
+    { "id": "medical", "label": { "uk": "Медтехніка", "en": "Medical" } },
+    { "id": "social", "label": { "uk": "Соціальні", "en": "Social" } }
+  ]
+}
