@@ -1,89 +1,104 @@
 .main {
   min-height: 100vh;
-  padding-bottom: var(--space-xl);
+  padding-bottom: 6rem;
+  background-color: var(--gray-50);
 }
 
 .header {
-  background-color: var(--black);
-  color: var(--white);
-  padding: var(--space-xl) 0;
-  margin-bottom: var(--space-xl);
+  background-color: white;
+  padding: 4rem 0 3rem;
+  margin-bottom: 3rem;
+  border-bottom: 1px solid var(--gray-100);
 }
 
 .title {
+  font-family: var(--font-e-ukraine-head);
   font-size: 3rem;
-  margin-bottom: var(--space-md);
+  color: var(--text-dark);
+  margin-bottom: 1rem;
 }
 
 .description {
   font-size: 1.25rem;
+  color: var(--text-muted);
   max-width: 700px;
-  opacity: 0.8;
   line-height: 1.6;
 }
 
 .summarySection {
-  margin-bottom: var(--space-xl);
+  margin-bottom: 4rem;
 }
 
 .summaryGrid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: var(--space-lg);
+  gap: 2rem;
 }
 
 .summaryCard {
-  background-color: var(--light-gray);
-  padding: var(--space-xl) var(--space-lg);
+  background-color: white;
+  padding: 2.5rem 2rem;
   display: flex;
   flex-direction: column;
-  gap: var(--space-xs);
-  border-radius: 4px;
+  gap: 0.5rem;
+  border-radius: 24px;
+  border: 1px solid var(--gray-100);
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.02);
+  transition: all 0.3s ease;
+}
+
+.summaryCard:hover {
+  transform: translateY(-5px);
+  border-color: var(--accent);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
 }
 
 .summaryLabel {
   font-size: 0.875rem;
   text-transform: uppercase;
   font-weight: 700;
-  color: var(--accent-color);
-  opacity: 0.8;
+  color: var(--text-muted);
+  letter-spacing: 0.05em;
 }
 
 .summaryValue {
+  font-family: var(--font-e-ukraine-head);
   font-size: 2.5rem;
-  font-weight: 900;
-  color: var(--black);
+  color: var(--text-dark);
 }
 
 .historySection {
-  padding: var(--space-xl) 0;
+  padding: 2rem 0;
 }
 
 .sectionTitle {
+  font-family: var(--font-e-ukraine-head);
   font-size: 2rem;
-  margin-bottom: var(--space-lg);
+  color: var(--text-dark);
+  margin-bottom: 2rem;
 }
 
 .reportList {
   display: flex;
   flex-direction: column;
-  gap: var(--space-md);
+  gap: 1rem;
 }
 
 .reportItem {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: var(--space-lg);
-  background-color: var(--white);
-  border: 1px solid rgba(0, 0, 0, 0.1);
-  border-radius: 4px;
-  transition: var(--transition-fast);
+  padding: 1.5rem 2rem;
+  background-color: white;
+  border: 1px solid var(--gray-100);
+  border-radius: 20px;
+  transition: all 0.2s ease;
 }
 
 .reportItem:hover {
-  border-color: var(--accent-color);
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+  border-color: var(--accent);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.03);
+  transform: translateX(5px);
 }
 
 .reportInfo {
@@ -93,40 +108,59 @@
 }
 
 .reportMonth {
+  font-family: var(--font-e-ukraine-head);
   font-size: 1.25rem;
-  font-weight: 800;
+  color: var(--text-dark);
   text-transform: uppercase;
 }
 
 .reportAmount {
-  font-size: 1rem;
+  font-size: 1.125rem;
   font-weight: 600;
-  color: var(--accent-color);
+  color: var(--accent);
 }
 
 .downloadBtn {
-  background-color: var(--black);
-  color: var(--white);
-  padding: 0.5rem 1.5rem;
+  background-color: var(--gray-50);
+  color: var(--text-dark);
+  padding: 0.75rem 1.5rem;
   font-weight: 800;
-  border-radius: 4px;
+  border-radius: 12px;
+  border: 1px solid var(--gray-200);
+  font-family: var(--font-e-ukraine-head);
+  text-transform: uppercase;
+  font-size: 0.75rem;
+  letter-spacing: 0.05em;
+  transition: all 0.2s ease;
 }
 
 .downloadBtn:hover {
-  background-color: var(--accent-color);
+  background-color: var(--accent);
+  color: white;
+  border-color: var(--accent);
+}
+
+@media (max-width: 992px) {
+  .summaryGrid {
+    grid-template-columns: repeat(2, 1fr);
+  }
 }
 
 @media (max-width: 768px) {
   .summaryGrid {
     grid-template-columns: 1fr;
-    gap: var(--space-md);
+    gap: 1rem;
   }
 
   .title {
-    font-size: 2.5rem;
+    font-size: 2.25rem;
   }
 
   .summaryValue {
     font-size: 2rem;
+  }
+  
+  .reportItem {
+    padding: 1.25rem;
   }
 }

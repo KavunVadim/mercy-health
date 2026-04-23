@@ -19,9 +19,10 @@ body {
   color: var(--text-primary);
   background: var(--bg-primary);
   font-family: var(--font-main);
+  font-size: 18px; /* High readability standard */
+  line-height: 1.6;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  line-height: 1.5;
   display: flex;
   flex-direction: column;
 }
@@ -31,8 +32,8 @@ body {
 }
 
 h1, h2, h3, h4, h5, h6 {
-  text-transform: uppercase;
-  font-weight: 800;
+  font-family: var(--font-e-ukraine-head), var(--font-main);
+  font-weight: 700;
   margin-bottom: var(--space-md);
   line-height: 1.2;
 }
@@ -58,21 +59,19 @@ img {
 }
 
 .container {
-  max-width: 1280px;
+  max-width: 1600px;
   margin: 0 auto;
-  padding: 0 var(--space-md);
+  padding: 0 2rem;
 }
 
 @media (max-width: 1024px) {
   .container {
-    padding-left: max(1rem, env(safe-area-inset-left, 0px));
-    padding-right: max(1rem, env(safe-area-inset-right, 0px));
+    padding: 0 1.5rem;
   }
 }
 
-@media (max-width: 480px) {
+@media (max-width: 768px) {
   .container {
-    padding-left: max(0.875rem, env(safe-area-inset-left, 0px));
-    padding-right: max(0.875rem, env(safe-area-inset-right, 0px));
+    padding: 0 1rem;
   }
 }

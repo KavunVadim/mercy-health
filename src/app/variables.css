@@ -2,8 +2,8 @@
   /* Colors - Inspired by fond-emblem.svg */
   /* Blue variations from the logo */
   --primary-blue: #1EA2FE;
-  --primary-blue-hover: #007DFF;
-  --secondary-blue: #22B3FE;
+  --primary-blue-hover: #007AFF;
+  --secondary-blue: #F0F9FF; /* Very light blue for backgrounds/badges */
   
   /* Foundation palette */
   --black: #000000;
@@ -11,31 +11,57 @@
   --light-gray: #f5f5f5;
   --dark-gray: #1a1a1a;
   
-  /* Theme mapping */
-  --bg-primary: var(--white);
-  --bg-secondary: var(--light-gray);
-  --bg-dark: var(--black);
+  /* Typography — e-Ukraine Font System */
+  --font-main: var(--font-e-ukraine, sans-serif);
+  --font-oswald: var(--font-e-ukraine, sans-serif);
+  --font-inter: var(--font-e-ukraine, sans-serif);
   
-  /* Text */
-  --text-primary: var(--black);
-  --text-secondary: #4a4a4a;
-  --text-light: var(--white);
+  --bg-primary: #FFFFFF;
+  --bg-secondary: #F9FAFB;
+  --bg-tertiary: #F3F4F6;
+  --bg-footer: #F9FAFB;
+
+  --gray-50: #F9FAFB;
+  --gray-100: #F3F4F6;
+  --gray-200: #E5E7EB;
+  --gray-300: #D1D5DB;
+  --gray-400: #9CA3AF;
+  --gray-500: #6B7280;
   
-  /* Functional colors - using blue instead of green */
-  --accent-color: var(--primary-blue);
-  --accent-color-hover: var(--primary-blue-hover);
+  --text-dark: #111827;
+  --text-primary: #1A1A1A;
+  --text-secondary: #4B5563;
+  --text-muted: #6B7280;
+  --text-light: #FFFFFF;
   
-  /* Typography */
-  --font-main: var(--font-geist-sans), sans-serif;
-  --font-mono: var(--font-geist-mono), monospace;
+  --accent: #1EA2FE;
+  --accent-hover: #007AFF;
+  --accent-color: var(--accent);
+  --accent-color-hover: var(--accent-hover);
+  --color-donate: #E8401C;
+  --color-donate-hover: #CF3516;
   
-  /* Spacing */
-  --space-xs: 0.25rem;
-  --space-sm: 0.5rem;
-  --space-md: 1rem;
-  --space-lg: 2rem;
-  --space-xl: 4rem;
+  --border-color: #E5E7EB;
+  --border-color-strong: #D1D5DB;
+
+  /* UI Metrics — "Soft" Aesthetic */
+  --radius-sm: 8px;
+  --radius-md: 8px; /* Standardized to match switcher */
+  --radius-lg: 12px;
+  --radius-full: 8px; /* Removed pill-shape for buttons per user request */
+  
+  --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.04);
+  --shadow-md: 0 8px 24px rgba(0, 0, 0, 0.08);
+  --shadow-lg: 0 16px 48px rgba(0, 0, 0, 0.12);
+  
+  /* Spacing — "Airy" Layout */
+  --space-xs: 0.5rem;
+  --space-sm: 1rem;
+  --space-md: 2rem;
+  --space-lg: 4rem;
+  --space-xl: 6rem;
   
   /* Transitions */
-  --transition-fast: 0.2s ease;
+  --transition-fast: 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-normal: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }

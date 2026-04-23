@@ -1,0 +1,65 @@
+.main {
+  min-height: 100vh;
+  padding-bottom: 5rem;
+}
+
+.hero {
+  padding: 120px 0 60px;
+  background: linear-gradient(135deg, var(--gray-50) 0%, white 100%);
+  border-bottom: 1px solid var(--gray-200);
+  text-align: center;
+}
+
+.title {
+  font-family: var(--font-e-ukraine-head);
+  font-size: 3.5rem;
+  color: var(--text-dark);
+  margin-bottom: 1.5rem;
+  animation: fadeInDown 0.5s ease-out;
+}
+
+.description {
+  font-size: 1.25rem;
+  color: var(--text-muted);
+  max-width: 700px;
+  margin: 0 auto;
+  line-height: 1.6;
+  animation: fadeInUp 0.5s ease-out 0.2s both;
+}
+
+.content {
+  padding: 4rem 0;
+}
+
+.contentWrapper {
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+.tabContent {
+  margin-top: 3rem;
+}
+
+@keyframes fadeInDown {
+  from { opacity: 0; transform: translateY(-20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@media (max-width: 768px) {
+  .title {
+    font-size: 2.5rem;
+  }
+  
+  .description {
+    font-size: 1.125rem;
+  }
+  
+  .hero {
+    padding: 100px 0 40px;
+  }
+}

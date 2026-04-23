@@ -1,39 +1,30 @@
 .header {
-  background-color: var(--black);
-  color: var(--white);
-  padding: var(--space-md) 0;
+  background-color: rgba(255, 255, 255, 0.98);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  color: var(--text-primary);
+  padding: 1.125rem 0;
   position: sticky;
   top: 0;
   z-index: 1000;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  border-bottom: 1px solid var(--border-color);
+  transition: var(--transition-fast);
 }
 
 .container {
   position: relative;
   display: flex;
+  justify-content: space-between;
   align-items: center;
-  min-height: 2.75rem;
-}
-
-/* Одна строка: меню зліва й однакова «вага» з блоком дій — логотип рівно по центру шапки */
-.nav {
-  flex: 1;
-  display: flex;
-  justify-content: flex-start;
-  gap: var(--space-lg);
-  min-width: 0;
+  height: 100%;
 }
 
 .logo {
-  position: absolute;
-  left: 50%;
-  top: 50%;
-  transform: translate(-50%, -50%);
-  display: inline-flex;
+  flex: 0 0 auto;
+  display: flex;
   align-items: center;
-  gap: 0.625rem;
-  white-space: nowrap;
-  line-height: 1;
+  gap: 0.75rem;
+  z-index: 10;
 }
 
 .logoMark {
@@ -44,167 +35,140 @@
 }
 
 .logoText {
-  font-size: 1.5rem;
-  font-weight: 900;
-  letter-spacing: -0.02em;
+  font-family: var(--font-e-ukraine-head), sans-serif;
+  font-size: 1.25rem;
+  font-weight: 800;
+  letter-spacing: -0.01em;
+  color: var(--text-primary);
+  text-transform: uppercase;
 }
 
 .logoAmp {
   color: var(--accent-color);
 }
 
-.actions {
-  flex: 1;
+.nav {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
   display: flex;
-  justify-content: flex-end;
   align-items: center;
-  gap: var(--space-lg);
-  min-width: 0;
-}
-
-.localeDesktop {
-  display: contents;
+  gap: 2rem;
 }
 
 .navLink {
+  font-family: var(--font-e-ukraine), sans-serif;
   text-transform: uppercase;
+  letter-spacing: 0.08em;
+  font-size: 1rem;
   font-weight: 700;
-  font-size: 0.875rem;
-  letter-spacing: 0.05em;
-  opacity: 0.8;
+  color: var(--text-primary);
+  transition: var(--transition-fast);
+  white-space: nowrap;
 }
 
 .navLink:hover {
-  opacity: 1;
   color: var(--accent-color);
+}
+
+.actions {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+  z-index: 10;
 }
 
 .supportBtn {
   background-color: var(--accent-color);
   color: var(--white);
-  padding: 0.75rem 1.5rem;
-  font-weight: 700;
+  padding: 1.125rem 2.25rem;
+  font-family: var(--font-e-ukraine), sans-serif;
   text-transform: uppercase;
-  font-size: 0.875rem;
-  border-radius: 4px;
+  font-weight: 800;
+  font-size: 0.9375rem;
+  letter-spacing: 0.08em;
+  border-radius: var(--radius-md);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 0 4px 15px rgba(30, 162, 254, 0.2);
+  white-space: nowrap;
 }
 
 .supportBtn:hover {
   background-color: var(--accent-color-hover);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(30, 162, 254, 0.3);
+}
+
+.header.hidden {
+  transform: translateY(-100%);
+}
+
+.searchBtn {
+  background: none;
+  border: none;
+  color: var(--text-primary);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.5rem;
+  transition: var(--transition-fast);
+}
+
+.searchBtn:hover {
+  color: var(--accent-color);
+}
+
+.scrolled {
+  padding: 0.75rem 0;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+  background-color: rgba(255, 255, 255, 0.9);
+}
+
+@media (max-width: 1200px) {
+  .nav {
+    gap: 1.5rem;
+  }
 }
 
 @media (max-width: 1024px) {
   .nav {
-    gap: var(--space-md);
+    display: none;
   }
-
-  .navLink {
-    font-size: 0.8125rem;
-    letter-spacing: 0.04em;
+  
+  .container {
+    justify-content: space-between;
   }
-
-  .supportBtn {
-    padding: 0.65rem 1.1rem;
-    font-size: 0.8125rem;
+  
+  .logo {
+    flex: 1;
   }
 
   .actions {
-    gap: var(--space-md);
-  }
-}
-
-@media (max-width: 900px) {
-  .nav {
-    gap: 0.5rem;
-    overflow-x: auto;
-    overflow-y: hidden;
-    flex-wrap: nowrap;
-    -webkit-overflow-scrolling: touch;
-    scrollbar-width: none;
-    mask-image: linear-gradient(90deg, #000 92%, transparent);
-  }
-
-  .nav::-webkit-scrollbar {
-    display: none;
-  }
-
-  .navLink {
-    flex-shrink: 0;
+    gap: 1rem;
   }
 }
 
 @media (max-width: 768px) {
   .header {
-    padding-top: max(0.75rem, env(safe-area-inset-top));
-    padding-bottom: max(0.75rem, env(safe-area-inset-bottom));
-  }
-
-  .container {
-    display: grid;
-    grid-template-columns: auto 1fr auto;
-    column-gap: 0.75rem;
-    min-height: 3rem;
-  }
-
-  .nav {
-    display: none;
-  }
-
-  .logo {
-    position: static;
-    left: auto;
-    top: auto;
-    transform: none;
-    min-width: 0;
-    max-width: 100%;
-    justify-self: center;
-    justify-content: center;
-    overflow: hidden;
-  }
-
-  .actions {
-    flex: none;
-    gap: 0.4rem;
-    flex-shrink: 0;
-  }
-
-  .localeDesktop {
-    display: none;
-  }
-
-  .supportBtn {
-    min-height: 44px;
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    padding: 0.5rem 0.75rem;
-    font-size: 0.6875rem;
-    max-width: 31vw;
-    text-align: center;
-    line-height: 1.1;
-    white-space: nowrap;
+    padding: 0.75rem 0;
   }
 
   .logoText {
-    font-size: clamp(0.8125rem, 3.5vw, 1.125rem);
-    overflow: hidden;
-    text-overflow: ellipsis;
+    font-size: 1.125rem;
   }
 
   .logoMark {
     width: 36px;
     height: 36px;
   }
-}
 
-@media (max-width: 380px) {
-  .logo {
-    gap: 0.4rem;
+  .searchBtn, .localeDesktop {
+    display: none;
   }
 
   .supportBtn {
-    padding: 0.45rem 0.6rem;
-    font-size: 0.625rem;
-    max-width: 32vw;
+    padding: 0.75rem 1.25rem;
+    font-size: 0.75rem;
   }
 }

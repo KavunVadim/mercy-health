@@ -5,25 +5,28 @@
 }
 
 .link {
-  font-size: 0.875rem;
-  font-weight: 700;
-  padding: var(--space-xs) var(--space-sm);
-  border-radius: 4px;
-  color: var(--white);
+  font-family: var(--font-e-ukraine), sans-serif;
+  font-size: 0.8125rem;
+  font-weight: 500;
+  padding: 0.5rem 0.875rem;
+  border-radius: var(--radius-sm);
+  color: var(--text-primary);
   opacity: 0.6;
-  min-width: 44px;
+  width: 48px; /* Fixed width to prevent jumping */
   min-height: 44px;
   display: inline-flex;
   align-items: center;
   justify-content: center;
+  transition: var(--transition-fast);
 }
 
 .link:hover {
   opacity: 1;
-  background-color: rgba(255, 255, 255, 0.1);
+  background-color: rgba(0, 0, 0, 0.04);
 }
 
-.link.active {
+.linkActive {
   opacity: 1;
-  background-color: var(--accent-color);
+  background-color: var(--text-primary);
+  color: var(--white);
 }

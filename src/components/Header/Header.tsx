@@ -1,9 +1,14 @@
+"use client";
+
 import Image from "next/image";
 import Link from "next/link";
+import { useState } from "react";
+import { motion, useScroll, useMotionValueEvent } from "framer-motion";
 import styles from "./Header.module.css";
 import LocaleSwitcher from "../LocaleSwitcher/LocaleSwitcher";
 import MobileMenu from "./MobileMenu";
 import type { Locale } from "@/i18n-config";
+import clsx from "clsx";
 
 export default function Header({
   dictionary,
@@ -12,8 +17,46 @@ export default function Header({
   dictionary: any;
   lang: Locale;
 }) {
+  const { scrollY } = useScroll();
+  const [hidden, setHidden] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
+
+  useMotionValueEvent(scrollY, "change", (latest) => {
+    const previous = scrollY.getPrevious() ?? 0;
+    if (latest > previous && latest > 150) {
+      setHidden(true);
+    } else {
+      setHidden(false);
+    }
+    setScrolled(latest > 50);
+  });
+
+  const navItems = [
+    {
+      href: `/${lang}/about`,
+      label: lang === "uk" ? "Про Фонд" : "About Foundation",
+    },
+    {
+      href: `/${lang}/projects`,
+      label: lang === "uk" ? "Проекти" : "Projects",
+    },
+    {
+      href: `/${lang}/news`,
+      label: lang === "uk" ? "Матеріали" : "Materials",
+    },
+    {
+      href: `/${lang}/reports`,
+      label: lang === "uk" ? "Звітність" : "Reporting",
+    },
+  ];
+
   return (
-    <header className={styles.header}>
+    <motion.header
+      className={clsx(styles.header, hidden && styles.hidden, scrolled && styles.scrolled)}
+      initial={false}
+      animate={{ y: hidden ? -100 : 0 }}
+      transition={{ duration: 0.3, ease: "easeInOut" }}
+    >
       <div className={`container ${styles.container}`}>
         <Link href={`/${lang}`} className={styles.logo}>
           <Image
@@ -30,15 +73,11 @@ export default function Header({
         </Link>
 
         <nav className={styles.nav}>
-          <Link href={`/${lang}/about`} className={styles.navLink}>
-            {dictionary.navigation.about}
-          </Link>
-          <Link href={`/${lang}/projects`} className={styles.navLink}>
-            {dictionary.navigation.projects}
-          </Link>
-          <Link href={`/${lang}/reports`} className={styles.navLink}>
-            {dictionary.navigation.reports}
-          </Link>
+          {navItems.map((item) => (
+            <Link key={item.href} href={item.href} className={styles.navLink}>
+              {item.label}
+            </Link>
+          ))}
         </nav>
 
         <div className={styles.actions}>
@@ -55,6 +94,6 @@ export default function Header({
           />
         </div>
       </div>
-    </header>
+    </motion.header>
   );
 }

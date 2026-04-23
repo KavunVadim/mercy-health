@@ -1,0 +1,52 @@
+{
+  "reports": [
+    {
+      "id": "r2024-q4",
+      "title": { "uk": "Звіт Q4 2024", "en": "Q4 2024 Report" },
+      "period": "2024-Q4",
+      "date": "2025-01-15",
+      "pdf_url": "/reports/q4-2024.pdf",
+      "summary": {
+        "uk": "За четвертий квартал 2024 року фондом залучено та використано кошти на медичне обладнання, транспорт та гуманітарну допомогу.",
+        "en": "In Q4 2024, the foundation raised and utilized funds for medical equipment, transport, and humanitarian aid."
+      },
+      "stats": {
+        "raised": 3100000,
+        "spent": 2900000,
+        "projects_count": 18
+      }
+    },
+    {
+      "id": "r2024-q3",
+      "title": { "uk": "Звіт Q3 2024", "en": "Q3 2024 Report" },
+      "period": "2024-Q3",
+      "date": "2024-10-15",
+      "pdf_url": "/reports/q3-2024.pdf",
+      "summary": {
+        "uk": "За третій квартал 2024 року фондом залучено та використано кошти на автомобілі, дрони та медтехніку для ЗСУ.",
+        "en": "In Q3 2024, the foundation raised and utilized funds for vehicles, drones, and medical equipment for the Armed Forces."
+      },
+      "stats": {
+        "raised": 2340000,
+        "spent": 2180000,
+        "projects_count": 23
+      }
+    },
+    {
+      "id": "r2024-q2",
+      "title": { "uk": "Звіт Q2 2024", "en": "Q2 2024 Report" },
+      "period": "2024-Q2",
+      "date": "2024-07-15",
+      "pdf_url": "/reports/q2-2024.pdf",
+      "summary": {
+        "uk": "За другий квартал 2024 року фондом реалізовано 15 проєктів допомоги армії та цивільному населенню.",
+        "en": "In Q2 2024, the foundation completed 15 projects supporting the army and civilians."
+      },
+      "stats": {
+        "raised": 1850000,
+        "spent": 1720000,
+        "projects_count": 15
+      }
+    }
+  ]
+}

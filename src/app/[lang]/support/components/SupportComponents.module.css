@@ -1,0 +1,288 @@
+.cardsGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: 1.5rem; /* Reduced gap */
+  animation: fadeIn 0.3s ease-out;
+}
+
+.donationCard {
+  background-color: white;
+  border: 1px solid var(--gray-100);
+  border-radius: 20px; /* Softer radius */
+  padding: 2rem; /* Reduced padding */
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.03);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.donationCard:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.08);
+  border-color: var(--accent);
+}
+
+.cardHeader {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 1.25rem;
+}
+
+.bankLogoWrapper {
+  width: 48px;
+  height: 48px;
+  background-color: var(--gray-50);
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  border: 1px solid var(--gray-100);
+}
+
+.cardTitle {
+  font-family: var(--font-e-ukraine-head);
+  font-size: 1.35rem;
+  color: var(--text-dark);
+  margin: 0;
+}
+
+.cardDescription {
+  color: var(--text-muted);
+  font-size: 0.9375rem;
+  line-height: 1.6;
+  margin-bottom: 2rem;
+  flex-grow: 1;
+}
+
+.supportBtn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  padding: 1rem;
+  background-color: var(--accent);
+  color: white;
+  font-family: var(--font-e-ukraine-head);
+  font-size: 1rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  text-decoration: none;
+  border-radius: 12px;
+  transition: all 0.2s ease;
+}
+
+/* Premium Bank Details */
+.bankDetailsContainer {
+  background-color: white;
+  border: 1px solid var(--gray-100);
+  border-radius: 24px;
+  padding: 2.5rem;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.03);
+}
+
+.detailsHeader {
+  margin-bottom: 2.5rem;
+  text-align: left;
+}
+
+.detailsTitle {
+  font-family: var(--font-e-ukraine-head);
+  font-size: 2.25rem;
+  color: var(--text-dark);
+  margin-bottom: 0.5rem;
+}
+
+.detailsSubtitle {
+  color: var(--text-muted);
+  font-size: 1.125rem;
+}
+
+.currencySelector {
+  display: flex;
+  gap: 0.5rem;
+  margin-bottom: 2rem;
+  background-color: var(--gray-50);
+  padding: 0.5rem;
+  border-radius: 16px;
+  width: fit-content;
+}
+
+.currencyToggle {
+  padding: 0.75rem 1.5rem;
+  border-radius: 12px;
+  font-family: var(--font-e-ukraine-head);
+  font-weight: 700;
+  font-size: 0.875rem;
+  color: var(--text-muted);
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  white-space: nowrap;
+}
+
+.currencyToggle.active {
+  background-color: white;
+  color: var(--text-dark);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+}
+
+.currencyToggle:hover:not(.active) {
+  color: var(--text-dark);
+  background-color: rgba(255, 255, 255, 0.5);
+}
+
+.rowsWrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.premiumDetailsGrid {
+  margin-bottom: 3rem;
+}
+
+.premiumDetailRow {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+  padding: 1.25rem;
+  background-color: var(--gray-50);
+  border-radius: 16px;
+  border: 1px solid transparent;
+  transition: all 0.3s ease;
+}
+
+.premiumDetailRow:hover {
+  background-color: white;
+  border-color: var(--accent);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+  transform: translateX(5px);
+}
+
+.rowIconWrapper {
+  width: 44px;
+  height: 44px;
+  background-color: white;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--accent);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+}
+
+.rowContent {
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.rowLabel {
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.rowValue {
+  font-family: var(--font-e-ukraine-head);
+  font-size: 1.125rem;
+  color: var(--text-dark);
+  word-break: break-all;
+}
+
+.premiumCopyBtn {
+  position: relative;
+  background: white;
+  border: 1px solid var(--gray-200);
+  width: 40px;
+  height: 40px;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  color: var(--text-muted);
+  transition: all 0.2s ease;
+}
+
+.premiumCopyBtn:hover {
+  color: var(--accent);
+  border-color: var(--accent);
+}
+
+.premiumTooltip {
+  position: absolute;
+  top: -35px;
+  right: 0;
+  background-color: var(--text-dark);
+  color: white;
+  padding: 0.4rem 0.6rem;
+  border-radius: 6px;
+  font-size: 0.7rem;
+  white-space: nowrap;
+}
+
+.premiumInfoSection {
+  padding-top: 2rem;
+  border-top: 1px solid var(--gray-100);
+}
+
+.sectionInfo {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  color: var(--text-muted);
+}
+
+.infoText {
+  font-size: 0.875rem;
+  margin: 0;
+}
+
+/* Placeholder card */
+.placeholderCard {
+  background-color: var(--gray-50);
+  border-radius: 24px;
+  padding: 3rem;
+  text-align: center;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@media (max-width: 768px) {
+  .cardsGrid {
+    grid-template-columns: 1fr;
+  }
+  
+  .bankDetailsContainer {
+    padding: 1.5rem;
+  }
+  
+  .detailsTitle {
+    font-size: 1.75rem;
+  }
+  
+  .premiumDetailRow {
+    padding: 1rem;
+    gap: 1rem;
+  }
+  
+  .rowIconWrapper {
+    width: 36px;
+    height: 36px;
+  }
+  
+  .rowValue {
+    font-size: 1rem;
+  }
+}

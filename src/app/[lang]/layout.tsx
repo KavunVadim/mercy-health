@@ -1,19 +1,23 @@
 import type { Metadata, Viewport } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import { Inter, Outfit } from "next/font/google";
 import "../globals.css";
+import "../variables.css";
 import { i18n, type Locale } from "@/i18n-config";
 import Header from "@/components/Header/Header";
 import Footer from "@/components/Footer/Footer";
 import { getDictionary } from "@/get-dictionary";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
+const eUkraineHead = Outfit({
   subsets: ["latin"],
+  variable: "--font-e-ukraine-head",
+  weight: "700",
+  display: "swap",
 });
 
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
+const eUkraine = Inter({
+  subsets: ["latin", "cyrillic"],
+  variable: "--font-e-ukraine",
+  display: "swap",
 });
 
 export async function generateStaticParams() {
@@ -43,7 +47,7 @@ export default async function RootLayout({
   const dictionary = await getDictionary(locale);
 
   return (
-    <html lang={locale} className={`${geistSans.variable} ${geistMono.variable}`}>
+    <html lang={locale} className={`${eUkraineHead.variable} ${eUkraine.variable}`}>
       <body>
         <Header dictionary={dictionary} lang={locale} />
         <div className="layout-wrapper">

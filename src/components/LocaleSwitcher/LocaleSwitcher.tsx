@@ -3,6 +3,7 @@
 import { usePathname } from "next/navigation";
 import Link from "next/link";
 import { i18n, type Locale } from "@/i18n-config";
+import { clsx } from "clsx";
 import styles from "./LocaleSwitcher.module.css";
 
 export default function LocaleSwitcher() {
@@ -23,7 +24,7 @@ export default function LocaleSwitcher() {
           <Link
             key={locale}
             href={redirectedPathname(locale)}
-            className={`${styles.link} ${isActive ? styles.active : ""}`}
+            className={clsx(styles.link, isActive && styles.linkActive)}
           >
             {locale.toUpperCase()}
           </Link>

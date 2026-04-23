@@ -2,9 +2,8 @@
   "site": {
     "name": "Charitable Foundation «Mercy and Health»",
     "tagline": "Together for Victory",
-    "description": "Charitable Foundation «Mercy and Health» — we support the army, rehabilitate veterans, and assist civilians affected by war.",
+    "description": "Charitable Foundation 'Mercy & Health' — we help the army, provide equipment for stabilization points, and support the civilian population during the war.",
     "phone_fund": "093-351-62-00",
-    "phone_center": "096-145-11-55",
     "email": "info@fond.specter-it.site",
     "address": "Vinnytsia, Ukraine",
     "social": {
@@ -15,7 +14,6 @@
   },
   "nav": {
     "fund": "Charitable Foundation",
-    "center": "Rehabilitation Center",
     "about": "About Us",
     "history": "Fund History",
     "general_info": "General Information",
@@ -45,22 +43,40 @@
     "reports": "Reports",
     "contacts": "Contacts",
     "donate": "Donate",
-    "center_about": "About",
-    "mission": "Mission",
-    "vision": "Vision",
-    "specialists": "Specialists",
-    "directions": "Services",
-    "psych_help": "Psychological Support for Veterans",
-    "phys_help": "Physical Rehabilitation",
-    "family_support": "Support for Families",
-    "children_support": "Support for Children of Fallen Soldiers",
-    "mobile_groups": "Mobile Groups",
-    "teen_club": "Teen Club",
     "branches": "Branches"
   },
+  "hero_slider": [
+    {
+      "id": "slide-1",
+      "badge": "PROJECTS",
+      "title": "Ambulances for the Front Line",
+      "description": "Providing combat medics with specialized vehicles to save the lives of our defenders.",
+      "image": "https://images.unsplash.com/photo-1583321500900-82807e458f3c?auto=format&fit=crop&q=80&w=1600",
+      "cta": "Learn more",
+      "href": "/projects/ambulances"
+    },
+    {
+      "id": "slide-2",
+      "badge": "NEWS",
+      "title": "New Humanitarian Shipment",
+      "description": "Delivered over 10 tons of medicine and equipment to frontline hospitals in Kharkiv region.",
+      "image": "https://images.unsplash.com/photo-1593113598332-cd288d649433?auto=format&fit=crop&q=80&w=1600",
+      "cta": "Read article",
+      "href": "/news/humanitarian-aid"
+    },
+    {
+      "id": "slide-3",
+      "badge": "REPORTING",
+      "title": "Monthly Work Results",
+      "description": "Your donations in action: see the detailed report on how we helped the AFU last month.",
+      "image": "https://images.unsplash.com/photo-1576091160550-2173dad99978?auto=format&fit=crop&q=80&w=1600",
+      "cta": "View report",
+      "href": "/reports"
+    }
+  ],
   "hero": {
     "headline": "Supporting Those Who Defend Ukraine",
-    "subheadline": "Army support, veteran rehabilitation, community aid — every day since 2022",
+    "subheadline": "Help for the army, medical equipment, community support — every day since 2022",
     "cta_primary": "Donate Now",
     "cta_secondary": "Learn More",
     "scroll_hint": "Scroll down"
@@ -151,50 +167,7 @@
       { "icon": "eye", "title": "Transparency", "text": "Regular reports and open finances for every donor" }
     ]
   },
-  "rehab_center": {
-    "title": "Rehabilitation Center",
-    "subtitle": "Restoring Body and Spirit",
-    "mission": "Psychological and physical rehabilitation of military personnel and their families — a path to returning to civilian life",
-    "phone": "096-145-11-55",
-    "services": [
-      {
-        "id": "psych",
-        "icon": "brain",
-        "title": "Psychological Support",
-        "description": "Individual and group sessions with experienced psychologists. Work with PTSD, anxiety, and depression"
-      },
-      {
-        "id": "physical",
-        "icon": "activity",
-        "title": "Physical Rehabilitation",
-        "description": "Recovery from injuries and physical exhaustion. Exercise therapy, massage, physiotherapy"
-      },
-      {
-        "id": "family",
-        "icon": "users",
-        "title": "Family Support",
-        "description": "Psychological help for spouses, parents, and children of military personnel"
-      },
-      {
-        "id": "children",
-        "icon": "star",
-        "title": "Children's Support",
-        "description": "Specialized work with children of fallen and wounded soldiers. Teen Club program"
-      }
-    ],
-    "mobile_groups": {
-      "title": "Mobile Psychological Groups",
-      "subtitle": "Field support in 4 regions of Ukraine",
-      "regions": [
-        { "name": "Donetsk Region", "slug": "donetsk" },
-        { "name": "Zaporizhzhia Region", "slug": "zaporizhzhia" },
-        { "name": "Kharkiv Region", "slug": "kharkiv" },
-        { "name": "Kyiv Region", "slug": "kyiv" }
-      ]
-    },
-    "cta_register": "Schedule a Consultation",
-    "cta_learn": "Learn More"
-  },
+
   "reports": {
     "title": "Reports & Transparency",
     "subtitle": "We are open and accountable to every donor",
@@ -208,7 +181,6 @@
   "contacts": {
     "title": "Contact Us",
     "fund_title": "Charitable Foundation «Mercy and Health»",
-    "center_title": "Rehabilitation Center",
     "phone_label": "Phone",
     "email_label": "Email",
     "address_label": "Address",
@@ -263,7 +235,6 @@
   "footer": {
     "tagline": "Together for Ukraine's Victory",
     "fund_links_title": "Charitable Foundation",
-    "center_links_title": "Rehabilitation Center",
     "info_links_title": "Information",
     "contacts_title": "Contacts",
     "copyright": "© 2024 Charitable Foundation «Mercy and Health». All rights reserved.",

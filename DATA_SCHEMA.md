@@ -12,10 +12,10 @@ These act as the site's content database — editable without touching code.
 | `content.uk.json` | All Ukrainian text content       |
 | `content.en.json` | All English text content         |
 | `projects.json`   | Fundraising campaigns / projects |
-| `team.json`       | Team members (fund + center)     |
+| `team.json`       | Team members                     |
 | `partners.json`   | Partner organizations            |
 | `reports.json`    | Annual/financial reports         |
-| `branches.json`   | Rehabilitation center branches   |
+| `branches.json`   | Fund branches                    |
 
 ---
 
@@ -28,7 +28,6 @@ These act as the site's content database — editable without touching code.
     "tagline": "Разом для перемоги",
     "description": "Ми допомагаємо армії та цивільному населенню...",
     "phone_fund": "093-351-62-00",
-    "phone_center": "096-145-11-55",
     "email": "info@fond.specter-it.site",
     "address": "м. Вінниця, вул. ...",
     "social": {
@@ -39,7 +38,6 @@ These act as the site's content database — editable without touching code.
   },
   "nav": {
     "fund": "Благодійний фонд",
-    "center": "Центр реабілітації",
     "about": "Про нас",
     "projects": "Проєкти",
     "reports": "Звіти",
@@ -144,46 +142,7 @@ These act as the site's content database — editable without touching code.
       }
     ]
   },
-  "rehab_center": {
-    "title": "Центр реабілітації",
-    "subtitle": "Відновлення тіла і духу",
-    "mission": "Психологічна та фізична реабілітація військових і їхніх родин",
-    "services": [
-      {
-        "id": "psych",
-        "icon": "brain",
-        "title": "Психологічна допомога",
-        "description": "Індивідуальні та групові сесії з досвідченими психологами"
-      },
-      {
-        "id": "physical",
-        "icon": "activity",
-        "title": "Фізична реабілітація",
-        "description": "Відновлення після поранень та фізичного виснаження"
-      },
-      {
-        "id": "family",
-        "icon": "users",
-        "title": "Підтримка родин",
-        "description": "Допомога сім'ям військовослужбовців"
-      },
-      {
-        "id": "children",
-        "icon": "star",
-        "title": "Підтримка дітей",
-        "description": "Робота з дітьми полеглих та поранених воїнів"
-      }
-    ],
-    "mobile_groups": {
-      "title": "Мобільні психологічні групи",
-      "regions": [
-        "Донецька область",
-        "Запорізька область",
-        "Харківська область",
-        "Київська область"
-      ]
-    }
-  },
+
   "reports": {
     "title": "Звіти та прозорість",
     "subtitle": "Ми відкриті та відповідальні перед донорами",
@@ -196,7 +155,6 @@ These act as the site's content database — editable without touching code.
   "contacts": {
     "title": "Контакти",
     "fund_title": "Благодійний фонд",
-    "center_title": "Центр реабілітації",
     "form_title": "Написати нам",
     "form_name": "Ваше ім'я",
     "form_email": "Email",
@@ -377,18 +335,6 @@ These act as the site's content database — editable without touching code.
         "en": "Volunteer since 2014..."
       }
     }
-  ],
-  "center_team": [
-    {
-      "id": "c1",
-      "name": { "uk": "Олена Коваль", "en": "Olena Koval" },
-      "role": { "uk": "Провідний психолог", "en": "Lead Psychologist" },
-      "photo": "/images/team/olena-koval.jpg",
-      "specialization": {
-        "uk": "ПТСР, кризова інтервенція",
-        "en": "PTSD, Crisis Intervention"
-      }
-    }
   ]
 }
 ```
@@ -456,7 +402,7 @@ These act as the site's content database — editable without touching code.
       "id": "b1",
       "city": { "uk": "Вінниця (головний офіс)", "en": "Vinnytsia (HQ)" },
       "address": { "uk": "вул. Соборна, 1", "en": "1 Soborna St." },
-      "phone": "096-145-11-55",
+      "phone": "093-351-62-00",
       "email": "vinnytsia@fond.specter-it.site",
       "coordinates": { "lat": 49.2331, "lng": 28.4682 },
       "is_main": true

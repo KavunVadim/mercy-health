@@ -1,129 +1,208 @@
 {
   "navigation": {
-    "about": "About",
+    "about": "About Us",
     "projects": "Projects",
-    "reports": "Reporting",
+    "materials": "Materials",
+    "reports": "Reports",
     "support": "Support"
   },
-  "hero": {
-    "title": "Mercy and Health",
-    "description": "Saving lives and bringing victory closer by providing veterans and medics on the front line with everything they need.",
-    "cta": "Help Now"
-  },
-  "footer": {
-    "rights": "All rights reserved © 2026 CF \"Mercy and Health\"",
-    "columns": {
-      "contacts": "Contacts",
-      "socials": "Social Media",
-      "legal": "Legal Information"
+  "hero_slider": [
+    {
+      "id": "1",
+      "badge": "Medical Aid",
+      "title": "Help Save Lives",
+      "description": "Providing critical medical aid and logistics to those in need.",
+      "image": "https://images.unsplash.com/photo-1593113598332-cd288d649433?auto=format&fit=crop&q=80&w=1600",
+      "cta": "Support Now",
+      "href": "/support"
     },
-    "foundation_phone": "093-351-62-00",
-    "rehab_phone": "096-145-11-55",
-    "address_foundation": "Kyiv, Holosiivskyi District",
-    "address_rehab": "Kyiv, Obolonskyi District"
+    {
+      "id": "2",
+      "badge": "Logistics",
+      "title": "Frontline Logistics",
+      "description": "Delivering essential supplies to the most difficult-to-reach areas.",
+      "image": "https://images.unsplash.com/photo-1580674285054-bed31e145f59?auto=format&fit=crop&q=80&w=1600",
+      "cta": "View Projects",
+      "href": "/projects"
+    },
+    {
+      "id": "3",
+      "badge": "Humanitarian Aid",
+      "title": "Food Security",
+      "description": "Providing food supplies to residents of de-occupied territories.",
+      "image": "https://images.unsplash.com/photo-1488521787991-ed7bbaae773c?auto=format&fit=crop&q=80&w=1600",
+      "cta": "Help",
+      "href": "/support"
+    },
+    {
+      "id": "4",
+      "badge": "Children",
+      "title": "Future of Ukraine",
+      "description": "Support programs for children affected by the war.",
+      "image": "https://images.unsplash.com/photo-1488521787991-ed7bbaae773c?auto=format&fit=crop&q=80&w=1600",
+      "cta": "Read More",
+      "href": "/projects/generation-future"
+    },
+    {
+      "id": "5",
+      "badge": "TacMed",
+      "title": "Training Saves Lives",
+      "description": "First aid courses for military and civilians.",
+      "image": "https://images.unsplash.com/photo-1612349317150-e413f6a5b16d?auto=format&fit=crop&q=80&w=1600",
+      "cta": "Sign Up",
+      "href": "/projects/tactical-med-standard"
+    },
+    {
+      "id": "6",
+      "badge": "Evacuation",
+      "title": "Road to Safety",
+      "description": "Safe evacuation of people from active combat zones.",
+      "image": "https://images.unsplash.com/photo-1516549655169-df83a0774514?auto=format&fit=crop&q=80&w=1600",
+      "cta": "Support",
+      "href": "/support"
+    }
+  ],
+  "stats": {
+    "items": {
+      "collected": "Collected",
+      "helped": "People Helped",
+      "donors": "Total Donors"
+    }
   },
   "about": {
-    "title": "About Our Foundation",
+    "title": "About Foundation",
+    "tabs": {
+      "about_us": "About Us",
+      "partners": "Partners",
+      "contacts": "Contacts"
+    },
+    "sidebar": {
+      "who_we_are": "Who We Are",
+      "mission": "Mission & Values",
+      "media": "Media About Us"
+    },
     "history": {
       "title": "Our History",
-      "content": "Founded in 2016, our foundation has grown from a local initiative into a large-scale organization. Since February 2022, we have been operating 24/7. Today, we are one of the largest suppliers of specialized transport for the Armed Forces of Ukraine."
+      "content": "The Charitable Foundation 'Mercy and Health' was founded with a clear goal: to help those who need it most. Since the beginning of the full-scale invasion, we have focused our efforts on supporting the Armed Forces of Ukraine and medical institutions."
     },
     "mission": {
-      "title": "Mission and Values",
-      "content": "We believe that no one should be left alone with their trouble. Our mission is to be a reliable rear for those on the front line and to provide comprehensive rehabilitation for those who have returned."
+      "title": "Our Mission",
+      "content": "To provide necessary assistance to the military and civilians, to preserve life and health, and to bring our common Victory closer through transparency, speed, and efficiency."
     },
     "team": {
       "title": "Our Team",
       "members": [
         {
-          "name": "Oleksandr Yatsyna",
-          "role": "Founder of CF 'Mercy and Health'"
+          "name": "Oleksandr Petrenko",
+          "role": "Founder & Director"
         },
         {
-          "name": "Yulia Ustich",
-          "role": "Executive Director of the Foundation"
+          "name": "Maria Ivanova",
+          "role": "Project Coordinator"
         },
         {
-          "name": "Katya Bogadelnikova",
-          "role": "Director of the Rehabilitation Center"
-        },
-        {
-          "name": "Tetyana Makiyashyna",
-          "role": "Head Volunteer"
+          "name": "Dmytro Kovalenko",
+          "role": "Logistics Manager"
         }
       ]
+    },
+    "media": {
+      "title": "Media About Us",
+      "content": "We regularly share our achievements and work in the media. Here you can find articles and videos about our activities."
+    },
+    "contacts_tab": {
+      "title": "Get in Touch",
+      "form": {
+        "name": "Your Name",
+        "email": "Email Address",
+        "message": "Message",
+        "submit": "Send Message"
+      }
     }
   },
   "projects": {
+    "title": "Our Projects",
     "collected": "Collected",
     "goal": "Goal",
     "details": "Details",
     "items": [
       {
-        "id": "1",
+        "id": "reanimobili-na-front",
         "title": "Ambulances for the Front",
-        "description": "Over 200 specialized vehicles have already been delivered to save the lives of our defenders.",
-        "image": "https://images.unsplash.com/photo-1583321500900-82807e458f3c?auto=format&fit=crop&q=80&w=1000",
-        "collected": 210,
-        "goal": 300,
-        "unit": "vehicles"
+        "short_description": "Purchase and equipment of ambulances for the evacuation of the wounded.",
+        "full_description": "Our flagship project aimed at providing combat medics with specialized transport. Every ambulance means dozens of lives saved every month.",
+        "image": "https://images.unsplash.com/photo-1583321500900-82807e458f3c?auto=format&fit=crop&q=80&w=1600",
+        "collected": 12500000,
+        "goal": 20000000,
+        "unit": "uah"
       },
       {
-        "id": "2",
-        "title": "Project 'On the Shield'",
-        "description": "Providing refrigerated trucks for the dignified transportation of fallen Heroes.",
-        "image": "https://images.unsplash.com/photo-1576091160550-2173dad99978?auto=format&fit=crop&q=80&w=1000",
-        "collected": 850000,
-        "goal": 1500000
+        "id": "tactical-med-standard",
+        "title": "Tactical Med Standards",
+        "short_description": "Providing units with certified tourniquets and NATO-standard medical kits.",
+        "image": "https://images.unsplash.com/photo-1612349317150-e413f6a5b16d?auto=format&fit=crop&q=80&w=1000",
+        "collected": 4800000,
+        "goal": 8000000,
+        "unit": "uah"
       },
       {
-        "id": "3",
+        "id": "mobile-hospitals",
+        "title": "Mobile Hospitals",
+        "short_description": "Creation and deployment of autonomous medical stabilization points near the front line.",
+        "image": "https://images.unsplash.com/photo-1516549655169-df83a0774514?auto=format&fit=crop&q=80&w=1000",
+        "collected": 15600000,
+        "goal": 25000000,
+        "unit": "uah"
+      },
+      {
+        "id": "rehabilitation-center",
         "title": "Rehabilitation Center",
-        "description": "Free psychological and physical assistance to military personnel and their families.",
-        "image": "https://images.unsplash.com/photo-1579684385127-1ef15d508118?auto=format&fit=crop&q=80&w=1000",
-        "collected": 1200000,
-        "goal": 5000000
+        "short_description": "Physical and psychological recovery program for military and civilians.",
+        "image": "https://images.unsplash.com/photo-1576765608535-5f04d1e3f289?auto=format&fit=crop&q=80&w=1000",
+        "collected": 2100000,
+        "goal": 10000000,
+        "unit": "uah"
+      },
+      {
+        "id": "food-security",
+        "title": "Humanitarian Food Aid",
+        "short_description": "Delivery of food and hygiene products to de-occupied and frontline settlements.",
+        "image": "https://images.unsplash.com/photo-1593113598332-cd288d649433?auto=format&fit=crop&q=80&w=1000",
+        "collected": 3400000,
+        "goal": 5000000,
+        "unit": "uah"
+      },
+      {
+        "id": "generation-future",
+        "title": "Generation of the Future",
+        "short_description": "Support for children who have lost parents or were affected by hostilities.",
+        "image": "https://images.unsplash.com/photo-1488521787991-ed7bbaae773c?auto=format&fit=crop&q=80&w=1000",
+        "collected": 850000,
+        "goal": 3000000,
+        "unit": "uah"
       }
     ]
   },
-  "reports": {
-    "title": "Reporting",
-    "description": "We believe in full transparency. Our goal is to be a reliable rear for those on the front line.",
-    "summary": {
-      "total_collected": "Total Raised",
-      "donations_count": "Aid Delivered",
-      "avg_donation": "Ambulances"
-    },
-    "history": "Report History",
-    "months": {
-      "jan": "January",
-      "feb": "February",
-      "mar": "March"
-    }
-  },
-  "stats": {
-    "title": "Our Achievements",
-    "items": {
-      "collected": "Ambulances delivered",
-      "helped": "Project 'On the Shield'",
-      "donors": "Rehabilitation Centers"
-    }
-  },
   "news": {
-    "title": "Our Activities",
+    "title": "Materials",
+    "tabs": {
+      "news": "News",
+      "gallery": "Gallery",
+      "others": "Others"
+    },
     "more": "All materials",
     "items": [
       {
         "id": "1",
         "date": "19.04.2026",
-        "title": "Mobile psychological groups operate in 4 regions of Ukraine",
-        "image": "https://images.unsplash.com/photo-1516574187841-cb9cc2ca948b?auto=format&fit=crop&q=80&w=1000"
+        "title": "New batch of ambulances dispatched to the Bakhmut direction",
+        "image": "https://images.unsplash.com/photo-1583321500900-82807e458f3c?auto=format&fit=crop&q=80&w=1000"
       },
       {
         "id": "2",
         "date": "17.04.2026",
-        "title": "Support program for children of fallen defenders: teenage club",
-        "image": "https://images.unsplash.com/photo-1584622781564-1d9876a13d00?auto=format&fit=crop&q=80&w=1000"
+        "title": "New medical equipment delivered to a stabilization point in Kharkiv region",
+        "image": "https://images.unsplash.com/photo-1576091160550-2173dad99978?auto=format&fit=crop&q=80&w=1000"
       },
       {
         "id": "3",
@@ -131,6 +210,113 @@
         "title": "Assistance to orphanages and facilities for the elderly",
         "image": "https://images.unsplash.com/photo-1583321500900-82807e458f3c?auto=format&fit=crop&q=80&w=1000"
       }
-    ]
+    ],
+    "gallery": {
+      "title": "Our Gallery",
+      "description": "Photos from the frontline and our foundation's daily work."
+    },
+    "others": {
+      "title": "Additional Materials",
+      "description": "Reports, documents, and other useful files for download."
+    }
+  },
+  "reports": {
+    "title": "Reporting and Transparency",
+    "description": "We are open about every hryvnia spent. Here you can find our financial and operational reports.",
+    "summary": {
+      "total_collected": "Total collected",
+      "donations_count": "Donations count",
+      "avg_donation": "Average donation"
+    },
+    "history": "Report History",
+    "months": {
+      "jan": "January",
+      "feb": "February",
+      "mar": "March",
+      "apr": "April",
+      "may": "May",
+      "jun": "June",
+      "jul": "July",
+      "aug": "August",
+      "sep": "September",
+      "oct": "October",
+      "nov": "November",
+      "dec": "December"
+    }
+  },
+  "support": {
+    "title": "Help the Foundation",
+    "description": "Your support saves lives. Choose a convenient way to help.",
+    "tabs": {
+      "once": "Once",
+      "monthly": "Monthly",
+      "requisites": "Requisites"
+    },
+    "cards": {
+      "monobank": "Support on Monobank",
+      "privatbank": "Transfer via Privat24",
+      "details": "View details",
+      "items": [
+        {
+          "id": "army",
+          "title": "Help for AFU",
+          "description": "Purchase of ammunition, drones, and communication equipment for frontline units.",
+          "bank": "Monobank",
+          "link": "https://send.monobank.ua/jar/example1"
+        },
+        {
+          "id": "medics",
+          "title": "Tactical Medicine",
+          "description": "Assembling first aid kits and purchasing medical equipment for stabilization points.",
+          "bank": "Monobank",
+          "link": "https://send.monobank.ua/jar/example2"
+        }
+      ]
+    },
+    "bank_details": {
+      "title": "Bank Requisites",
+      "subtitle": "For transfers in UAH and foreign currency",
+      "beneficiary": "Beneficiary",
+      "beneficiary_value": "CHARITABLE FOUNDATION 'MERCY AND HEALTH'",
+      "edrpou": "EDRPOU",
+      "edrpou_value": "40347558",
+      "bank_name": "Bank",
+      "bank_name_value": "JSC CB 'PrivatBank'",
+      "iban": "IBAN",
+      "purpose": "Payment purpose",
+      "purpose_value": "Charitable assistance",
+      "copy": "Copy",
+      "copied": "Copied!",
+      "currencies": {
+        "uah": "Hryvnia (UAH)",
+        "usd": "US Dollar (USD)",
+        "eur": "Euro (EUR)",
+        "gbp": "British Pound (GBP)"
+      }
+    }
+  },
+  "hero": {
+    "title": "Mercy & Health",
+    "description": "Charitable foundation 'Mercy and Health' provides medical aid and humanitarian support to those affected by war in Ukraine."
+  },
+  "footer": {
+    "address_title": "Address",
+    "address_foundation": "Kyiv, Ukraine",
+    "foundation_phone": "+380 44 123 45 67",
+    "columns": {
+      "foundation": "Foundation",
+      "projects": "Projects",
+      "socials": "Social Media",
+      "contacts": "Contacts",
+      "legal": "Legal Information"
+    },
+    "social_links": {
+      "facebook": "https://facebook.com",
+      "instagram": "https://instagram.com",
+      "telegram": "https://t.me",
+      "linkedin": "https://linkedin.com"
+    },
+    "copyright": "© 2026 Mercy and Health. All rights reserved.",
+    "rights": "© 2026 Mercy and Health. All rights reserved."
   }
 }

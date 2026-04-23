@@ -1,0 +1,74 @@
+.tabsContainer {
+  margin-bottom: 3rem;
+  border-bottom: 1px solid var(--gray-200);
+  display: flex;
+  justify-content: center; /* Center the tabs as requested */
+}
+
+.tabsList {
+  display: flex;
+  gap: 3rem;
+  overflow-x: auto;
+  scrollbar-width: none;
+  padding: 0 1rem;
+}
+
+.tabsList::-webkit-scrollbar {
+  display: none;
+}
+
+.tabBtn {
+  position: relative;
+  background: none;
+  border: none;
+  padding: 1.25rem 0;
+  cursor: pointer;
+  font-family: var(--font-e-ukraine-head);
+  font-size: 1rem;
+  font-weight: 700;
+  text-transform: uppercase; /* Use uppercase as requested */
+  letter-spacing: 0.05em;
+  color: var(--text-muted);
+  transition: all 0.3s ease;
+  white-space: nowrap;
+}
+
+.tabBtn:hover {
+  color: var(--text-dark);
+}
+
+.tabBtn.active {
+  color: var(--text-dark);
+}
+
+.tabLabel {
+  position: relative;
+  z-index: 1;
+}
+
+.activeIndicator {
+  position: absolute;
+  bottom: -1px;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background-color: var(--accent);
+  border-radius: 4px 4px 0 0;
+  z-index: 2;
+}
+
+@media (max-width: 768px) {
+  .tabsContainer {
+    justify-content: flex-start;
+    margin-bottom: 2rem;
+  }
+  
+  .tabsList {
+    gap: 2rem;
+  }
+  
+  .tabBtn {
+    font-size: 0.875rem;
+    padding: 1rem 0;
+  }
+}

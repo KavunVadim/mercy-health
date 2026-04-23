@@ -1,0 +1,25 @@
+{
+  "partners": [
+    {
+      "id": "p1",
+      "name": "USAID",
+      "logo": "/images/partners/usaid.png",
+      "url": "https://usaid.gov",
+      "category": "international"
+    },
+    {
+      "id": "p2",
+      "name": "UNICEF",
+      "logo": "/images/partners/unicef.png",
+      "url": "https://unicef.org",
+      "category": "international"
+    },
+    {
+      "id": "p3",
+      "name": "Червоний Хрест",
+      "logo": "/images/partners/red-cross.png",
+      "url": "https://redcross.org.ua",
+      "category": "international"
+    }
+  ]
+}

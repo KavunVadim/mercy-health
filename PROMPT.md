@@ -10,16 +10,17 @@
 ## Завдання
 Переробити сайт благодійного фонду під новий дизайн:
 - ЗВІДКИ БЕРЕМО КОНТЕНТ: https://fond.specter-it.site (тексти, фото, структура)
-- РЕФЕРЕНС ДИЗАЙНУ: https://savelife.in.ua (стиль, layout, компоненти)
-- Результат: Next.js сайт у стилі savelife, але з контентом Милосердя та здоров'я і блакитним акцентом
+- Результат: Чистий, світлий Next.js сайт у структурі savelife, але з блакитним акцентом та світлою палітрою.
 
 ## Логотип та кольори
-Логотип — голуб. Основний колір: небесно-синій #4A9ECC.
-Адаптуємо темну палітру savelife.in.ua, замінюємо їх зелений на наш блакитний #4A9ECC.
-Кнопка "Допомогти" — яскраво-червоний #E8401C (як на savelife).
+Логотип — голуб. Основний колір: небесно-синій #1EA2FE.
+Палітра: Білий, світло-сірий #F8FAFC, та блакитний акцент #1EA2FE.
+Кнопка "Допомогти" — яскраво-червоний #E8401C.
 
-## Стек
-- Next.js 14 App Router + TypeScript
+## Color Palette
+
+```css
+/* === ФОНИ — Apple Style === */
 - Tailwind CSS (кастомні кольори в tailwind.config)
 - next-intl (uk за замовчуванням, en — /en/...)
 - Framer Motion (анімації)
@@ -36,7 +37,7 @@
 - /data/content.uk.json та content.en.json — всі тексти
 - /data/projects.json — проєкти/збори
 - /data/team.json — команда
-- /data/partners-reports-branches.json — партнери, звіти, філіали
+- /data/partners.json, /data/reports.json, /data/branches.json — партнери, звіти, філіали
 - messages/uk.json та en.json — для next-intl
 
 ## Поточний крок
@@ -55,11 +56,11 @@
 1. npx create-next-app@latest --typescript --tailwind --app charity-fund
 2. npm install next-intl framer-motion lucide-react clsx react-countup
 3. tailwind.config.ts — додай кастомні кольори:
-   colors: {
-     accent: { DEFAULT:'#4A9ECC', dark:'#2E7DA8', light:'#7BBFE0' },
-     donate: { DEFAULT:'#E8401C', hover:'#C9340F' },
-     bg: { hero:'#0A0F1E', dark:'#111827', mid:'#1A2744', light:'#F0F4F8' },
-   }
+   - **Backgrounds**: Use white (`#ffffff`) or Apple-style light gray (`#f5f5f7`) for sections.
+   - **Accent Color**: Primary Blue (`#1ea2fe`).
+   - **Donate CTA**: Red (`#e8401c`).
+   - **Typography**: Oswald for headings (uppercase), Inter for body text.
+   - **Component Style**: Clean, high-end, inspired by Apple's UI (subtle blurs, crisp borders).
 4. globals.css — CSS змінні для всіх кольорів з DESIGN.md
 5. next.config.js — next-intl plugin + i18n routing (uk default, en)
 6. src/i18n.ts + middleware.ts — налаштування next-intl
@@ -77,18 +78,17 @@
 HEADER (sticky, 2-рядкова структура як savelife.in.ua):
 
 Рядок 1 (тонкий ~36px):
-- Ліворуч: "Благодійний фонд: 093-351-62-00" | "Центр реабілітації: 096-145-11-55"
+- Ліворуч: "Благодійний фонд: 093-351-62-00"
 - Праворуч: перемикач UA / EN (з next-intl)
 - bg: трохи темніший ніж основний навбар
 - text-xs text-[#9BAAC4]
 
 Рядок 2 (основний ~72px):
 - Ліворуч: Logo (голуб SVG + назва "Благодійний фонд Милосердя та здоров'я")
-- Центр: дві групи посилань — "Благодійний фонд ▼" | "Центр реабілітації ▼"
-  (dropdown меню з підпунктами при hover)
+- Центр: посилання — "Благодійний фонд ▼" (dropdown меню з підпунктами при hover)
 - Праворуч: кнопка "Допомогти" bg-[#E8401C] text-white uppercase
-- bg: rgba(10,15,30,0.97) backdrop-blur-md
-- border-bottom: 1px solid rgba(74,158,204,0.12)
+- bg: rgba(255, 255, 255, 0.95) backdrop-blur-md
+- border-bottom: 1px solid rgba(0, 0, 0, 0.05)
 
 Мобільний хедер:
 - Logo + hamburger кнопка
@@ -96,8 +96,8 @@ HEADER (sticky, 2-рядкова структура як savelife.in.ua):
 - Телефони + мовний перемикач всередині
 
 FOOTER:
-- bg-[#0A0F1E] border-t-2 border-[rgba(74,158,204,0.3)]
-- 4 колонки: Благодійний фонд | Центр реабілітації | Інформація | Контакти
+- bg-[#F8FAFC] border-t border-[rgba(0,0,0,0.05)]
+- 4 колонки: Благодійний фонд | Інформація | Контакти | Соцмережі
 - Телефони та email
 - Соцмережі (Facebook, Instagram, Telegram) — іконки Lucide
 - Copyright рядок знизу
@@ -175,30 +175,10 @@ PROJECT CARD (src/components/ui/ProjectCard.tsx):
 - FAQ акордеон (без зовнішньої бібліотеки — useState)
 - Кнопка "Назад" ←
 
-Дані з content.uk.json → how_to_help та donate_page
+Дані з messages/uk.json → how_to_help та donate_page
 ```
 
-### Phase 6 — Rehabilitation Center
-
-```
-Виконай Phase 6: Центр реабілітації.
-
-СЕКЦІЯ НА ГОЛОВНІЙ (src/components/sections/RehabCenter.tsx):
-- Відокремлений блок з іншим bg (bg-[#0F1F14] або чергування)
-- Акцент: зелений #5BA05B замість синього
-- Заголовок "Центр реабілітації" + підзаголовок
-- 4 карточки напрямків (Психологічна | Фізична | Родини | Діти)
-- CTA: "Записатись на консультацію" + телефон 096-145-11-55
-
-СТОРІНКИ /[locale]/center/...:
-- /center — головна центру (місія, візія)
-- /center/services — напрямки роботи (4 секції з деталями)
-- /center/team — картки спеціалістів (фото + ім'я + спеціалізація)
-- /center/mobile-groups — мобільні групи (4 регіони)
-- /center/branches — філіали (список + адреси)
-
-Дані з content.uk.json → rehab_center та team.json
-```
+### Phase 6 — [REMOVED]
 
 ### Phase 7 — Reports & Partners
 
@@ -212,12 +192,12 @@ REPORTS (src/components/sections/Reports.tsx + /[locale]/reports):
   - Короткий підсумок
   - 3 ключові цифри (зібрано / витрачено / проєктів)
   - Кнопка "Завантажити PDF" (іконка Download)
-- Всі звіти — з /data/partners-reports-branches.json → reports
+- Всі звіти — з /data/reports.json
 
 PARTNERS (src/components/sections/Partners.tsx):
 - "Наші партнери"
 - Логотипи партнерів у ряд (grayscale → кольоровий hover)
-- З /data/partners-reports-branches.json → partners
+- З /data/partners.json
 ```
 
 ### Phase 8 — Inner Pages
@@ -227,7 +207,7 @@ PARTNERS (src/components/sections/Partners.tsx):
 
 1. /[locale]/about — Про фонд
    - Tabs: Історія | Загальна інформація | Фото | Команда
-   - Текст з content.uk.json → about_fund
+   - Текст з messages/uk.json → about_fund
    - Команда — картки з team.json → fund_team
 
 2. /[locale]/projects — Всі проєкти
@@ -238,7 +218,7 @@ PARTNERS (src/components/sections/Partners.tsx):
    - Кнопки поширення (FB, Telegram, copy link)
 
 4. /[locale]/contacts — Контакти
-   - Контакти Фонду та Центру
+   - Контакти Фонду
    - Форма зворотного зв'язку (useState, без backend)
    - Карта (iframe Google Maps або статичне зображення)
 

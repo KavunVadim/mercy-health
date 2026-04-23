@@ -1,0 +1,22 @@
+{
+  "branches": [
+    {
+      "id": "b1",
+      "city": { "uk": "Вінниця (головний офіс)", "en": "Vinnytsia (HQ)" },
+      "address": { "uk": "вул. Соборна, 1", "en": "1 Soborna St." },
+      "phone": "093-351-62-00",
+      "email": "info@fond.specter-it.site",
+      "coordinates": { "lat": 49.2331, "lng": 28.4682 },
+      "is_main": true
+    },
+    {
+      "id": "b2",
+      "city": { "uk": "Старокостянтинів", "en": "Starokostiantyniv" },
+      "address": { "uk": "вул. Незалежності, 5", "en": "5 Nezalezhnosti St." },
+      "phone": null,
+      "email": null,
+      "coordinates": { "lat": 49.7548, "lng": 27.2186 },
+      "is_main": false
+    }
+  ]
+}
