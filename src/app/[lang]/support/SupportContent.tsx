@@ -6,7 +6,7 @@ import DonationCards from "./components/DonationCards";
 import BankDetails from "./components/BankDetails";
 import styles from "./page.module.css";
 
-export default function SupportContent({ dictionary }: { dictionary: any }) {
+export default function SupportContent({ dictionary }: { dictionary: Record<string, unknown> }) {
   const [activeTab, setActiveTab] = useState("once");
 
   const tabs = [

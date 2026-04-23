@@ -6,13 +6,14 @@ import { motion, AnimatePresence } from "framer-motion";
 import styles from "./AboutUs.module.css";
 import clsx from "clsx";
 
-export default function AboutUs({ dictionary }: { dictionary: any }) {
+export default function AboutUs({ dictionary }: { dictionary: Record<string, unknown> }) {
+  const dict = dictionary as any;
   const [activeSection, setActiveSection] = useState("who_we_are");
 
   const sections = [
-    { id: "who_we_are", label: dictionary.about.sidebar.who_we_are },
-    { id: "mission", label: dictionary.about.sidebar.mission },
-    { id: "media", label: dictionary.about.sidebar.media },
+    { id: "who_we_are", label: dict.about.sidebar.who_we_are },
+    { id: "mission", label: dict.about.sidebar.mission },
+    { id: "media", label: dict.about.sidebar.media },
   ];
 
   return (
@@ -51,15 +52,15 @@ export default function AboutUs({ dictionary }: { dictionary: any }) {
                   />
                 </div>
                 
-                <h3 className={styles.subtitle}>{dictionary.about.team.title}</h3>
+                <h3 className={styles.subtitle}>{dict.about.team.title}</h3>
                 <div className={styles.teamGrid}>
-                  {dictionary.about.team.members.map((member: any, index: number) => (
+                  {(dict.about.team.members as unknown[]).map((member: unknown, index: number) => (
                     <div key={index} className={styles.teamMember}>
                       <div className={styles.memberAvatar}>
-                        <span className={styles.avatarPlaceholder}>{member.name[0]}</span>
+                        <span className={styles.avatarPlaceholder}>{(member as any).name[0]}</span>
                       </div>
-                      <h4 className={styles.memberName}>{member.name}</h4>
-                      <p className={styles.memberRole}>{member.role}</p>
+                      <h4 className={styles.memberName}>{(member as any).name}</h4>
+                      <p className={styles.memberRole}>{(member as any).role}</p>
                     </div>
                   ))}
                 </div>
@@ -69,16 +70,16 @@ export default function AboutUs({ dictionary }: { dictionary: any }) {
             {activeSection === "mission" && (
               <div className={styles.sectionBlock}>
                 <div className={styles.missionCard}>
-                  <h2 className={styles.title}>{dictionary.about.mission.title}</h2>
-                  <p className={styles.text}>{dictionary.about.mission.content}</p>
+                  <h2 className={styles.title}>{dict.about.mission.title}</h2>
+                  <p className={styles.text}>{dict.about.mission.content}</p>
                 </div>
               </div>
             )}
 
             {activeSection === "media" && (
               <div className={styles.sectionBlock}>
-                <h2 className={styles.title}>{dictionary.about.media.title}</h2>
-                <p className={styles.text}>{dictionary.about.media.content}</p>
+                <h2 className={styles.title}>{dict.about.media.title}</h2>
+                <p className={styles.text}>{dict.about.media.content}</p>
                 <div className={styles.mediaPlaceholder}>
                   <p>News articles will be listed here.</p>
                 </div>

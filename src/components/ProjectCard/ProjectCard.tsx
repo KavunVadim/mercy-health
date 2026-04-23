@@ -12,7 +12,7 @@ interface ProjectProps {
   goal: number | string;
   category?: string;
   status?: string;
-  dictionary: any;
+  dictionary: Record<string, unknown>;
   lang: Locale;
 }
 

@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useCallback, useEffect, useState } from "react";
+import React, { useCallback, useLayoutEffect, useState } from "react";
 import useEmblaCarousel from "embla-carousel-react";
 import Autoplay from "embla-carousel-autoplay";
 import Image from "next/image";
@@ -36,9 +36,10 @@ export default function HeroSlider({ slides }: { slides: Slide[] }) {
     setSelectedIndex(emblaApi.selectedScrollSnap());
   }, [emblaApi]);
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     if (!emblaApi) return;
-    onSelect();
+    // eslint-disable-next-line react-hooks/set-state-in-effect
+    setSelectedIndex(emblaApi.selectedScrollSnap());
     setScrollSnaps(emblaApi.scrollSnapList());
     emblaApi.on("select", onSelect);
     emblaApi.on("reInit", onSelect);

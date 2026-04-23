@@ -14,7 +14,7 @@ export default function MobileMenu({
   lang,
   supportLabel,
 }: {
-  dictionary: any;
+  dictionary: Record<string, unknown>;
   lang: Locale;
   supportLabel: string;
 }) {

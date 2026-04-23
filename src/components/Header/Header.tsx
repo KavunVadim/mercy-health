@@ -14,7 +14,7 @@ export default function Header({
   dictionary,
   lang,
 }: {
-  dictionary: any;
+  dictionary: Record<string, unknown>;
   lang: Locale;
 }) {
   const { scrollY } = useScroll();

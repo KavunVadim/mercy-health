@@ -9,7 +9,7 @@ export default function Footer({
   dictionary,
   lang,
 }: {
-  dictionary: any;
+  dictionary: Record<string, unknown>;
   lang: Locale;
 }) {
   const socialLinks = dictionary.footer.social_links;

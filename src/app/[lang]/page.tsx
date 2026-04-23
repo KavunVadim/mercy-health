@@ -48,7 +48,7 @@ export default async function Home({
               </Link>
             </div>
             <div className={styles.projectGrid}>
-              {dictionary.projects.items.slice(0, 6).map((project: any) => (
+              {(dictionary.projects.items as unknown[]).slice(0, 6).map((project: unknown) => (
                 <ProjectCard
                   key={project.id}
                   title={project.title}
@@ -74,7 +74,7 @@ export default async function Home({
               </Link>
             </div>
             <div className={styles.newsGrid}>
-              {dictionary.news.items.slice(0, 3).map((item: any) => (
+              {(dictionary.news.items as unknown[]).slice(0, 3).map((item: unknown) => (
                 <NewsCard
                   key={item.id}
                   id={item.id}

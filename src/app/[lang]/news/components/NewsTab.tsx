@@ -1,15 +1,14 @@
 "use client";
 
 import Image from "next/image";
-import Link from "next/link";
 import styles from "./Tabs.module.css";
 
-export default function NewsTab({ dictionary }: { dictionary: any }) {
+export default function NewsTab({ dictionary }: { dictionary: Record<string, unknown> }) {
   const items = dictionary.news.items;
 
   return (
     <div className={styles.grid}>
-      {items.map((item: any) => (
+      {(items as unknown[]).map((item: unknown) => (
         <article key={item.id} className={styles.card}>
           <div className={styles.imageWrapper}>
             <Image

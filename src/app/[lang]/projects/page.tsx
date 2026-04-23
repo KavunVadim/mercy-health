@@ -5,6 +5,17 @@ import Link from "next/link";
 import styles from "./page.module.css";
 import Breadcrumbs from "@/components/Breadcrumbs/Breadcrumbs";
 
+type Project = {
+  id: string;
+  title: string;
+  description: string;
+  short_description?: string;
+  image: string;
+  collected: number;
+  goal?: number;
+  unit: string;
+};
+
 export default async function ProjectsPage({
   params,
 }: {
@@ -25,7 +36,7 @@ export default async function ProjectsPage({
 
       <section className={`container ${styles.section}`}>
         <div className={styles.grid}>
-          {dictionary.projects.items.map((project: any) => {
+          {(dictionary.projects.items as Project[]).map((project: Project) => {
             const progress = project.goal ? Math.min((project.collected / project.goal) * 100, 100) : 0;
             
             return (

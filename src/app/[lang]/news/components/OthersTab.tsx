@@ -3,7 +3,7 @@
 import { FileText, Download } from "lucide-react";
 import styles from "./Tabs.module.css";
 
-export default function OthersTab({ dictionary }: { dictionary: any }) {
+export default function OthersTab({ dictionary }: { dictionary: Record<string, unknown> }) {
   const { title, description } = dictionary.news.others;
 
   const documents = [

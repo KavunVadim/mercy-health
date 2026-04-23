@@ -4,9 +4,10 @@ import { FaFacebookF, FaInstagram, FaTelegramPlane, FaLinkedinIn } from "react-i
 import { Mail, Phone, MapPin } from "lucide-react";
 import styles from "./Contacts.module.css";
 
-export default function Contacts({ dictionary }: { dictionary: any }) {
-  const formDict = dictionary.about.contacts_tab.form;
-  const footerDict = dictionary.footer;
+export default function Contacts({ dictionary }: { dictionary: Record<string, unknown> }) {
+  const dict = dictionary as any;
+  const formDict = dict.about.contacts_tab.form;
+  const footerDict = dict.footer;
   const socials = footerDict.social_links;
 
   const handleSubmit = (e: React.FormEvent) => {
@@ -16,7 +17,7 @@ export default function Contacts({ dictionary }: { dictionary: any }) {
 
   return (
     <div className={styles.container}>
-      <h2 className={styles.title}>{dictionary.about.contacts_tab.title}</h2>
+      <h2 className={styles.title}>{dict.about.contacts_tab.title}</h2>
       
       <div className={styles.grid}>
         <div className={styles.infoCol}>

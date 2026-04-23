@@ -5,7 +5,7 @@ import AutoScroll from "embla-carousel-auto-scroll";
 import styles from "./Partners.module.css";
 import Image from "next/image";
 
-export default function Partners({ dictionary }: { dictionary: any }) {
+export default function Partners({ dictionary }: { dictionary: Record<string, unknown> }) {
   const [emblaRef] = useEmblaCarousel(
     { loop: true, dragFree: true },
     [AutoScroll({ speed: 1, stopOnInteraction: false, stopOnMouseEnter: true })]
