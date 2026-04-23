@@ -6,7 +6,8 @@ import "react-photo-view/dist/react-photo-view.css";
 import styles from "./Tabs.module.css";
 
 export default function GalleryTab({ dictionary }: { dictionary: Record<string, unknown> }) {
-  const { title, description } = dictionary.news.gallery;
+  const dict = dictionary as any;
+  const { title, description } = dict.news.gallery;
 
   // Mock gallery images
   const images = [

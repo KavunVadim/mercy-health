@@ -4,7 +4,8 @@ import { FileText, Download } from "lucide-react";
 import styles from "./Tabs.module.css";
 
 export default function OthersTab({ dictionary }: { dictionary: Record<string, unknown> }) {
-  const { title, description } = dictionary.news.others;
+  const dict = dictionary as any;
+  const { title, description } = dict.news.others;
 
   const documents = [
     { id: 1, name: "Річний звіт фонду за 2025 рік", size: "2.4 MB", date: "15.01.2026" },

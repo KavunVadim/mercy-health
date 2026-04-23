@@ -41,8 +41,8 @@ export default function AboutUs({ dictionary }: { dictionary: Record<string, unk
           >
             {activeSection === "who_we_are" && (
               <div className={styles.sectionBlock}>
-                <h2 className={styles.title}>{dictionary.about.history.title}</h2>
-                <p className={styles.text}>{dictionary.about.history.content}</p>
+                <h2 className={styles.title}>{dict.about.history.title}</h2>
+                <p className={styles.text}>{dict.about.history.content}</p>
                 <div className={styles.imageWrapper}>
                   <Image 
                     src="https://images.unsplash.com/photo-1593113598332-cd288d649433?auto=format&fit=crop&q=80&w=1000" 

@@ -18,22 +18,22 @@ export default async function Home({
   return (
     <div className={styles.page}>
       <main className={styles.main}>
-        <HeroSlider slides={dictionary.hero_slider} />
+        <HeroSlider slides={(dictionary as any).hero_slider} />
 
         <section className={styles.statsSection}>
           <div className="container">
             <div className={styles.statsGrid}>
               <div className={styles.statItem}>
                 <span className={styles.statValue}>12.4M ₴</span>
-                <span className={styles.statLabel}>{dictionary.stats.items.collected}</span>
+                <span className={styles.statLabel}>{(dictionary as any).stats.items.collected}</span>
               </div>
               <div className={styles.statItem}>
                 <span className={styles.statValue}>15.2K</span>
-                <span className={styles.statLabel}>{dictionary.stats.items.helped}</span>
+                <span className={styles.statLabel}>{(dictionary as any).stats.items.helped}</span>
               </div>
               <div className={styles.statItem}>
                 <span className={styles.statValue}>8.3K</span>
-                <span className={styles.statLabel}>{dictionary.stats.items.donors}</span>
+                <span className={styles.statLabel}>{(dictionary as any).stats.items.donors}</span>
               </div>
             </div>
           </div>
@@ -42,24 +42,24 @@ export default async function Home({
         <section className={styles.projectsSection}>
           <div className="container">
             <div className={styles.sectionHeader}>
-              <h2 className={styles.sectionTitle}>{dictionary.projects.title}</h2>
+              <h2 className={styles.sectionTitle}>{(dictionary as any).projects.title}</h2>
               <Link href={`/${locale}/projects`} className={styles.viewAll}>
-                {dictionary.projects.more}
+                {(dictionary as any).projects.more}
               </Link>
             </div>
             <div className={styles.projectGrid}>
-              {(dictionary.projects.items as unknown[]).slice(0, 6).map((project: unknown) => (
-                <ProjectCard
-                  key={project.id}
-                  title={project.title}
-                  description={project.description}
-                  image={project.image}
-                  collected={project.collected}
-                  goal={project.goal}
-                  id={project.id}
-                  dictionary={dictionary}
-                  lang={locale}
-                />
+              {((dictionary as any).projects.items as unknown[]).slice(0, 6).map((project: unknown) => (
+                  <ProjectCard
+                    key={(project as any).id}
+                    title={(project as any).title}
+                    description={(project as any).description}
+                    image={(project as any).image}
+                    collected={(project as any).collected}
+                    goal={(project as any).goal}
+                    id={(project as any).id}
+                    dictionary={dictionary as any}
+                    lang={locale}
+                  />
               ))}
             </div>
           </div>
@@ -68,19 +68,19 @@ export default async function Home({
         <section className={styles.newsSection}>
           <div className="container">
             <div className={styles.sectionHeader}>
-              <h2 className={styles.sectionTitle}>{dictionary.news.title}</h2>
+              <h2 className={styles.sectionTitle}>{(dictionary as any).news.title}</h2>
               <Link href={`/${locale}/news`} className={styles.viewAll}>
-                {dictionary.news.more}
+                {(dictionary as any).news.more}
               </Link>
             </div>
             <div className={styles.newsGrid}>
-              {(dictionary.news.items as unknown[]).slice(0, 3).map((item: unknown) => (
+              {((dictionary as any).news.items as unknown[]).slice(0, 3).map((item: unknown) => (
                 <NewsCard
-                  key={item.id}
-                  id={item.id}
-                  date={item.date}
-                  title={item.title}
-                  image={item.image}
+                  key={(item as any).id}
+                  id={(item as any).id}
+                  date={(item as any).date}
+                  title={(item as any).title}
+                  image={(item as any).image}
                   lang={locale}
                 />
               ))}

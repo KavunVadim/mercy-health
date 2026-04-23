@@ -6,6 +6,7 @@ import styles from "./Partners.module.css";
 import Image from "next/image";
 
 export default function Partners({ dictionary }: { dictionary: Record<string, unknown> }) {
+  const dict = dictionary as any;
   const [emblaRef] = useEmblaCarousel(
     { loop: true, dragFree: true },
     [AutoScroll({ speed: 1, stopOnInteraction: false, stopOnMouseEnter: true })]
@@ -25,7 +26,7 @@ export default function Partners({ dictionary }: { dictionary: Record<string, un
 
   return (
     <div className={styles.container}>
-      <h2 className={styles.title}>{dictionary.about.tabs.partners}</h2>
+      <h2 className={styles.title}>{dict.about.tabs.partners}</h2>
       <p className={styles.description}>
         Разом ми здатні на більше. Дякуємо нашим партнерам за постійну підтримку.
       </p>

@@ -8,12 +8,13 @@ import OthersTab from "./components/OthersTab";
 import styles from "./page.module.css";
 
 export default function MaterialsContent({ dictionary }: { dictionary: Record<string, unknown> }) {
+  const dict = dictionary as any;
   const [activeTab, setActiveTab] = useState("news");
 
   const tabs = [
-    { id: "news", label: dictionary.news.tabs.news },
-    { id: "gallery", label: dictionary.news.tabs.gallery },
-    { id: "others", label: dictionary.news.tabs.others },
+    { id: "news", label: dict.news.tabs.news },
+    { id: "gallery", label: dict.news.tabs.gallery },
+    { id: "others", label: dict.news.tabs.others },
   ];
 
   return (
@@ -21,9 +22,9 @@ export default function MaterialsContent({ dictionary }: { dictionary: Record<st
       <Tabs tabs={tabs} activeTab={activeTab} onChange={setActiveTab} />
       
       <div className={styles.tabContent}>
-        {activeTab === "news" && <NewsTab dictionary={dictionary} />}
-        {activeTab === "gallery" && <GalleryTab dictionary={dictionary} />}
-        {activeTab === "others" && <OthersTab dictionary={dictionary} />}
+        {activeTab === "news" && <NewsTab dictionary={dict} />}
+        {activeTab === "gallery" && <GalleryTab dictionary={dict} />}
+        {activeTab === "others" && <OthersTab dictionary={dict} />}
       </div>
     </div>
   );
