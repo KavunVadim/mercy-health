@@ -7,7 +7,7 @@ import GalleryTab from "./components/GalleryTab";
 import OthersTab from "./components/OthersTab";
 import styles from "./page.module.css";
 
-export default function MaterialsContent({ dictionary }: { dictionary: any }) {
+export default function MaterialsContent({ dictionary, lang }: { dictionary: any, lang: string }) {
   const dict = dictionary as any;
   const [activeTab, setActiveTab] = useState("news");
 
@@ -22,7 +22,7 @@ export default function MaterialsContent({ dictionary }: { dictionary: any }) {
       <Tabs tabs={tabs} activeTab={activeTab} onChange={setActiveTab} />
       
       <div className={styles.tabContent}>
-        {activeTab === "news" && <NewsTab dictionary={dict} />}
+        {activeTab === "news" && <NewsTab dictionary={dict} lang={lang} />}
         {activeTab === "gallery" && <GalleryTab dictionary={dict} />}
         {activeTab === "others" && <OthersTab dictionary={dict} />}
       </div>

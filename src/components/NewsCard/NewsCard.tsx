@@ -13,7 +13,7 @@ interface NewsProps {
 
 export default function NewsCard({ id, date, title, image, lang }: NewsProps) {
   return (
-    <Link href={`/${lang}/news/${id}`} className={styles.card}>
+    <Link href={`/${lang}/news`} className={styles.card}>
       <div className={styles.imageWrapper}>
         <Image src={image} alt={title} fill className={styles.image} />
       </div>

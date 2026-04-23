@@ -5,6 +5,7 @@ import "../variables.css";
 import { i18n, type Locale } from "@/i18n-config";
 import Header from "@/components/Header/Header";
 import Footer from "@/components/Footer/Footer";
+import ScrollToTop from "@/components/ScrollToTop";
 import { getDictionary } from "@/get-dictionary";
 
 const eUkraineHead = Outfit({
@@ -49,6 +50,7 @@ export default async function RootLayout({
   return (
     <html lang={locale} className={`${eUkraineHead.variable} ${eUkraine.variable}`}>
       <body>
+        <ScrollToTop />
         <Header dictionary={dictionary} lang={locale} />
         <div className="layout-wrapper">
           {children}

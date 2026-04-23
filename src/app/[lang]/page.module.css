@@ -228,7 +228,7 @@
 
 @media (max-width: 768px) {
   .projectsSection, .newsSection {
-    padding: 6rem 0;
+    padding: 2rem 0;
   }
   
   .newsletterSection {
@@ -274,6 +274,31 @@
     font-size: 0.8125rem;
     width: auto;
     display: inline-block;
+  }
+}
+
+@media (max-width: 768px) {
+  .statsSection {
+    padding: 1.5rem 0;
+  }
+
+  .statsGrid {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 0.5rem;
+  }
+
+  .statItem {
+    padding: 0;
+  }
+
+  .statValue {
+    font-size: 1.5rem;
+  }
+
+  .statLabel {
+    font-size: 0.7rem;
+    margin-top: 0.25rem;
+    letter-spacing: 0.02em;
   }
 }
 

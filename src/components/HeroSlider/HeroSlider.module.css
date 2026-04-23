@@ -196,12 +196,28 @@
   .description {
     margin-left: auto;
     margin-right: auto;
+    margin-bottom: 24px;
+  }
+  .controls {
+    bottom: 20px;
   }
   .controlsInner {
     flex-direction: column;
-    gap: 24px;
+    gap: 16px;
+  }
+  .arrow {
+    width: 44px;
+    height: 44px;
+  }
+  .dot {
+    width: 8px;
+    height: 8px;
   }
   .title {
     font-size: clamp(1.75rem, 8vw, 2.5rem);
+  }
+  .cta {
+    padding: 0.875rem 2rem;
+    font-size: 0.9rem;
   }
 }

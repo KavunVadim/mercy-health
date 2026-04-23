@@ -17,7 +17,7 @@ export default async function Home({
 
   return (
     <div className={styles.page}>
-      <main className={styles.main}>
+      <main className={`${styles.main} home-main`}>
         <HeroSlider slides={(dictionary as any).hero_slider} />
 
         <section className={styles.statsSection}>

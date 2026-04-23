@@ -22,7 +22,7 @@ export default async function NewsPage({
         </div>
       </header>
       <section className={`container ${styles.section}`}>
-        <MaterialsContent dictionary={dictionary} />
+        <MaterialsContent dictionary={dictionary} lang={locale} />
       </section>
     </main>
   );
