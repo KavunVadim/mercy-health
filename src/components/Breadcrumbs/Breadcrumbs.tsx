@@ -8,7 +8,7 @@ import { Locale } from "@/i18n-config";
 
 interface BreadcrumbsProps {
   lang: Locale;
-  dictionary: Record<string, unknown>;
+  dictionary: any;
   items?: { label: string; href?: string }[];
   className?: string;
 }

@@ -8,7 +8,7 @@ import Partners from "./components/Partners";
 import Contacts from "./components/Contacts";
 import styles from "./page.module.css";
 
-export default function AboutContent({ dictionary }: { dictionary: Record<string, unknown> }) {
+export default function AboutContent({ dictionary }: { dictionary: any }) {
   const [activeTab, setActiveTab] = useState("about_us");
 
   const tabs = [

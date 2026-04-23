@@ -9,10 +9,11 @@ export default function Footer({
   dictionary,
   lang,
 }: {
-  dictionary: Record<string, unknown>;
+  dictionary: any;
   lang: Locale;
 }) {
-  const socialLinks = dictionary.footer.social_links;
+  const footer = dictionary.footer;
+  const socialLinks = footer.social_links;
 
   return (
     <footer className={styles.footer}>

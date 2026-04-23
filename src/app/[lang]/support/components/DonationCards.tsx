@@ -3,12 +3,32 @@
 import Image from "next/image";
 import styles from "./SupportComponents.module.css";
 
-export default function DonationCards({ dictionary }: { dictionary: Record<string, unknown> }) {
-  const { cards } = (dictionary.support as { cards: { items: unknown[] } });
+interface DonationCard {
+  id: string;
+  title: string;
+  description: string;
+  bank: string;
+  link: string;
+}
+
+interface Dictionary {
+  support: {
+    cards: {
+      monobank: string;
+      privatbank: string;
+      details: string;
+      items: DonationCard[];
+    };
+  };
+  [key: string]: any;
+}
+
+export default function DonationCards({ dictionary }: { dictionary: any }) {
+  const { cards } = (dictionary as Dictionary).support;
 
   return (
     <div className={styles.cardsGrid}>
-      {cards.items.map((item: unknown) => (
+      {cards.items.map((item: DonationCard) => (
         <div key={item.id} className={styles.donationCard}>
           <div className={styles.cardHeader}>
             <div className={styles.bankLogoWrapper}>

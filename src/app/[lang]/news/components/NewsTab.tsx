@@ -3,7 +3,7 @@
 import Image from "next/image";
 import styles from "./Tabs.module.css";
 
-export default function NewsTab({ dictionary }: { dictionary: Record<string, unknown> }) {
+export default function NewsTab({ dictionary }: { dictionary: any }) {
   const dict = dictionary as any;
   const items = dict.news.items;
 

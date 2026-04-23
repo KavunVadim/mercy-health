@@ -8,6 +8,19 @@ import { ArrowLeft } from "lucide-react";
 import ProjectImageGallery from "./components/ProjectImageGallery";
 import Breadcrumbs from "@/components/Breadcrumbs/Breadcrumbs";
 
+interface Project {
+  id: string;
+  title: string;
+  image: string;
+  short_description?: string;
+  full_description?: string;
+  description?: string;
+  collected: number;
+  goal?: number;
+  unit: string;
+  gallery?: string[];
+}
+
 export default async function ProjectDetailPage({
   params,
 }: {
@@ -17,14 +30,14 @@ export default async function ProjectDetailPage({
   const locale = lang as Locale;
   const dictionary = await getDictionary(locale);
 
-  const project = dictionary.projects.items.find((p: any) => p.id === id);
+  const project = (dictionary.projects.items as Project[]).find((p) => p.id === id);
 
   if (!project) {
     notFound();
   }
 
   const progress = project.goal ? Math.min((project.collected / project.goal) * 100, 100) : 0;
-  const fullDescription = (project as any).full_description || (project as any).short_description || (project as any).description || '';
+  const fullDescription = project.full_description || project.short_description || project.description || '';
 
   return (
     <main className={styles.main}>

@@ -6,7 +6,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import styles from "./AboutUs.module.css";
 import clsx from "clsx";
 
-export default function AboutUs({ dictionary }: { dictionary: Record<string, unknown> }) {
+export default function AboutUs({ dictionary }: { dictionary: any }) {
   const dict = dictionary as any;
   const [activeSection, setActiveSection] = useState("who_we_are");
 

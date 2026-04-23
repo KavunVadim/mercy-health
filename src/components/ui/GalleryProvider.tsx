@@ -9,8 +9,8 @@ export const GalleryProvider = ({ children }: { children: React.ReactNode }) => 
     <PhotoProvider
       maskOpacity={0.8}
       bannerVisible={false}
-      speedOut={300}
-      easingOut="cubic-bezier(0.4, 0, 0.2, 1)"
+      speed={(type) => (type === 2 ? 300 : 400)}
+      easing={(type) => (type === 2 ? "cubic-bezier(0.4, 0, 0.2, 1)" : "cubic-bezier(0.25, 0.8, 0.25, 1)")}
     >
       {children}
     </PhotoProvider>

@@ -6,13 +6,14 @@ import DonationCards from "./components/DonationCards";
 import BankDetails from "./components/BankDetails";
 import styles from "./page.module.css";
 
-export default function SupportContent({ dictionary }: { dictionary: Record<string, unknown> }) {
+export default function SupportContent({ dictionary }: { dictionary: any }) {
   const [activeTab, setActiveTab] = useState("once");
+  const support = dictionary.support;
 
   const tabs = [
-    { id: "once", label: dictionary.support.tabs.once },
-    { id: "monthly", label: dictionary.support.tabs.monthly },
-    { id: "requisites", label: dictionary.support.tabs.requisites },
+    { id: "once", label: support.tabs.once },
+    { id: "monthly", label: support.tabs.monthly },
+    { id: "requisites", label: support.tabs.requisites },
   ];
 
   return (

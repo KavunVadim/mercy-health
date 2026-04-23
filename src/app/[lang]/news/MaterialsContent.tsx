@@ -7,7 +7,7 @@ import GalleryTab from "./components/GalleryTab";
 import OthersTab from "./components/OthersTab";
 import styles from "./page.module.css";
 
-export default function MaterialsContent({ dictionary }: { dictionary: Record<string, unknown> }) {
+export default function MaterialsContent({ dictionary }: { dictionary: any }) {
   const dict = dictionary as any;
   const [activeTab, setActiveTab] = useState("news");
 

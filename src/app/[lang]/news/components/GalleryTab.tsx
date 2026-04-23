@@ -5,7 +5,7 @@ import { PhotoProvider, PhotoView } from "react-photo-view";
 import "react-photo-view/dist/react-photo-view.css";
 import styles from "./Tabs.module.css";
 
-export default function GalleryTab({ dictionary }: { dictionary: Record<string, unknown> }) {
+export default function GalleryTab({ dictionary }: { dictionary: any }) {
   const dict = dictionary as any;
   const { title, description } = dict.news.gallery;
 

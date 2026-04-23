@@ -4,7 +4,7 @@ import { FaFacebookF, FaInstagram, FaTelegramPlane, FaLinkedinIn } from "react-i
 import { Mail, Phone, MapPin } from "lucide-react";
 import styles from "./Contacts.module.css";
 
-export default function Contacts({ dictionary }: { dictionary: Record<string, unknown> }) {
+export default function Contacts({ dictionary }: { dictionary: any }) {
   const dict = dictionary as any;
   const formDict = dict.about.contacts_tab.form;
   const footerDict = dict.footer;
