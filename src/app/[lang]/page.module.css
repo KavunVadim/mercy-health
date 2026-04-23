@@ -89,14 +89,14 @@
 
 /* Projects Section */
 .projectsSection {
-  padding: 10rem 0;
+  padding: 6rem 0;
   background-color: #fcfdfe;
 }
 
 .projectGrid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 3rem;
+  gap: 2.5rem;
   align-items: stretch;
   width: 100%;
 }

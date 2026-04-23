@@ -30,7 +30,16 @@ export default async function ProjectDetailPage({
     <main className={styles.main}>
       <header className={styles.header}>
         <div className="container">
-          <Breadcrumbs lang={locale} dictionary={dictionary} className={styles.breadcrumbs} />
+          <Breadcrumbs 
+            lang={locale} 
+            dictionary={dictionary} 
+            className={styles.breadcrumbs} 
+            items={[
+              { label: dictionary.navigation.home, href: `/${lang}` },
+              { label: dictionary.navigation.projects, href: `/${lang}/projects` },
+              { label: project.title }
+            ]}
+          />
           <h1 className={styles.title}>{project.title}</h1>
         </div>
       </header>

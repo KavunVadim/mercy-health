@@ -20,7 +20,7 @@ export const GalleryProvider = ({ children }: { children: React.ReactNode }) => 
 export const GalleryItem = ({ src, children }: { src: string; children: React.ReactNode }) => {
   return (
     <PhotoView src={src}>
-      <div style={{ cursor: 'pointer' }}>
+      <div style={{ display: 'flex', width: '100%', height: '100%', cursor: 'pointer' }}>
         {children}
       </div>
     </PhotoView>
