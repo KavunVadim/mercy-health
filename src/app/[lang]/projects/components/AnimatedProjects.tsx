@@ -1,6 +1,6 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { motion, Variants } from "framer-motion";
 import Image from "next/image";
 import Link from "next/link";
 import styles from "../page.module.css";
@@ -23,7 +23,7 @@ interface AnimatedProjectsProps {
 }
 
 export default function AnimatedProjects({ projects, dictionary, lang }: AnimatedProjectsProps) {
-  const container = {
+  const container: Variants = {
     hidden: { opacity: 0 },
     show: {
       opacity: 1,
@@ -33,9 +33,16 @@ export default function AnimatedProjects({ projects, dictionary, lang }: Animate
     }
   };
 
-  const item = {
+  const item: Variants = {
     hidden: { opacity: 0, y: 20 },
-    show: { opacity: 1, y: 0, transition: { duration: 0.5, ease: "easeOut" } }
+    show: { 
+      opacity: 1, 
+      y: 0, 
+      transition: { 
+        duration: 0.5, 
+        ease: "easeOut" 
+      } 
+    }
   };
 
   return (
