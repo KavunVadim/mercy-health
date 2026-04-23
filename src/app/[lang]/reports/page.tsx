@@ -1,6 +1,7 @@
 import styles from "./page.module.css";
 import { getDictionary } from "@/get-dictionary";
 import type { Locale } from "@/i18n-config";
+import Breadcrumbs from "@/components/Breadcrumbs/Breadcrumbs";
 
 export default async function ReportsPage({
   params,
@@ -29,6 +30,7 @@ export default async function ReportsPage({
     <main className={styles.main}>
       <header className={styles.header}>
         <div className="container">
+          <Breadcrumbs lang={locale} dictionary={dictionary} className={styles.breadcrumbs} />
           <h1 className={styles.title}>{dictionary.reports.title}</h1>
           <p className={styles.description}>{dictionary.reports.description}</p>
         </div>

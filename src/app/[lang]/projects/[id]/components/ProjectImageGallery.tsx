@@ -1,8 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import { PhotoProvider, PhotoView } from "react-photo-view";
-import "react-photo-view/dist/react-photo-view.css";
+import { GalleryProvider, GalleryItem } from "@/components/ui/GalleryProvider";
 import styles from "../page.module.css";
 import galleryStyles from "./ProjectGallery.module.css";
 
@@ -15,14 +14,11 @@ interface ProjectImageGalleryProps {
 
 export default function ProjectImageGallery({ mainImage, title, gallery, description }: ProjectImageGalleryProps) {
   return (
-    <PhotoProvider
-      maskOpacity={0.8}
-      bannerVisible={false}
-    >
+    <GalleryProvider>
       <div className={styles.contentCol}>
         <div className={styles.mainImageWrapper}>
-          <PhotoView src={mainImage}>
-            <div style={{ position: 'relative', width: '100%', height: '100%', cursor: 'pointer' }}>
+          <GalleryItem src={mainImage}>
+            <div style={{ position: 'relative', width: '100%', height: '100%' }}>
               <Image
                 src={mainImage}
                 alt={title}
@@ -35,7 +31,7 @@ export default function ProjectImageGallery({ mainImage, title, gallery, descrip
                 <span>Переглянути фото</span>
               </div>
             </div>
-          </PhotoView>
+          </GalleryItem>
         </div>
 
         <div className={styles.description}>
@@ -49,8 +45,8 @@ export default function ProjectImageGallery({ mainImage, title, gallery, descrip
             <h3 className={galleryStyles.galleryTitle}>Галерея проєкту</h3>
             <div className={galleryStyles.galleryGrid}>
               {gallery.map((img, idx) => (
-                <PhotoView key={idx} src={img}>
-                  <div className={galleryStyles.galleryImageWrapper} style={{ cursor: 'pointer' }}>
+                <GalleryItem key={idx} src={img}>
+                  <div className={galleryStyles.galleryImageWrapper}>
                     <Image
                       src={img}
                       alt={`${title} gallery image ${idx + 1}`}
@@ -62,12 +58,12 @@ export default function ProjectImageGallery({ mainImage, title, gallery, descrip
                       <span className={galleryStyles.zoomText}>Збільшити</span>
                     </div>
                   </div>
-                </PhotoView>
+                </GalleryItem>
               ))}
             </div>
           </div>
         )}
       </div>
-    </PhotoProvider>
+    </GalleryProvider>
   );
 }

@@ -3,6 +3,7 @@ import type { Locale } from "@/i18n-config";
 import Image from "next/image";
 import Link from "next/link";
 import styles from "./page.module.css";
+import Breadcrumbs from "@/components/Breadcrumbs/Breadcrumbs";
 
 export default async function ProjectsPage({
   params,
@@ -17,6 +18,7 @@ export default async function ProjectsPage({
     <main className={styles.main}>
       <header className={styles.header}>
         <div className="container">
+          <Breadcrumbs lang={locale} dictionary={dictionary} className={styles.breadcrumbs} />
           <h1 className={styles.title}>{dictionary.navigation.projects}</h1>
         </div>
       </header>

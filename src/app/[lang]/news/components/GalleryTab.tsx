@@ -1,6 +1,8 @@
 "use client";
 
 import Image from "next/image";
+import { PhotoProvider, PhotoView } from "react-photo-view";
+import "react-photo-view/dist/react-photo-view.css";
 import styles from "./Tabs.module.css";
 
 export default function GalleryTab({ dictionary }: { dictionary: any }) {
@@ -21,18 +23,22 @@ export default function GalleryTab({ dictionary }: { dictionary: any }) {
       <h2 className={styles.sectionTitle}>{title}</h2>
       <p className={styles.sectionDescription}>{description}</p>
       
-      <div className={styles.galleryGrid}>
-        {images.map((img, idx) => (
-          <div key={idx} className={styles.galleryItem}>
-            <Image
-              src={img}
-              alt={`Gallery image ${idx + 1}`}
-              fill
-              className={styles.galleryImage}
-            />
-          </div>
-        ))}
-      </div>
+      <PhotoProvider>
+        <div className={styles.galleryGrid}>
+          {images.map((img, idx) => (
+            <PhotoView key={idx} src={img}>
+              <div className={styles.galleryItem} style={{ cursor: 'pointer' }}>
+                <Image
+                  src={img}
+                  alt={`Gallery image ${idx + 1}`}
+                  fill
+                  className={styles.galleryImage}
+                />
+              </div>
+            </PhotoView>
+          ))}
+        </div>
+      </PhotoProvider>
     </div>
   );
 }

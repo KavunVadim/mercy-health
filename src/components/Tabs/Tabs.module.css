@@ -1,5 +1,4 @@
 .tabsContainer {
-  margin-bottom: 3rem;
   border-bottom: 1px solid var(--gray-200);
   display: flex;
   justify-content: center; /* Center the tabs as requested */
@@ -60,7 +59,6 @@
 @media (max-width: 768px) {
   .tabsContainer {
     justify-content: flex-start;
-    margin-bottom: 2rem;
   }
   
   .tabsList {

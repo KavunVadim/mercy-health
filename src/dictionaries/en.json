@@ -4,7 +4,8 @@
     "projects": "Projects",
     "materials": "Materials",
     "reports": "Reports",
-    "support": "Support"
+    "support": "Support",
+    "home": "Home"
   },
   "hero_slider": [
     {
@@ -122,6 +123,7 @@
   },
   "projects": {
     "title": "Our Projects",
+    "more": "All Projects",
     "collected": "Collected",
     "goal": "Goal",
     "details": "Details",
@@ -195,20 +197,26 @@
       {
         "id": "1",
         "date": "19.04.2026",
-        "title": "New batch of ambulances dispatched to the Bakhmut direction",
+        "title": "New batch of ambulances sent to Bakhmut direction",
         "image": "https://images.unsplash.com/photo-1583321500900-82807e458f3c?auto=format&fit=crop&q=80&w=1000"
       },
       {
         "id": "2",
         "date": "17.04.2026",
-        "title": "New medical equipment delivered to a stabilization point in Kharkiv region",
-        "image": "https://images.unsplash.com/photo-1576091160550-2173dad99978?auto=format&fit=crop&q=80&w=1000"
+        "title": "New medical equipment delivered to stabilization point in Kharkiv region",
+        "image": "https://images.unsplash.com/photo-1516549655169-df83a0774514?auto=format&fit=crop&q=80&w=1000"
       },
       {
         "id": "3",
         "date": "15.04.2026",
-        "title": "Assistance to orphanages and facilities for the elderly",
-        "image": "https://images.unsplash.com/photo-1583321500900-82807e458f3c?auto=format&fit=crop&q=80&w=1000"
+        "title": "Aid to orphanages and institutions for the elderly",
+        "image": "https://images.unsplash.com/photo-1488521787991-ed7bbaae773c?auto=format&fit=crop&q=80&w=1000"
+      },
+      {
+        "id": "4",
+        "date": "12.04.2026",
+        "title": "Repair of mobile hospital for frontline areas completed",
+        "image": "https://images.unsplash.com/photo-1519494026892-80bbd2d6fd0d?auto=format&fit=crop&q=80&w=1000"
       }
     ],
     "gallery": {

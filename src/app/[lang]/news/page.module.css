@@ -1,12 +1,39 @@
 .main {
   min-height: 100vh;
-  padding-top: calc(var(--header-height) + 2rem);
   padding-bottom: 4rem;
   background-color: var(--gray-50);
 }
 
+.header {
+  background-color: var(--gray-50);
+  padding: 0.5rem 0;
+  margin-bottom: 1rem;
+  border-bottom: 1px solid var(--gray-200);
+}
+
+.breadcrumbs {
+  padding: 0.5rem 0 !important;
+}
+
+.title {
+  font-family: var(--font-e-ukraine-head);
+  font-size: 4rem;
+  color: var(--text-dark);
+  margin: 0;
+  text-transform: uppercase;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  line-height: 1;
+}
+
 .section {
   padding: 0 1rem;
+}
+
+.contentWrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
 }
 
 .tabContent {
@@ -19,7 +46,12 @@
 }
 
 @media (max-width: 768px) {
-  .main {
-    padding-top: calc(var(--header-height) + 1.5rem);
+  .header {
+    padding: 0.5rem 0;
+    margin-bottom: 1rem;
+  }
+  
+  .title {
+    font-size: 2.5rem;
   }
 }

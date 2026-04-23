@@ -6,6 +6,7 @@ import { notFound } from "next/navigation";
 import styles from "./page.module.css";
 import { ArrowLeft } from "lucide-react";
 import ProjectImageGallery from "./components/ProjectImageGallery";
+import Breadcrumbs from "@/components/Breadcrumbs/Breadcrumbs";
 
 export default async function ProjectDetailPage({
   params,
@@ -29,10 +30,7 @@ export default async function ProjectDetailPage({
     <main className={styles.main}>
       <header className={styles.header}>
         <div className="container">
-          <Link href={`/${lang}/projects`} className={styles.backLink}>
-            <ArrowLeft size={20} />
-            {dictionary.navigation.projects}
-          </Link>
+          <Breadcrumbs lang={locale} dictionary={dictionary} className={styles.breadcrumbs} />
           <h1 className={styles.title}>{project.title}</h1>
         </div>
       </header>

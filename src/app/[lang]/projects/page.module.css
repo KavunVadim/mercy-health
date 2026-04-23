@@ -4,16 +4,25 @@
 }
 
 .header {
-  background-color: var(--gray-100);
-  padding: 6rem 0 3rem;
-  margin-bottom: 4rem;
+  background-color: var(--gray-50);
+  padding: 0.5rem 0;
+  margin-bottom: 2rem;
+  border-bottom: 1px solid var(--gray-200);
+}
+
+.breadcrumbs {
+  padding: 0.5rem 0 !important;
 }
 
 .title {
   font-family: var(--font-e-ukraine-head);
-  font-size: 3rem;
+  font-size: 4rem;
   color: var(--text-dark);
   margin: 0;
+  text-transform: uppercase;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  line-height: 1;
 }
 
 .grid {
@@ -116,7 +125,7 @@
 
 @media (max-width: 768px) {
   .header {
-    padding: 4rem 0 2rem;
+    padding: 0.5rem 0;
     margin-bottom: 2rem;
   }
   

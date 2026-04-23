@@ -1,34 +1,33 @@
 .main {
   min-height: 100vh;
   padding-bottom: 5rem;
+  background-color: var(--gray-50);
 }
 
-.hero {
-  padding: 120px 0 60px;
-  background: linear-gradient(135deg, var(--gray-50) 0%, white 100%);
+.header {
+  background-color: var(--gray-50);
+  padding: 0.5rem 0;
+  margin-bottom: 1rem;
   border-bottom: 1px solid var(--gray-200);
-  text-align: center;
+}
+
+.breadcrumbs {
+  padding: 0.5rem 0 !important;
 }
 
 .title {
   font-family: var(--font-e-ukraine-head);
-  font-size: 3.5rem;
+  font-size: 4rem;
   color: var(--text-dark);
-  margin-bottom: 1.5rem;
-  animation: fadeInDown 0.5s ease-out;
-}
-
-.description {
-  font-size: 1.25rem;
-  color: var(--text-muted);
-  max-width: 700px;
-  margin: 0 auto;
-  line-height: 1.6;
-  animation: fadeInUp 0.5s ease-out 0.2s both;
+  margin: 0;
+  text-transform: uppercase;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  line-height: 1;
 }
 
 .content {
-  padding: 4rem 0;
+  padding-top: 2rem;
 }
 
 .contentWrapper {
@@ -37,29 +36,16 @@
 }
 
 .tabContent {
-  margin-top: 3rem;
-}
-
-@keyframes fadeInDown {
-  from { opacity: 0; transform: translateY(-20px); }
-  to { opacity: 1; transform: translateY(0); }
-}
-
-@keyframes fadeInUp {
-  from { opacity: 0; transform: translateY(20px); }
-  to { opacity: 1; transform: translateY(0); }
+  margin-top: 1.5rem; /* Using the same 'little bit' margin as news/about */
 }
 
 @media (max-width: 768px) {
+  .header {
+    padding: 0.5rem 0;
+    margin-bottom: 1rem;
+  }
+  
   .title {
     font-size: 2.5rem;
-  }
-  
-  .description {
-    font-size: 1.125rem;
-  }
-  
-  .hero {
-    padding: 100px 0 40px;
   }
 }

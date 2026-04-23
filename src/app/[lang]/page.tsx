@@ -42,9 +42,9 @@ export default async function Home({
         <section className={styles.projectsSection}>
           <div className="container">
             <div className={styles.sectionHeader}>
-              <h2 className={styles.sectionTitle}>{dictionary.navigation.projects}</h2>
+              <h2 className={styles.sectionTitle}>{dictionary.projects.title}</h2>
               <Link href={`/${locale}/projects`} className={styles.viewAll}>
-                {dictionary.news.more}
+                {dictionary.projects.more}
               </Link>
             </div>
             <div className={styles.projectGrid}>
@@ -74,7 +74,7 @@ export default async function Home({
               </Link>
             </div>
             <div className={styles.newsGrid}>
-              {dictionary.news.items.slice(0, 6).map((item: any) => (
+              {dictionary.news.items.slice(0, 3).map((item: any) => (
                 <NewsCard
                   key={item.id}
                   id={item.id}
