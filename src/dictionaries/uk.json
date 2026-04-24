@@ -151,7 +151,7 @@
         "title": "Реанімобілі на фронт",
         "short_description": "Закупівля та оснащення автомобілів швидкої допомоги для евакуації поранених.",
         "full_description": "Наш флагманський проєкт, спрямований на забезпечення бойових медиків спеціалізованим транспортом. Кожна швидка — це десятки врятованих життів щомісяця.",
-        "image": "https://armyinform.com.ua/wp-content/uploads/2022/06/1-73.jpg",
+        "image": "/images/projects/reanimobili.png",
         "collected": 12500000,
         "goal": 20000000,
         "unit": "грн"
@@ -160,7 +160,7 @@
         "id": "tactical-med-standard",
         "title": "Стандарти такмеду",
         "short_description": "Забезпечення підрозділів сертифікованими турнікетами та аптечками стандарту НАТО.",
-        "image": "https://www.stopcor.org/static/storage/thumbs/960x540/3/93/39316161616161616161616161616161.jpg",
+        "image": "/images/projects/tactical_med.png",
         "collected": 4800000,
         "goal": 8000000,
         "unit": "грн"
@@ -169,7 +169,7 @@
         "id": "mobile-hospitals",
         "title": "Мобільні госпіталі",
         "short_description": "Створення та розгортання автономних медичних стабілізаційних пунктів поблизу лінії фронту.",
-        "image": "https://www.stopcor.org/static/storage/thumbs/960x540/6/f1/6f1d8c8c6c3c5d6c6c3c5d6c6c3c5d6c.jpg",
+        "image": "/images/projects/mobile_hospital.png",
         "collected": 15600000,
         "goal": 25000000,
         "unit": "грн"
@@ -178,7 +178,7 @@
         "id": "rehabilitation-center",
         "title": "Центр реабілітації",
         "short_description": "Програма фізичного та психологічного відновлення для військових та цивільних.",
-        "image": "https://www.stopcor.org/static/storage/thumbs/960x540/5/9e/59e66699318182747120616147120616.jpg",
+        "image": "/images/projects/rehabilitation.png",
         "collected": 2100000,
         "goal": 10000000,
         "unit": "грн"
@@ -187,7 +187,7 @@
         "id": "food-security",
         "title": "Гуманітарна продовольча допомога",
         "short_description": "Доставка продуктів харчування та засобів гігієни у деокуповані та прифронтові населені пункти.",
-        "image": "https://www.stopcor.org/static/storage/thumbs/1200x630/4/02/763c329b-7901518f8892694939b4d8f075d5b024.jpg",
+        "image": "/images/projects/humanitarian_aid.png",
         "collected": 3400000,
         "goal": 5000000,
         "unit": "грн"
@@ -196,7 +196,7 @@
         "id": "generation-future",
         "title": "Покоління майбутнього",
         "short_description": "Підтримка дітей, які втратили батьків або постраждали внаслідок бойових дій.",
-        "image": "https://www.stopcor.org/static/storage/thumbs/1200x630/c/90/73111cc2-88226011c759549f7e5d8b888c30690c.jpg",
+        "image": "/images/projects/kids_support.png",
         "collected": 850000,
         "goal": 3000000,
         "unit": "грн"
@@ -216,25 +216,25 @@
         "id": "1",
         "date": "19.04.2026",
         "title": "Нова партія реанімобілів вирушила на Бахмутський напрямок",
-        "image": "https://armyinform.com.ua/wp-content/uploads/2022/06/1-73.jpg"
+        "image": "/images/news/ambulances_convoy.png"
       },
       {
         "id": "2",
         "date": "17.04.2026",
         "title": "Доставлено нове медичне обладнання до стабпункту на Харківщині",
-        "image": "https://www.stopcor.org/static/storage/thumbs/960x540/3/93/39316161616161616161616161616161.jpg"
+        "image": "/images/news/medical_equipment.png"
       },
       {
         "id": "3",
         "date": "15.04.2026",
         "title": "Допомога дитячим будинкам та закладам для літніх людей",
-        "image": "https://www.stopcor.org/static/storage/thumbs/960x540/5/9e/59e66699318182747120616147120616.jpg"
+        "image": "/images/news/elders_support.png"
       },
       {
         "id": "4",
         "date": "12.04.2026",
         "title": "Завершено ремонт мобільного шпиталю для прифронтових зон",
-        "image": "https://www.stopcor.org/static/storage/thumbs/960x540/6/f1/6f1d8c8c6c3c5d6c6c3c5d6c6c3c5d6c.jpg"
+        "image": "/images/news/field_hospital_repair.png"
       }
     ],
     "gallery": {

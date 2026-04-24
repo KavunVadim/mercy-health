@@ -104,9 +104,9 @@
   justify-content: center;
   background-color: var(--accent-color);
   color: white;
-  padding: 1.25rem 3.5rem;
+  padding: 1rem 2.5rem;
   font-family: var(--font-e-ukraine), sans-serif;
-  font-size: 1.125rem;
+  font-size: 1rem;
   font-weight: 600;
   text-transform: uppercase;
   letter-spacing: 0.08em;
@@ -116,6 +116,7 @@
   box-shadow: 0 10px 30px rgba(30, 162, 254, 0.3);
   position: relative;
   overflow: hidden;
+  white-space: nowrap;
 }
 
 .cta::before {
@@ -159,9 +160,21 @@
   align-items: center;
 }
 
+.controlsRight {
+  display: flex;
+  align-items: center;
+  gap: 32px;
+}
+
+.staticActions {
+  display: flex;
+  align-items: center;
+}
+
 .dots {
   display: flex;
-  gap: 16px;
+  gap: 12px;
+  align-items: center; /* Центруємо точки відносно кнопки */
 }
 
 .dot {
@@ -257,7 +270,14 @@
     bottom: 30px;
   }
   .controlsInner {
+    flex-direction: column;
+    gap: 24px;
     justify-content: center;
+  }
+  .controlsRight {
+    flex-direction: column;
+    gap: 20px;
+    align-items: center;
   }
   .arrows {
     display: none;

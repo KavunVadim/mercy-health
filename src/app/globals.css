@@ -30,8 +30,6 @@ body {
 .layout-wrapper {
   flex: 1 0 auto;
   position: relative;
-  /* Додаємо мінімальний відступ зверху для всього контенту, 
-     щоб він не ховався під sticky шапкою на внутрішніх сторінках */
 }
 
 main:not(.home-main) {

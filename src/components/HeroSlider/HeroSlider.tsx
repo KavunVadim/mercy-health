@@ -20,8 +20,8 @@ interface Slide {
 }
 
 export default function HeroSlider({ slides }: { slides: Slide[] }) {
-  const [emblaRef, emblaApi] = useEmblaCarousel({ loop: true }, [
-    Autoplay({ delay: 6000, stopOnInteraction: true, stopOnMouseEnter: true }),
+  const [emblaRef, emblaApi] = useEmblaCarousel({ loop: true, duration: 20 }, [
+    Autoplay({ delay: 5000, stopOnInteraction: true, stopOnMouseEnter: true }),
   ]);
 
   const [selectedIndex, setSelectedIndex] = useState(0);
@@ -68,22 +68,6 @@ export default function HeroSlider({ slides }: { slides: Slide[] }) {
                   <span className={styles.titleWrap}>{slide.title}</span>
                 </h2>
                 <p className={styles.description}>{slide.description}</p>
-                <div className={styles.actions}>
-                  {slide.href.startsWith("http") ? (
-                    <a
-                      href={slide.href}
-                      className={styles.cta}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                    >
-                      {slide.cta}
-                    </a>
-                  ) : (
-                    <Link href={slide.href} className={styles.cta}>
-                      {slide.cta}
-                    </Link>
-                  )}
-                </div>
               </div>
             </div>
           </div>
@@ -102,13 +86,33 @@ export default function HeroSlider({ slides }: { slides: Slide[] }) {
               />
             ))}
           </div>
-          <div className={styles.arrows}>
-            <button className={styles.arrow} onClick={scrollPrev} aria-label="Previous slide">
-              <ChevronLeft size={24} />
-            </button>
-            <button className={styles.arrow} onClick={scrollNext} aria-label="Next slide">
-              <ChevronRight size={24} />
-            </button>
+
+          <div className={styles.controlsRight}>
+            <div className={styles.staticActions}>
+              {slides[selectedIndex]?.href.startsWith("http") ? (
+                <a
+                  href={slides[selectedIndex].href}
+                  className={styles.cta}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  {slides[selectedIndex].cta}
+                </a>
+              ) : (
+                <Link href={slides[selectedIndex]?.href || "#"} className={styles.cta}>
+                  {slides[selectedIndex]?.cta}
+                </Link>
+              )}
+            </div>
+
+            <div className={styles.arrows}>
+              <button className={styles.arrow} onClick={scrollPrev} aria-label="Previous slide">
+                <ChevronLeft size={24} />
+              </button>
+              <button className={styles.arrow} onClick={scrollNext} aria-label="Next slide">
+                <ChevronRight size={24} />
+              </button>
+            </div>
           </div>
         </div>
       </div>
