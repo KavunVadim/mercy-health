@@ -87,10 +87,13 @@
     }
   ],
   "stats": {
+    "collected_value": "12.4M ₴",
+    "helped_value": "15.2K",
+    "donors_value": "8.3K",
     "items": {
-      "collected": "Зібрано коштів",
-      "helped": "Допомогли людям",
-      "donors": "Всього благодійників"
+      "collected": "Зібрано",
+      "helped": "Допомогли",
+      "donors": "Благодійників"
     }
   },
   "about": {
@@ -350,7 +353,8 @@
       "facebook": "https://www.facebook.com/mercyandhealth",
       "instagram": "https://www.instagram.com/mercy_health_foundation/",
       "instagram_rehab": "https://www.instagram.com/rehab_mercy_and_health",
-      "tiktok": "https://www.tiktok.com/@mercy_health_foundation?_t=8kRiIEepl2b"
+      "tiktok": "https://www.tiktok.com/@mercy_health_foundation?_t=8kRiIEepl2b",
+      "telegram": "https://t.me/mercyandhealth"
     },
     "copyright": "© 2026 Милосердя та Здоров'я. Всі права захищені.",
     "rights": "© 2026 Милосердя та Здоров'я. Всі права захищені."

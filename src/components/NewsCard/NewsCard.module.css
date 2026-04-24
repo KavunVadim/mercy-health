@@ -78,7 +78,7 @@
 
 @media (max-width: 640px) {
   .title {
-    font-size: 0.875rem;
+    font-size: 1.125rem;
     -webkit-line-clamp: 2;
   }
 }

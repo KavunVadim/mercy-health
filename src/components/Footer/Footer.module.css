@@ -187,26 +187,86 @@
     flex-direction: row;
     justify-content: space-between;
     align-items: flex-start;
-    padding-bottom: 3rem;
+    padding-bottom: 2rem;
     border-bottom: 1px solid rgba(255, 255, 255, 0.05);
   }
 }
 
 @media (max-width: 768px) {
+  .footer {
+    padding: 3rem 0 0 0;
+  }
+
   .container {
-    grid-template-columns: 1fr;
-    gap: 3rem;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 2rem 1rem;
+    padding-bottom: 3rem;
   }
   
   .mainCol {
-    grid-column: span 1;
+    grid-column: span 2;
     flex-direction: column;
-    gap: 2rem;
+    gap: 1.5rem;
+    padding-bottom: 2rem;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  }
+
+  .description {
+    max-width: none;
+    font-size: 0.875rem;
+  }
+
+  .navCol {
+    grid-column: span 1;
+  }
+
+  .contactsCol {
+    grid-column: span 2;
+    margin-top: 1rem;
+    padding-top: 2rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.05);
+  }
+
+  .colTitle {
+    font-size: 0.875rem;
+    margin-bottom: 1.25rem;
+  }
+
+  .list, .contactsList {
+    gap: 0.75rem;
+  }
+
+  .list a, .contactsList li {
+    font-size: 0.875rem;
   }
   
   .bottomInner {
     flex-direction: column;
-    gap: 1.5rem;
+    gap: 1rem;
     text-align: center;
+  }
+
+  .legalLinks {
+    gap: 1.5rem;
+    justify-content: center;
+  }
+}
+
+@media (max-width: 480px) {
+  .container {
+    gap: 2rem 0.5rem;
+  }
+
+  .mainCol {
+    align-items: center;
+    text-align: center;
+  }
+
+  .description {
+    font-size: 0.8125rem;
+  }
+
+  .socials {
+    justify-content: center;
   }
 }

@@ -67,7 +67,7 @@
 
 @media (max-width: 640px) {
   .title {
-    font-size: 0.9rem;
+    font-size: 1.125rem;
     -webkit-line-clamp: 2;
     display: -webkit-box;
     -webkit-box-orient: vertical;
@@ -94,11 +94,11 @@
 @media (max-width: 640px) {
   .description {
     display: -webkit-box;
-    -webkit-line-clamp: 2;
+    -webkit-line-clamp: 3;
     -webkit-box-orient: vertical;
     overflow: hidden;
-    margin-bottom: 0.5rem;
-    font-size: 0.75rem;
+    margin-bottom: 0.75rem;
+    font-size: 0.875rem;
   }
 }
 

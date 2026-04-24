@@ -5,7 +5,12 @@
     "materials": "Materials",
     "reports": "Reports",
     "support": "Support",
-    "home": "Home"
+    "home": "Home",
+    "team": "Team",
+    "contacts": "Contacts",
+    "rehab": "Rehabilitation",
+    "medical_aid": "Medical Aid",
+    "privacy": "Privacy Policy"
   },
   "hero_slider": [
     {
@@ -82,6 +87,9 @@
     }
   ],
   "stats": {
+    "collected_value": "12.4M ₴",
+    "helped_value": "15.2K",
+    "donors_value": "8.3K",
     "items": {
       "collected": "Collected",
       "helped": "People Helped",
@@ -345,7 +353,8 @@
       "facebook": "https://www.facebook.com/mercyandhealth",
       "instagram": "https://www.instagram.com/mercy_health_foundation/",
       "instagram_rehab": "https://www.instagram.com/rehab_mercy_and_health",
-      "tiktok": "https://www.tiktok.com/@mercy_health_foundation?_t=8kRiIEepl2b"
+      "tiktok": "https://www.tiktok.com/@mercy_health_foundation?_t=8kRiIEepl2b",
+      "telegram": "https://t.me/mercyandhealth"
     },
     "copyright": "© 2026 Mercy and Health. All rights reserved.",
     "rights": "© 2026 Mercy and Health. All rights reserved."

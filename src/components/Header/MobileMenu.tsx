@@ -52,6 +52,7 @@ export default function MobileMenu({
     { icon: FaFacebookF, href: dictionary.footer.social_links.facebook },
     { icon: FaInstagram, href: dictionary.footer.social_links.instagram },
     { icon: FaTiktok, href: dictionary.footer.social_links.tiktok },
+    { icon: FaTelegramPlane, href: dictionary.footer.social_links.telegram },
   ];
 
   return (

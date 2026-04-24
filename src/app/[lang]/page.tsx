@@ -50,15 +50,15 @@ export default async function Home({
           <div className="container">
             <div className={styles.statsGrid}>
               <div className={styles.statItem}>
-                <span className={styles.statValue}>12.4M ₴</span>
+                <span className={styles.statValue}>{(dictionary as any).stats.collected_value}</span>
                 <span className={styles.statLabel}>{(dictionary as any).stats.items.collected}</span>
               </div>
               <div className={styles.statItem}>
-                <span className={styles.statValue}>15.2K</span>
+                <span className={styles.statValue}>{(dictionary as any).stats.helped_value}</span>
                 <span className={styles.statLabel}>{(dictionary as any).stats.items.helped}</span>
               </div>
               <div className={styles.statItem}>
-                <span className={styles.statValue}>8.3K</span>
+                <span className={styles.statValue}>{(dictionary as any).stats.donors_value}</span>
                 <span className={styles.statLabel}>{(dictionary as any).stats.items.donors}</span>
               </div>
             </div>

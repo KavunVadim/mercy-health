@@ -32,9 +32,10 @@
   background-color: var(--accent);
   color: var(--white);
   border-color: var(--accent);
+  cursor: default;
 }
 
 .linkActive:hover {
-  background-color: var(--accent-hover);
+  background-color: var(--accent);
   opacity: 1;
 }

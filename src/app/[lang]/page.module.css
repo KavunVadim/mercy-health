@@ -247,34 +247,39 @@
   }
   
   .newsletterSection {
-    padding: 6rem 0;
+    padding: 4rem 0;
   }
-  
+
   .newsletterTitle {
     font-size: 2.25rem;
+    margin-bottom: 1.5rem;
   }
-  
+
+  .newsletterInfo p {
+    font-size: 1.125rem;
+    margin-bottom: 2rem;
+  }
+
   .newsletterForm {
     flex-direction: column;
     background: transparent;
     border: none;
     padding: 0;
+    gap: 1rem;
     width: 100%;
   }
-  
+
   .newsletterInput {
     background: rgba(255, 255, 255, 0.05);
+    border-radius: 12px;
     border: 1px solid rgba(255, 255, 255, 0.1);
-    border-radius: 16px;
-    margin-bottom: 1rem;
-  }
-  
-  .newsletterBtn {
     width: 100%;
   }
-  
-  .sectionTitle {
-    font-size: 2.5rem;
+
+  .newsletterBtn {
+    width: 100%;
+    padding: 1.25rem;
+    border-radius: 12px;
   }
 
   .sectionHeader {
@@ -295,6 +300,12 @@
 @media (max-width: 768px) {
   .statsSection {
     padding: 1.5rem 0;
+  }
+
+  .container {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.5rem 1rem;
+    padding-bottom: 2rem;
   }
 
   .statsGrid {
@@ -319,8 +330,8 @@
 
 @media (max-width: 640px) {
   .projectGrid, .newsGrid {
-    grid-template-columns: repeat(2, 1fr);
-    gap: 0.75rem;
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
   }
   
   .statValue {

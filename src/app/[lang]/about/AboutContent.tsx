@@ -9,13 +9,19 @@ import Contacts from "./components/Contacts";
 import styles from "./page.module.css";
 
 export default function AboutContent({ dictionary }: { dictionary: any }) {
-  const [activeTab, setActiveTab] = useState("about_us");
-
   const tabs = [
     { id: "about_us", label: (dictionary as any).about.tabs.about_us },
     { id: "partners", label: (dictionary as any).about.tabs.partners },
     { id: "contacts", label: (dictionary as any).about.tabs.contacts },
   ];
+
+  const [activeTab, setActiveTab] = useState(() => {
+    if (typeof window !== "undefined") {
+      const hash = window.location.hash.replace("#", "");
+      if (tabs.some(t => t.id === hash)) return hash;
+    }
+    return "about_us";
+  });
 
   return (
     <div className={styles.contentWrapper}>
