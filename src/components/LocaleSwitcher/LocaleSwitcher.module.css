@@ -12,21 +12,29 @@
   border-radius: var(--radius-sm);
   color: var(--text-primary);
   opacity: 0.6;
-  width: 48px; /* Fixed width to prevent jumping */
+  width: 48px;
   min-height: 44px;
   display: inline-flex;
   align-items: center;
   justify-content: center;
   transition: var(--transition-fast);
+  border: 1px solid #E5E7EB;
 }
 
-.link:hover {
+.link:hover:not(.linkActive) {
   opacity: 1;
   background-color: rgba(0, 0, 0, 0.04);
+  border-color: #D1D5DB;
 }
 
 .linkActive {
   opacity: 1;
-  background-color: var(--text-primary);
+  background-color: var(--accent);
   color: var(--white);
+  border-color: var(--accent);
+}
+
+.linkActive:hover {
+  background-color: var(--accent-hover);
+  opacity: 1;
 }

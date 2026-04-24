@@ -145,13 +145,14 @@
     "collected": "Collected",
     "goal": "Goal",
     "details": "Details",
+    "support": "Support",
     "items": [
       {
         "id": "reanimobili-na-front",
         "title": "Ambulances for the Front",
         "short_description": "Purchase and equipment of ambulances for the evacuation of the wounded.",
         "full_description": "Our flagship project aimed at providing combat medics with specialized transport. Every ambulance means dozens of lives saved every month.",
-        "image": "https://armyinform.com.ua/wp-content/uploads/2022/06/1-73.jpg",
+        "image": "/images/projects/reanimobili.png",
         "collected": 12500000,
         "goal": 20000000,
         "unit": "uah"
@@ -160,7 +161,7 @@
         "id": "tactical-med-standard",
         "title": "Tactical Med Standards",
         "short_description": "Providing units with certified tourniquets and NATO-standard medical kits.",
-        "image": "https://www.stopcor.org/static/storage/thumbs/960x540/3/93/39316161616161616161616161616161.jpg",
+        "image": "/images/projects/tactical_med.png",
         "collected": 4800000,
         "goal": 8000000,
         "unit": "uah"
@@ -169,7 +170,7 @@
         "id": "mobile-hospitals",
         "title": "Mobile Hospitals",
         "short_description": "Creation and deployment of autonomous medical stabilization points near the front line.",
-        "image": "https://www.stopcor.org/static/storage/thumbs/960x540/6/f1/6f1d8c8c6c3c5d6c6c3c5d6c6c3c5d6c.jpg",
+        "image": "/images/projects/mobile_hospital.png",
         "collected": 15600000,
         "goal": 25000000,
         "unit": "uah"
@@ -178,7 +179,7 @@
         "id": "rehabilitation-center",
         "title": "Rehabilitation Center",
         "short_description": "Physical and psychological recovery program for military and civilians.",
-        "image": "https://www.stopcor.org/static/storage/thumbs/960x540/5/9e/59e66699318182747120616147120616.jpg",
+        "image": "/images/projects/rehabilitation.png",
         "collected": 2100000,
         "goal": 10000000,
         "unit": "uah"
@@ -187,7 +188,7 @@
         "id": "food-security",
         "title": "Humanitarian Food Aid",
         "short_description": "Delivery of food and hygiene products to de-occupied and frontline settlements.",
-        "image": "https://www.stopcor.org/static/storage/thumbs/1200x630/4/02/763c329b-7901518f8892694939b4d8f075d5b024.jpg",
+        "image": "/images/projects/humanitarian_aid.png",
         "collected": 3400000,
         "goal": 5000000,
         "unit": "uah"
@@ -196,7 +197,7 @@
         "id": "generation-future",
         "title": "Generation of the Future",
         "short_description": "Support for children who have lost parents or were affected by hostilities.",
-        "image": "https://www.stopcor.org/static/storage/thumbs/1200x630/c/90/73111cc2-88226011c759549f7e5d8b888c30690c.jpg",
+        "image": "/images/projects/kids_support.png",
         "collected": 850000,
         "goal": 3000000,
         "unit": "uah"
@@ -216,25 +217,29 @@
         "id": "1",
         "date": "19.04.2026",
         "title": "New batch of ambulances sent to Bakhmut direction",
-        "image": "https://armyinform.com.ua/wp-content/uploads/2022/06/1-73.jpg"
+        "description": "Providing medics at the most intense frontline areas with necessary transport for evacuation.",
+        "image": "/images/news/ambulances_convoy.png"
       },
       {
         "id": "2",
         "date": "17.04.2026",
         "title": "New medical equipment delivered to stabilization point in Kharkiv region",
-        "image": "https://www.stopcor.org/static/storage/thumbs/960x540/3/93/39316161616161616161616161616161.jpg"
+        "description": "Handed over scarce medical supplies and equipment for providing first aid to the wounded.",
+        "image": "/images/news/medical_equipment.png"
       },
       {
         "id": "3",
         "date": "15.04.2026",
         "title": "Aid to orphanages and institutions for the elderly",
-        "image": "https://www.stopcor.org/static/storage/thumbs/960x540/5/9e/59e66699318182747120616147120616.jpg"
+        "description": "Continuing to support vulnerable groups of the population under martial law.",
+        "image": "/images/news/elders_support.png"
       },
       {
         "id": "4",
         "date": "12.04.2026",
         "title": "Repair of mobile hospital for frontline areas completed",
-        "image": "https://www.stopcor.org/static/storage/thumbs/960x540/6/f1/6f1d8c8c6c3c5d6c6c3c5d6c6c3c5d6c.jpg"
+        "description": "The mobile hospital is again ready for deployment and receiving patients in field conditions.",
+        "image": "/images/news/field_hospital_repair.png"
       }
     ],
     "gallery": {
@@ -285,14 +290,14 @@
         {
           "id": "army",
           "title": "Collection for 2 Charging Stations",
-          "description": "Fundraising for 2 charging stations for the 114th Brigade. Every donation brings victory closer!",
+          "description": "Darkness is also an enemy weapon. Collecting for 2 charging stations for the 114th brigade - because communication and charged equipment save lives",
           "bank": "Monobank",
           "link": "https://send.monobank.ua/jar/A2KXCRZcSX"
         },
         {
           "id": "medics",
-          "title": "Tactical Medicine",
-          "description": "Collection for tactical medicine for the 'MERCY AND HEALTH' foundation. Your help saves lives!",
+          "title": "Charitable Foundation MERCY AND HEALTH",
+          "description": "IBAN UA 37 322001 00000 2902 3998 0013 27",
           "bank": "Monobank",
           "link": "https://send.monobank.ua/jar/9jCSaHumZ6"
         }
@@ -344,5 +349,11 @@
     },
     "copyright": "© 2026 Mercy and Health. All rights reserved.",
     "rights": "© 2026 Mercy and Health. All rights reserved."
+  },
+  "newsletter": {
+    "title": "Stay Informed",
+    "description": "Subscribe to our newsletter to receive news about projects and reports.",
+    "placeholder": "E-mail",
+    "button": "Subscribe"
   }
 }

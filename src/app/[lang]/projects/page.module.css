@@ -1,12 +1,12 @@
 .main {
   min-height: 100vh;
-  padding-bottom: 4rem;
+  padding-bottom: 6rem;
 }
 
 .header {
   background-color: var(--gray-50);
-  padding: 0.5rem 0;
-  margin-bottom: 2rem;
+  padding: 1rem 0;
+  margin-bottom: 3rem;
   border-bottom: 1px solid var(--gray-200);
 }
 
@@ -16,7 +16,7 @@
 
 .title {
   font-family: var(--font-e-ukraine-head);
-  font-size: 4rem;
+  font-size: 3.5rem;
   color: var(--text-dark);
   margin: 0;
   text-transform: uppercase;
@@ -25,115 +25,37 @@
   line-height: 1;
 }
 
+@media (max-width: 768px) {
+  .title {
+    font-size: 2.25rem;
+  }
+}
+
 .grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
-  gap: 2rem;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1.5rem;
 }
 
-.card {
-  display: flex;
-  flex-direction: column;
-  background-color: white;
-  border-radius: 24px;
-  overflow: hidden;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
-  text-decoration: none;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-  border: 1px solid var(--gray-200);
-}
-
-.card:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.1);
-}
-
-.imageWrapper {
-  position: relative;
-  width: 100%;
-  height: 240px;
-}
-
-.image {
-  object-fit: cover;
-  transition: transform 0.5s ease;
-}
-
-.card:hover .image {
-  transform: scale(1.05);
-}
-
-.content {
-  padding: 2rem;
-  display: flex;
-  flex-direction: column;
-  flex-grow: 1;
-}
-
-.cardTitle {
-  font-family: var(--font-e-ukraine-head);
-  font-size: 1.5rem;
-  color: var(--text-dark);
-  margin-bottom: 1rem;
-}
-
-.description {
-  color: var(--text-muted);
-  line-height: 1.6;
-  margin-bottom: 2rem;
-  flex-grow: 1;
-}
-
-.progressSection {
-  margin-bottom: 1.5rem;
-}
-
-.progressHeader {
-  display: flex;
-  justify-content: space-between;
-  font-size: 0.875rem;
-  font-weight: 500;
-  color: var(--text-dark);
-  margin-bottom: 0.5rem;
-}
-
-.progressBar {
-  height: 8px;
-  background-color: var(--gray-200);
-  border-radius: 4px;
-  overflow: hidden;
-}
-
-.progressFill {
-  height: 100%;
-  background-color: var(--accent);
-  border-radius: 4px;
-  transition: width 1s ease-out;
-}
-
-.cta {
-  display: inline-block;
-  color: var(--accent);
-  font-weight: 600;
-  font-size: 1rem;
-  transition: opacity 0.2s ease;
-}
-
-.card:hover .cta {
-  opacity: 0.8;
-}
-
-@media (max-width: 768px) {
-  .header {
-    padding: 0.5rem 0;
-    margin-bottom: 2rem;
-  }
-  
-  .title {
-    font-size: 2.5rem;
-  }
-  
+@media (max-width: 1200px) {
   .grid {
-    grid-template-columns: 1fr;
+    grid-template-columns: repeat(3, 1fr);
   }
+}
+
+@media (max-width: 992px) {
+  .grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 640px) {
+  .grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0.75rem;
+  }
+}
+
+.section {
+  padding-bottom: 4rem;
 }

@@ -1,7 +1,7 @@
 "use client";
 
-import Image from "next/image";
-import Link from "next/link";
+import NewsCard from "@/components/NewsCard/NewsCard";
+import type { Locale } from "@/i18n-config";
 import styles from "./Tabs.module.css";
 
 export default function NewsTab({ dictionary, lang }: { dictionary: any, lang: string }) {
@@ -10,29 +10,16 @@ export default function NewsTab({ dictionary, lang }: { dictionary: any, lang: s
 
   return (
     <div className={styles.grid}>
-      {items.map((item: unknown) => (
-        <Link 
-          key={(item as any).id} 
-          href={`/${lang}/news`}
-          className={styles.card}
-        >
-          <article>
-            <div className={styles.imageWrapper}>
-              <Image
-                src={(item as any).image}
-                alt={(item as any).title}
-                fill
-                className={styles.image}
-              />
-            </div>
-            <div className={styles.content}>
-              <time className={styles.date}>{(item as any).date}</time>
-              <h3 className={styles.title}>{(item as any).title}</h3>
-              {/* The user can add a detailed news page link here later */}
-              <span className={styles.readMore}>Читати далі &rarr;</span>
-            </div>
-          </article>
-        </Link>
+      {items.map((item: any) => (
+        <NewsCard
+          key={item.id}
+          id={item.id}
+          date={item.date}
+          title={item.title}
+          description={item.description}
+          image={item.image}
+          lang={lang as Locale}
+        />
       ))}
     </div>
   );

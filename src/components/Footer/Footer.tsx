@@ -64,26 +64,26 @@ export default function Footer({
         </div>
 
         <div className={styles.navCol}>
-          <h4 className={styles.colTitle}>{lang === "uk" ? "Фонд" : "Foundation"}</h4>
+          <h4 className={styles.colTitle}>{dictionary.footer.columns.foundation}</h4>
           <ul className={styles.list}>
             <li><Link href={`/${lang}/about`}>{dictionary.navigation.about}</Link></li>
-            <li><Link href={`/${lang}/team`}>{lang === "uk" ? "Команда" : "Team"}</Link></li>
-            <li><Link href={`/${lang}/contacts`}>{lang === "uk" ? "Контакти" : "Contacts"}</Link></li>
+            <li><Link href={`/${lang}/team`}>{dictionary.navigation.team}</Link></li>
+            <li><Link href={`/${lang}/contacts`}>{dictionary.navigation.contacts}</Link></li>
           </ul>
         </div>
 
         <div className={styles.navCol}>
           <h4 className={styles.colTitle}>{dictionary.navigation.projects}</h4>
           <ul className={styles.list}>
-            <li><Link href={`/${lang}/projects/rehab`}>{lang === "uk" ? "Реабілітація" : "Rehabilitation"}</Link></li>
-            <li><Link href={`/${lang}/projects/medics`}>{lang === "uk" ? "Допомога медикам" : "Medical Aid"}</Link></li>
+            <li><Link href={`/${lang}/projects/rehab`}>{dictionary.navigation.rehab}</Link></li>
+            <li><Link href={`/${lang}/projects/medics`}>{dictionary.navigation.medical_aid}</Link></li>
           </ul>
         </div>
 
         <div className={styles.navCol}>
-          <h4 className={styles.colTitle}>{lang === "uk" ? "Матеріали" : "Materials"}</h4>
+          <h4 className={styles.colTitle}>{dictionary.navigation.materials}</h4>
           <ul className={styles.list}>
-            <li><Link href={`/${lang}/news`}>{dictionary.navigation.news || "Новини"}</Link></li>
+            <li><Link href={`/${lang}/news`}>{dictionary.navigation.news || dictionary.navigation.materials}</Link></li>
             <li><Link href={`/${lang}/reports`}>{dictionary.navigation.reports}</Link></li>
           </ul>
         </div>
@@ -118,7 +118,7 @@ export default function Footer({
             <p>{dictionary.footer.rights}</p>
             <div className={styles.legalLinks}>
               <Link href={`/${lang}/legal`}>{dictionary.footer.columns.legal}</Link>
-              <Link href={`/${lang}/privacy`}>{lang === "uk" ? "Конфіденційність" : "Privacy"}</Link>
+              <Link href={`/${lang}/privacy`}>{dictionary.navigation.privacy}</Link>
             </div>
           </div>
         </div>

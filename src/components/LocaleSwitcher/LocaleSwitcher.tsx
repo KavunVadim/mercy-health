@@ -26,7 +26,7 @@ export default function LocaleSwitcher() {
             href={redirectedPathname(locale)}
             className={clsx(styles.link, isActive && styles.linkActive)}
           >
-            {locale.toUpperCase()}
+            {locale === "uk" ? "UA" : locale.toUpperCase()}
           </Link>
         );
       })}

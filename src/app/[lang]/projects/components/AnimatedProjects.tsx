@@ -1,9 +1,9 @@
 "use client";
 
 import { motion, Variants } from "framer-motion";
-import Image from "next/image";
-import Link from "next/link";
 import styles from "../page.module.css";
+import ProjectCard from "@/components/ProjectCard/ProjectCard";
+import type { Locale } from "@/i18n-config";
 
 type Project = {
   id: string;
@@ -14,6 +14,8 @@ type Project = {
   collected: number;
   goal?: number;
   unit: string;
+  category?: string;
+  status?: string;
 };
 
 interface AnimatedProjectsProps {
@@ -52,48 +54,22 @@ export default function AnimatedProjects({ projects, dictionary, lang }: Animate
       initial="hidden"
       animate="show"
     >
-      {projects.map((project: Project) => {
-        const progress = project.goal ? Math.min((project.collected / project.goal) * 100, 100) : 0;
-        
-        return (
-          <motion.div key={project.id} variants={item}>
-            <Link 
-              href={`/${lang}/projects/${project.id}`} 
-              className={styles.card}
-            >
-              <div className={styles.imageWrapper}>
-                <Image
-                  src={project.image}
-                  alt={project.title}
-                  fill
-                  className={styles.image}
-                />
-              </div>
-              <div className={styles.content}>
-                <h3 className={styles.cardTitle}>{project.title}</h3>
-                <p className={styles.description}>{project.short_description || project.description}</p>
-                
-                {project.goal && (
-                  <div className={styles.progressSection}>
-                    <div className={styles.progressHeader}>
-                      <span>{dictionary.projects.collected}: {project.collected.toLocaleString()} {project.unit}</span>
-                      <span>{dictionary.projects.goal}: {project.goal.toLocaleString()} {project.unit}</span>
-                    </div>
-                    <div className={styles.progressBar}>
-                      <div 
-                        className={styles.progressFill} 
-                        style={{ width: `${progress}%` }}
-                      ></div>
-                    </div>
-                  </div>
-                )}
-                
-                <span className={styles.cta}>{dictionary.projects.details} &rarr;</span>
-              </div>
-            </Link>
-          </motion.div>
-        );
-      })}
+      {projects.map((project: Project) => (
+        <motion.div key={project.id} variants={item}>
+          <ProjectCard
+            id={project.id}
+            title={project.title}
+            description={project.short_description || project.description}
+            image={project.image}
+            collected={project.collected}
+            goal={project.goal || 0}
+            category={project.category}
+            status={project.status}
+            dictionary={dictionary}
+            lang={lang as Locale}
+          />
+        </motion.div>
+      ))}
     </motion.div>
   );
 }

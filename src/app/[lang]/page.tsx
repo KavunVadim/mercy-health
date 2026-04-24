@@ -20,6 +20,32 @@ export default async function Home({
       <main className={`${styles.main} home-main`}>
         <HeroSlider slides={(dictionary as any).hero_slider} />
 
+        <section className={styles.projectsSection}>
+          <div className="container">
+            <div className={styles.sectionHeader}>
+              <h2 className={styles.sectionTitle}>{(dictionary as any).projects.title}</h2>
+              <Link href={`/${locale}/projects`} className={styles.viewAll}>
+                {(dictionary as any).projects.more}
+              </Link>
+            </div>
+            <div className={styles.projectGrid}>
+              {((dictionary as any).projects.items as unknown[]).slice(0, 4).map((project: unknown) => (
+                  <ProjectCard
+                    key={(project as any).id}
+                    title={(project as any).title}
+                    description={(project as any).short_description || (project as any).description}
+                    image={(project as any).image}
+                    collected={(project as any).collected}
+                    goal={(project as any).goal}
+                    id={(project as any).id}
+                    dictionary={dictionary as any}
+                    lang={locale}
+                  />
+              ))}
+            </div>
+          </div>
+        </section>
+
         <section className={styles.statsSection}>
           <div className="container">
             <div className={styles.statsGrid}>
@@ -39,32 +65,6 @@ export default async function Home({
           </div>
         </section>
 
-        <section className={styles.projectsSection}>
-          <div className="container">
-            <div className={styles.sectionHeader}>
-              <h2 className={styles.sectionTitle}>{(dictionary as any).projects.title}</h2>
-              <Link href={`/${locale}/projects`} className={styles.viewAll}>
-                {(dictionary as any).projects.more}
-              </Link>
-            </div>
-            <div className={styles.projectGrid}>
-              {((dictionary as any).projects.items as unknown[]).slice(0, 6).map((project: unknown) => (
-                  <ProjectCard
-                    key={(project as any).id}
-                    title={(project as any).title}
-                    description={(project as any).description}
-                    image={(project as any).image}
-                    collected={(project as any).collected}
-                    goal={(project as any).goal}
-                    id={(project as any).id}
-                    dictionary={dictionary as any}
-                    lang={locale}
-                  />
-              ))}
-            </div>
-          </div>
-        </section>
-
         <section className={styles.newsSection}>
           <div className="container">
             <div className={styles.sectionHeader}>
@@ -74,12 +74,13 @@ export default async function Home({
               </Link>
             </div>
             <div className={styles.newsGrid}>
-              {((dictionary as any).news.items as unknown[]).slice(0, 3).map((item: unknown) => (
+              {((dictionary as any).news.items as unknown[]).slice(0, 4).map((item: unknown) => (
                 <NewsCard
                   key={(item as any).id}
                   id={(item as any).id}
                   date={(item as any).date}
                   title={(item as any).title}
+                  description={(item as any).description}
                   image={(item as any).image}
                   lang={locale}
                 />
@@ -92,12 +93,12 @@ export default async function Home({
           <div className="container">
             <div className={styles.newsletterContainer}>
               <div className={styles.newsletterInfo}>
-                <h2 className={styles.newsletterTitle}>Будьте в курсі</h2>
-                <p>Підпишіться на нашу розсилку, щоб отримувати новини про проекти та звіти.</p>
+                <h2 className={styles.newsletterTitle}>{(dictionary as any).newsletter.title}</h2>
+                <p>{(dictionary as any).newsletter.description}</p>
               </div>
               <form className={styles.newsletterForm}>
-                <input type="email" placeholder="E-mail" className={styles.newsletterInput} />
-                <button type="submit" className={styles.newsletterBtn}>Підписатися</button>
+                <input type="email" placeholder={(dictionary as any).newsletter.placeholder} className={styles.newsletterInput} />
+                <button type="submit" className={styles.newsletterBtn}>{(dictionary as any).newsletter.button}</button>
               </form>
             </div>
           </div>

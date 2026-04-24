@@ -8,10 +8,10 @@ interface NewsProps {
   date: string;
   title: string;
   image: string;
+  description?: string;
   lang: Locale;
 }
-
-export default function NewsCard({ id, date, title, image, lang }: NewsProps) {
+export default function NewsCard({ id, date, title, image, description, lang }: NewsProps) {
   return (
     <Link href={`/${lang}/news`} className={styles.card}>
       <div className={styles.imageWrapper}>
@@ -20,6 +20,7 @@ export default function NewsCard({ id, date, title, image, lang }: NewsProps) {
       <div className={styles.content}>
         <span className={styles.date}>{date}</span>
         <h3 className={styles.title}>{title}</h3>
+        {description && <p className={styles.description}>{description}</p>}
       </div>
     </Link>
   );
