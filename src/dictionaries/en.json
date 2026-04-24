@@ -18,7 +18,7 @@
       "badge": "YouTube",
       "title": "\"Path of Mercy\": Ambulances to Save Soldiers' Lives",
       "description": "Handing over critically important medical transport for evacuating the wounded from the frontline.",
-      "image": "https://img.youtube.com/vi/Rh0fD5_0OhU/maxresdefault.jpg",
+      "image": "/images/hero/reanimobiles_frontline_new.png",
       "cta": "Watch video",
       "href": "https://youtu.be/Rh0fD5_0OhU"
     },
@@ -27,7 +27,7 @@
       "badge": "Vikna",
       "title": "\"Path of Mercy\": Benefactors Brought Ambulances to Ukraine",
       "description": "Learn more about how volunteers and benefactors provide military medics with modern equipment.",
-      "image": "https://vikna.tv/wp-content/uploads/2024/05/20/avto_zag.jpg",
+      "image": "/images/hero/humanitarian_aid_new.png",
       "cta": "Read article",
       "href": "https://vikna.tv/dlia-tebe/vijna-v-ukrayini/shlyah-myloserdya-blagodijnyky-pryvezly-v-ukrayinu-reanimobili-dlya-poryatunky-zhyttiv-vijskovyh/"
     },
@@ -36,7 +36,7 @@
       "badge": "YouTube",
       "title": "Transfer of Modern Ambulances for AFU Needs",
       "description": "Another stage of our mission — handing over equipped ambulances to save defenders' lives.",
-      "image": "https://img.youtube.com/vi/jO78_rVQ94I/maxresdefault.jpg",
+      "image": "/images/hero/medical_training_new.png",
       "cta": "Watch video",
       "href": "https://youtu.be/jO78_rVQ94I"
     },
@@ -45,7 +45,7 @@
       "badge": "Suspilne",
       "title": "Mykolaiv Region Received a New Ambulance",
       "description": "Mykolaiv region received a modern ambulance as part of our \"Path of Mercy\" project.",
-      "image": "https://cdn4.suspilne.media/images/e3a5d5118602d462.png",
+      "image": "/images/hero/medical_logistics_new.png",
       "cta": "Read more",
       "href": "https://suspilne.media/236722-volonterska-dopomoga-mikolaivsina-otrimala-novij-reanimobil/"
     },
@@ -54,7 +54,7 @@
       "badge": "Suspilne",
       "title": "Emergency Center Received a New Ambulance",
       "description": "Important addition to the emergency fleet for rapid response in war conditions.",
-      "image": "https://cdn4.suspilne.media/images/a10ffbf0cb9534af.png",
+      "image": "/images/hero/reanimobili_front.png",
       "cta": "Read news",
       "href": "https://suspilne.media/235727-centru-ekstrenoi-dopomogi-peredali-novij-reanimobil-v-akomu-stani-avtopark-cerez-vijnu/"
     },
@@ -63,7 +63,7 @@
       "badge": "TV MTM",
       "title": "Help for Zaporizhzhia: Ambulance and Antidotes",
       "description": "Zaporizhzhia direction received necessary medical support and protective equipment.",
-      "image": "https://tvmtm.online/wp-content/uploads/2022/05/na-zaporizhzhya-dostavyly-reanim.jpg",
+      "image": "/images/hero/humanitarian_support.png",
       "cta": "View material",
       "href": "https://tvmtm.online/na-zaporizhzhya-dostavyly-reanimobil-ta-preparaty-proty-himichnogo-otruyennya/"
     },
@@ -72,7 +72,7 @@
       "badge": "Poltava News",
       "title": "SBU in Poltava Received a Modern Ambulance",
       "description": "Support for special units with high-mobility medical transport.",
-      "image": "https://np.pl.ua/wp-content/uploads/2022/06/photo_2022-06-17_14-28-57.jpg",
+      "image": "/images/hero/medical_aid_receipt.png",
       "cta": "Read article",
       "href": "https://np.pl.ua/2022/06/upravlinnia-sbu-na-poltavshchyni-otrymalo-suchasnyy-reanimobil/"
     },
@@ -81,7 +81,7 @@
       "badge": "YouTube",
       "title": "\"Path of Mercy\" — How Volunteers Save Lives",
       "description": "Video story about our daily struggle for the life of every Ukrainian.",
-      "image": "https://img.youtube.com/vi/SyaIc8zK6pw/maxresdefault.jpg",
+      "image": "/images/hero/volunteers_action.png",
       "cta": "Watch report",
       "href": "https://m.youtube.com/watch?v=SyaIc8zK6pw"
     }
