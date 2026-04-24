@@ -12,7 +12,6 @@ export default function SupportContent({ dictionary }: { dictionary: any }) {
 
   const tabs = [
     { id: "once", label: support.tabs.once },
-    { id: "monthly", label: support.tabs.monthly },
     { id: "requisites", label: support.tabs.requisites },
   ];
 
@@ -22,14 +21,6 @@ export default function SupportContent({ dictionary }: { dictionary: any }) {
       
       <div className={styles.tabContent}>
         {activeTab === "once" && <DonationCards dictionary={dictionary} />}
-        {activeTab === "monthly" && (
-          <div className={styles.placeholderCard}>
-            <h3 className={styles.placeholderTitle}>{dictionary.support.tabs.monthly}</h3>
-            <p className={styles.placeholderText}>
-              Цей розділ наразі знаходиться в розробці. Незабаром ви зможете оформити щомісячну підписку на підтримку наших проєктів.
-            </p>
-          </div>
-        )}
         {activeTab === "requisites" && <BankDetails dictionary={dictionary} />}
       </div>
     </div>

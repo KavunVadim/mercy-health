@@ -2,9 +2,9 @@
   overflow: hidden;
   position: relative;
   width: 100%;
-  height: 80vh;
+  height: 75vh;
   min-height: 600px;
-  background-color: var(--bg-secondary);
+  background-color: #000;
 }
 
 .container {
@@ -23,16 +23,22 @@
 .bgImage {
   object-fit: cover;
   z-index: -2;
+  transition: transform 8s ease-out;
+}
+
+.slideActive .bgImage {
+  transform: scale(1.1);
 }
 
 .overlay {
   position: absolute;
   inset: 0;
   background: linear-gradient(
-    180deg,
-    rgba(255, 255, 255, 0.4) 0%,
-    transparent 40%,
-    rgba(255, 255, 255, 0.7) 100%
+    90deg,
+    rgba(0, 0, 0, 0.8) 0%,
+    rgba(0, 0, 0, 0.4) 30%,
+    rgba(0, 0, 0, 0.1) 60%,
+    rgba(0, 0, 0, 0.2) 100%
   );
   z-index: -1;
 }
@@ -44,46 +50,37 @@
 }
 
 .inner {
-  max-width: 850px;
+  max-width: 750px;
   position: relative;
   z-index: 2;
-  padding: 4.5rem;
-  background: rgba(255, 255, 255, 0.85);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  border-radius: var(--radius-lg);
-  border: 1px solid rgba(255, 255, 255, 0.5);
-  box-shadow: 0 15px 50px rgba(0, 0, 0, 0.05);
-}
-@media (max-width: 768px) {
-  .inner {
-    padding: 32px 24px;
-    margin: 0 16px;
-  }
+  padding: 0;
+  color: white;
 }
 
 .badge {
   display: inline-block;
   background: var(--accent-color);
   color: white;
-  padding: 6px 16px;
+  padding: 8px 18px;
   font-family: var(--font-e-ukraine);
-  font-size: 13px;
-  font-weight: 500;
-  letter-spacing: 0.05em;
+  font-size: 14px;
+  font-weight: 600;
+  letter-spacing: 0.1em;
   margin-bottom: 24px;
   text-transform: uppercase;
-  border-radius: var(--radius-sm);
+  border-radius: 4px;
+  backdrop-filter: blur(4px);
 }
 
 .title {
   font-family: var(--font-e-ukraine-head), sans-serif;
-  font-size: clamp(2.25rem, 5.5vw, 4.25rem);
-  line-height: 1.1;
-  color: var(--text-primary);
+  font-size: clamp(2.5rem, 6vw, 4.5rem);
+  line-height: 1.05;
+  color: white;
   margin-bottom: 24px;
   font-weight: 700;
-  letter-spacing: -0.02em;
+  letter-spacing: -0.03em;
+  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
 }
 
 .titleWrap {
@@ -92,12 +89,13 @@
 
 .description {
   font-family: var(--font-e-ukraine), sans-serif;
-  font-size: clamp(1.1rem, 2vw, 1.25rem);
-  color: var(--text-secondary);
+  font-size: clamp(1.125rem, 1.8vw, 1.35rem);
+  color: rgba(255, 255, 255, 0.9);
   margin-bottom: 48px;
-  max-width: 90%;
-  line-height: 1.6;
+  max-width: 600px;
+  line-height: 1.5;
   font-weight: 400;
+  text-shadow: 0 1px 5px rgba(0, 0, 0, 0.2);
 }
 
 .cta {
@@ -106,28 +104,50 @@
   justify-content: center;
   background-color: var(--accent-color);
   color: white;
-  padding: 1.125rem 3.5rem;
+  padding: 1.25rem 3.5rem;
   font-family: var(--font-e-ukraine), sans-serif;
   font-size: 1.125rem;
-  font-weight: 500;
+  font-weight: 600;
   text-transform: uppercase;
-  letter-spacing: 0.06em;
-  transition: var(--transition-normal);
+  letter-spacing: 0.08em;
+  transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
   text-decoration: none;
   border-radius: var(--radius-md);
-  box-shadow: 0 4px 15px rgba(30, 162, 254, 0.2);
+  box-shadow: 0 10px 30px rgba(30, 162, 254, 0.3);
+  position: relative;
+  overflow: hidden;
+}
+
+.cta::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    120deg,
+    transparent,
+    rgba(255, 255, 255, 0.2),
+    transparent
+  );
+  transition: all 0.6s;
 }
 
 .cta:hover {
   background-color: var(--accent-color-hover);
-  transform: translateY(-2px);
-  box-shadow: 0 8px 25px rgba(30, 162, 254, 0.35);
+  transform: translateY(-4px);
+  box-shadow: 0 15px 40px rgba(30, 162, 254, 0.4);
+}
+
+.cta:hover::before {
+  left: 100%;
 }
 
 /* Controls */
 .controls {
   position: absolute;
-  bottom: 40px;
+  bottom: 60px;
   left: 0;
   right: 0;
   z-index: 2;
@@ -141,23 +161,23 @@
 
 .dots {
   display: flex;
-  gap: 12px;
+  gap: 16px;
 }
 
 .dot {
-  width: 12px;
-  height: 12px;
-  border-radius: 50%;
-  background-color: rgba(0, 0, 0, 0.1);
+  width: 40px;
+  height: 3px;
+  background-color: rgba(255, 255, 255, 0.3);
   border: none;
   cursor: pointer;
-  transition: all 0.3s ease;
+  transition: all 0.4s ease;
   padding: 0;
+  position: relative;
 }
 
 .dotActive {
   background-color: var(--accent-color);
-  transform: scale(1.3);
+  width: 60px;
 }
 
 .arrows {
@@ -166,58 +186,86 @@
 }
 
 .arrow {
-  background: rgba(255, 255, 255, 0.9);
-  border: 1px solid rgba(0, 0, 0, 0.04);
-  color: var(--text-primary);
-  width: 56px;
-  height: 56px;
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  color: white;
+  width: 64px;
+  height: 64px;
   display: flex;
   align-items: center;
   justify-content: center;
   cursor: pointer;
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-  backdrop-filter: blur(8px);
+  backdrop-filter: blur(10px);
   border-radius: var(--radius-md);
 }
 
 .arrow:hover {
   background: var(--accent-color);
-  color: white;
+  border-color: var(--accent-color);
+  transform: scale(1.05);
+}
+
+@media (max-width: 1024px) {
+  .inner {
+    max-width: 600px;
+  }
 }
 
 @media (max-width: 768px) {
   .viewport {
-    height: 70vh;
+    height: 80vh; /* Taller on mobile for better visibility */
     min-height: 500px;
+  }
+  .overlay {
+    background: linear-gradient(
+      180deg,
+      rgba(0, 0, 0, 0.3) 0%,
+      rgba(0, 0, 0, 0.7) 100%
+    );
   }
   .inner {
     text-align: center;
-  }
-  .description {
-    margin-left: auto;
-    margin-right: auto;
-    margin-bottom: 24px;
-  }
-  .controls {
-    bottom: 20px;
-  }
-  .controlsInner {
+    padding: 0 1rem;
+    margin: 0 auto;
+    display: flex;
     flex-direction: column;
-    gap: 16px;
+    align-items: center;
   }
-  .arrow {
-    width: 44px;
-    height: 44px;
-  }
-  .dot {
-    width: 8px;
-    height: 8px;
+  .badge {
+    margin-bottom: 16px;
+    padding: 6px 14px;
+    font-size: 12px;
   }
   .title {
-    font-size: clamp(1.75rem, 8vw, 2.5rem);
+    font-size: clamp(2rem, 8vw, 2.75rem);
+    margin-bottom: 16px;
+  }
+  .description {
+    font-size: 1rem;
+    margin-bottom: 32px;
+    max-width: 100%;
+    -webkit-line-clamp: 3;
   }
   .cta {
-    padding: 0.875rem 2rem;
-    font-size: 0.9rem;
+    padding: 1rem 2.5rem;
+    font-size: 1rem;
+    width: 100%;
+    max-width: 320px;
+  }
+  .controls {
+    bottom: 30px;
+  }
+  .controlsInner {
+    justify-content: center;
+  }
+  .arrows {
+    display: none;
+  }
+  .dot {
+    width: 24px;
+  }
+  .dotActive {
+    width: 40px;
   }
 }

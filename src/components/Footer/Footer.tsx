@@ -1,7 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { Mail, Phone, MapPin } from "lucide-react";
-import { FaFacebookF, FaInstagram, FaTelegramPlane, FaLinkedinIn } from "react-icons/fa";
+import { FaFacebookF, FaInstagram, FaTelegramPlane, FaLinkedinIn, FaTiktok } from "react-icons/fa";
 import styles from "./Footer.module.css";
 import type { Locale } from "@/i18n-config";
 
@@ -36,23 +36,28 @@ export default function Footer({
           </p>
           <div className={styles.socials}>
             {socialLinks.facebook && (
-              <a href={socialLinks.facebook} target="_blank" rel="noopener noreferrer" className={styles.socLink}>
+              <a href={socialLinks.facebook} target="_blank" rel="noopener noreferrer" className={styles.socLink} title="Facebook">
                 <FaFacebookF size={18} />
               </a>
             )}
             {socialLinks.instagram && (
-              <a href={socialLinks.instagram} target="_blank" rel="noopener noreferrer" className={styles.socLink}>
+              <a href={socialLinks.instagram} target="_blank" rel="noopener noreferrer" className={styles.socLink} title="Foundation Instagram">
                 <FaInstagram size={18} />
               </a>
             )}
-            {socialLinks.telegram && (
-              <a href={socialLinks.telegram} target="_blank" rel="noopener noreferrer" className={styles.socLink}>
-                <FaTelegramPlane size={18} />
+            {socialLinks.instagram_rehab && (
+              <a href={socialLinks.instagram_rehab} target="_blank" rel="noopener noreferrer" className={styles.socLink} title="Rehab Instagram">
+                <FaInstagram size={18} />
               </a>
             )}
-            {socialLinks.linkedin && (
-              <a href={socialLinks.linkedin} target="_blank" rel="noopener noreferrer" className={styles.socLink}>
-                <FaLinkedinIn size={18} />
+            {socialLinks.tiktok && (
+              <a href={socialLinks.tiktok} target="_blank" rel="noopener noreferrer" className={styles.socLink} title="TikTok">
+                <FaTiktok size={18} />
+              </a>
+            )}
+            {socialLinks.telegram && (
+              <a href={socialLinks.telegram} target="_blank" rel="noopener noreferrer" className={styles.socLink} title="Telegram">
+                <FaTelegramPlane size={18} />
               </a>
             )}
           </div>
@@ -92,7 +97,9 @@ export default function Footer({
             </li>
             <li>
               <Mail size={16} />
-              <a href="mailto:info@mercy-health.org">info@mercy-health.org</a>
+              <a href={`mailto:${dictionary.footer.foundation_email || "info@mercyandhealth.org"}`}>
+                {dictionary.footer.foundation_email || "info@mercyandhealth.org"}
+              </a>
             </li>
             <li>
               <MapPin size={16} />

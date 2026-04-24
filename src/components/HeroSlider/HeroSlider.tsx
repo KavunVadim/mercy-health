@@ -21,7 +21,7 @@ interface Slide {
 
 export default function HeroSlider({ slides }: { slides: Slide[] }) {
   const [emblaRef, emblaApi] = useEmblaCarousel({ loop: true }, [
-    Autoplay({ delay: 5000, stopOnInteraction: false }),
+    Autoplay({ delay: 6000, stopOnInteraction: true, stopOnMouseEnter: true }),
   ]);
 
   const [selectedIndex, setSelectedIndex] = useState(0);
@@ -48,14 +48,17 @@ export default function HeroSlider({ slides }: { slides: Slide[] }) {
   return (
     <section className={styles.viewport} ref={emblaRef}>
       <div className={styles.container}>
-        {slides.map((slide) => (
-          <div className={styles.slide} key={slide.id}>
+        {slides.map((slide, index) => (
+          <div 
+            className={clsx(styles.slide, index === selectedIndex && styles.slideActive)} 
+            key={slide.id}
+          >
             <Image
               src={slide.image}
               alt={slide.title}
               fill
               className={styles.bgImage}
-              priority
+              priority={index === 0}
             />
             <div className={styles.overlay} />
             <div className={`container ${styles.content}`}>
@@ -66,9 +69,20 @@ export default function HeroSlider({ slides }: { slides: Slide[] }) {
                 </h2>
                 <p className={styles.description}>{slide.description}</p>
                 <div className={styles.actions}>
-                  <Link href={slide.href} className={styles.cta}>
-                    {slide.cta}
-                  </Link>
+                  {slide.href.startsWith("http") ? (
+                    <a
+                      href={slide.href}
+                      className={styles.cta}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      {slide.cta}
+                    </a>
+                  ) : (
+                    <Link href={slide.href} className={styles.cta}>
+                      {slide.cta}
+                    </Link>
+                  )}
                 </div>
               </div>
             </div>

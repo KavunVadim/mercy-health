@@ -33,7 +33,7 @@ export default function DonationCards({ dictionary }: { dictionary: any }) {
           <div className={styles.cardHeader}>
             <div className={styles.bankLogoWrapper}>
               <Image 
-                src="/icons/banks/monobank.svg" 
+                src="/icons/banks/monobank.png" 
                 alt={item.bank} 
                 width={40} 
                 height={40} 

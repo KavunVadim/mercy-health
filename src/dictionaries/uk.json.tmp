@@ -1,0 +1,83 @@
+{
+  "navigation": {
+    "about": "Про фонд",
+    "projects": "Проєкти",
+    "materials": "Матеріали",
+    "reports": "Звітність",
+    "support": "Підтримати",
+    "home": "Головна"
+  },
+  "hero_slider": [
+    {
+      "id": "1",
+      "badge": "YouTube",
+      "title": "\"Шлях милосердя\": реанімобілі для порятунку життів військових",
+      "description": "Передача критично важливого медичного транспорту для евакуації поранених з передової.",
+      "image": "https://img.youtube.com/vi/Rh0fD5_0OhU/maxresdefault.jpg",
+      "cta": "Дивитись відео",
+      "href": "https://youtu.be/Rh0fD5_0OhU"
+    },
+    {
+      "id": "2",
+      "badge": "Вікна",
+      "title": "\"Шлях милосердя\": благодійники привезли в Україну реанімобілі",
+      "description": "Дізнайтеся більше про те, як волонтери та благодійники забезпечують військових медиків сучасним обладнанням.",
+      "image": "https://images.unsplash.com/photo-1583321500900-82807e458f3c?auto=format&fit=crop&q=80&w=1600",
+      "cta": "Читати статтю",
+      "href": "https://vikna.tv/dlia-tebe/vijna-v-ukrayini/shlyah-myloserdya-blagodijnyky-pryvezly-v-ukrayinu-reanimobili-dlya-poryatunky-zhyttiv-vijskovyh/"
+    },
+    {
+      "id": "3",
+      "badge": "YouTube",
+      "title": "Передача сучасних реанімобілів для потреб ЗСУ",
+      "description": "Черговий етап нашої місії — передача укомплектованих швидких для порятунку життів захисників.",
+      "image": "https://img.youtube.com/vi/jO78_rVQ94I/maxresdefault.jpg",
+      "cta": "Дивитись відео",
+      "href": "https://youtu.be/jO78_rVQ94I"
+    },
+    {
+      "id": "4",
+      "badge": "Суспільне",
+      "title": "Миколаївщина отримала новий реанімобіль",
+      "description": "Миколаївська область отримала сучасну швидку допомогу в рамках нашого проекту \"Шлях милосердя\".",
+      "image": "https://images.unsplash.com/photo-1516549655169-df83a0774514?auto=format&fit=crop&q=80&w=1600",
+      "cta": "Докладніше",
+      "href": "https://suspilne.media/236722-volonterska-dopomoga-mikolaivsina-otrimala-novij-reanimobil/"
+    },
+    {
+      "id": "5",
+      "badge": "Суспільне",
+      "title": "Центру екстреної допомоги передали новий реанімобіль",
+      "description": "Важливе поповнення автопарку екстреної допомоги для оперативного реагування в умовах війни.",
+      "image": "https://images.unsplash.com/photo-1519494026892-80bbd2d6fd0d?auto=format&fit=crop&q=80&w=1600",
+      "cta": "Читати новину",
+      "href": "https://suspilne.media/235727-centru-ekstrenoi-dopomogi-peredali-novij-reanimobil-v-akomu-stani-avtopark-cerez-vijnu/"
+    },
+    {
+      "id": "6",
+      "badge": "TV MTM",
+      "title": "Допомога Запоріжжю: реанімобіль та препарати",
+      "description": "Запорізький напрямок отримав необхідну медичну підтримку та спецзасоби для захисту.",
+      "image": "https://images.unsplash.com/photo-1612349317150-e413f6a5b16d?auto=format&fit=crop&q=80&w=1600",
+      "cta": "Перейти до матеріалу",
+      "href": "https://tvmtm.online/na-zaporizhzhya-dostavyly-reanimobil-ta-preparaty-proty-himichnogo-otruyennya/"
+    },
+    {
+      "id": "7",
+      "badge": "Новини Полтавщини",
+      "title": "СБУ Полтавщини отримало сучасний реанімобіль",
+      "description": "Підтримка спецпідрозділів медичним транспортом високої прохідності.",
+      "image": "https://images.unsplash.com/photo-1593113598332-cd288d649433?auto=format&fit=crop&q=80&w=1600",
+      "cta": "Читати статтю",
+      "href": "https://np.pl.ua/2022/06/upravlinnia-sbu-na-poltavshchyni-otrymalo-suchasnyy-reanimobil/"
+    },
+    {
+      "id": "8",
+      "badge": "YouTube",
+      "title": "\"Шлях милосердя\" — як волонтери рятують життя",
+      "description": "Відео-історія про нашу щоденну боротьбу за життя кожного українця.",
+      "image": "https://img.youtube.com/vi/SyaIc8zK6pw/maxresdefault.jpg",
+      "cta": "Дивитись репортаж",
+      "href": "https://m.youtube.com/watch?v=SyaIc8zK6pw"
+    }
+  ],

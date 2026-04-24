@@ -52,6 +52,12 @@
   justify-content: center;
   flex-shrink: 0;
   border: 1px solid var(--gray-100);
+  overflow: hidden;
+}
+
+.bankLogo {
+  border-radius: 12px;
+  object-fit: contain;
 }
 
 .cardTitle {

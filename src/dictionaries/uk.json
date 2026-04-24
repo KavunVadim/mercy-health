@@ -10,57 +10,75 @@
   "hero_slider": [
     {
       "id": "1",
-      "badge": "Медична допомога",
-      "title": "Допоможіть рятувати життя",
-      "description": "Надання критичної медичної допомоги та логістики тим, хто цього потребує.",
-      "image": "https://images.unsplash.com/photo-1593113598332-cd288d649433?auto=format&fit=crop&q=80&w=1600",
-      "cta": "Підтримати зараз",
-      "href": "/support"
+      "badge": "YouTube",
+      "title": "\"Шлях милосердя\": реанімобілі для порятунку життів військових",
+      "description": "Передача критично важливого медичного транспорту для евакуації поранених з передової.",
+      "image": "https://img.youtube.com/vi/Rh0fD5_0OhU/maxresdefault.jpg",
+      "cta": "Дивитись відео",
+      "href": "https://youtu.be/Rh0fD5_0OhU"
     },
     {
       "id": "2",
-      "badge": "Логістика",
-      "title": "Логістика передової",
-      "description": "Доставка життєво необхідних вантажів у найважкодоступніші райони.",
-      "image": "https://images.unsplash.com/photo-1580674285054-bed31e145f59?auto=format&fit=crop&q=80&w=1600",
-      "cta": "Наші проєкти",
-      "href": "/projects"
+      "badge": "Вікна",
+      "title": "\"Шлях милосердя\": благодійники привезли в Україну реанімобілі",
+      "description": "Дізнайтеся більше про те, як волонтери та благодійники забезпечують військових медиків сучасним обладнанням.",
+      "image": "https://vikna.tv/wp-content/uploads/2024/05/20/avto_zag.jpg",
+      "cta": "Читати статтю",
+      "href": "https://vikna.tv/dlia-tebe/vijna-v-ukrayini/shlyah-myloserdya-blagodijnyky-pryvezly-v-ukrayinu-reanimobili-dlya-poryatunky-zhyttiv-vijskovyh/"
     },
     {
       "id": "3",
-      "badge": "Гуманітарна допомога",
-      "title": "Харчова безпека",
-      "description": "Забезпечення продуктами харчування мешканців деокупованих територій.",
-      "image": "https://images.unsplash.com/photo-1488521787991-ed7bbaae773c?auto=format&fit=crop&q=80&w=1600",
-      "cta": "Допомогти",
-      "href": "/support"
+      "badge": "YouTube",
+      "title": "Передача сучасних реанімобілів для потреб ЗСУ",
+      "description": "Черговий етап нашої місії — передача укомплектованих швидких для порятунку життів захисників.",
+      "image": "https://img.youtube.com/vi/jO78_rVQ94I/maxresdefault.jpg",
+      "cta": "Дивитись відео",
+      "href": "https://youtu.be/jO78_rVQ94I"
     },
     {
       "id": "4",
-      "badge": "Діти",
-      "title": "Майбутнє України",
-      "description": "Програми підтримки для дітей, які постраждали від війни.",
-      "image": "https://images.unsplash.com/photo-1488521787991-ed7bbaae773c?auto=format&fit=crop&q=80&w=1600",
-      "cta": "Детальніше",
-      "href": "/projects/generation-future"
+      "badge": "Суспільне",
+      "title": "Миколаївщина отримала новий реанімобіль",
+      "description": "Миколаївська область отримала сучасну швидку допомогу в рамках нашого проекту \"Шлях милосердя\".",
+      "image": "https://cdn4.suspilne.media/images/e3a5d5118602d462.png",
+      "cta": "Докладніше",
+      "href": "https://suspilne.media/236722-volonterska-dopomoga-mikolaivsina-otrimala-novij-reanimobil/"
     },
     {
       "id": "5",
-      "badge": "Такмед",
-      "title": "Навчання рятує життя",
-      "description": "Курси домедичної допомоги для військових та цивільних.",
-      "image": "https://images.unsplash.com/photo-1612349317150-e413f6a5b16d?auto=format&fit=crop&q=80&w=1600",
-      "cta": "Записатися",
-      "href": "/projects/tactical-med-standard"
+      "badge": "Суспільне",
+      "title": "Центру екстреної допомоги передали новий реанімобіль",
+      "description": "Важливе поповнення автопарку екстреної допомоги для оперативного реагування в умовах війни.",
+      "image": "https://cdn4.suspilne.media/images/a10ffbf0cb9534af.png",
+      "cta": "Читати новину",
+      "href": "https://suspilne.media/235727-centru-ekstrenoi-dopomogi-peredali-novij-reanimobil-v-akomu-stani-avtopark-cerez-vijnu/"
     },
     {
       "id": "6",
-      "badge": "Евакуація",
-      "title": "Шлях до безпеки",
-      "description": "Безпечне вивезення людей з зони активних бойових дій.",
-      "image": "https://images.unsplash.com/photo-1516549655169-df83a0774514?auto=format&fit=crop&q=80&w=1600",
-      "cta": "Підтримати",
-      "href": "/support"
+      "badge": "TV MTM",
+      "title": "Допомога Запоріжжю: реанімобіль та препарати",
+      "description": "Запорізький напрямок отримав необхідну медичну підтримку та спецзасоби для захисту.",
+      "image": "https://tvmtm.online/wp-content/uploads/2022/05/na-zaporizhzhya-dostavyly-reanim.jpg",
+      "cta": "Перейти до матеріалу",
+      "href": "https://tvmtm.online/na-zaporizhzhya-dostavyly-reanimobil-ta-preparaty-proty-himichnogo-otruyennya/"
+    },
+    {
+      "id": "7",
+      "badge": "Новини Полтавщини",
+      "title": "СБУ Полтавщини отримало сучасний реанімобіль",
+      "description": "Підтримка спецпідрозділів медичним транспортом високої прохідності.",
+      "image": "https://np.pl.ua/wp-content/uploads/2022/06/photo_2022-06-17_14-28-57.jpg",
+      "cta": "Читати статтю",
+      "href": "https://np.pl.ua/2022/06/upravlinnia-sbu-na-poltavshchyni-otrymalo-suchasnyy-reanimobil/"
+    },
+    {
+      "id": "8",
+      "badge": "YouTube",
+      "title": "\"Шлях милосердя\" — як волонтери рятують життя",
+      "description": "Відео-історія про нашу щоденну боротьбу за життя кожного українця.",
+      "image": "https://img.youtube.com/vi/SyaIc8zK6pw/maxresdefault.jpg",
+      "cta": "Дивитись репортаж",
+      "href": "https://m.youtube.com/watch?v=SyaIc8zK6pw"
     }
   ],
   "stats": {
@@ -133,7 +151,7 @@
         "title": "Реанімобілі на фронт",
         "short_description": "Закупівля та оснащення автомобілів швидкої допомоги для евакуації поранених.",
         "full_description": "Наш флагманський проєкт, спрямований на забезпечення бойових медиків спеціалізованим транспортом. Кожна швидка — це десятки врятованих життів щомісяця.",
-        "image": "https://images.unsplash.com/photo-1583321500900-82807e458f3c?auto=format&fit=crop&q=80&w=1600",
+        "image": "https://armyinform.com.ua/wp-content/uploads/2022/06/1-73.jpg",
         "collected": 12500000,
         "goal": 20000000,
         "unit": "грн"
@@ -142,7 +160,7 @@
         "id": "tactical-med-standard",
         "title": "Стандарти такмеду",
         "short_description": "Забезпечення підрозділів сертифікованими турнікетами та аптечками стандарту НАТО.",
-        "image": "https://images.unsplash.com/photo-1612349317150-e413f6a5b16d?auto=format&fit=crop&q=80&w=1000",
+        "image": "https://www.stopcor.org/static/storage/thumbs/960x540/3/93/39316161616161616161616161616161.jpg",
         "collected": 4800000,
         "goal": 8000000,
         "unit": "грн"
@@ -151,7 +169,7 @@
         "id": "mobile-hospitals",
         "title": "Мобільні госпіталі",
         "short_description": "Створення та розгортання автономних медичних стабілізаційних пунктів поблизу лінії фронту.",
-        "image": "https://images.unsplash.com/photo-1516549655169-df83a0774514?auto=format&fit=crop&q=80&w=1000",
+        "image": "https://www.stopcor.org/static/storage/thumbs/960x540/6/f1/6f1d8c8c6c3c5d6c6c3c5d6c6c3c5d6c.jpg",
         "collected": 15600000,
         "goal": 25000000,
         "unit": "грн"
@@ -160,7 +178,7 @@
         "id": "rehabilitation-center",
         "title": "Центр реабілітації",
         "short_description": "Програма фізичного та психологічного відновлення для військових та цивільних.",
-        "image": "https://images.unsplash.com/photo-1576765608535-5f04d1e3f289?auto=format&fit=crop&q=80&w=1000",
+        "image": "https://www.stopcor.org/static/storage/thumbs/960x540/5/9e/59e66699318182747120616147120616.jpg",
         "collected": 2100000,
         "goal": 10000000,
         "unit": "грн"
@@ -169,7 +187,7 @@
         "id": "food-security",
         "title": "Гуманітарна продовольча допомога",
         "short_description": "Доставка продуктів харчування та засобів гігієни у деокуповані та прифронтові населені пункти.",
-        "image": "https://images.unsplash.com/photo-1593113598332-cd288d649433?auto=format&fit=crop&q=80&w=1000",
+        "image": "https://www.stopcor.org/static/storage/thumbs/1200x630/4/02/763c329b-7901518f8892694939b4d8f075d5b024.jpg",
         "collected": 3400000,
         "goal": 5000000,
         "unit": "грн"
@@ -178,7 +196,7 @@
         "id": "generation-future",
         "title": "Покоління майбутнього",
         "short_description": "Підтримка дітей, які втратили батьків або постраждали внаслідок бойових дій.",
-        "image": "https://images.unsplash.com/photo-1488521787991-ed7bbaae773c?auto=format&fit=crop&q=80&w=1000",
+        "image": "https://www.stopcor.org/static/storage/thumbs/1200x630/c/90/73111cc2-88226011c759549f7e5d8b888c30690c.jpg",
         "collected": 850000,
         "goal": 3000000,
         "unit": "грн"
@@ -198,25 +216,25 @@
         "id": "1",
         "date": "19.04.2026",
         "title": "Нова партія реанімобілів вирушила на Бахмутський напрямок",
-        "image": "https://images.unsplash.com/photo-1583321500900-82807e458f3c?auto=format&fit=crop&q=80&w=1000"
+        "image": "https://armyinform.com.ua/wp-content/uploads/2022/06/1-73.jpg"
       },
       {
         "id": "2",
         "date": "17.04.2026",
         "title": "Доставлено нове медичне обладнання до стабпункту на Харківщині",
-        "image": "https://images.unsplash.com/photo-1516549655169-df83a0774514?auto=format&fit=crop&q=80&w=1000"
+        "image": "https://www.stopcor.org/static/storage/thumbs/960x540/3/93/39316161616161616161616161616161.jpg"
       },
       {
         "id": "3",
         "date": "15.04.2026",
         "title": "Допомога дитячим будинкам та закладам для літніх людей",
-        "image": "https://images.unsplash.com/photo-1488521787991-ed7bbaae773c?auto=format&fit=crop&q=80&w=1000"
+        "image": "https://www.stopcor.org/static/storage/thumbs/960x540/5/9e/59e66699318182747120616147120616.jpg"
       },
       {
         "id": "4",
         "date": "12.04.2026",
         "title": "Завершено ремонт мобільного шпиталю для прифронтових зон",
-        "image": "https://images.unsplash.com/photo-1519494026892-80bbd2d6fd0d?auto=format&fit=crop&q=80&w=1000"
+        "image": "https://www.stopcor.org/static/storage/thumbs/960x540/6/f1/6f1d8c8c6c3c5d6c6c3c5d6c6c3c5d6c.jpg"
       }
     ],
     "gallery": {
@@ -257,7 +275,6 @@
     "description": "Ваша підтримка рятує життя. Виберіть зручний спосіб допомоги.",
     "tabs": {
       "once": "Один раз",
-      "monthly": "Щомісяця",
       "requisites": "Реквізити"
     },
     "cards": {
@@ -267,17 +284,17 @@
       "items": [
         {
           "id": "army",
-          "title": "Допомога ЗСУ",
-          "description": "Закупівля амуніції, дронів та засобів зв'язку для підрозділів на передовій.",
+          "title": "Збір на 2 зарядні станції",
+          "description": "Темрява - це теж зброя ворога. Збираємо на 2 зарядні станції для 114 бригади-бо зв'язок і заряджена техніка рятує життя",
           "bank": "Monobank",
-          "link": "https://send.monobank.ua/jar/example1"
+          "link": "https://send.monobank.ua/jar/A2KXCRZcSX"
         },
         {
           "id": "medics",
-          "title": "Тактична медицина",
-          "description": "Формування аптечок та закупівля медичного обладнання для стабілізаційних пунктів.",
+          "title": "Благодійний фонд МИЛОСЕРДЯ ТА ЗДОРОВ'Я",
+          "description": "IBAN UA 37 322001 00000 2902 3998 0013 27",
           "bank": "Monobank",
-          "link": "https://send.monobank.ua/jar/example2"
+          "link": "https://send.monobank.ua/jar/9jCSaHumZ6"
         }
       ]
     },
@@ -310,7 +327,8 @@
   "footer": {
     "address_title": "Адреса",
     "address_foundation": "м. Київ, Україна",
-    "foundation_phone": "+380 44 123 45 67",
+    "foundation_phone": "+380 93 351 62 00",
+    "foundation_email": "info@mercyandhealth.org",
     "columns": {
       "foundation": "Фонд",
       "projects": "Проєкти",
@@ -319,10 +337,10 @@
       "legal": "Юридична інформація"
     },
     "social_links": {
-      "facebook": "https://facebook.com",
-      "instagram": "https://instagram.com",
-      "telegram": "https://t.me",
-      "linkedin": "https://linkedin.com"
+      "facebook": "https://www.facebook.com/mercyandhealth",
+      "instagram": "https://www.instagram.com/mercy_health_foundation/",
+      "instagram_rehab": "https://www.instagram.com/rehab_mercy_and_health",
+      "tiktok": "https://www.tiktok.com/@mercy_health_foundation?_t=8kRiIEepl2b"
     },
     "copyright": "© 2026 Милосердя та Здоров'я. Всі права захищені.",
     "rights": "© 2026 Милосердя та Здоров'я. Всі права захищені."
