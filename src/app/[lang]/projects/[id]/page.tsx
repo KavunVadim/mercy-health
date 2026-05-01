@@ -7,6 +7,7 @@ import styles from "./page.module.css";
 import { ArrowLeft } from "lucide-react";
 import ProjectImageGallery from "./components/ProjectImageGallery";
 import Breadcrumbs from "@/components/Breadcrumbs/Breadcrumbs";
+import ShareButtons from "./components/ShareButtons";
 
 interface Project {
   id: string;
@@ -66,38 +67,16 @@ export default async function ProjectDetailPage({
             description={fullDescription}
           />
 
-          <div className={styles.sidebarCol}>
-            <div className={styles.statsCard}>
-              <h3 className={styles.statsTitle}>Статус збору</h3>
+            <div className={styles.sidebarCol}>
+              <ShareButtons 
+                title={project.title} 
+                shareLabel="Поширити збір" 
+              />
               
-              {project.goal ? (
-                <>
-                  <div className={styles.progressHeader}>
-                    <div className={styles.statItem}>
-                      <span className={styles.statLabel}>Зібрано</span>
-                      <span className={styles.statValue}>{project.collected.toLocaleString()} {project.unit}</span>
-                    </div>
-                    <div className={styles.statItem}>
-                      <span className={styles.statLabel}>Ціль</span>
-                      <span className={styles.statValue}>{project.goal.toLocaleString()} {project.unit}</span>
-                    </div>
-                  </div>
-                  <div className={styles.progressBar}>
-                    <div 
-                      className={styles.progressFill} 
-                      style={{ width: `${progress}%` }}
-                    ></div>
-                  </div>
-                </>
-              ) : (
-                <p className={styles.completedText}>Проєкт успішно завершено та реалізовано!</p>
-              )}
-
               <Link href={`/${lang}/support`} className={styles.donateBtn}>
                 Підтримати проєкт
               </Link>
             </div>
-          </div>
         </div>
       </section>
     </main>

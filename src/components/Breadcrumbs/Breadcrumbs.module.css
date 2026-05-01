@@ -17,19 +17,20 @@
 .item {
   display: flex;
   align-items: center;
-  color: var(--foreground-muted);
+  color: inherit;
   font-size: 0.875rem;
   font-weight: 500;
+  opacity: 0.6;
 }
 
 .separator {
   margin: 0 0.5rem;
-  opacity: 0.5;
-  color: var(--foreground-muted);
+  opacity: 0.4;
+  color: inherit;
 }
 
 .link {
-  color: var(--foreground-muted);
+  color: inherit;
   text-decoration: none;
   transition: all 0.2s ease;
   display: flex;
@@ -53,7 +54,8 @@
 }
 
 .current {
-  color: var(--foreground);
+  color: inherit;
+  opacity: 1;
   font-weight: 600;
   max-width: 200px;
   overflow: hidden;

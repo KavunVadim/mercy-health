@@ -1,57 +1,65 @@
 :root {
   /* Colors - Inspired by fond-emblem.svg */
-  /* Blue variations from the logo */
-  --primary-blue: #1EA2FE;
-  --primary-blue-hover: #007AFF;
-  --secondary-blue: #F0F9FF; /* Very light blue for backgrounds/badges */
+  /* Apple-Inspired "Titanium Minimalist" Palette */
+  --apple-black: #000000;
+  --apple-dark: #1D1D1F; /* Primary Text */
+  --apple-gray: #86868B; /* Secondary Text */
+  --apple-bg-light: #F5F5F7; /* Apple's signature light gray */
+  --apple-blue: #0066CC; /* Apple Link/Action Blue */
+  --white: #FFFFFF;
   
-  /* Foundation palette */
-  --black: #000000;
-  --white: #ffffff;
-  --light-gray: #f5f5f5;
-  --dark-gray: #1a1a1a;
+  /* Foundation */
+  --primary-blue: var(--apple-blue);
+  --primary-blue-hover: #004080;
   
-  /* Typography — e-Ukraine Font System */
-  --font-main: var(--font-e-ukraine, sans-serif);
-  --font-oswald: var(--font-e-ukraine, sans-serif);
-  --font-inter: var(--font-e-ukraine, sans-serif);
-  
-  --bg-primary: #FFFFFF;
-  --bg-secondary: #F9FAFB;
-  --bg-tertiary: #F3F4F6;
-  --bg-footer: #F9FAFB;
+  /* Backgrounds */
+  --bg-primary: var(--white);
+  --bg-secondary: var(--apple-bg-light);
+  --bg-tertiary: #F2F2F2;
+  --bg-header: rgba(29, 29, 31, 0.8); /* Glassmorphism Black */
+  --bg-footer: var(--apple-black);
 
-  --gray-50: #F9FAFB;
-  --gray-100: #F3F4F6;
-  --gray-200: #E5E7EB;
-  --gray-300: #D1D5DB;
-  --gray-400: #9CA3AF;
-  --gray-500: #6B7280;
+  --gray-50: #F5F5F7;
+  --gray-100: #E8E8ED;
+  --gray-200: #D2D2D7;
+  --gray-300: #B0B0B5;
+  --gray-400: #86868B;
+  --gray-500: #6E6E73;
   
-  --text-dark: #111827;
-  --text-primary: #1A1A1A;
-  --text-secondary: #4B5563;
-  --text-muted: #6B7280;
+  --text-dark: var(--apple-dark);
+  --text-primary: var(--apple-dark); 
+  /* Typography */
+  --text-main: #32374A; /* Custom text color requested */
+  --text-secondary: #6E6E73;
+  --text-muted: #6E6E73;
   --text-light: #FFFFFF;
+  --page-header-bg: #1D1D1F; /* Deep Space Gray for page headers */
+  --page-header-text: #FFFFFF;
+  --page-header-border: rgba(255, 255, 255, 0.1);
+  --text-header: #32374A;
   
-  --accent: #1EA2FE;
-  --accent-hover: #007AFF;
+  --accent: var(--apple-blue);
+  --accent-hover: var(--primary-blue-hover);
   --accent-color: var(--accent);
   --accent-color-hover: var(--accent-hover);
-  --color-donate: #E8401C;
-  --color-donate-hover: #CF3516;
   
-  --border-color: #E5E7EB;
+  /* Donation */
+  --color-donate: var(--apple-blue);
+  --color-donate-hover: var(--primary-blue-hover);
+  
+  --border-color: #D2D2D7;
   --border-color-strong: #D1D5DB;
 
   /* UI Metrics — "Soft" Aesthetic */
   --radius-sm: 8px;
-  --radius-md: 8px; /* Standardized to match switcher */
-  --radius-lg: 12px;
+  --radius-md: 18px; /* Apple's softer corners */
+  --radius-lg: 24px;
   --radius-full: 8px; /* Removed pill-shape for buttons per user request */
+  --container-max: 1024px;
+  --space-unit: 1rem;
   
-  --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.04);
-  --shadow-md: 0 8px 24px rgba(0, 0, 0, 0.08);
+  --shadow-sm: 0 2px 8px rgba(0,0,0,0.04);
+  --shadow-md: 0 4px 20px rgba(0,0,0,0.08);
   --shadow-lg: 0 16px 48px rgba(0, 0, 0, 0.12);
   
   /* Spacing — "Airy" Layout */

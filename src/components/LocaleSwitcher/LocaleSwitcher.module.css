@@ -10,32 +10,32 @@
   font-weight: 500;
   padding: 0.5rem 0.875rem;
   border-radius: var(--radius-sm);
-  color: var(--text-primary);
-  opacity: 0.6;
+  color: #32374A;
+  opacity: 0.8;
   width: 48px;
   min-height: 44px;
   display: inline-flex;
   align-items: center;
   justify-content: center;
   transition: var(--transition-fast);
-  border: 1px solid #E5E7EB;
+  border: 1px solid rgba(0, 0, 0, 0.1);
 }
 
 .link:hover:not(.linkActive) {
   opacity: 1;
-  background-color: rgba(0, 0, 0, 0.04);
-  border-color: #D1D5DB;
+  background-color: rgba(0, 0, 0, 0.05);
+  border-color: rgba(0, 0, 0, 0.2);
 }
 
 .linkActive {
   opacity: 1;
-  background-color: var(--accent);
-  color: var(--white);
-  border-color: var(--accent);
+  background-color: var(--apple-blue);
+  color: #FFFFFF;
+  border-color: var(--apple-blue);
   cursor: default;
 }
 
 .linkActive:hover {
-  background-color: var(--accent);
+  background-color: var(--apple-blue);
   opacity: 1;
 }

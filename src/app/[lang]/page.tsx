@@ -89,20 +89,6 @@ export default async function Home({
           </div>
         </section>
 
-        <section className={styles.newsletterSection}>
-          <div className="container">
-            <div className={styles.newsletterContainer}>
-              <div className={styles.newsletterInfo}>
-                <h2 className={styles.newsletterTitle}>{(dictionary as any).newsletter.title}</h2>
-                <p>{(dictionary as any).newsletter.description}</p>
-              </div>
-              <form className={styles.newsletterForm}>
-                <input type="email" placeholder={(dictionary as any).newsletter.placeholder} className={styles.newsletterInput} />
-                <button type="submit" className={styles.newsletterBtn}>{(dictionary as any).newsletter.button}</button>
-              </form>
-            </div>
-          </div>
-        </section>
       </main>
     </div>
   );

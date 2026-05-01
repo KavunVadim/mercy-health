@@ -5,20 +5,22 @@
 }
 
 .header {
-  background-color: var(--gray-50);
-  padding: 0.5rem 0;
-  margin-bottom: 1rem;
-  border-bottom: 1px solid var(--gray-200);
+  background-color: var(--page-header-bg);
+  padding: 4rem 0; /* Consistent large padding */
+  margin-bottom: 3rem;
+  border-bottom: 1px solid var(--page-header-border);
+  color: var(--page-header-text);
 }
 
 .breadcrumbs {
   padding: 0.5rem 0 !important;
+  opacity: 0.7;
 }
 
 .title {
   font-family: var(--font-e-ukraine-head);
-  font-size: 4rem;
-  color: var(--text-dark);
+  font-size: clamp(2.5rem, 8vw, 4rem);
+  color: var(--page-header-text);
   margin: 0;
   text-transform: uppercase;
   font-weight: 800;

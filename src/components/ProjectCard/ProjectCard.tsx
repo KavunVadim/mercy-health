@@ -54,28 +54,6 @@ export default function ProjectCard({
           <h3 className={styles.title}>{title}</h3>
           <p className={styles.description}>{description}</p>
           
-          <div className={styles.progressContainer}>
-            <div className={styles.progressBar}>
-              <div 
-                className={styles.progressFill} 
-                style={{ width: `${progress}%` }}
-              ></div>
-            </div>
-            <div className={styles.progressFooter}>
-              <div className={styles.progressLabelCol}>
-                <span className={styles.progressLabel}>{(dictionary as any).projects.collected}</span>
-                <span className={styles.collectedValue}>
-                  {collNum.toLocaleString(numberLocale)} {unit || '₴'}
-                </span>
-              </div>
-              <div className={styles.progressLabelCol} style={{ textAlign: 'right' }}>
-                <span className={styles.progressLabel}>{(dictionary as any).projects.goal}</span>
-                <span className={styles.goalValue}>
-                  {goalNum.toLocaleString(numberLocale)} {unit || '₴'}
-                </span>
-              </div>
-            </div>
-          </div>
 
           <div className={styles.supportBtn}>
             <svg 

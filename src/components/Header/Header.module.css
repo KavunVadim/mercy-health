@@ -1,14 +1,14 @@
 .header {
-  background-color: rgba(255, 255, 255, 0.98);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  color: var(--text-primary);
-  padding: 1.125rem 0;
+  background-color: rgba(245, 245, 247, 0.92);
+  backdrop-filter: saturate(180%) blur(40px);
+  -webkit-backdrop-filter: saturate(180%) blur(40px);
+  color: #32374A; /* Updated to custom color */
+  padding: 1rem 0;
   position: sticky;
   top: 0;
   z-index: 1000;
-  border-bottom: 1px solid var(--border-color);
-  transition: var(--transition-fast);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+  transition: all 0.3s ease;
 }
 
 .container {
@@ -36,10 +36,10 @@
 
 .logoText {
   font-family: var(--font-e-ukraine-head), sans-serif;
-  font-size: 1.25rem;
+  font-size: 1.125rem;
   font-weight: 800;
-  letter-spacing: -0.01em;
-  color: var(--text-primary);
+  letter-spacing: 0.05em;
+  color: #32374A;
   text-transform: uppercase;
 }
 
@@ -58,13 +58,17 @@
 
 .navLink {
   font-family: var(--font-e-ukraine), sans-serif;
-  text-transform: uppercase;
-  letter-spacing: 0.08em;
-  font-size: 1rem;
+  font-size: 0.875rem;
   font-weight: 700;
-  color: var(--text-primary);
-  transition: var(--transition-fast);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: #32374A;
+  transition: opacity 0.2s ease;
   white-space: nowrap;
+}
+
+.navLink:hover {
+  opacity: 0.6;
 }
 
 .navLink:hover {
@@ -106,7 +110,8 @@
 .searchBtn {
   background: none;
   border: none;
-  color: var(--text-primary);
+  color: #32374A;
+  opacity: 0.8;
   cursor: pointer;
   display: flex;
   align-items: center;
