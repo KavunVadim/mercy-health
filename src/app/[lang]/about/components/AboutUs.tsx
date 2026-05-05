@@ -42,7 +42,9 @@ export default function AboutUs({ dictionary }: { dictionary: any }) {
             {activeSection === "who_we_are" && (
               <div className={styles.sectionBlock}>
                 <h2 className={styles.title}>{dict.about.history.title}</h2>
-                <p className={styles.text}>{dict.about.history.content}</p>
+                {dict.about.history.content.split('\n\n').map((paragraph: string, index: number) => (
+                  <p key={index} className={styles.text}>{paragraph}</p>
+                ))}
                 <div className={styles.imageWrapper}>
                   <Image 
                     src="https://images.unsplash.com/photo-1593113598332-cd288d649433?auto=format&fit=crop&q=80&w=1000" 
@@ -50,19 +52,6 @@ export default function AboutUs({ dictionary }: { dictionary: any }) {
                     fill 
                     className={styles.image}
                   />
-                </div>
-                
-                <h3 className={styles.subtitle}>{dict.about.team.title}</h3>
-                <div className={styles.teamGrid}>
-                  {(dict.about.team.members as unknown[]).map((member: unknown, index: number) => (
-                    <div key={index} className={styles.teamMember}>
-                      <div className={styles.memberAvatar}>
-                        <span className={styles.avatarPlaceholder}>{(member as any).name[0]}</span>
-                      </div>
-                      <h4 className={styles.memberName}>{(member as any).name}</h4>
-                      <p className={styles.memberRole}>{(member as any).role}</p>
-                    </div>
-                  ))}
                 </div>
               </div>
             )}

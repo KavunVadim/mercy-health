@@ -67,7 +67,6 @@ export default function Footer({
           <h4 className={styles.colTitle}>{dictionary.footer.columns.foundation}</h4>
           <ul className={styles.list}>
             <li><Link href={`/${lang}/about`}>{dictionary.navigation.about}</Link></li>
-            <li><Link href={`/${lang}/about#about_us`}>{dictionary.navigation.team}</Link></li>
             <li><Link href={`/${lang}/about#contacts`}>{dictionary.navigation.contacts}</Link></li>
           </ul>
         </div>

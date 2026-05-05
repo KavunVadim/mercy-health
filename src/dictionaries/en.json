@@ -10,7 +10,6 @@
     "reports": "Reports",
     "support": "Support",
     "home": "Home",
-    "team": "Team",
     "contacts": "Contacts",
     "rehab": "Rehabilitation",
     "medical_aid": "Medical Aid",
@@ -114,28 +113,11 @@
     },
     "history": {
       "title": "Our History",
-      "content": "The Charitable Foundation 'Mercy and Health' was founded with a clear goal: to help those who need it most. Since the beginning of the full-scale invasion, we have focused our efforts on supporting the Armed Forces of Ukraine and medical institutions."
+      "content": "Charitable Foundation 'Mercy and Health' was founded in 2016 with the goal of providing assistance to the population, medical and social institutions and organizations of any form of ownership.\n\nOur main areas of activity include providing essential medicines and medical equipment, providing consulting and rehabilitation assistance, supplying food, hygiene products, clothing, as well as special-purpose transport — in particular, ambulances.\n\nThe foundation's team has many years of experience in the procurement and logistics of medical equipment.\n\nSince February 24, 2022, the foundation has significantly expanded the scale of its work. We actively established contacts with potential partners and promoted our needs in the media — and this gave results: we managed to attract a significant number of international donors and partners.\n\nToday we are one of the largest suppliers of specialized equipment for the Armed Forces of Ukraine. Our flagship project is 'Ambulances for the Front'. We have delivered over 130 modern vehicles that save the lives of defenders every day. In addition, within the 'On the Shield' program, we supply refrigerated vehicles for the dignified transportation of fallen heroes, as well as pickups and other specialized vehicles for people with disabilities.\n\nThe main direction of our work is medical assistance. We supply medicines, consumables, and medical equipment to frontline cities and villages, helping to save lives every day. Our specialists go directly to the front line, and the foundation's rehabilitation center provides free physical and psychological support to military personnel and their families.\n\nWe also work with the children of fallen defenders and organize educational programs throughout Ukraine.\n\nA separate direction is assistance to orphanages and institutions for the elderly: food, clothing, hygiene products, and basic necessities.\n\nAmong our initiatives is the 'Water for Life' project: we drill wells in Donbas so that local residents have access to clean water even after shelling.\n\nAnd the project — 'Light of Life': we provide generators to military and civilians.\n\nWe don't wait for better conditions. We work in the ones that exist — for the sake of those who need it."
     },
     "mission": {
       "title": "Our Mission",
       "content": "To provide necessary assistance to the military and civilians, to preserve life and health, and to bring our common Victory closer through transparency, speed, and efficiency."
-    },
-    "team": {
-      "title": "Our Team",
-      "members": [
-        {
-          "name": "Oleksandr Petrenko",
-          "role": "Founder & Director"
-        },
-        {
-          "name": "Maria Ivanova",
-          "role": "Project Coordinator"
-        },
-        {
-          "name": "Dmytro Kovalenko",
-          "role": "Logistics Manager"
-        }
-      ]
     },
     "media": {
       "title": "Media About Us",
@@ -394,7 +376,7 @@
   },
   "hero": {
     "title": "Mercy & Health",
-    "description": "Charitable foundation 'Mercy and Health' provides medical aid and humanitarian support to those affected by war in Ukraine."
+    "description": "Charitable Foundation 'Mercy and Health' — medical and humanitarian aid for military and civilians in the conditions of war in Ukraine."
   },
   "footer": {
     "address_title": "Address",

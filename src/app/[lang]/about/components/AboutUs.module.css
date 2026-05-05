@@ -86,8 +86,12 @@
   font-size: 1.35rem;
   color: var(--text-muted);
   line-height: 1.8;
-  margin-bottom: 3rem;
+  margin-bottom: 1.5rem;
   font-weight: 400;
+}
+
+.text:last-of-type {
+  margin-bottom: 3.5rem;
 }
 
 .imageWrapper {
@@ -101,85 +105,6 @@
 
 .image {
   object-fit: cover;
-}
-
-.teamGrid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
-  gap: 3rem;
-}
-
-@media (max-width: 640px) {
-  .teamGrid {
-    grid-template-columns: repeat(2, 1fr);
-    gap: 1.5rem;
-  }
-}
-
-.teamMember {
-  text-align: left;
-  transition: transform 0.3s ease;
-}
-
-.teamMember:hover {
-  transform: translateY(-5px);
-}
-
-.memberAvatar {
-  width: 100%;
-  aspect-ratio: 1;
-  border-radius: 20px;
-  background-color: var(--gray-100);
-  margin-bottom: 1.5rem;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  overflow: hidden;
-  position: relative;
-  border: 1px solid var(--gray-200);
-}
-
-.avatarPlaceholder {
-  font-family: var(--font-e-ukraine-head);
-  font-size: 4rem;
-  color: var(--gray-300);
-  font-weight: 800;
-}
-
-@media (max-width: 640px) {
-  .memberAvatar {
-    margin-bottom: 0.75rem;
-  }
-  .avatarPlaceholder {
-    font-size: 2.5rem;
-  }
-}
-
-.memberName {
-  font-family: var(--font-e-ukraine-head);
-  font-size: 1.25rem;
-  margin-bottom: 0.5rem;
-  color: var(--text-dark);
-  text-transform: uppercase;
-  font-weight: 800;
-}
-
-.memberRole {
-  color: var(--accent);
-  font-size: 0.875rem;
-  font-weight: 700;
-  text-transform: uppercase;
-  letter-spacing: 0.05em;
-}
-
-@media (max-width: 640px) {
-  .memberName {
-    font-size: 0.875rem;
-    margin-bottom: 0.25rem;
-  }
-  .memberRole {
-    font-size: 0.7rem;
-  }
 }
 
 .missionCard {
