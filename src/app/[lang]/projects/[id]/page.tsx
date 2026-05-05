@@ -45,6 +45,7 @@ export default async function ProjectDetailPage({
             className={styles.breadcrumbs}
             items={[
               { label: dictionary.navigation.home, href: `/${lang}` },
+              { label: dictionary.navigation.projects, href: `/${lang}/projects` },
               { label: project.title }
             ]}
           />
