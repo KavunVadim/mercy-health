@@ -25,10 +25,14 @@ export async function generateStaticParams() {
   return i18n.locales.map((locale) => ({ lang: locale }));
 }
 
-export const metadata: Metadata = {
-  title: "Mercy & Health | Милосердя та здоров'я",
-  description: "Volunteer medical support foundation",
-};
+export async function generateMetadata({ params }: { params: Promise<{ lang: string }> }): Promise<Metadata> {
+  const { lang } = await params;
+  const dictionary = await getDictionary(lang as Locale);
+  return {
+    title: dictionary.metadata.title,
+    description: dictionary.metadata.description,
+  };
+}
 
 export const viewport: Viewport = {
   width: "device-width",

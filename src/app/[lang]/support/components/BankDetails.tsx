@@ -19,26 +19,26 @@ export default function BankDetails({ dictionary }: { dictionary: any }) {
   };
 
   const tabs = [
-    { id: "ua", label: "Перекази по Україні", icon: Zap },
-    { id: "intl", label: "Перекази з-за кордону", icon: Globe },
-    { id: "crypto", label: "Криптовалюта", icon: Wallet },
+    { id: "ua", label: dictionary.support.bank_details.tabs.ua, icon: Zap },
+    { id: "intl", label: dictionary.support.bank_details.tabs.intl, icon: Globe },
+    { id: "crypto", label: dictionary.support.bank_details.tabs.crypto, icon: Wallet },
   ];
 
   const content = {
     ua: [
-      { label: "Рахунок в 'ПриватБанку' (IBAN)", value: "UA383052990000026005015017860", id: "ua_privat", icon: Landmark },
-      { label: "Рахунок в 'Ощадбанку' (IBAN)", value: "UA223226690000026007300905964", id: "ua_oschad", icon: Landmark },
-      { label: "Рахунок в 'ПУМБ' (IBAN)", value: "UA183348510000000260022228947", id: "ua_pumb", icon: Landmark },
-      { label: "Рахунок в 'Укрсиббанку' (IBAN)", value: "UA863220010000026002080000681", id: "ua_ukrsib", icon: Landmark },
+      { label: dictionary.support.bank_details.accounts.privat, value: "UA383052990000026005015017860", id: "ua_privat", icon: Landmark },
+      { label: dictionary.support.bank_details.accounts.oschad, value: "UA223226690000026007300905964", id: "ua_oschad", icon: Landmark },
+      { label: dictionary.support.bank_details.accounts.pumb, value: "UA183348510000000260022228947", id: "ua_pumb", icon: Landmark },
+      { label: dictionary.support.bank_details.accounts.ukrsib, value: "UA863220010000026002080000681", id: "ua_ukrsib", icon: Landmark },
     ],
     intl: [
-      { label: "USD Account (SWIFT)", value: "UA098765432109876543210987654", id: "intl_usd", icon: Globe, extra: "JPMorgan Chase Bank" },
-      { label: "EUR Account (SWIFT)", value: "UA112233445566778899001122334", id: "intl_eur", icon: Globe, extra: "Deutsche Bank" },
+      { label: dictionary.support.bank_details.accounts.usd, value: "UA098765432109876543210987654", id: "intl_usd", icon: Globe, extra: "JPMorgan Chase Bank" },
+      { label: dictionary.support.bank_details.accounts.eur, value: "UA112233445566778899001122334", id: "intl_eur", icon: Globe, extra: "Deutsche Bank" },
     ],
     crypto: [
-      { label: "USDT (TRC20)", value: "TXxxxxxxxxxxxxxxxxxxxxxxxxxxxx", id: "crypto_usdt", icon: Wallet },
-      { label: "Bitcoin (BTC)", value: "1xxxxxxxxxxxxxxxxxxxxxxxxxxxxxx", id: "crypto_btc", icon: Wallet },
-      { label: "Ethereum (ETH)", value: "0xxxxxxxxxxxxxxxxxxxxxxxxxxxxxx", id: "crypto_eth", icon: Wallet },
+      { label: dictionary.support.bank_details.accounts.usdt, value: "TXxxxxxxxxxxxxxxxxxxxxxxxxxxxx", id: "crypto_usdt", icon: Wallet },
+      { label: dictionary.support.bank_details.accounts.btc, value: "1xxxxxxxxxxxxxxxxxxxxxxxxxxxxxx", id: "crypto_btc", icon: Wallet },
+      { label: dictionary.support.bank_details.accounts.eth, value: "0xxxxxxxxxxxxxxxxxxxxxxxxxxxxxx", id: "crypto_eth", icon: Wallet },
     ]
   };
 
@@ -73,6 +73,7 @@ export default function BankDetails({ dictionary }: { dictionary: any }) {
                 item={item} 
                 copiedId={copiedId} 
                 onCopy={copyToClipboard}
+                dictionary={dictionary}
               />
             ))}
           </motion.div>
@@ -93,7 +94,7 @@ export default function BankDetails({ dictionary }: { dictionary: any }) {
   );
 }
 
-function PaymentRow({ item, copiedId, onCopy }: any) {
+function PaymentRow({ item, copiedId, onCopy, dictionary }: any) {
   const Icon = item.icon;
   const isCopied = copiedId === item.id;
 
@@ -122,7 +123,7 @@ function PaymentRow({ item, copiedId, onCopy }: any) {
               animate={{ opacity: 1 }}
             >
               <Check size={16} />
-              <span>Скопійовано</span>
+              <span>{dictionary.support.bank_details.copied}</span>
             </motion.div>
           ) : (
             <motion.div 
@@ -132,7 +133,7 @@ function PaymentRow({ item, copiedId, onCopy }: any) {
               animate={{ opacity: 1 }}
             >
               <Copy size={16} />
-              <span>Копіювати</span>
+              <span>{dictionary.support.bank_details.copy}</span>
             </motion.div>
           )}
         </AnimatePresence>

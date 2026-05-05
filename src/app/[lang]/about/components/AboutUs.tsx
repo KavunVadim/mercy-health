@@ -81,7 +81,7 @@ export default function AboutUs({ dictionary }: { dictionary: any }) {
                 <h2 className={styles.title}>{dict.about.media.title}</h2>
                 <p className={styles.text}>{dict.about.media.content}</p>
                 <div className={styles.mediaPlaceholder}>
-                  <p>News articles will be listed here.</p>
+                  <p>{dict.news.no_articles}</p>
                 </div>
               </div>
             )}

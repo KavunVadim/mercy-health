@@ -26,7 +26,7 @@ export default function Contacts({ dictionary }: { dictionary: any }) {
               <li>
                 <div className={styles.icon}><Phone size={24} /></div>
                 <div>
-                  <span className={styles.label}>Телефон</span>
+                  <span className={styles.label}>{dict.about.contacts_tab.labels.phone}</span>
                   <a href={`tel:${footerDict.foundation_phone}`} className={styles.value}>
                     {footerDict.foundation_phone}
                   </a>
@@ -35,7 +35,7 @@ export default function Contacts({ dictionary }: { dictionary: any }) {
               <li>
                 <div className={styles.icon}><Mail size={24} /></div>
                 <div>
-                  <span className={styles.label}>Email</span>
+                  <span className={styles.label}>{dict.about.contacts_tab.labels.email}</span>
                   <a href="mailto:info@mercy-health.org" className={styles.value}>
                     info@mercy-health.org
                   </a>
@@ -44,7 +44,7 @@ export default function Contacts({ dictionary }: { dictionary: any }) {
               <li>
                 <div className={styles.icon}><MapPin size={24} /></div>
                 <div>
-                  <span className={styles.label}>Адреса</span>
+                  <span className={styles.label}>{dict.about.contacts_tab.labels.address}</span>
                   <span className={styles.value}>{footerDict.address_foundation}</span>
                 </div>
               </li>
@@ -80,7 +80,7 @@ export default function Contacts({ dictionary }: { dictionary: any }) {
           <form className={styles.form} onSubmit={handleSubmit}>
             <div className={styles.inputGroup}>
               <label htmlFor="name">{formDict.name}</label>
-              <input type="text" id="name" required className={styles.input} placeholder="Введіть ваше ім'я" />
+              <input type="text" id="name" required className={styles.input} placeholder={formDict.name_placeholder} />
             </div>
             <div className={styles.inputGroup}>
               <label htmlFor="email">{formDict.email}</label>
@@ -88,7 +88,7 @@ export default function Contacts({ dictionary }: { dictionary: any }) {
             </div>
             <div className={styles.inputGroup}>
               <label htmlFor="message">{formDict.message}</label>
-              <textarea id="message" rows={5} required className={styles.textarea} placeholder="Ваше повідомлення..."></textarea>
+              <textarea id="message" rows={5} required className={styles.textarea} placeholder={formDict.message_placeholder}></textarea>
             </div>
             <button type="submit" className={styles.submitBtn}>
               {formDict.submit}

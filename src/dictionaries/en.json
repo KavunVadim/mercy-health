@@ -1,4 +1,8 @@
 {
+  "metadata": {
+    "title": "Mercy & Health | Foundation",
+    "description": "Volunteer medical support foundation"
+  },
   "navigation": {
     "about": "About Us",
     "projects": "Projects",
@@ -141,9 +145,17 @@
       "title": "Get in Touch",
       "form": {
         "name": "Your Name",
-        "email": "Email Address",
+        "name_placeholder": "Enter your name",
+        "email": "Email",
+        "email_placeholder": "example@mail.com",
         "message": "Message",
+        "message_placeholder": "Your message...",
         "submit": "Send Message"
+      },
+      "labels": {
+        "phone": "Phone",
+        "email": "Email",
+        "address": "Address"
       }
     }
   },
@@ -154,16 +166,30 @@
     "goal": "Goal",
     "details": "Details",
     "support": "Support",
+    "support_project": "Support Project",
+    "gallery_title": "Project Gallery",
+    "zoom": "Zoom",
+    "photo": "photo",
     "items": [
       {
         "id": "reanimobili-na-front",
         "title": "Ambulances for the Front",
         "short_description": "Purchase and equipment of ambulances for the evacuation of the wounded.",
-        "full_description": "Our flagship project aimed at providing combat medics with specialized transport. Every ambulance means dozens of lives saved every month.",
+        "full_description": "The 'Path of Mercy' project is our key initiative aimed at saving the lives of Ukrainian defenders and civilians in active combat zones. Every ambulance we hand over to the front is not just transport, but a full-fledged mobile stabilization point on wheels.\n\nWe focus on purchasing modern Type C vehicles, which are equipped with everything necessary to support life during long-term evacuation: defibrillators, ventilators, patient monitors, and oxygen supply systems. Our team of volunteers and technical specialists personally checks and equips each machine before shipment.\n\nSince the beginning of the project, we have managed to transfer over 30 units of specialized transport to various AFU units and frontline hospitals. Each such vehicle saves hundreds of lives every month, allowing medics to provide assistance right on the road, without losing the precious minutes of the 'golden hour'.\n\nYour support is an investment in life. Together, we provide our medics with tools that make the impossible possible in the most difficult conditions. Join the collection, share information, and help us continue this vital mission.",
         "image": "/images/projects/reanimobili.png",
         "collected": 12500000,
         "goal": 20000000,
-        "unit": "uah"
+        "unit": "uah",
+        "gallery": [
+          "/images/hero/reanimobiles_frontline_new.png",
+          "/images/hero/humanitarian_aid_new.png",
+          "/images/hero/medical_training_new.png",
+          "/images/hero/medical_logistics_new.png",
+          "/images/hero/reanimobili_front.png",
+          "/images/hero/volunteers_action.png",
+          "/images/hero/humanitarian_support.png",
+          "/images/hero/medical_aid_receipt.png"
+        ]
       },
       {
         "id": "tactical-med-standard",
@@ -213,7 +239,8 @@
     ]
   },
   "news": {
-    "title": "Materials",
+    "title": "News",
+    "no_articles": "News articles will be listed here soon.",
     "tabs": {
       "news": "News",
       "gallery": "Gallery",
@@ -256,7 +283,13 @@
     },
     "others": {
       "title": "Additional Materials",
-      "description": "Reports, documents, and other useful files for download."
+      "description": "Reports, documents, and other useful files for download.",
+      "documents": [
+        "Annual Foundation Report 2025",
+        "Foundation Charter",
+        "Financial Audit 2025",
+        "Presentation for Partners"
+      ]
     }
   },
   "reports": {
@@ -324,7 +357,23 @@
       "purpose": "Payment purpose",
       "purpose_value": "Charitable assistance",
       "copy": "Copy",
-      "copied": "Copied!",
+      "copied": "Copied",
+      "tabs": {
+        "ua": "Transfers within Ukraine",
+        "intl": "International Transfers",
+        "crypto": "Cryptocurrency"
+      },
+      "accounts": {
+        "privat": "PrivatBank Account (IBAN)",
+        "oschad": "Oschadbank Account (IBAN)",
+        "pumb": "PUMB Account (IBAN)",
+        "ukrsib": "Ukrsibbank Account (IBAN)",
+        "usd": "USD Account (SWIFT)",
+        "eur": "EUR Account (SWIFT)",
+        "usdt": "USDT (TRC20)",
+        "btc": "Bitcoin (BTC)",
+        "eth": "Ethereum (ETH)"
+      },
       "currencies": {
         "uah": "Hryvnia (UAH)",
         "usd": "US Dollar (USD)",
@@ -332,6 +381,16 @@
         "gbp": "British Pound (GBP)"
       }
     }
+  },
+  "share": {
+    "title": "Share project",
+    "copy": "Copy link",
+    "copied": "Copied",
+    "share_on": "Share on",
+    "facebook": "Facebook",
+    "telegram": "Telegram",
+    "whatsapp": "WhatsApp",
+    "x": "X"
   },
   "hero": {
     "title": "Mercy & Health",

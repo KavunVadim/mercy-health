@@ -33,9 +33,9 @@
   --text-secondary: #6E6E73;
   --text-muted: #6E6E73;
   --text-light: #FFFFFF;
-  --page-header-bg: #1D1D1F; /* Deep Space Gray for page headers */
-  --page-header-text: #FFFFFF;
-  --page-header-border: rgba(255, 255, 255, 0.1);
+  --page-header-bg: var(--apple-bg-light); /* Light gray for page headers */
+  --page-header-text: var(--apple-dark);
+  --page-header-border: rgba(0, 0, 0, 0.05);
   --text-header: #32374A;
   
   --accent: var(--apple-blue);
@@ -50,17 +50,27 @@
   --border-color: #D2D2D7;
   --border-color-strong: #D1D5DB;
 
-  /* UI Metrics — "Soft" Aesthetic */
-  --radius-sm: 8px;
-  --radius-md: 18px; /* Apple's softer corners */
-  --radius-lg: 24px;
-  --radius-full: 8px; /* Removed pill-shape for buttons per user request */
-  --container-max: 1024px;
+  /* UI Metrics — Unified Radius System */
+  --radius-xs: 8px;   /* small inputs, tags */
+  --radius-sm: 12px;  /* buttons, chips */
+  --radius-md: 20px;  /* cards, panels */
+  --radius-lg: 28px;  /* large cards */
+  --radius-full: 12px;
+  --container-max: 1280px;
+
+  /* Glass Design System — Liquid Glass Refraction (taste-skill)
+     Note: backdrop-filter only on fixed/sticky (Header). Cards use inset highlights + diffuse shadows.
+   */
+  --glass-border-subtle: rgba(0, 0, 0, 0.05);
+  --glass-inset-top: inset 0 1px 0 rgba(255, 255, 255, 0.85);
+  --glass-inset-hover: inset 0 1px 0 rgba(255, 255, 255, 0.95);
+  --glass-shadow: 0 16px 32px -10px rgba(0, 0, 0, 0.05);
+  --glass-shadow-hover: 0 24px 48px -14px rgba(0, 0, 0, 0.09);
   --space-unit: 1rem;
   
   --shadow-sm: 0 2px 8px rgba(0,0,0,0.04);
-  --shadow-md: 0 4px 20px rgba(0,0,0,0.08);
-  --shadow-lg: 0 16px 48px rgba(0, 0, 0, 0.12);
+  --shadow-md: 0 4px 20px rgba(0,0,0,0.07);
+  --shadow-lg: 0 16px 48px rgba(0, 0, 0, 0.10);
   
   /* Spacing — "Airy" Layout */
   --space-xs: 0.5rem;

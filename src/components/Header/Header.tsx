@@ -34,19 +34,19 @@ export default function Header({
   const navItems = [
     {
       href: `/${lang}/about`,
-      label: lang === "uk" ? "Про Фонд" : "About Foundation",
+      label: dictionary.navigation.about,
     },
     {
       href: `/${lang}/projects`,
-      label: lang === "uk" ? "Проекти" : "Projects",
+      label: dictionary.navigation.projects,
     },
     {
       href: `/${lang}/news`,
-      label: lang === "uk" ? "Матеріали" : "Materials",
+      label: dictionary.navigation.materials,
     },
     {
       href: `/${lang}/reports`,
-      label: lang === "uk" ? "Звітність" : "Reporting",
+      label: dictionary.navigation.reports,
     },
   ];
 

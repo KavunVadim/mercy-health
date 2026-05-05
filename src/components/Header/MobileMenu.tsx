@@ -44,7 +44,7 @@ export default function MobileMenu({
   const navItems = [
     { href: `/${lang}/about`, label: dictionary.navigation.about },
     { href: `/${lang}/projects`, label: dictionary.navigation.projects },
-    { href: `/${lang}/news`, label: dictionary.navigation.news || (lang === "uk" ? "Матеріали" : "Materials") },
+    { href: `/${lang}/news`, label: dictionary.navigation.materials },
     { href: `/${lang}/reports`, label: dictionary.navigation.reports },
   ];
 

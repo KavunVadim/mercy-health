@@ -6,8 +6,8 @@
 
 .header {
   background-color: var(--page-header-bg);
-  padding: 4rem 0; /* Consistent large padding */
-  margin-bottom: 3rem;
+  padding: 2rem 0;
+  margin-bottom: 2.5rem;
   border-bottom: 1px solid var(--page-header-border);
   color: var(--page-header-text);
 }
@@ -19,13 +19,13 @@
 
 .title {
   font-family: var(--font-e-ukraine-head);
-  font-size: clamp(2.5rem, 8vw, 4rem);
+  font-size: clamp(2rem, 5vw, 3.5rem);
   color: var(--page-header-text);
   margin: 0;
   text-transform: uppercase;
   font-weight: 800;
   letter-spacing: -0.02em;
-  line-height: 1;
+  line-height: 1.1;
 }
 
 .section {
@@ -49,11 +49,11 @@
 
 @media (max-width: 768px) {
   .header {
-    padding: 0.5rem 0;
-    margin-bottom: 1rem;
+    padding: 1rem 0;
+    margin-bottom: 1.5rem;
   }
   
   .title {
-    font-size: 2.5rem;
+    font-size: 2rem;
   }
 }

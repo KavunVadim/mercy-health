@@ -28,7 +28,7 @@ export default function Partners({ dictionary }: { dictionary: any }) {
     <div className={styles.container}>
       <h2 className={styles.title}>{dict.about.tabs.partners}</h2>
       <p className={styles.description}>
-        Разом ми здатні на більше. Дякуємо нашим партнерам за постійну підтримку.
+        {dict.about.partners_description}
       </p>
 
       <div className={styles.sliderWrap} ref={emblaRef}>
