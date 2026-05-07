@@ -1,13 +1,18 @@
 .header {
   background-color: var(--bg-header);
-  backdrop-filter: saturate(180%) blur(40px);
-  -webkit-backdrop-filter: saturate(180%) blur(40px);
+  background-image: linear-gradient(
+    to bottom,
+    color-mix(in oklab, oklch(1 0 0) 5%, transparent),
+    transparent
+  );
+  backdrop-filter: saturate(180%) blur(100px);
+  -webkit-backdrop-filter: saturate(180%) blur(100px);
   color: var(--foreground);
   padding: 1rem 0;
   position: sticky;
   top: 0;
   z-index: 1000;
-  border-bottom: 1px solid var(--glass-border-subtle);
+  border-bottom: 1px solid var(--border);
   transition: all 0.3s ease, background-color var(--transition-theme), color var(--transition-theme);
 }
 

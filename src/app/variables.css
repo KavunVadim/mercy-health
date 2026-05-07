@@ -111,7 +111,7 @@
   --bg-primary:      var(--background);
   --bg-secondary:    var(--surface);
   --bg-tertiary:     var(--muted);
-  --bg-header:       color-mix(in oklab, var(--surface) 80%, transparent);
+  --bg-header:       color-mix(in oklab, var(--surface) 94%, transparent);
   --bg-footer:       oklch(0.18 0.01 255);
 
   /* Old grays → semantic */
@@ -147,7 +147,7 @@
   /* Old page header → semantic */
   --page-header-bg:     var(--surface);
   --page-header-text:   var(--foreground);
-  --page-header-border: color-mix(in oklab, var(--foreground) 5%, transparent);
+  --page-header-border: var(--border);
 }
 
 
@@ -221,7 +221,7 @@
 
   /* ── Dark-specific aliases ─────────────────────────────────── */
   --apple-black:     oklch(0.15 0.01 255);
-  --bg-header:       color-mix(in oklab, var(--background) 85%, transparent);
+  --bg-header:       color-mix(in oklab, var(--background) 96%, transparent);
   --bg-footer:       oklch(0.16 0.01 255);
-  --page-header-border: color-mix(in oklab, oklch(1 0 0) 6%, transparent);
+  --page-header-border: var(--border);
 }
