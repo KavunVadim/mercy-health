@@ -1,0 +1,44 @@
+.toggle {
+  background: var(--muted);
+  border: 1px solid var(--border);
+  width: 48px;
+  height: 44px;
+  border-radius: var(--radius-sm);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--foreground);
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+  transition: all var(--transition-fast);
+}
+
+.toggle:hover {
+  background-color: var(--secondary);
+  border-color: var(--border);
+  transform: translateY(-1px);
+  box-shadow: var(--shadow-sm);
+}
+
+.toggle:active {
+  transform: translateY(0);
+}
+
+.iconContainer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.icon {
+  display: block;
+}
+
+.skeleton {
+  width: 48px;
+  height: 44px;
+  background: var(--muted);
+  border-radius: var(--radius-sm);
+  opacity: 0.5;
+}

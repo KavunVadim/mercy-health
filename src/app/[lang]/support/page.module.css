@@ -1,7 +1,8 @@
 .main {
   min-height: 100vh;
   padding-bottom: 5rem;
-  background-color: var(--gray-50);
+  background-color: var(--surface);
+  transition: background-color var(--transition-theme);
 }
 
 .header {

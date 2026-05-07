@@ -9,14 +9,15 @@
 .shareWrapper {
   display: flex;
   flex-direction: column;
-  background: #ffffff;
-  border: 1px solid rgba(0, 0, 0, 0.08);
+  background: var(--card);
+  border: 1px solid var(--border);
   border-radius: var(--radius-md);
   padding: 16px;
   width: 100%;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.04);
+  box-shadow: var(--shadow-sm);
   gap: 12px;
   align-items: stretch;
+  transition: background-color var(--transition-theme);
 }
 
 .topRow {
@@ -43,19 +44,19 @@
   width: 44px;
   height: 44px;
   border-radius: var(--radius-xs);
-  background: #ffffff;
-  color: #4b5563;
+  background: var(--card);
+  color: var(--muted-foreground);
   transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
   text-decoration: none;
-  border: 1px solid rgba(0, 0, 0, 0.05);
-  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.9);
+  border: 1px solid var(--border);
+  box-shadow: var(--glass-inset-top);
 }
 
 .socialBtn:hover {
   background-color: var(--hover-color);
-  color: #ffffff;
+  color: oklch(1 0 0);
   transform: translateY(-2px);
-  box-shadow: 0 6px 14px rgba(0, 0, 0, 0.12);
+  box-shadow: var(--shadow-md);
 }
 
 .copyBtn {
@@ -65,26 +66,26 @@
   width: 100%;
   gap: 8px;
   padding: 12px;
-  background-color: #007AFF;
+  background-color: var(--accent);
   border: none;
   border-radius: var(--radius-sm);
-  color: #ffffff;
+  color: var(--accent-foreground);
   font-size: 0.85rem;
   font-weight: 600;
   cursor: pointer;
   transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
-  box-shadow: inset 0 1px 0 rgba(255,255,255,0.15), 0 4px 12px rgba(0, 122, 255, 0.22);
+  box-shadow: inset 0 1px 0 oklch(1 0 0 / 0.15), 0 4px 12px color-mix(in oklab, var(--accent) 25%, transparent);
 }
 
 .copyBtn:hover {
-  background-color: #0062CC;
+  background-color: var(--accent-hover);
   transform: translateY(-1px);
-  box-shadow: 0 6px 15px rgba(0, 122, 255, 0.3);
+  box-shadow: 0 6px 15px color-mix(in oklab, var(--accent) 35%, transparent);
 }
 
 .copyBtn.copied {
-  background-color: #28a745;
-  box-shadow: 0 4px 12px rgba(40, 167, 69, 0.2);
+  background-color: oklch(0.65 0.17 150);
+  box-shadow: 0 4px 12px color-mix(in oklab, oklch(0.65 0.17 150) 25%, transparent);
 }
 
 .labelRow {
@@ -102,7 +103,7 @@
   font-weight: 800;
   text-transform: uppercase;
   letter-spacing: 0.1em;
-  color: var(--text-muted);
+  color: var(--muted-foreground);
   opacity: 0.6;
 }
 
@@ -125,10 +126,10 @@
   .shareWrapper {
     width: 100%;
     padding: 20px;
-    background: #ffffff;
-    border: 1px solid rgba(0, 0, 0, 0.06);
+    background: var(--card);
+    border: 1px solid var(--border);
     border-radius: var(--radius-md);
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.03);
+    box-shadow: var(--shadow-sm);
     gap: 16px;
   }
   
@@ -181,5 +182,3 @@
     min-width: 0;
   }
 }
-
-

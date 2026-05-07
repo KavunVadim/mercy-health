@@ -1,7 +1,8 @@
 .main {
   min-height: 100vh;
   padding-bottom: 4rem;
-  background-color: var(--gray-50);
+  background-color: var(--surface);
+  transition: background-color var(--transition-theme);
 }
 
 .header {
@@ -10,6 +11,7 @@
   margin-bottom: 2.5rem;
   border-bottom: 1px solid var(--page-header-border);
   color: var(--page-header-text);
+  transition: background-color var(--transition-theme), color var(--transition-theme);
 }
 
 .breadcrumbs {

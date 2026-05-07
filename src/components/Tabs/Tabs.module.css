@@ -1,7 +1,7 @@
 .tabsContainer {
-  border-bottom: 1px solid var(--gray-200);
+  border-bottom: 1px solid var(--border);
   display: flex;
-  justify-content: center; /* Center the tabs as requested */
+  justify-content: center;
 }
 
 .tabsList {
@@ -25,19 +25,19 @@
   font-family: var(--font-e-ukraine-head);
   font-size: 1rem;
   font-weight: 700;
-  text-transform: uppercase; /* Use uppercase as requested */
+  text-transform: uppercase;
   letter-spacing: 0.05em;
-  color: var(--text-muted);
+  color: var(--muted-foreground);
   transition: all 0.3s ease;
   white-space: nowrap;
 }
 
 .tabBtn:hover {
-  color: var(--text-dark);
+  color: var(--foreground);
 }
 
 .tabBtn.active {
-  color: var(--text-dark);
+  color: var(--foreground);
 }
 
 .tabLabel {
@@ -51,7 +51,7 @@
   left: 0;
   right: 0;
   height: 4px;
-  background-color: var(--accent);
+  background: var(--gradient-accent);
   border-radius: 4px 4px 0 0;
   z-index: 2;
 }

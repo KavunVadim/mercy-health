@@ -1,7 +1,7 @@
 .cardsGrid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
-  gap: 1.5rem; /* Reduced gap */
+  gap: 1.5rem;
   animation: fadeIn 0.3s ease-out;
 }
 
@@ -13,16 +13,16 @@
 }
 
 .donationCard {
-  background: #ffffff;
-  border: 1px solid rgba(0, 0, 0, 0.05);
+  background: var(--card);
+  border: 1px solid var(--border);
   border-radius: var(--radius-lg);
   padding: 2rem;
   display: flex;
   flex-direction: column;
   box-shadow:
-    inset 0 1px 0 rgba(255, 255, 255, 0.9),
-    0 16px 32px -10px rgba(0, 0, 0, 0.05);
-  transition: all 0.45s cubic-bezier(0.16, 1, 0.3, 1);
+    var(--glass-inset-top),
+    0 16px 32px -10px color-mix(in oklab, var(--foreground) 5%, transparent);
+  transition: all 0.45s cubic-bezier(0.16, 1, 0.3, 1), background-color var(--transition-theme);
 }
 
 @media (max-width: 768px) {
@@ -33,10 +33,10 @@
 
 .donationCard:hover {
   transform: translateY(-5px);
-  border-color: rgba(0, 0, 0, 0.08);
+  border-color: color-mix(in oklab, var(--foreground) 8%, transparent);
   box-shadow:
-    inset 0 1px 0 rgba(255, 255, 255, 0.95),
-    0 24px 48px -14px rgba(0, 0, 0, 0.09);
+    var(--glass-inset-hover),
+    0 24px 48px -14px color-mix(in oklab, var(--foreground) 9%, transparent);
 }
 
 .cardHeader {
@@ -49,13 +49,13 @@
 .bankLogoWrapper {
   width: 48px;
   height: 48px;
-  background-color: var(--gray-50);
+  background-color: var(--muted);
   border-radius: 12px;
   display: flex;
   align-items: center;
   justify-content: center;
   flex-shrink: 0;
-  border: 1px solid var(--gray-100);
+  border: 1px solid var(--border);
   overflow: hidden;
 }
 
@@ -67,12 +67,12 @@
 .cardTitle {
   font-family: var(--font-e-ukraine-head);
   font-size: 1.35rem;
-  color: var(--text-dark);
+  color: var(--foreground);
   margin: 0;
 }
 
 .cardDescription {
-  color: var(--text-muted);
+  color: var(--muted-foreground);
   font-size: 0.9375rem;
   line-height: 1.6;
   margin-bottom: 2rem;
@@ -86,7 +86,7 @@
   width: 100%;
   padding: 1rem;
   background-color: var(--accent);
-  color: white;
+  color: var(--accent-foreground);
   font-family: var(--font-e-ukraine-head);
   font-size: 1rem;
   font-weight: 700;
@@ -100,18 +100,19 @@
 .supportBtn:hover {
   background-color: var(--accent-hover);
   transform: translateY(-1px);
-  box-shadow: 0 8px 20px rgba(0, 102, 204, 0.2);
+  box-shadow: 0 8px 20px color-mix(in oklab, var(--accent) 25%, transparent);
 }
 
 /* Premium Bank Details */
 .bankDetailsContainer {
-  background: #ffffff;
-  border: 1px solid rgba(0, 0, 0, 0.05);
+  background: var(--card);
+  border: 1px solid var(--border);
   border-radius: var(--radius-lg);
   padding: 3.5rem;
   box-shadow:
-    inset 0 1px 0 rgba(255, 255, 255, 0.9),
-    0 20px 40px -14px rgba(0, 0, 0, 0.05);
+    var(--glass-inset-top),
+    0 20px 40px -14px color-mix(in oklab, var(--foreground) 5%, transparent);
+  transition: background-color var(--transition-theme);
 }
 
 @media (max-width: 768px) {
@@ -128,7 +129,7 @@
 .detailsTitle {
   font-family: var(--font-e-ukraine-head);
   font-size: 2.75rem;
-  color: var(--text-dark);
+  color: var(--foreground);
   margin-bottom: 1rem;
   text-transform: uppercase;
   font-weight: 800;
@@ -136,15 +137,15 @@
 }
 
 .detailsSubtitle {
-  color: var(--text-muted);
+  color: var(--muted-foreground);
   font-size: 1.25rem;
   max-width: 600px;
 }
 
 .premiumTabsWrapper {
   display: flex;
-  background: var(--gray-50);
-  border: 1px solid rgba(0, 0, 0, 0.05);
+  background: var(--muted);
+  border: 1px solid var(--border);
   border-radius: var(--radius-md);
   padding: 4px;
   margin-bottom: 3.5rem;
@@ -174,7 +175,7 @@
   font-family: var(--font-e-ukraine-head);
   font-weight: 800;
   font-size: 0.875rem;
-  color: var(--text-muted);
+  color: var(--muted-foreground);
   cursor: pointer;
   white-space: nowrap;
   transition: all 0.3s ease;
@@ -198,12 +199,10 @@
 }
 
 .premiumTabItem.activeTab {
-  background: white;
+  background: var(--card);
   color: var(--accent);
   border-radius: calc(var(--radius-md) - 4px);
-  box-shadow:
-    inset 0 1px 0 rgba(255, 255, 255, 0.9),
-    0 4px 12px rgba(0, 0, 0, 0.06);
+  box-shadow: var(--shadow-sm);
 }
 
 .tabContentGrid {
@@ -225,11 +224,11 @@
   align-items: center;
   gap: 2rem;
   padding: 1.5rem 2rem;
-  background: #ffffff;
-  border: 1px solid rgba(0, 0, 0, 0.05);
+  background: var(--card);
+  border: 1px solid var(--border);
   border-radius: var(--radius-md);
-  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.85), 0 4px 12px rgba(0, 0, 0, 0.03);
-  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  box-shadow: var(--glass-inset-top), var(--shadow-sm);
+  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1), background-color var(--transition-theme);
 }
 
 @media (max-width: 768px) {
@@ -241,21 +240,22 @@
 }
 
 .paymentReferenceRow:hover {
-  border-color: var(--accent-light);
-  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.04);
+  border-color: var(--accent-soft);
+  box-shadow: var(--shadow-md);
   transform: translateY(-2px);
 }
 
 .paymentIconBox {
   width: 60px;
   height: 60px;
-  background: var(--gray-50);
+  background: var(--muted);
   border-radius: 10px;
   display: flex;
   align-items: center;
   justify-content: center;
   color: var(--accent);
   transition: all 0.3s ease;
+  border: 1px solid var(--border);
 }
 
 @media (max-width: 768px) {
@@ -267,7 +267,8 @@
 
 .paymentReferenceRow:hover .paymentIconBox {
   background: var(--accent);
-  color: white;
+  color: var(--accent-foreground);
+  border-color: var(--accent);
 }
 
 .paymentInfo {
@@ -279,7 +280,7 @@
 .paymentLabel {
   font-size: 0.875rem;
   font-weight: 600;
-  color: var(--text-muted);
+  color: var(--muted-foreground);
 }
 
 @media (max-width: 768px) {
@@ -292,7 +293,7 @@
   font-family: var(--font-e-ukraine-head);
   font-weight: 800;
   font-size: 1.35rem;
-  color: var(--text-dark);
+  color: var(--foreground);
   letter-spacing: -0.01em;
   word-break: break-all;
 }
@@ -313,7 +314,7 @@
 
 .paymentCopyAction {
   background: transparent;
-  border: 1px solid rgba(0, 0, 0, 0.08);
+  border: 1px solid var(--border);
   padding: 0.75rem 1.5rem;
   border-radius: var(--radius-sm);
   cursor: pointer;
@@ -333,7 +334,7 @@
   align-items: center;
   justify-content: center;
   gap: 0.75rem;
-  color: var(--text-dark);
+  color: var(--foreground);
   font-family: var(--font-e-ukraine-head);
   font-weight: 800;
   font-size: 0.8125rem;
@@ -342,7 +343,7 @@
 }
 
 .paymentCopyAction:hover {
-  background: var(--gray-50);
+  background: var(--muted);
   border-color: var(--accent);
 }
 
@@ -352,15 +353,16 @@
 }
 
 .paymentCopyAction.copied .copyBtnContent {
-  color: white;
+  color: var(--accent-foreground);
 }
 
 .commonOrgInfo {
-  background: var(--gray-50);
+  background: var(--muted);
   padding: 3rem;
   border-radius: 16px;
-  border: 1px dashed var(--gray-200);
+  border: 1px dashed var(--border);
   margin-top: 2rem;
+  transition: background-color var(--transition-theme);
 }
 
 @media (max-width: 768px) {
@@ -385,7 +387,7 @@
 .orgValue {
   font-size: 1.5rem;
   font-weight: 800;
-  color: var(--text-dark);
+  color: var(--foreground);
   margin-bottom: 2rem;
   line-height: 1.2;
 }
@@ -399,14 +401,13 @@
 
 .orgMeta {
   font-size: 1rem;
-  color: var(--text-muted);
+  color: var(--muted-foreground);
   display: flex;
   gap: 2rem;
   flex-wrap: wrap;
 }
 
 .orgMeta b {
-  color: var(--text-dark);
+  color: var(--foreground);
   font-weight: 800;
 }
-

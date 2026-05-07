@@ -5,14 +5,14 @@
 .title {
   font-family: var(--font-e-ukraine-head);
   font-size: 2.5rem;
-  color: var(--text-dark);
+  color: var(--foreground);
   margin-bottom: 1rem;
   text-align: center;
 }
 
 .description {
   font-size: 1.25rem;
-  color: var(--text-muted);
+  color: var(--muted-foreground);
   margin-bottom: 4rem;
   text-align: center;
   max-width: 700px;
@@ -39,12 +39,12 @@
 
 .sliderWrap::before {
   left: 0;
-  background: linear-gradient(90deg, #ffffff 0%, rgba(255, 255, 255, 0) 100%);
+  background: linear-gradient(90deg, var(--surface) 0%, transparent 100%);
 }
 
 .sliderWrap::after {
   right: 0;
-  background: linear-gradient(-90deg, #ffffff 0%, rgba(255, 255, 255, 0) 100%);
+  background: linear-gradient(-90deg, var(--surface) 0%, transparent 100%);
 }
 
 .sliderContainer {
@@ -60,14 +60,14 @@
 .logoCard {
   width: 220px;
   height: 120px;
-  background: #ffffff;
-  border: 1px solid rgba(0, 0, 0, 0.05);
+  background: var(--card);
+  border: 1px solid var(--border);
   border-radius: 24px;
   display: flex;
   align-items: center;
   justify-content: center;
   padding: 1.5rem;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.03);
+  box-shadow: var(--shadow-sm);
   transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
   filter: grayscale(100%);
   opacity: 0.6;
@@ -78,7 +78,7 @@
   opacity: 1;
   transform: translateY(-5px) scale(1.05);
   border-color: var(--accent);
-  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.08);
+  box-shadow: var(--shadow-md);
 }
 
 .logoImage {

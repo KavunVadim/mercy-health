@@ -1,6 +1,8 @@
 .main {
   min-height: 100vh;
   padding-bottom: 6rem;
+  background-color: var(--surface);
+  transition: background-color var(--transition-theme);
 }
 
 .header {

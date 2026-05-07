@@ -1,6 +1,6 @@
 .footer {
-  background-color: #1A1A1A;
-  color: #FFFFFF;
+  background-color: var(--bg-footer);
+  color: oklch(0.85 0.006 250);
   padding: 5rem 0 0 0;
   margin-top: auto;
 }
@@ -28,16 +28,16 @@
   font-family: var(--font-e-ukraine-head), sans-serif;
   font-size: 1.5rem;
   font-weight: 800;
-  color: #FFFFFF;
+  color: oklch(0.92 0.006 250);
   text-transform: uppercase;
 }
 
 .logoAmp {
-  color: var(--accent-color);
+  color: var(--accent);
 }
 
 .description {
-  color: #9CA3AF;
+  color: oklch(0.6 0.01 250);
   font-size: 0.9375rem;
   line-height: 1.6;
   max-width: 320px;
@@ -52,26 +52,26 @@
   width: 48px;
   height: 48px;
   border-radius: 14px;
-  background: rgba(255, 255, 255, 0.05);
+  background: oklch(1 0 0 / 0.05);
   display: flex;
   align-items: center;
   justify-content: center;
-  color: #FFFFFF;
+  color: oklch(0.92 0.006 250);
   transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }
 
 .socLink:hover {
-  background: var(--accent-color);
+  background: var(--accent);
   transform: translateY(-5px) scale(1.1);
-  box-shadow: 0 10px 25px rgba(30, 162, 254, 0.4);
-  color: #FFFFFF;
+  box-shadow: 0 10px 25px color-mix(in oklab, var(--accent) 45%, transparent);
+  color: var(--accent-foreground);
 }
 
 .colTitle {
   font-family: var(--font-e-ukraine-head), sans-serif;
   font-size: 1rem;
   font-weight: 800;
-  color: #FFFFFF;
+  color: oklch(0.92 0.006 250);
   text-transform: uppercase;
   letter-spacing: 0.05em;
   margin-bottom: 2rem;
@@ -85,7 +85,7 @@
 }
 
 .list a {
-  color: #9CA3AF;
+  color: oklch(0.6 0.01 250);
   text-decoration: none;
   font-size: 0.9375rem;
   font-weight: 500;
@@ -93,7 +93,7 @@
 }
 
 .list a:hover {
-  color: #FFFFFF;
+  color: oklch(0.92 0.006 250);
 }
 
 .contactsCol {
@@ -113,24 +113,24 @@
   display: flex;
   align-items: flex-start;
   gap: 0.75rem;
-  color: #9CA3AF;
+  color: oklch(0.6 0.01 250);
   font-size: 0.9375rem;
 }
 
 .contactsList a {
-  color: #9CA3AF;
+  color: oklch(0.6 0.01 250);
   text-decoration: none;
   transition: color 0.2s ease;
 }
 
 .contactsList a:hover {
-  color: #FFFFFF;
+  color: oklch(0.92 0.006 250);
 }
 
 .footerCta {
   margin-top: 1rem;
-  background: var(--accent-color);
-  color: #FFFFFF;
+  background: var(--gradient-accent);
+  color: var(--accent-foreground);
   text-align: center;
   padding: 1rem;
   border-radius: 10px;
@@ -143,12 +143,12 @@
 }
 
 .footerCta:hover {
-  background: var(--accent-color-hover);
-  box-shadow: 0 10px 20px rgba(30, 162, 254, 0.2);
+  filter: brightness(1.1);
+  box-shadow: 0 10px 20px color-mix(in oklab, var(--accent) 30%, transparent);
 }
 
 .bottom {
-  border-top: 1px solid rgba(255, 255, 255, 0.05);
+  border-top: 1px solid oklch(1 0 0 / 0.05);
   padding: 2.5rem 0;
 }
 
@@ -156,7 +156,7 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  color: #6B7280;
+  color: oklch(0.5 0.01 250);
   font-size: 0.8125rem;
 }
 
@@ -166,13 +166,13 @@
 }
 
 .legalLinks a {
-  color: #6B7280;
+  color: oklch(0.5 0.01 250);
   text-decoration: none;
   transition: color 0.2s ease;
 }
 
 .legalLinks a:hover {
-  color: #FFFFFF;
+  color: oklch(0.92 0.006 250);
 }
 
 @media (max-width: 1200px) {
@@ -188,7 +188,7 @@
     justify-content: space-between;
     align-items: flex-start;
     padding-bottom: 2rem;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    border-bottom: 1px solid oklch(1 0 0 / 0.05);
   }
 }
 
@@ -208,7 +208,7 @@
     flex-direction: column;
     gap: 1.5rem;
     padding-bottom: 2rem;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    border-bottom: 1px solid oklch(1 0 0 / 0.05);
   }
 
   .description {
@@ -224,7 +224,7 @@
     grid-column: span 2;
     margin-top: 1rem;
     padding-top: 2rem;
-    border-top: 1px solid rgba(255, 255, 255, 0.05);
+    border-top: 1px solid oklch(1 0 0 / 0.05);
   }
 
   .colTitle {

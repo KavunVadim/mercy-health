@@ -1,20 +1,22 @@
 .wrapper {
-  background-color: #FFFFFF;
+  background-color: var(--background);
   min-height: 100vh;
   padding-bottom: 5rem;
+  transition: background-color var(--transition-theme);
 }
 
 .hero {
   padding: calc(var(--header-height) + 4rem) 0 3rem;
-  background: #FFFFFF;
+  background: var(--background);
   text-align: center;
+  transition: background-color var(--transition-theme);
 }
 
 .title {
   font-family: var(--font-e-ukraine), sans-serif;
   font-size: 3rem;
   font-weight: 800;
-  color: #1A1A1A;
+  color: var(--foreground);
   margin-bottom: 1.5rem;
   letter-spacing: -0.02em;
 }
@@ -23,7 +25,7 @@
   font-family: var(--font-e-ukraine), sans-serif;
   font-size: 1.25rem;
   line-height: 1.6;
-  color: #4B5563;
+  color: var(--muted-foreground);
   max-width: 800px;
   margin: 0 auto;
 }
@@ -36,10 +38,11 @@
 
 .tabs {
   display: flex;
-  background: #F3F4F6;
+  background: var(--muted);
   padding: 4px;
   border-radius: 12px;
   gap: 4px;
+  border: 1px solid var(--border);
 }
 
 .tab {
@@ -50,7 +53,7 @@
   font-weight: 600;
   border: none;
   background: transparent;
-  color: #6B7280;
+  color: var(--muted-foreground);
   cursor: pointer;
   transition: all 0.2s ease;
   text-transform: uppercase;
@@ -58,9 +61,9 @@
 }
 
 .tab.active {
-  background: #FFFFFF;
-  color: #1A1A1A;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+  background: var(--card);
+  color: var(--foreground);
+  box-shadow: var(--shadow-sm);
 }
 
 /* Collections Grid */
@@ -72,20 +75,20 @@
 }
 
 .collectionCard {
-  background: #FFFFFF;
-  border: 1px solid #E5E7EB;
+  background: var(--card);
+  border: 1px solid var(--border);
   border-radius: 24px;
   padding: 3rem;
   text-align: center;
-  transition: all 0.3s ease;
+  transition: all 0.3s ease, background-color var(--transition-theme);
   display: flex;
   flex-direction: column;
   align-items: center;
 }
 
 .collectionCard:hover {
-  border-color: #1EA2FE;
-  box-shadow: 0 20px 40px rgba(30, 162, 254, 0.06);
+  border-color: var(--accent);
+  box-shadow: 0 20px 40px color-mix(in oklab, var(--accent) 10%, transparent);
   transform: translateY(-4px);
 }
 
@@ -93,12 +96,13 @@
   width: 120px;
   height: 120px;
   margin-bottom: 2rem;
-  background: #F9FAFB;
+  background: var(--muted);
   border-radius: 30px;
   display: flex;
   align-items: center;
   justify-content: center;
   padding: 1.5rem;
+  border: 1px solid var(--border);
 }
 
 .monoIcon {
@@ -111,22 +115,22 @@
   font-family: var(--font-e-ukraine), sans-serif;
   font-size: 1.75rem;
   font-weight: 800;
-  color: #1A1A1A;
+  color: var(--foreground);
   margin-bottom: 1rem;
 }
 
 .collectionDesc {
   font-family: var(--font-e-ukraine), sans-serif;
   font-size: 1.125rem;
-  color: #4B5563;
+  color: var(--muted-foreground);
   margin-bottom: 2.5rem;
   line-height: 1.6;
 }
 
 .monoBtn {
   width: 100%;
-  background: #1EA2FE;
-  color: #FFFFFF;
+  background: var(--accent);
+  color: var(--accent-foreground);
   padding: 1.25rem;
   border-radius: 12px;
   font-family: var(--font-e-ukraine), sans-serif;
@@ -139,11 +143,11 @@
 }
 
 .monoBtn:hover {
-  background: #007AFF;
-  box-shadow: 0 10px 20px rgba(30, 162, 254, 0.2);
+  background: var(--accent-hover);
+  box-shadow: 0 10px 20px color-mix(in oklab, var(--accent) 25%, transparent);
 }
 
-/* Bank Grid - Reusing and refining styles */
+/* Bank Grid */
 .bankGrid {
   display: grid;
   grid-template-columns: 1.2fr 1fr;
@@ -152,10 +156,11 @@
 }
 
 .bankCard {
-  background: #FFFFFF;
-  border: 1px solid #E5E7EB;
+  background: var(--card);
+  border: 1px solid var(--border);
   border-radius: 24px;
   padding: 3rem;
+  transition: background-color var(--transition-theme);
 }
 
 .bankHeader {
@@ -174,7 +179,7 @@
   font-family: var(--font-e-ukraine), sans-serif;
   font-size: 1.75rem;
   font-weight: 700;
-  color: #1A1A1A;
+  color: var(--foreground);
 }
 
 .infoRow {
@@ -185,7 +190,7 @@
   display: block;
   font-size: 0.8125rem;
   font-weight: 700;
-  color: #9CA3AF;
+  color: var(--muted-foreground);
   text-transform: uppercase;
   letter-spacing: 0.1em;
   margin-bottom: 0.75rem;
@@ -201,7 +206,7 @@
 .infoValue {
   font-size: 1.125rem;
   font-weight: 600;
-  color: #1A1A1A;
+  color: var(--foreground);
 }
 
 .accountsInfo {
@@ -211,22 +216,22 @@
 }
 
 .accountCard {
-  background: #F9FAFB;
-  border: 1px solid #E5E7EB;
+  background: var(--muted);
+  border: 1px solid var(--border);
   border-radius: 20px;
   padding: 2rem;
   transition: all 0.3s ease;
 }
 
 .accountCard:hover {
-  background: #FFFFFF;
-  border-color: #1EA2FE;
+  background: var(--card);
+  border-color: var(--accent);
 }
 
 .accountLabel {
   font-size: 1rem;
   font-weight: 700;
-  color: #1A1A1A;
+  color: var(--foreground);
   display: block;
   margin-bottom: 1rem;
 }
@@ -241,7 +246,7 @@
 .ibanValue {
   font-family: 'Monaco', 'Consolas', monospace;
   font-size: 1.125rem;
-  color: #1EA2FE;
+  color: var(--accent);
   font-weight: 600;
 }
 

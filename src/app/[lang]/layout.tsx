@@ -7,6 +7,7 @@ import Header from "@/components/Header/Header";
 import Footer from "@/components/Footer/Footer";
 import ScrollToTop from "@/components/ScrollToTop";
 import { getDictionary } from "@/get-dictionary";
+import { ThemeProvider } from "@/components/ThemeProvider";
 
 const eUkraineHead = Outfit({
   subsets: ["latin"],
@@ -52,14 +53,16 @@ export default async function RootLayout({
   const dictionary = await getDictionary(locale);
 
   return (
-    <html lang={locale} className={`${eUkraineHead.variable} ${eUkraine.variable}`}>
+    <html lang={locale} className={`${eUkraineHead.variable} ${eUkraine.variable}`} suppressHydrationWarning>
       <body>
-        <ScrollToTop />
-        <Header dictionary={dictionary} lang={locale} />
-        <div className="layout-wrapper">
-          {children}
-        </div>
-        <Footer dictionary={dictionary} lang={locale} />
+        <ThemeProvider>
+          <ScrollToTop />
+          <Header dictionary={dictionary} lang={locale} />
+          <div className="layout-wrapper">
+            {children}
+          </div>
+          <Footer dictionary={dictionary} lang={locale} />
+        </ThemeProvider>
       </body>
     </html>
   );

@@ -6,6 +6,7 @@ import { useState } from "react";
 import { motion, useScroll, useMotionValueEvent } from "framer-motion";
 import styles from "./Header.module.css";
 import LocaleSwitcher from "../LocaleSwitcher/LocaleSwitcher";
+import ThemeToggle from "../ThemeToggle/ThemeToggle";
 import MobileMenu from "./MobileMenu";
 import type { Locale } from "@/i18n-config";
 import clsx from "clsx";
@@ -82,6 +83,7 @@ export default function Header({
 
         <div className={styles.actions}>
           <div className={styles.localeDesktop}>
+            <ThemeToggle className={styles.themeToggleDesktop} />
             <LocaleSwitcher />
           </div>
           <Link href={`/${lang}/support`} className={styles.supportBtn}>

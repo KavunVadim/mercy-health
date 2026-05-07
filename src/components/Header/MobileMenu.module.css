@@ -11,7 +11,7 @@
 .burger {
   background: none;
   border: none;
-  color: var(--text-primary);
+  color: var(--foreground);
   cursor: pointer;
   z-index: 2001;
   position: relative;
@@ -26,9 +26,9 @@
 .overlay {
   position: fixed;
   inset: 0;
-  background-color: #FFFFFF;
+  background-color: var(--background);
   z-index: 9999;
-  padding: 0; /* Remove fixed padding, use topBar and content padding */
+  padding: 0;
   display: flex;
   flex-direction: column;
   height: 100dvh;
@@ -41,7 +41,7 @@
   justify-content: space-between;
   align-items: center;
   padding: 1rem 1.5rem;
-  border-bottom: 1px solid #F3F4F6;
+  border-bottom: 1px solid var(--border);
 }
 
 .logo {
@@ -55,14 +55,14 @@
   font-family: var(--font-e-ukraine-head), sans-serif;
   font-size: 1rem;
   font-weight: 800;
-  color: var(--text-primary);
+  color: var(--foreground);
   letter-spacing: -0.01em;
 }
 
 .closeBtn {
   background: none;
   border: none;
-  color: var(--text-primary);
+  color: var(--foreground);
   cursor: pointer;
   width: 48px;
   height: 48px;
@@ -92,7 +92,7 @@
   font-family: var(--font-e-ukraine-head), sans-serif;
   font-size: 2rem;
   font-weight: 800;
-  color: #1A1A1A;
+  color: var(--foreground);
   text-transform: uppercase;
   letter-spacing: -0.01em;
   text-decoration: none;
@@ -102,7 +102,7 @@
 }
 
 .link:active {
-  color: var(--accent-color);
+  color: var(--accent);
 }
 
 .ctaWrapper {
@@ -111,8 +111,8 @@
 
 .cta {
   display: inline-block;
-  background: var(--accent-color);
-  color: #FFFFFF;
+  background: var(--gradient-accent);
+  color: var(--accent-foreground);
   padding: 1rem 2rem;
   border-radius: 12px;
   font-family: var(--font-e-ukraine), sans-serif;
@@ -128,7 +128,7 @@
 .footer {
   margin-top: auto;
   padding-top: 2rem;
-  border-top: 1px solid #F3F4F6;
+  border-top: 1px solid var(--border);
   display: flex;
   flex-direction: column;
   gap: 1.5rem;
@@ -138,6 +138,7 @@
 
 .langWrapper {
   display: flex;
+  gap: var(--space-xs);
 }
 
 .socials {
@@ -153,19 +154,19 @@
   justify-content: center;
   width: 52px;
   height: 52px;
-  background: #F9FAFB;
+  background: var(--muted);
   border-radius: 16px;
-  color: var(--text-primary);
+  color: var(--foreground);
   transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-  border: 1px solid #F3F4F6;
+  border: 1px solid var(--border);
 }
 
 .socLink:hover, .socLink:active {
-  background: var(--accent-color);
-  color: white;
+  background: var(--accent);
+  color: var(--accent-foreground);
   transform: translateY(-5px) scale(1.05);
-  box-shadow: 0 10px 20px rgba(30, 162, 254, 0.15);
-  border-color: var(--accent-color);
+  box-shadow: 0 10px 20px color-mix(in oklab, var(--accent) 25%, transparent);
+  border-color: var(--accent);
 }
 
 .contacts {
@@ -180,25 +181,25 @@
   align-items: center;
   gap: 1.25rem;
   text-decoration: none;
-  color: var(--text-primary);
+  color: var(--foreground);
   font-family: var(--font-e-ukraine-head), sans-serif;
   font-weight: 800;
   font-size: 1.5rem;
   transition: all 0.2s ease;
   padding: 1.25rem;
-  background: #F9FAFB;
+  background: var(--muted);
   border-radius: 20px;
-  border: 1px solid #F3F4F6;
+  border: 1px solid var(--border);
 }
 
 .contactLink:active {
-  background: #F3F4F6;
-  color: var(--accent-color);
+  background: var(--secondary);
+  color: var(--accent);
   transform: scale(0.98);
 }
 
 .contactLink svg {
-  color: var(--accent-color);
+  color: var(--accent);
   flex-shrink: 0;
 }
 

@@ -10,6 +10,7 @@ import { FaFacebookF, FaInstagram, FaTelegramPlane, FaLinkedinIn, FaTiktok } fro
 import styles from "./MobileMenu.module.css";
 import type { Locale } from "@/i18n-config";
 import LocaleSwitcher from "../LocaleSwitcher/LocaleSwitcher";
+import ThemeToggle from "../ThemeToggle/ThemeToggle";
 
 export default function MobileMenu({
   dictionary,
@@ -137,6 +138,7 @@ export default function MobileMenu({
 
                 <div className={styles.footer}>
                   <div className={styles.langWrapper}>
+                    <ThemeToggle />
                     <LocaleSwitcher />
                   </div>
                   <div className={styles.socials}>

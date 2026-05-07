@@ -1,85 +1,225 @@
+/* ═══════════════════════════════════════════════════════════════
+   Mercy & Health — Design System Tokens
+   Color Space: oklch (perceptually uniform)
+   Light: Slate  |  Dark: Graphite
+   ═══════════════════════════════════════════════════════════════ */
+
 :root {
-  /* Colors - Inspired by fond-emblem.svg */
-  /* Apple-Inspired "Titanium Minimalist" Palette */
-  --apple-black: #000000;
-  --apple-dark: #1D1D1F; /* Primary Text */
-  --apple-gray: #86868B; /* Secondary Text */
-  --apple-bg-light: #F5F5F7; /* Apple's signature light gray */
-  --apple-blue: #0066CC; /* Apple Link/Action Blue */
-  --white: #FFFFFF;
-  
-  /* Foundation */
-  --primary-blue: var(--apple-blue);
-  --primary-blue-hover: #004080;
-  
-  /* Backgrounds */
-  --bg-primary: var(--white);
-  --bg-secondary: var(--apple-bg-light);
-  --bg-tertiary: #F2F2F2;
-  --bg-header: rgba(29, 29, 31, 0.8); /* Glassmorphism Black */
-  --bg-footer: var(--apple-black);
+  /* ── Core Palette ──────────────────────────────────────────── */
+  --background:          oklch(0.9 0.008 245);
+  --foreground:          oklch(0.2 0.025 255);
+  --surface:             oklch(0.87 0.01 245);
+  --card:                oklch(0.885 0.009 245);
+  --popover:             oklch(0.885 0.009 245);
 
-  --gray-50: #F5F5F7;
-  --gray-100: #E8E8ED;
-  --gray-200: #D2D2D7;
-  --gray-300: #B0B0B5;
-  --gray-400: #86868B;
-  --gray-500: #6E6E73;
-  
-  --text-dark: var(--apple-dark);
-  --text-primary: var(--apple-dark); 
-  /* Typography */
-  --text-main: #32374A; /* Custom text color requested */
-  --text-secondary: #6E6E73;
-  --text-muted: #6E6E73;
-  --text-light: #FFFFFF;
-  --page-header-bg: var(--apple-bg-light); /* Light gray for page headers */
-  --page-header-text: var(--apple-dark);
-  --page-header-border: rgba(0, 0, 0, 0.05);
-  --text-header: #32374A;
-  
-  --accent: var(--apple-blue);
-  --accent-hover: var(--primary-blue-hover);
-  --accent-color: var(--accent);
-  --accent-color-hover: var(--accent-hover);
-  
-  /* Donation */
-  --color-donate: var(--apple-blue);
-  --color-donate-hover: var(--primary-blue-hover);
-  
-  --border-color: #D2D2D7;
-  --border-color-strong: #D1D5DB;
+  /* ── Accent — Sky Blue ─────────────────────────────────────── */
+  --accent:              oklch(0.72 0.12 232);
+  --accent-foreground:   oklch(0.15 0.03 255);
+  --accent-soft:         oklch(0.83 0.06 232);
+  --accent-glow:         oklch(0.82 0.14 228);
+  --accent-hover:        oklch(0.65 0.13 232);
 
-  /* UI Metrics — Unified Radius System */
-  --radius-xs: 8px;   /* small inputs, tags */
-  --radius-sm: 12px;  /* buttons, chips */
-  --radius-md: 20px;  /* cards, panels */
-  --radius-lg: 28px;  /* large cards */
+  /* ── Secondary ─────────────────────────────────────────────── */
+  --secondary:           oklch(0.84 0.012 245);
+  --secondary-foreground: oklch(0.25 0.025 255);
+
+  /* ── Muted ─────────────────────────────────────────────────── */
+  --muted:               oklch(0.86 0.01 245);
+  --muted-foreground:    oklch(0.46 0.02 255);
+
+  /* ── Borders & Inputs ──────────────────────────────────────── */
+  --border:              oklch(0.8 0.012 245);
+  --input:               oklch(0.82 0.012 245);
+  --ring:                oklch(0.72 0.12 232);
+
+  /* ── Destructive ───────────────────────────────────────────── */
+  --destructive:         oklch(0.6 0.2 25);
+  --destructive-foreground: oklch(0.98 0 0);
+
+  /* ── Gradients ─────────────────────────────────────────────── */
+  --gradient-bg:
+    radial-gradient(120% 80% at 90% -10%, color-mix(in oklab, var(--accent) 22%, transparent) 0%, transparent 55%),
+    radial-gradient(70% 50% at 0% 10%, color-mix(in oklab, var(--accent-glow) 18%, transparent) 0%, transparent 60%),
+    var(--background);
+
+  --gradient-accent: linear-gradient(135deg, var(--accent) 0%, var(--accent-glow) 100%);
+
+  /* ── Shadows ───────────────────────────────────────────────── */
+  --shadow-elegant:
+    0 1px 0 0 color-mix(in oklab, var(--foreground) 5%, transparent),
+    0 30px 60px -25px color-mix(in oklab, var(--foreground) 22%, transparent),
+    0 8px 20px -12px color-mix(in oklab, var(--accent) 32%, transparent);
+
+  --shadow-glow:
+    0 0 0 1px color-mix(in oklab, var(--accent) 20%, transparent),
+    0 12px 40px -10px color-mix(in oklab, var(--accent) 50%, transparent);
+
+  /* ── Glass Design System ───────────────────────────────────── */
+  --glass-bg:            color-mix(in oklab, var(--card) 70%, transparent);
+  --glass-blur:          blur(20px) saturate(140%);
+  --glass-border-subtle: color-mix(in oklab, var(--foreground) 5%, transparent);
+  --glass-inset-top:     inset 0 1px 0 color-mix(in oklab, oklch(1 0 0) 12%, transparent);
+  --glass-inset-hover:   inset 0 1px 0 color-mix(in oklab, oklch(1 0 0) 18%, transparent);
+  --glass-shadow:        0 16px 32px -10px color-mix(in oklab, var(--foreground) 8%, transparent);
+  --glass-shadow-hover:  0 24px 48px -14px color-mix(in oklab, var(--foreground) 12%, transparent);
+
+  /* ── Radius ────────────────────────────────────────────────── */
+  --radius-base: 0.875rem;
+  --radius-xs: 8px;
+  --radius-sm: 12px;
+  --radius-md: 20px;
+  --radius-lg: 28px;
   --radius-full: 12px;
-  --container-max: 1280px;
 
-  /* Glass Design System — Liquid Glass Refraction (taste-skill)
-     Note: backdrop-filter only on fixed/sticky (Header). Cards use inset highlights + diffuse shadows.
-   */
-  --glass-border-subtle: rgba(0, 0, 0, 0.05);
-  --glass-inset-top: inset 0 1px 0 rgba(255, 255, 255, 0.85);
-  --glass-inset-hover: inset 0 1px 0 rgba(255, 255, 255, 0.95);
-  --glass-shadow: 0 16px 32px -10px rgba(0, 0, 0, 0.05);
-  --glass-shadow-hover: 0 24px 48px -14px rgba(0, 0, 0, 0.09);
+  /* ── Spacing ───────────────────────────────────────────────── */
   --space-unit: 1rem;
-  
-  --shadow-sm: 0 2px 8px rgba(0,0,0,0.04);
-  --shadow-md: 0 4px 20px rgba(0,0,0,0.07);
-  --shadow-lg: 0 16px 48px rgba(0, 0, 0, 0.10);
-  
-  /* Spacing — "Airy" Layout */
   --space-xs: 0.5rem;
   --space-sm: 1rem;
   --space-md: 2rem;
   --space-lg: 4rem;
   --space-xl: 6rem;
-  
-  /* Transitions */
+
+  /* ── Layout ────────────────────────────────────────────────── */
+  --container-max: 1280px;
+
+  /* ── Transitions ───────────────────────────────────────────── */
   --transition-fast: 0.2s cubic-bezier(0.4, 0, 0.2, 1);
   --transition-normal: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-theme: 0.7s cubic-bezier(0.4, 0, 0.2, 1);
+
+  /* ── Shadows (simple) ──────────────────────────────────────── */
+  --shadow-sm: 0 2px 8px color-mix(in oklab, var(--foreground) 4%, transparent);
+  --shadow-md: 0 4px 20px color-mix(in oklab, var(--foreground) 7%, transparent);
+  --shadow-lg: 0 16px 48px color-mix(in oklab, var(--foreground) 10%, transparent);
+
+  /* ══════════════════════════════════════════════════════════════
+     Backwards-Compatible Aliases
+     (These map old variable names to the new semantic tokens)
+     ══════════════════════════════════════════════════════════════ */
+
+  /* Old Apple palette → semantic */
+  --apple-black:     oklch(0.15 0.01 255);
+  --apple-dark:      var(--foreground);
+  --apple-gray:      var(--muted-foreground);
+  --apple-bg-light:  var(--surface);
+  --apple-blue:      var(--accent);
+  --white:           var(--card);
+
+  /* Old backgrounds → semantic */
+  --bg-primary:      var(--background);
+  --bg-secondary:    var(--surface);
+  --bg-tertiary:     var(--muted);
+  --bg-header:       color-mix(in oklab, var(--surface) 80%, transparent);
+  --bg-footer:       oklch(0.18 0.01 255);
+
+  /* Old grays → semantic */
+  --gray-50:         var(--surface);
+  --gray-100:        var(--border);
+  --gray-200:        var(--border);
+  --gray-300:        var(--muted-foreground);
+  --gray-400:        var(--muted-foreground);
+  --gray-500:        var(--muted-foreground);
+
+  /* Old text → semantic */
+  --text-dark:       var(--foreground);
+  --text-primary:    var(--foreground);
+  --text-main:       var(--foreground);
+  --text-secondary:  var(--muted-foreground);
+  --text-muted:      var(--muted-foreground);
+  --text-light:      var(--accent-foreground);
+  --text-header:     var(--foreground);
+
+  /* Old accent → semantic */
+  --primary-blue:        var(--accent);
+  --primary-blue-hover:  var(--accent-hover);
+  --accent-color:        var(--accent);
+  --accent-color-hover:  var(--accent-hover);
+  --accent-light:        var(--accent-soft);
+  --color-donate:        var(--accent);
+  --color-donate-hover:  var(--accent-hover);
+
+  /* Old borders → semantic */
+  --border-color:        var(--border);
+  --border-color-strong: var(--border);
+
+  /* Old page header → semantic */
+  --page-header-bg:     var(--surface);
+  --page-header-text:   var(--foreground);
+  --page-header-border: color-mix(in oklab, var(--foreground) 5%, transparent);
+}
+
+
+/* ═══════════════════════════════════════════════════════════════
+   Dark Theme — Graphite
+   Deep cool graphite with frost-blue accent
+   ═══════════════════════════════════════════════════════════════ */
+
+[data-theme='dark'] {
+  /* ── Core Palette ──────────────────────────────────────────── */
+  --background:          oklch(0.22 0.012 255);
+  --foreground:          oklch(0.92 0.006 250);
+  --surface:             oklch(0.26 0.014 255);
+  --card:                oklch(0.25 0.013 255);
+  --popover:             oklch(0.25 0.013 255);
+
+  /* ── Accent — Frost Blue ───────────────────────────────────── */
+  --accent:              oklch(0.82 0.1 232);
+  --accent-foreground:   oklch(0.18 0.02 255);
+  --accent-soft:         oklch(0.4 0.06 232);
+  --accent-glow:         oklch(0.78 0.16 230);
+  --accent-hover:        oklch(0.75 0.11 232);
+
+  /* ── Secondary ─────────────────────────────────────────────── */
+  --secondary:           oklch(0.3 0.014 255);
+  --secondary-foreground: oklch(0.92 0.006 250);
+
+  /* ── Muted ─────────────────────────────────────────────────── */
+  --muted:               oklch(0.29 0.012 255);
+  --muted-foreground:    oklch(0.7 0.012 250);
+
+  /* ── Borders & Inputs ──────────────────────────────────────── */
+  --border:              oklch(0.34 0.012 255);
+  --input:               oklch(0.32 0.012 255);
+  --ring:                oklch(0.82 0.1 232);
+
+  /* ── Destructive ───────────────────────────────────────────── */
+  --destructive:         oklch(0.65 0.2 25);
+  --destructive-foreground: oklch(0.98 0 0);
+
+  /* ── Gradients (dark) ──────────────────────────────────────── */
+  --gradient-bg:
+    radial-gradient(120% 80% at 85% -10%, color-mix(in oklab, var(--accent) 28%, transparent) 0%, transparent 55%),
+    radial-gradient(70% 50% at 0% 10%, color-mix(in oklab, var(--accent-glow) 22%, transparent) 0%, transparent 60%),
+    var(--background);
+
+  --gradient-accent: linear-gradient(135deg, var(--accent) 0%, var(--accent-glow) 100%);
+
+  /* ── Shadows (dark) ────────────────────────────────────────── */
+  --shadow-elegant:
+    0 1px 0 0 color-mix(in oklab, oklch(1 0 0) 5%, transparent),
+    0 30px 60px -25px oklch(0 0 0 / 0.6),
+    0 8px 20px -12px color-mix(in oklab, var(--accent) 35%, transparent);
+
+  --shadow-glow:
+    0 0 0 1px color-mix(in oklab, var(--accent) 28%, transparent),
+    0 12px 50px -8px color-mix(in oklab, var(--accent) 55%, transparent);
+
+  /* ── Glass (dark) ──────────────────────────────────────────── */
+  --glass-bg:            color-mix(in oklab, var(--card) 70%, transparent);
+  --glass-border-subtle: color-mix(in oklab, oklch(1 0 0) 8%, transparent);
+  --glass-inset-top:     inset 0 1px 0 color-mix(in oklab, oklch(1 0 0) 3%, transparent);
+  --glass-inset-hover:   inset 0 1px 0 color-mix(in oklab, oklch(1 0 0) 6%, transparent);
+  --glass-shadow:        0 16px 32px -10px oklch(0 0 0 / 0.5);
+  --glass-shadow-hover:  0 24px 48px -14px oklch(0 0 0 / 0.65);
+
+  /* ── Simple shadows (dark) ─────────────────────────────────── */
+  --shadow-sm: 0 2px 8px oklch(0 0 0 / 0.35);
+  --shadow-md: 0 4px 20px oklch(0 0 0 / 0.5);
+  --shadow-lg: 0 16px 48px oklch(0 0 0 / 0.7);
+
+  /* ── Dark-specific aliases ─────────────────────────────────── */
+  --apple-black:     oklch(0.15 0.01 255);
+  --bg-header:       color-mix(in oklab, var(--background) 85%, transparent);
+  --bg-footer:       oklch(0.16 0.01 255);
+  --page-header-border: color-mix(in oklab, oklch(1 0 0) 6%, transparent);
 }
