@@ -1,7 +1,7 @@
 .main {
   min-height: 100dvh;
   padding-bottom: 6rem;
-  background-color: var(--surface);
+  background-color: var(--background);
   transition: background-color var(--transition-theme);
 }
 
@@ -14,10 +14,6 @@
   transition: background-color var(--transition-theme), color var(--transition-theme);
 }
 
-.breadcrumbs {
-  padding: 0.5rem 0 !important;
-  opacity: 0.7;
-}
 
 .title {
   font-family: var(--font-e-ukraine-head);

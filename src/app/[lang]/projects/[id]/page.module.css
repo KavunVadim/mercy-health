@@ -257,7 +257,7 @@
   background: var(--accent);
   color: var(--accent-foreground);
   text-decoration: none;
-  border-radius: 16px;
+  border-radius: var(--radius-lg);
   font-family: var(--font-e-ukraine-head);
   font-size: 0.8125rem;
   font-weight: 800;
@@ -273,7 +273,7 @@
   width: 36px;
   height: 36px;
   background: oklch(1 0 0 / 0.12);
-  border-radius: 12px;
+  border-radius: var(--radius-sm);
   display: flex;
   align-items: center;
   justify-content: center;

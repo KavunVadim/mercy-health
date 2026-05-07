@@ -25,14 +25,16 @@
   .link {
     width: 52px;
     height: 52px;
-    border-radius: 16px;
+    border-radius: var(--radius-lg);
     font-size: 0.875rem;
   }
 }
 
 .link:hover:not(.linkActive) {
   background-color: var(--secondary);
-  border-color: var(--border);
+  border-color: color-mix(in oklab, var(--foreground) 15%, transparent);
+  transform: translateY(-1px);
+  box-shadow: var(--shadow-sm);
 }
 
 .linkActive {

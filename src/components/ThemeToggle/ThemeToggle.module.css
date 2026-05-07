@@ -18,7 +18,7 @@
   .toggle {
     width: 52px;
     height: 52px;
-    border-radius: 16px;
+    border-radius: var(--radius-lg);
   }
 }
 
@@ -44,9 +44,9 @@
 }
 
 .skeleton {
-  width: 48px;
+  width: 44px;
   height: 44px;
   background: var(--muted);
-  border-radius: var(--radius-sm);
+  border-radius: var(--radius-md);
   opacity: 0.5;
 }
