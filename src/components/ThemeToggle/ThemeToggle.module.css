@@ -1,9 +1,9 @@
 .toggle {
   background: var(--muted);
   border: 1px solid var(--border);
-  width: 48px;
+  width: 44px;
   height: 44px;
-  border-radius: var(--radius-sm);
+  border-radius: var(--radius-md);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -12,6 +12,14 @@
   position: relative;
   overflow: hidden;
   transition: all var(--transition-fast);
+}
+
+@media (max-width: 1024px) {
+  .toggle {
+    width: 52px;
+    height: 52px;
+    border-radius: 16px;
+  }
 }
 
 .toggle:hover {

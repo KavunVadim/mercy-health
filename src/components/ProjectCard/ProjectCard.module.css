@@ -3,7 +3,7 @@
   border: 1px solid var(--border);
   box-shadow:
     var(--glass-inset-top),
-    0 20px 40px -12px color-mix(in oklab, var(--foreground) 6%, transparent);
+    0 20px 40px -12px color-mix(in oklab, var(--foreground) 16%, transparent);
   border-radius: var(--radius-lg);
   overflow: hidden;
   transition: all 0.45s cubic-bezier(0.16, 1, 0.3, 1), background-color var(--transition-theme);
@@ -23,7 +23,7 @@
   border-color: color-mix(in oklab, var(--foreground) 8%, transparent);
   box-shadow:
     var(--glass-inset-hover),
-    0 28px 56px -16px color-mix(in oklab, var(--foreground) 10%, transparent);
+    0 28px 56px -16px color-mix(in oklab, var(--foreground) 24%, transparent);
 }
 
 .imageWrapper {
@@ -196,30 +196,34 @@
   width: 100%;
   background-color: var(--secondary);
   color: var(--secondary-foreground);
-  padding: 0.875rem;
-  font-family: inherit;
-  font-weight: 600;
-  font-size: 0.9rem;
-  border-radius: var(--radius-sm);
+  padding: 0.8rem 1rem;
+  font-family: var(--font-e-ukraine-head), inherit;
+  font-weight: 800;
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  border-radius: 12px;
   transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
   text-align: center;
   display: flex;
   align-items: center;
   justify-content: center;
   margin-top: 0.5rem;
+  border: 1px solid var(--border);
 }
 
 .supportBtn:hover {
   background-color: var(--accent);
   color: var(--accent-foreground);
-  transform: scale(1.02);
-  box-shadow: 0 8px 24px color-mix(in oklab, var(--accent) 30%, transparent);
+  border-color: var(--accent);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px color-mix(in oklab, var(--accent) 25%, transparent);
 }
 
 @media (max-width: 640px) {
   .supportBtn {
-    padding: 0.75rem;
-    font-size: 0.8rem;
+    padding: 0.9rem 1rem;
+    font-size: 0.75rem;
     margin-top: 0.25rem;
   }
 }

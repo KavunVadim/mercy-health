@@ -6,19 +6,28 @@
 
 .link {
   font-family: var(--font-e-ukraine), sans-serif;
-  font-size: 0.8125rem;
-  font-weight: 500;
-  padding: 0.5rem 0.875rem;
-  border-radius: var(--radius-sm);
+  font-size: 0.75rem;
+  font-weight: 700;
+  padding: 0;
+  border-radius: var(--radius-md);
   color: var(--foreground);
-  width: 48px;
-  min-height: 44px;
+  width: 44px;
+  height: 44px;
   display: inline-flex;
   align-items: center;
   justify-content: center;
   transition: var(--transition-fast);
   background-color: var(--muted);
   border: 1px solid var(--border);
+}
+
+@media (max-width: 1024px) {
+  .link {
+    width: 52px;
+    height: 52px;
+    border-radius: 16px;
+    font-size: 0.875rem;
+  }
 }
 
 .link:hover:not(.linkActive) {

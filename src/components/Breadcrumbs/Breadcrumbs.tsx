@@ -1,8 +1,8 @@
 "use client";
 
 import Link from "next/link";
-import { usePathname } from "next/navigation";
-import { ChevronRight, Home } from "lucide-react";
+import { usePathname, useRouter } from "next/navigation";
+import { ChevronRight, Home, ArrowLeft } from "lucide-react";
 import styles from "./Breadcrumbs.module.css";
 import { Locale } from "@/i18n-config";
 
@@ -11,10 +11,12 @@ interface BreadcrumbsProps {
   dictionary: any;
   items?: { label: string; href?: string }[];
   className?: string;
+  showBack?: boolean;
 }
 
-export default function Breadcrumbs({ lang, dictionary, items, className }: BreadcrumbsProps) {
+export default function Breadcrumbs({ lang, dictionary, items, className, showBack }: BreadcrumbsProps) {
   const pathname = usePathname();
+  const router = useRouter();
   
   // If items are provided, use them. Otherwise, try to infer from pathname.
   const breadcrumbItems = items || [];
@@ -53,9 +55,23 @@ export default function Breadcrumbs({ lang, dictionary, items, className }: Brea
   return (
     <nav aria-label="Breadcrumb" className={`${styles.breadcrumbs} ${className || ""}`}>
       <ol className={styles.list}>
+        {showBack && (
+          <li className={styles.backItem}>
+            <button 
+              onClick={() => router.back()} 
+              className={styles.backButton}
+              aria-label="Go back"
+            >
+              <ArrowLeft size={16} />
+            </button>
+            <div className={styles.backSeparator} />
+          </li>
+        )}
         {breadcrumbItems.map((item, index) => (
           <li key={index} className={styles.item}>
-            {index > 0 && <ChevronRight className={styles.separator} size={14} />}
+            {(index > 0 || (index === 0 && !showBack)) ? (
+              index > 0 && <ChevronRight className={styles.separator} size={14} />
+            ) : null}
             {item.href ? (
               <Link href={item.href} className={styles.link}>
                 {index === 0 ? (

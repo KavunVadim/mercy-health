@@ -4,6 +4,7 @@ import { notFound } from "next/navigation";
 import styles from "./page.module.css";
 import ProjectImageGallery from "./components/ProjectImageGallery";
 import Breadcrumbs from "@/components/Breadcrumbs/Breadcrumbs";
+import BackButton from "@/components/BackButton/BackButton";
 
 interface Project {
   id: string;
@@ -39,16 +40,19 @@ export default async function ProjectDetailPage({
     <main className={styles.main}>
       <header className={styles.header}>
         <div className="container">
-          <Breadcrumbs
-            lang={locale}
-            dictionary={dictionary}
-            className={styles.breadcrumbs}
-            items={[
-              { label: dictionary.navigation.home, href: `/${lang}` },
-              { label: dictionary.navigation.projects, href: `/${lang}/projects` },
-              { label: project.title }
-            ]}
-          />
+          <div className={styles.topActions}>
+            <Breadcrumbs
+              lang={locale}
+              dictionary={dictionary}
+              showBack={true}
+              className={styles.breadcrumbs}
+              items={[
+                { label: dictionary.navigation.home, href: `/${lang}` },
+                { label: dictionary.navigation.projects, href: `/${lang}/projects` },
+                { label: project.title }
+              ]}
+            />
+          </div>
         </div>
       </header>
 

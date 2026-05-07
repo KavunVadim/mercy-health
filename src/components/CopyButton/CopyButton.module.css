@@ -2,21 +2,22 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 32px;
-  height: 32px;
+  width: 36px;
+  height: 36px;
   padding: 0;
-  background: #F3F4F6;
-  border: none;
-  border-radius: 6px;
-  color: #4B5563;
+  background: var(--muted);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  color: var(--muted-foreground);
   cursor: pointer;
-  transition: all 0.2s ease;
+  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
   flex-shrink: 0;
 }
 
 .button:hover {
-  background: #E5E7EB;
-  color: #1A1A1A;
+  background: var(--secondary);
+  border-color: var(--accent);
+  color: var(--accent);
 }
 
 .button:active {
@@ -24,8 +25,9 @@
 }
 
 .button.copied {
-  background: #1EA2FE;
-  color: white;
+  background: var(--accent);
+  border-color: var(--accent);
+  color: var(--accent-foreground);
 }
 
 .icon {

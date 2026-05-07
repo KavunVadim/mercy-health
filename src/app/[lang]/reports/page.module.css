@@ -1,5 +1,5 @@
 .main {
-  min-height: 100vh;
+  min-height: 100dvh;
   padding-bottom: 6rem;
   background-color: var(--surface);
   transition: background-color var(--transition-theme);

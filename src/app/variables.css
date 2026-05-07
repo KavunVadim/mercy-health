@@ -5,12 +5,12 @@
    ═══════════════════════════════════════════════════════════════ */
 
 :root {
-  /* ── Core Palette ──────────────────────────────────────────── */
-  --background:          oklch(0.9 0.008 245);
+  /* Light Theme - Slate Aluminum (Premium Cool Gray) */
+  --background:          oklch(0.83 0.008 245);
   --foreground:          oklch(0.2 0.025 255);
-  --surface:             oklch(0.87 0.01 245);
-  --card:                oklch(0.885 0.009 245);
-  --popover:             oklch(0.885 0.009 245);
+  --surface:             oklch(0.85 0.01 245);
+  --card:                oklch(0.86 0.009 245);
+  --popover:             oklch(0.86 0.009 245);
 
   /* ── Accent — Sky Blue ─────────────────────────────────────── */
   --accent:              oklch(0.72 0.12 232);
@@ -28,9 +28,10 @@
   --muted-foreground:    oklch(0.46 0.02 255);
 
   /* ── Borders & Inputs ──────────────────────────────────────── */
-  --border:              oklch(0.8 0.012 245);
-  --input:               oklch(0.82 0.012 245);
+  --border:              oklch(0.74 0.015 245);
+  --input:               oklch(0.74 0.015 245);
   --ring:                oklch(0.72 0.12 232);
+  --border-highlight:    oklch(1 0 0 / 0.15);
 
   /* ── Destructive ───────────────────────────────────────────── */
   --destructive:         oklch(0.6 0.2 25);
@@ -46,9 +47,9 @@
 
   /* ── Shadows ───────────────────────────────────────────────── */
   --shadow-elegant:
-    0 1px 0 0 color-mix(in oklab, var(--foreground) 5%, transparent),
-    0 30px 60px -25px color-mix(in oklab, var(--foreground) 22%, transparent),
-    0 8px 20px -12px color-mix(in oklab, var(--accent) 32%, transparent);
+    0 1px 0 0 color-mix(in oklab, var(--foreground) 8%, transparent),
+    0 30px 60px -25px color-mix(in oklab, var(--foreground) 28%, transparent),
+    0 8px 20px -12px color-mix(in oklab, var(--accent) 38%, transparent);
 
   --shadow-glow:
     0 0 0 1px color-mix(in oklab, var(--accent) 20%, transparent),
@@ -64,12 +65,13 @@
   --glass-shadow-hover:  0 24px 48px -14px color-mix(in oklab, var(--foreground) 12%, transparent);
 
   /* ── Radius ────────────────────────────────────────────────── */
-  --radius-base: 0.875rem;
-  --radius-xs: 8px;
-  --radius-sm: 12px;
-  --radius-md: 20px;
-  --radius-lg: 28px;
-  --radius-full: 12px;
+  --radius-xs:           0.5rem;   /* 8px */
+  --radius-sm:           0.75rem;  /* 12px */
+  --radius-md:           0.875rem; /* 14px */
+  --radius-lg:           1.125rem; /* 18px */
+  --radius-xl:           1.5rem;   /* 24px */
+  --radius-2xl:          2rem;     /* 32px */
+  --radius-full:         9999px;
 
   /* ── Spacing ───────────────────────────────────────────────── */
   --space-unit: 1rem;
@@ -88,9 +90,9 @@
   --transition-theme: 0.7s cubic-bezier(0.4, 0, 0.2, 1);
 
   /* ── Shadows (simple) ──────────────────────────────────────── */
-  --shadow-sm: 0 2px 8px color-mix(in oklab, var(--foreground) 4%, transparent);
-  --shadow-md: 0 4px 20px color-mix(in oklab, var(--foreground) 7%, transparent);
-  --shadow-lg: 0 16px 48px color-mix(in oklab, var(--foreground) 10%, transparent);
+  --shadow-sm: 0 2px 12px color-mix(in oklab, var(--foreground) 10%, transparent);
+  --shadow-md: 0 4px 24px color-mix(in oklab, var(--foreground) 14%, transparent);
+  --shadow-lg: 0 16px 56px color-mix(in oklab, var(--foreground) 20%, transparent);
 
   /* ══════════════════════════════════════════════════════════════
      Backwards-Compatible Aliases

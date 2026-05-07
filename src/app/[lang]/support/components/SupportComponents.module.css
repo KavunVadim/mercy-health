@@ -21,7 +21,7 @@
   flex-direction: column;
   box-shadow:
     var(--glass-inset-top),
-    0 16px 32px -10px color-mix(in oklab, var(--foreground) 5%, transparent);
+    0 16px 32px -10px color-mix(in oklab, var(--foreground) 15%, transparent);
   transition: all 0.45s cubic-bezier(0.16, 1, 0.3, 1), background-color var(--transition-theme);
 }
 
@@ -36,7 +36,7 @@
   border-color: color-mix(in oklab, var(--foreground) 8%, transparent);
   box-shadow:
     var(--glass-inset-hover),
-    0 24px 48px -14px color-mix(in oklab, var(--foreground) 9%, transparent);
+    0 24px 48px -14px color-mix(in oklab, var(--foreground) 22%, transparent);
 }
 
 .cardHeader {
@@ -111,7 +111,7 @@
   padding: 3.5rem;
   box-shadow:
     var(--glass-inset-top),
-    0 20px 40px -14px color-mix(in oklab, var(--foreground) 5%, transparent);
+    0 20px 40px -14px color-mix(in oklab, var(--foreground) 18%, transparent);
   transition: background-color var(--transition-theme);
 }
 
