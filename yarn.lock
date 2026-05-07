@@ -1268,6 +1268,20 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@teispace/next-themes@npm:^0.4.2":
+  version: 0.4.2
+  resolution: "@teispace/next-themes@npm:0.4.2"
+  peerDependencies:
+    next: ">=13.0.0"
+    react: ">=18.0.0"
+    react-dom: ">=18.0.0"
+  peerDependenciesMeta:
+    next:
+      optional: true
+  checksum: 10c0/ce56b8fba297772131cb379500734cf41d2a04b4feb5d96d8d368fbd1d3d08cba7ebb0f178f23474916045566e04ed22d20325d4b70c9d3a1ef92bbd6473b39f
+  languageName: node
+  linkType: hard
+
 "@tybys/wasm-util@npm:^0.10.0":
   version: 0.10.1
   resolution: "@tybys/wasm-util@npm:0.10.1"
@@ -3681,6 +3695,7 @@ __metadata:
   resolution: "mercy-health@workspace:."
   dependencies:
     "@tailwindcss/postcss": "npm:^4.2.4"
+    "@teispace/next-themes": "npm:^0.4.2"
     "@types/negotiator": "npm:^0.6.4"
     "@types/node": "npm:^20"
     "@types/react": "npm:^19"
@@ -3697,7 +3712,6 @@ __metadata:
     lucide-react: "npm:^1.8.0"
     next: "npm:16.2.4"
     next-intl: "npm:^4.9.1"
-    next-themes: "npm:^0.4.6"
     postcss: "npm:^8.5.10"
     react: "npm:19.2.4"
     react-countup: "npm:^6.5.3"
@@ -3849,16 +3863,6 @@ __metadata:
     typescript:
       optional: true
   checksum: 10c0/5de74d60427c75995a84a639cb440d9b972d35e4a227ddaa6e2c664695cadcd1951620b6c6bece60a57264d2e862b4dc40ad9fa57d4089ae98fd528e583e587a
-  languageName: node
-  linkType: hard
-
-"next-themes@npm:^0.4.6":
-  version: 0.4.6
-  resolution: "next-themes@npm:0.4.6"
-  peerDependencies:
-    react: ^16.8 || ^17 || ^18 || ^19 || ^19.0.0-rc
-    react-dom: ^16.8 || ^17 || ^18 || ^19 || ^19.0.0-rc
-  checksum: 10c0/83590c11d359ce7e4ced14f6ea9dd7a691d5ce6843fe2dc520fc27e29ae1c535118478d03e7f172609c41b1ef1b8da6b8dd2d2acd6cd79cac1abbdbd5b99f2c4
   languageName: node
   linkType: hard
 
