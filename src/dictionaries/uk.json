@@ -20,6 +20,15 @@
   },
   "hero_slider": [
     {
+      "id": "voda-donechchyna",
+      "badge": "Pro100Media",
+      "title": "«Вода заради життя»: будуємо свердловини на Донеччині",
+      "description": "Масштабний проєкт, спрямований на покращення водозабезпечення в регіоні, де ситуація з доступом до води є критичною.",
+      "image": "/images/hero/voda-donechchyna.jpg",
+      "cta": "Читати статтю",
+      "href": "https://pro100media.com.ua/eksklyuzyv/voda-zarady-zhyttya-yak-na-donechchyni-buduyut-sverdlovyny-dlya-bezperebijnogo-vodozabezpechennya-ta-yaka-z-tsogo-koryst-kramatortsyam/"
+    },
+    {
       "id": "1",
       "badge": "YouTube",
       "title": "\"Шлях милосердя\": реанімобілі для порятунку життів військових",

@@ -17,6 +17,7 @@ interface Slide {
   image: string;
   cta: string;
   href: string;
+  focus?: string;
 }
 
 export default function HeroSlider({ slides }: { slides: Slide[] }) {
@@ -59,6 +60,7 @@ export default function HeroSlider({ slides }: { slides: Slide[] }) {
               fill
               className={styles.bgImage}
               priority={index === 0}
+              style={{ objectPosition: slide.focus || "center 25%" }}
             />
             <div className={styles.overlay} />
             <div className={`container ${styles.content}`}>

@@ -20,6 +20,15 @@
   },
   "hero_slider": [
     {
+      "id": "voda-donechchyna",
+      "badge": "Pro100Media",
+      "title": "\"Water for Life\": Building Wells in Donetsk Region",
+      "description": "A large-scale project aimed at improving water supply in a region where access to water is critical.",
+      "image": "/images/hero/voda-donechchyna.jpg",
+      "cta": "Read article",
+      "href": "https://pro100media.com.ua/eksklyuzyv/voda-zarady-zhyttya-yak-na-donechchyni-buduyut-sverdlovyny-dlya-bezperebijnogo-vodozabezpechennya-ta-yaka-z-tsogo-koryst-kramatortsyam/"
+    },
+    {
       "id": "1",
       "badge": "YouTube",
       "title": "\"Path of Mercy\": Ambulances to Save Soldiers' Lives",
