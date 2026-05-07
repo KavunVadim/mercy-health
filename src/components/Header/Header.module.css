@@ -5,15 +5,16 @@
     color-mix(in oklab, oklch(1 0 0) 5%, transparent),
     transparent
   );
-  backdrop-filter: saturate(180%) blur(100px);
-  -webkit-backdrop-filter: saturate(180%) blur(100px);
+  backdrop-filter: saturate(180%) blur(20px);
+  -webkit-backdrop-filter: saturate(180%) blur(20px);
   color: var(--foreground);
   padding: 1rem 0;
   position: sticky;
   top: 0;
   z-index: 1000;
   border-bottom: 1px solid var(--border);
-  transition: all 0.3s ease, background-color var(--transition-theme), color var(--transition-theme);
+  transform: translateZ(0); /* Fix Safari rendering */
+  transition: background-color var(--transition-theme), color var(--transition-theme), border-color var(--transition-theme);
 }
 
 .container {

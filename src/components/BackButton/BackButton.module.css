@@ -50,6 +50,8 @@
     border-radius: 16px;
     background: var(--surface);
     backdrop-filter: var(--glass-blur);
+    -webkit-backdrop-filter: var(--glass-blur);
+    transform: translateZ(0);
     border: 1.5px solid var(--accent); /* Clearer border on mobile */
     box-shadow: 0 8px 24px color-mix(in oklab, var(--foreground) 12%, transparent);
     z-index: 1000;

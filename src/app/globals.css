@@ -17,6 +17,8 @@ body {
 
 html {
   scroll-padding-top: 80px;
+  background-color: var(--background);
+  transition: background-color var(--transition-theme);
 }
 
 body {
