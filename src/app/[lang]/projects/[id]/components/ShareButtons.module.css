@@ -171,12 +171,12 @@
   .copyBtn {
     width: auto;
     flex: 1;
-    padding: 12px 18px;
+    padding: 12px 14px;
     font-size: 0.75rem;
     white-space: nowrap;
     border-radius: var(--radius-sm);
     justify-content: center;
-    min-width: 130px;
+    min-width: 0; /* Allow shrinking below 130px */
   }
   
   .labelRow {
@@ -185,12 +185,22 @@
   }
 }
 
-@media (max-width: 400px) {
+@media (max-width: 420px) {
+  .topRow {
+    flex-direction: column;
+    gap: 16px;
+  }
+  
+  .socialGrid {
+    width: 100%;
+    justify-content: space-between;
+  }
+
   .copyBtn {
-    flex: 1;
-    white-space: normal;
-    font-size: 0.65rem;
-    padding: 8px;
-    min-width: 0;
+    width: 100%;
+    flex: none;
+    padding: 14px;
+    font-size: 0.7rem;
+    letter-spacing: 0.05em;
   }
 }

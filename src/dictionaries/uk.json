@@ -20,6 +20,15 @@
   },
   "hero_slider": [
     {
+      "id": "reanimobile-frontline",
+      "badge": "YouTube",
+      "title": "Реанімобіль — на лінію фронту",
+      "description": "Поповнюємо автопарк медиків на передовій сучасним реанімобілем для швидкої евакуації та порятунку життів наших захисників.",
+      "image": "/images/hero/reanimobile_frontline.jpg",
+      "cta": "Дивитись відео",
+      "href": "https://youtu.be/jO78_rVQ94I"
+    },
+    {
       "id": "voda-donechchyna",
       "badge": "Pro100Media",
       "title": "«Вода заради життя»: будуємо свердловини на Донеччині",
@@ -379,7 +388,7 @@
   },
   "share": {
     "title": "Поділитися проєктом",
-    "copy": "Скопіювати посилання",
+    "copy": "Копіювати",
     "copied": "Скопійовано",
     "share_on": "Поділитися в",
     "facebook": "Facebook",

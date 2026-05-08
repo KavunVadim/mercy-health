@@ -20,6 +20,15 @@
   },
   "hero_slider": [
     {
+      "id": "reanimobile-frontline",
+      "badge": "YouTube",
+      "title": "Ambulance — to the Frontline",
+      "description": "Expanding the frontline medical fleet with a modern ambulance for rapid evacuation and saving the lives of our defenders.",
+      "image": "/images/hero/reanimobile_frontline.jpg",
+      "cta": "Watch video",
+      "href": "https://youtu.be/jO78_rVQ94I"
+    },
+    {
       "id": "voda-donechchyna",
       "badge": "Pro100Media",
       "title": "\"Water for Life\": Building Wells in Donetsk Region",
