@@ -24,7 +24,7 @@ export default function Partners({ dictionary }: { dictionary: any }) {
       <div className={styles.sliderWrap} ref={emblaRef}>
         <div className={styles.sliderContainer}>
           {/* Double the items to ensure smooth infinite loop */}
-          {[...partners, ...partners].map((partner, idx) => (
+          {[...partners, ...partners].map((partner: any, idx: number) => (
             <div key={`${partner.id}-${idx}`} className={styles.slide}>
               <div className={styles.logoCard}>
                 <Image

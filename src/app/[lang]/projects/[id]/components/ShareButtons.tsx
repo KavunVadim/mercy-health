@@ -82,7 +82,7 @@ export default function ShareButtons({ title, shareLabel, dictionary }: ShareBut
       <div className={styles.shareWrapper}>
         <div className={styles.topRow}>
           <div className={styles.socialGrid}>
-            {shareLinks.map((link) => (
+            {shareLinks.map((link: any) => (
               <a
                 key={link.name}
                 href={link.url}

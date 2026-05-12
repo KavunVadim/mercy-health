@@ -16,7 +16,7 @@ export default function GalleryTab({ dictionary }: { dictionary: any }) {
       
       <PhotoProvider>
         <div className={styles.galleryGrid}>
-          {images.map((img, idx) => (
+          {images.map((img: string, idx: number) => (
             <PhotoView key={idx} src={img}>
               <div className={styles.galleryItem} style={{ cursor: 'pointer' }}>
                 <Image

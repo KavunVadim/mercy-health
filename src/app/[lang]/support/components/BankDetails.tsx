@@ -46,7 +46,7 @@ export default function BankDetails({ dictionary }: { dictionary: any }) {
     <div className={styles.bankDetailsContainer}>
       {/* Navigation Tabs */}
       <div className={styles.premiumTabsWrapper}>
-        {tabs.map((tab) => (
+        {tabs.map((tab: any) => (
           <button
             key={tab.id}
             className={`${styles.premiumTabItem} ${activeTab === tab.id ? styles.activeTab : ""}`}

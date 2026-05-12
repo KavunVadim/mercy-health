@@ -19,7 +19,7 @@ export default function AboutUs({ dictionary }: { dictionary: any }) {
   return (
     <div className={styles.container}>
       <aside className={styles.sidebar}>
-        {sections.map((sec) => (
+        {sections.map((sec: any) => (
           <button
             key={sec.id}
             onClick={() => setActiveSection(sec.id)}

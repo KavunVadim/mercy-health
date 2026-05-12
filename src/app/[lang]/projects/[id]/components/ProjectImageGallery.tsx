@@ -104,7 +104,7 @@ export default function ProjectImageGallery({
                 viewport={{ once: true, margin: "-60px" }}
                 transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
               >
-                {fullDescription.split('\n').filter(Boolean).map((paragraph, idx) => (
+                {fullDescription.split('\n').filter(Boolean).map((paragraph: string, idx: number) => (
                   <p key={idx}>{paragraph}</p>
                 ))}
               </motion.div>
@@ -123,7 +123,7 @@ export default function ProjectImageGallery({
                 >
                   <h2 className={styles.galleryHeader}>{dictionary.projects.gallery_title}</h2>
                   <div className={galleryStyles.galleryGrid}>
-                    {gallery.map((img, idx) => {
+                    {gallery.map((img: string, idx: number) => {
                       let bentoClass = galleryStyles.bentoSmall;
                       const patternIndex = idx % 7;
                       if (patternIndex === 0) bentoClass = galleryStyles.bentoLarge;

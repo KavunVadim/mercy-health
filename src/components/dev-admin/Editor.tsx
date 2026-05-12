@@ -128,7 +128,7 @@ export const Editor: React.FC<EditorProps> = ({ data, onChange, fileName }) => {
     if (Array.isArray(value)) {
       const searchTerm = searchTerms[pathKey] || '';
       
-      const filteredIndices = value.map((item, index) => ({ item, index }))
+      const filteredIndices = (value as any[]).map((item: any, index: number) => ({ item, index }))
         .filter(({ item }) => {
           if (!searchTerm) return true;
           const str = JSON.stringify(item).toLowerCase();
@@ -179,7 +179,7 @@ export const Editor: React.FC<EditorProps> = ({ data, onChange, fileName }) => {
                 onReorder={(newOrder) => handleChange(newOrder)}
                 className="flex flex-col gap-3"
               >
-                {filteredIndices.map(({ item, index }) => {
+                {filteredIndices.map(({ item, index }: any) => {
                   const itemPathKey = `${pathKey}.${index}`;
                   const isItemCollapsed = collapsed[itemPathKey] !== false;
                   
@@ -241,7 +241,7 @@ export const Editor: React.FC<EditorProps> = ({ data, onChange, fileName }) => {
                         >
                           {typeof item === 'object' && item !== null ? (
                             <div className="flex flex-col gap-6">
-                              {Object.entries(item).map(([k, v]) => renderField(k, v, [...fullPath, index.toString()]))}
+                              {Object.entries(item).map(([k, v]: [string, any]) => renderField(k, v, [...fullPath, index.toString()]))}
                             </div>
                           ) : isImageField ? (
                             <div className={styles.imageFieldRow}>
@@ -637,7 +637,6 @@ export const Editor: React.FC<EditorProps> = ({ data, onChange, fileName }) => {
                       }
                       setLibraryTarget(null);
                     }}
-                    onClose={() => setLibraryTarget(null)}
                   />
                 </div>
             </motion.div>

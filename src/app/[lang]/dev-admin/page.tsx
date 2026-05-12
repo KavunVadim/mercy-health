@@ -206,9 +206,9 @@ export default function DevAdminPage() {
             <span>Медіатека</span>
           </div>
 
-          {MENU_STRUCTURE.map((group) => {
+          {MENU_STRUCTURE.map((group: any) => {
             // Filter items in this group
-            const groupItems = group.items.filter(item => {
+            const groupItems = group.items.filter((item: any) => {
               const fileObj = files.find(f => f.path === item.path);
               if (!fileObj) return false;
               if (!searchQuery) return true;
@@ -220,7 +220,7 @@ export default function DevAdminPage() {
             return (
               <React.Fragment key={group.category}>
                 <div className={styles.label}>{group.category}</div>
-                {groupItems.map(item => {
+                {groupItems.map((item: any) => {
                   const Icon = item.icon;
                   const fileObj = files.find(f => f.path === item.path)!;
                   const isActive = selectedFile?.path === fileObj.path;

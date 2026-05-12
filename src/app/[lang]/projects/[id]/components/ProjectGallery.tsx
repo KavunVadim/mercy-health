@@ -16,7 +16,7 @@ export default function ProjectGallery({ images, title, dictionary }: ProjectGal
       <div className={styles.gallery}>
         <h3 className={styles.galleryTitle}>{dictionary.projects.gallery_title}</h3>
         <div className={styles.galleryGrid}>
-          {images.map((img, idx) => (
+          {images.map((img: string, idx: number) => (
             <GalleryItem key={idx} src={img}>
               <div className={styles.galleryImageWrapper}>
                   <Image
