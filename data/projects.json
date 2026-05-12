@@ -1,19 +1,19 @@
 {
   "projects": [
     {
-      "id": "reanimobili-na-front",
-      "image": "/images/projects/reanimobili.png",
+      "id": "disabled-support",
+      "image": "/images/projects/img_9349.webp",
       "title": {
-        "uk": "Реанімобілі на фронт",
-        "en": "Ambulances for the Front"
+        "uk": "Допомога людям з інвалідністю:",
+        "en": "Support for people with disabilities:"
       },
       "description": {
-        "uk": "Закупівля та оснащення автомобілів швидкої допомоги для евакуації поранених.",
-        "en": "Purchase and equipment of ambulances for the evacuation of the wounded."
+        "uk": "Спільно з партнерами нам вдалося зробити внесок у життя людей, які потребують особливої підтримки:",
+        "en": "Together with our partners, we were able to contribute to the lives of people who need special support:"
       },
       "full_description": {
-        "uk": "Проєкт «Шлях милосердя» — це наша ключова ініціатива, спрямована на порятунок життів українських захисників та цивільного населення в зонах активних бойових дій. Кожен реанімобіль, який ми передаємо на фронт, — це не просто транспорт, а повноцінний мобільний стабілізаційний пункт на колесах.",
-        "en": "The 'Path of Mercy' project is our key initiative aimed at saving the lives of Ukrainian defenders and civilians in active combat zones. Every ambulance we hand over to the front is not just transport, but a full-fledged mobile stabilization point on wheels."
+        "uk": "15 транспортних засобів для людей обмеженими можливостями, 500+ механічних та електричних візків, благодійні психологічні консультації.",
+        "en": "15 transport vehicles for people with disabilities, 500+ mechanical and electric wheelchairs, charitable psychological consultations."
       },
       "gallery": []
     },

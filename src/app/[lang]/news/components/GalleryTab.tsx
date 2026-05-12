@@ -1,24 +1,25 @@
 "use client";
 
 import Image from "next/image";
-import { PhotoProvider, PhotoView } from "react-photo-view";
-import "react-photo-view/dist/react-photo-view.css";
+import { GalleryProvider, GalleryItem } from "@/components/ui/GalleryProvider";
 import styles from "./Tabs.module.css";
 
 export default function GalleryTab({ dictionary }: { dictionary: any }) {
   const dict = dictionary as any;
   const { title, description, images = [] } = dict.news.gallery;
+  console.log("images",images);
+  
 
   return (
     <div className={styles.container}>
       <h2 className={styles.sectionTitle}>{title}</h2>
       <p className={styles.sectionDescription}>{description}</p>
       
-      <PhotoProvider>
+      <GalleryProvider>
         <div className={styles.galleryGrid}>
           {images.map((img: string, idx: number) => (
-            <PhotoView key={idx} src={img}>
-              <div className={styles.galleryItem} style={{ cursor: 'pointer' }}>
+            <GalleryItem key={idx} src={img}>
+              <div className={styles.galleryItem}>
                 <Image
                   src={img}
                   alt={`Gallery image ${idx + 1}`}
@@ -26,10 +27,10 @@ export default function GalleryTab({ dictionary }: { dictionary: any }) {
                   className={styles.galleryImage}
                 />
               </div>
-            </PhotoView>
+            </GalleryItem>
           ))}
         </div>
-      </PhotoProvider>
+      </GalleryProvider>
     </div>
   );
 }

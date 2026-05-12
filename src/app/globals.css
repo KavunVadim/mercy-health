@@ -16,12 +16,20 @@ body {
 }
 
 html {
+  scroll-behavior: smooth;
   scroll-padding-top: 80px;
-  background-color: var(--background);
-  transition: background-color var(--transition-theme);
+  background-color: var(--bg-primary);
+}
+
+/* Фолбек для темної теми на рівні браузера, поки не завантажився JS */
+@media (prefers-color-scheme: dark) {
+  html:not([data-theme='light']) {
+    background-color: oklch(0.22 0.012 255);
+  }
 }
 
 body {
+  min-height: 100dvh;
   background-color: var(--background);
   background-image: var(--gradient-bg);
   background-attachment: fixed;
@@ -33,10 +41,17 @@ body {
   letter-spacing: -0.01em;
   display: flex;
   flex-direction: column;
-  transition:
-    background-color var(--transition-theme),
-    color var(--transition-theme);
   position: relative;
+}
+
+/* Прибираємо анімацію переходу при завантаженні або зміні теми через data-attribute */
+html:not([data-theme]) body,
+body:not([data-theme]) {
+  transition: none !important;
+}
+
+[data-theme] body {
+  transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 /* ── SVG Noise Overlay ───────────────────────────────────────── */

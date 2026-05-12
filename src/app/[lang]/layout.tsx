@@ -1,5 +1,6 @@
 import type { Metadata, Viewport } from "next";
 import localFont from "next/font/local";
+import Script from "next/script";
 import "../globals.css";
 import "../variables.css";
 import { i18n, type Locale } from "@/i18n-config";
@@ -58,6 +59,7 @@ export const viewport: Viewport = {
   width: "device-width",
   initialScale: 1,
   viewportFit: "cover",
+  colorScheme: "dark light",
 };
 
 export default async function RootLayout({
@@ -73,6 +75,7 @@ export default async function RootLayout({
 
   return (
     <html lang={locale} className={`${eUkraineHead.variable} ${eUkraine.variable}`} suppressHydrationWarning>
+      <head />
       <body>
         <ThemeProvider>
           <ScrollToTop />
