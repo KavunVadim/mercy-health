@@ -38,9 +38,9 @@ export async function POST(request: Request) {
       const nameWithoutExt = path.parse(file.name).name;
       finalFileName = `${nameWithoutExt}.webp`;
       
-      finalBuffer = await sharp(buffer)
+      finalBuffer = (await sharp(buffer)
         .webp({ quality: 85 })
-        .toBuffer();
+        .toBuffer()) as any;
     }
 
     const filePath = path.join(publicDir, finalFileName);

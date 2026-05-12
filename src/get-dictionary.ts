@@ -70,10 +70,10 @@ export const getDictionary = async (locale: Locale) => {
 
     // 4. Load news and localize them
     const newsPath = path.join(dataDir, 'news.json');
-    let localizedNews = [];
+    let newsData: any = { news: [], gallery: [] };
     try {
         const newsRaw = JSON.parse(await fs.readFile(newsPath, 'utf8'));
-        localizedNews = localizeData(newsRaw.news || newsRaw, locale);
+        newsData = localizeData(newsRaw, locale);
     } catch (e) {}
 
     // 5. Load reports and localize them
@@ -106,8 +106,11 @@ export const getDictionary = async (locale: Locale) => {
       },
       news: {
         ...finalDictionary.news,
-        ...contentData.news, // Preserve potential data-specific news metadata
-        items: localizedNews
+        items: newsData.news || [],
+        gallery: {
+          ...finalDictionary.news.gallery,
+          images: newsData.gallery || []
+        }
       },
       partners: localizedPartners,
       reports: {

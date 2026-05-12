@@ -20,8 +20,8 @@
     }
   ],
   "stats": {
-    "collected_value": "10.4M ₴",
-    "helped_value": "15.2K",
+    "collected_value": "28.2M ₴",
+    "helped_value": "45.2K",
     "donors_value": "8.3K"
   },
   "about": {
@@ -39,10 +39,41 @@
     }
   },
   "news": {
-    "items": [],
-    "others": {
-      "documents": []
-    }
+    "items": [
+      {
+        "id": "news-1",
+        "date": "2025-05-10",
+        "title": "Допомога Бахмутському напрямку",
+        "description": "Передали партію медикаментів та перев'язувальних матеріалів для стабілізаційних пунктів на Донеччині.",
+        "image": "/images/news/news-1.jpg"
+      },
+      {
+        "id": "news-2",
+        "date": "2025-05-05",
+        "title": "Новий реанімобіль для госпіталю",
+        "description": "Завдяки внескам наших благодійників ми придбали та переобладнали сучасний реанімобіль для евакуації поранених.",
+        "image": "/images/news/news-2.jpg"
+      }
+    ]
+  },
+  "reports": {
+    "documents": [
+      {
+        "id": "statute",
+        "title": "Статут фонду",
+        "url": "/docs/statute.pdf"
+      },
+      {
+        "id": "registration",
+        "title": "Свідоцтво про реєстрацію",
+        "url": "/docs/registration.pdf"
+      },
+      {
+        "id": "audit-2024",
+        "title": "Фінансовий звіт 2024 (аудит)",
+        "url": "/docs/audit-2024.pdf"
+      }
+    ]
   },
   "support": {
     "cards": {

@@ -20,8 +20,8 @@
     }
   ],
   "stats": {
-    "collected_value": "12.4M ₴",
-    "helped_value": "15.2K",
+    "collected_value": "28.2M ₴",
+    "helped_value": "45.2K",
     "donors_value": "8.3K"
   },
   "about": {
@@ -39,10 +39,41 @@
     }
   },
   "news": {
-    "items": [],
-    "others": {
-      "documents": []
-    }
+    "items": [
+      {
+        "id": "news-1",
+        "date": "2025-05-10",
+        "title": "Help for Bakhmut Direction",
+        "description": "Delivered a batch of medicines and dressing materials for stabilization points in the Donetsk region.",
+        "image": "/images/news/news-1.jpg"
+      },
+      {
+        "id": "news-2",
+        "date": "2025-05-05",
+        "title": "New Ambulance for Hospital",
+        "description": "Thanks to the contributions of our donors, we purchased and equipped a modern ambulance for the evacuation of the wounded.",
+        "image": "/images/news/news-2.jpg"
+      }
+    ]
+  },
+  "reports": {
+    "documents": [
+      {
+        "id": "statute",
+        "title": "Foundation Statute",
+        "url": "/docs/statute.pdf"
+      },
+      {
+        "id": "registration",
+        "title": "Certificate of Registration",
+        "url": "/docs/registration.pdf"
+      },
+      {
+        "id": "audit-2024",
+        "title": "Financial Report 2024 (Audit)",
+        "url": "/docs/audit-2024.pdf"
+      }
+    ]
   },
   "support": {
     "cards": {

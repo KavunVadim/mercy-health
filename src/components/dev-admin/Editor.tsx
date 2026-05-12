@@ -116,7 +116,8 @@ export const Editor: React.FC<EditorProps> = ({ data, onChange, fileName }) => {
     const label = key.charAt(0).toUpperCase() + key.slice(1).replace(/_/g, ' ');
     const isCollapsed = collapsed[pathKey] || false;
 
-    const isImageField = IMAGE_FIELDS.some(f => key.toLowerCase().includes(f));
+    const isImageField = IMAGE_FIELDS.some(f => key.toLowerCase().includes(f)) || 
+                         (path.length > 0 && IMAGE_FIELDS.some(f => path[path.length - 1].toLowerCase().includes(f)) && !isNaN(Number(key)));
     const isRichText = RICH_TEXT_FIELDS.includes(key.toLowerCase());
 
     const handleChange = (newValue: any) => {
@@ -136,9 +137,9 @@ export const Editor: React.FC<EditorProps> = ({ data, onChange, fileName }) => {
 
       return (
         <div key={pathKey} className={styles.formGroup}>
-          <div className="flex items-center justify-between mb-6">
+          <div className="flex items-center gap-4 mb-4">
             <div 
-              className={styles.collapsibleHeader} 
+              className={`${styles.collapsibleHeader} flex-1`} 
               onClick={(e) => {
                 // Prevent toggle if clicking on specific actions like search or add
                 if ((e.target as HTMLElement).closest(`.${styles.miniSearch}`)) return;
@@ -159,7 +160,7 @@ export const Editor: React.FC<EditorProps> = ({ data, onChange, fileName }) => {
             </div>
             
             {!isCollapsed && (
-              <div className={styles.miniSearch}>
+              <div className={`${styles.miniSearch} w-64`}>
                 <MagnifyingGlass size={14} weight="bold" className="opacity-40" />
                 <input 
                   placeholder={`Filter ${label}...`} 
@@ -171,7 +172,7 @@ export const Editor: React.FC<EditorProps> = ({ data, onChange, fileName }) => {
           </div>
           
           {!isCollapsed && (
-            <div className="flex flex-col gap-6">
+            <div className="flex flex-col gap-4">
               <Reorder.Group 
                 axis="y" 
                 values={value} 
@@ -192,7 +193,10 @@ export const Editor: React.FC<EditorProps> = ({ data, onChange, fileName }) => {
                     >
                       <div 
                         className={styles.arrayItemHeader} 
-                        onClick={() => toggleCollapse(itemPathKey)}
+                        onClick={(e) => {
+                          if ((e.target as HTMLElement).closest('button')) return;
+                          toggleCollapse(itemPathKey);
+                        }}
                         style={{ cursor: 'pointer' }}
                       >
                         <div className="flex items-center gap-4">
@@ -278,8 +282,9 @@ export const Editor: React.FC<EditorProps> = ({ data, onChange, fileName }) => {
                                     <CloudArrowUp size={16} weight="bold" /> 
                                     <span>Upload</span>
                                   </button>
-                                  <button className={styles.secondaryBtn} onClick={() => {
-                                    setLibraryTarget({ path: fullPath, key: index.toString(), arrayIndex: index });
+                                  <button className={styles.secondaryBtn} onClick={(e) => {
+                                    e.stopPropagation();
+                                    setLibraryTarget({ path, key, arrayIndex: index });
                                   }}>
                                     <ImageIcon size={16} weight="bold" />
                                     <span>Library</span>
@@ -308,9 +313,10 @@ export const Editor: React.FC<EditorProps> = ({ data, onChange, fileName }) => {
               <button 
                 type="button" 
                 className={styles.addBtn}
-                onClick={() => {
+                onClick={(e) => {
+                  e.stopPropagation();
                   if (label.toLowerCase() === 'gallery' || label.toLowerCase().includes('images')) {
-                    setLibraryTarget({ path, key: label });
+                    setLibraryTarget({ path, key });
                   } else {
                     const clearValues = (obj: any): any => {
                       if (Array.isArray(obj)) return obj.map(clearValues);
@@ -394,8 +400,8 @@ export const Editor: React.FC<EditorProps> = ({ data, onChange, fileName }) => {
 
       return (
         <div key={pathKey} className={styles.formGroup}>
-          <div className="flex items-center justify-between">
-            <div className={styles.collapsibleHeader} onClick={() => toggleCollapse(pathKey)}>
+          <div className="flex items-center w-full mb-2">
+            <div className={`${styles.collapsibleHeader} flex-1`} onClick={() => toggleCollapse(pathKey)}>
               <div className="flex items-center gap-3">
                 <div className={`transition-transform duration-300 ${isCollapsed ? '' : 'rotate-90'}`}>
                   <CaretRight size={18} weight="bold" className="text-accent" />
@@ -590,58 +596,50 @@ export const Editor: React.FC<EditorProps> = ({ data, onChange, fileName }) => {
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: 20 }}
               className={styles.modalContent}
-              style={{ maxWidth: '1200px', width: '90vw', height: '90vh', overflow: 'hidden', padding: 0 }}
+              style={{ maxWidth: '1200px', width: '90vw', height: '85vh', maxHeight: '85vh', overflow: 'hidden', padding: 0, display: 'flex', flexDirection: 'column', borderRadius: '24px' }}
             >
-              <div className="flex flex-col h-full">
-                <div className="flex items-center justify-between p-8 border-b border-white/5 bg-black/20">
-                  <h2 className="text-xl font-bold">Select Media</h2>
-                  <button onClick={() => setLibraryTarget(null)} className={styles.deleteBtn}>
-                    <X size={24} weight="bold" />
-                  </button>
-                </div>
-                <div className="flex-1 overflow-y-auto p-6">
-                  <MediaLibrary 
+              <div style={{ flex: 1, minHeight: 0, display: 'flex', flexDirection: 'column' }}>
+                <MediaLibrary 
+                  onClose={() => setLibraryTarget(null)}
                     isSelectMode 
-                    onSelect={(url) => {
+                    isMultiSelect={libraryTarget.key.toLowerCase().includes('gallery') || libraryTarget.key.toLowerCase().includes('images')}
+                    onSelect={(urlOrUrls) => {
                       if (!libraryTarget) return;
-
+                      
+                      const urls = Array.isArray(urlOrUrls) ? urlOrUrls : [urlOrUrls];
                       const { path, key, arrayIndex } = libraryTarget;
-                      const isGalleryAdd = key.toLowerCase().includes('gallery') && arrayIndex === undefined;
+                      const isGalleryArray = key.toLowerCase().includes('gallery') || key.toLowerCase().includes('images');
 
-                      if (isGalleryAdd) {
-                        // Append to gallery array
+                      if (isGalleryArray && arrayIndex === undefined) {
+                        // Append multiple to gallery array
                         const updatedData = deepClone(data);
                         let current = updatedData;
                         for (const p of path) {
                           current = current[p];
                         }
                         const currentValue = Array.isArray(current[key]) ? current[key] : [];
-                        current[key] = [...currentValue, url];
+                        current[key] = [...currentValue, ...urls];
                         onChange(updatedData);
                       } else if (arrayIndex !== undefined) {
-                        // Update specific index in array
+                        // Update specific index in array (take first if multi-selected by mistake)
                         const updatedData = deepClone(data);
                         let current = updatedData;
                         for (const p of path) {
                           current = current[p];
                         }
-                        // The key here is the array name, and path ends with the array name
-                        // Wait, if path includes the array name, we should go to path - 1
-                        // Let's use the robust updateNestedData logic for simplicity or fix deepClone logic
                         if (Array.isArray(current[key])) {
-                          current[key][arrayIndex] = url;
+                          current[key][arrayIndex] = urls[0];
                         }
                         onChange(updatedData);
                       } else {
                         // Simple field update
-                        updateNestedData(path, key, url);
+                        updateNestedData(path, key, urls[0]);
                       }
                       setLibraryTarget(null);
-                    }} 
+                    }}
                     onClose={() => setLibraryTarget(null)}
                   />
                 </div>
-              </div>
             </motion.div>
           </div>
         )}

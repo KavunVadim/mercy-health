@@ -33,7 +33,7 @@ export async function GET() {
 
     const zipData = await zip.generateAsync({ type: 'uint8array' });
     
-    return new NextResponse(zipData, {
+    return new NextResponse(zipData as unknown as BodyInit, {
       headers: {
         'Content-Type': 'application/zip',
         'Content-Disposition': 'attachment; filename=mercy-health-backup.zip',

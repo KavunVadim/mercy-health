@@ -22,7 +22,11 @@ import {
   DownloadSimple,
   Sun,
   Moon,
-  X
+  X,
+  ChartBar,
+  Users,
+  Article,
+  FolderStar
 } from '@phosphor-icons/react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useTheme } from '@teispace/next-themes';
@@ -32,6 +36,33 @@ interface ContentFile {
   path: string;
   type: 'data' | 'dictionary';
 }
+
+const MENU_STRUCTURE = [
+  {
+    category: "Сторінки",
+    items: [
+      { id: 'content.uk', label: 'Головна (Укр)', path: 'data/content.uk.json', icon: Layout },
+      { id: 'content.en', label: 'Головна (Англ)', path: 'data/content.en.json', icon: Layout },
+    ]
+  },
+  {
+    category: "Колекції",
+    items: [
+      { id: 'projects', label: 'Проєкти', path: 'data/projects.json', icon: FolderStar },
+      { id: 'news', label: 'Новини', path: 'data/news.json', icon: Article },
+      { id: 'reports', label: 'Звіти', path: 'data/reports.json', icon: ChartBar },
+      { id: 'partners', label: 'Партнери', path: 'data/partners.json', icon: Users },
+    ]
+  },
+  {
+    category: "Налаштування сайту",
+    items: [
+      { id: 'settings', label: 'Контакти та Футер', path: 'data/settings.json', icon: Gear },
+      { id: 'ui.uk', label: 'Інтерфейс (Укр)', path: 'src/dictionaries/uk.json', icon: Globe },
+      { id: 'ui.en', label: 'Інтерфейс (Англ)', path: 'src/dictionaries/en.json', icon: Globe },
+    ]
+  }
+];
 
 export default function DevAdminPage() {
   const [files, setFiles] = useState<ContentFile[]>([]);
@@ -172,32 +203,41 @@ export default function DevAdminPage() {
             }}
           >
             <ImageIcon size={18} weight={activeTab === 'media' ? "fill" : "bold"} />
-            <span>Media Library</span>
+            <span>Медіатека</span>
           </div>
 
-          <div className={styles.label}>Structure & Data</div>
-          {filteredFiles.filter(f => f.type === 'data').map(file => (
-            <div 
-              key={file.path}
-              className={`${styles.fileItem} ${selectedFile?.path === file.path ? styles.fileItemActive : ''}`}
-              onClick={() => loadFile(file)}
-            >
-              <Database size={18} weight={selectedFile?.path === file.path ? "fill" : "bold"} />
-              <span>{file.name}</span>
-            </div>
-          ))}
+          {MENU_STRUCTURE.map((group) => {
+            // Filter items in this group
+            const groupItems = group.items.filter(item => {
+              const fileObj = files.find(f => f.path === item.path);
+              if (!fileObj) return false;
+              if (!searchQuery) return true;
+              return item.label.toLowerCase().includes(searchQuery.toLowerCase());
+            });
 
-          <div className={styles.label}>Localization</div>
-          {filteredFiles.filter(f => f.type === 'dictionary').map(file => (
-            <div 
-              key={file.path}
-              className={`${styles.fileItem} ${selectedFile?.path === file.path ? styles.fileItemActive : ''}`}
-              onClick={() => loadFile(file)}
-            >
-              <Globe size={18} weight={selectedFile?.path === file.path ? "fill" : "bold"} />
-              <span>{file.name}</span>
-            </div>
-          ))}
+            if (groupItems.length === 0) return null;
+
+            return (
+              <React.Fragment key={group.category}>
+                <div className={styles.label}>{group.category}</div>
+                {groupItems.map(item => {
+                  const Icon = item.icon;
+                  const fileObj = files.find(f => f.path === item.path)!;
+                  const isActive = selectedFile?.path === fileObj.path;
+                  return (
+                    <div 
+                      key={item.id}
+                      className={`${styles.fileItem} ${isActive ? styles.fileItemActive : ''}`}
+                      onClick={() => loadFile(fileObj)}
+                    >
+                      <Icon size={18} weight={isActive ? "fill" : "bold"} />
+                      <span>{item.label}</span>
+                    </div>
+                  );
+                })}
+              </React.Fragment>
+            );
+          })}
         </div>
 
         <div className="p-6 mt-auto border-t border-black/5 dark:border-white/5">
@@ -247,15 +287,13 @@ export default function DevAdminPage() {
             >
               <div className={styles.header}>
                 <div>
-                  <h1 className={styles.title}>Asset Distribution</h1>
-                  <p className={styles.textMuted}>Global media library management</p>
-                </div>
-
-                <div className="flex items-center gap-3">
-                  {/* Theme toggle removed per user request */}
+                  <h1 className={styles.title}>Медіатека</h1>
+                  <p className={styles.textMuted}>Управління медіафайлами сайту</p>
                 </div>
               </div>
-              <MediaLibrary />
+              <div style={{ padding: '2rem 3rem', maxWidth: '1200px', margin: '0 auto' }}>
+                <MediaLibrary />
+              </div>
             </motion.div>
           ) : selectedFile ? (
             <motion.div

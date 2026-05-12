@@ -79,3 +79,40 @@ export async function DELETE(request: Request) {
     return NextResponse.json({ error: 'Failed to delete media' }, { status: 500 });
   }
 }
+
+export async function PATCH(request: Request) {
+  if (process.env.NODE_ENV !== 'development') {
+    return new NextResponse('Not Found', { status: 404 });
+  }
+
+  try {
+    const { oldUrl, newName } = await request.json();
+    if (!oldUrl || !newName) {
+      return NextResponse.json({ error: 'oldUrl and newName are required' }, { status: 400 });
+    }
+
+    // Convert URL back to filesystem path
+    const relativePath = oldUrl.replace('/images/', '');
+    const fullPath = path.join(process.cwd(), 'public', 'images', relativePath);
+    
+    // Security check: ensure the path is within public/images
+    const resolvedPath = path.resolve(fullPath);
+    const publicImagesDir = path.resolve(path.join(process.cwd(), 'public', 'images'));
+    
+    if (!resolvedPath.startsWith(publicImagesDir)) {
+      return NextResponse.json({ error: 'Forbidden' }, { status: 403 });
+    }
+
+    // Compute new path in the same directory
+    const dir = path.dirname(fullPath);
+    // basic sanitization for newName: avoid directory traversal
+    const safeNewName = path.basename(newName); 
+    const newFullPath = path.join(dir, safeNewName);
+
+    await fs.rename(fullPath, newFullPath);
+    return NextResponse.json({ success: true });
+  } catch (error) {
+    console.error('Error renaming media:', error);
+    return NextResponse.json({ error: 'Failed to rename media' }, { status: 500 });
+  }
+}

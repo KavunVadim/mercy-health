@@ -95,20 +95,19 @@
       "description": "Photos from the frontline and our foundation's daily work."
     },
     "others": {
-      "title": "Additional Materials",
-      "description": "Reports, documents, and other useful files for download.",
-      "documents": []
+      "description": "Reports, documents, and other useful files for download."
     }
   },
   "reports": {
     "title": "Reporting and Transparency",
-    "description": "We are open about every hryvnia spent. Here you can find our financial and operational reports.",
+    "description": "We are open in every hryvnia spent. Here you can familiarize yourself with our financial and operational reports.",
     "summary": {
-      "total_collected": "Total collected",
-      "donations_count": "Donations count",
-      "avg_donation": "Average donation"
+      "total_collected": "Total Collected",
+      "donations_count": "Number of Donations",
+      "avg_donation": "Average Donation"
     },
     "history": "Report History",
+    "transparency": "Transparency and Documents",
     "months": {
       "jan": "January",
       "feb": "February",
