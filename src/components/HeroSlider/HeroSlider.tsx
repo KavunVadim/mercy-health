@@ -49,7 +49,7 @@ export default function HeroSlider({ slides }: { slides: Slide[] }) {
   return (
     <section className={styles.viewport} ref={emblaRef}>
       <div className={styles.container}>
-        {slides.map((slide, index) => (
+        {slides?.map((slide, index) => (
           <div 
             className={clsx(styles.slide, index === selectedIndex && styles.slideActive)} 
             key={slide.id}
@@ -91,7 +91,7 @@ export default function HeroSlider({ slides }: { slides: Slide[] }) {
 
           <div className={styles.controlsRight}>
             <div className={styles.staticActions}>
-              {slides[selectedIndex]?.href.startsWith("http") ? (
+              {slides?.[selectedIndex]?.href?.startsWith("http") ? (
                 <a
                   href={slides[selectedIndex].href}
                   className={styles.cta}

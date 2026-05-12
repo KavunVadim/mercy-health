@@ -10,7 +10,7 @@ import {
   CircleNotch, 
   Globe, 
   Database, 
-  ShieldAlert, 
+  ShieldWarning, 
   MagnifyingGlass, 
   Code, 
   Layout, 
@@ -130,7 +130,7 @@ export default function DevAdminPage() {
           animate={{ opacity: 1, scale: 1 }}
           className="text-center p-12 bg-white rounded-[3rem] border border-black/5 shadow-2xl"
         >
-          <ShieldAlert size={80} weight="duotone" className="text-red-500 mx-auto mb-8" />
+          <ShieldWarning size={80} weight="duotone" className="text-red-500 mx-auto mb-8" />
           <h1 className="text-4xl font-bold font-head tracking-tighter mb-4">Access Denied</h1>
           <p className="text-zinc-500 max-w-md mx-auto">
             The Developer Administration Panel is strictly restricted to local development environments.
