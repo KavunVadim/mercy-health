@@ -7,7 +7,6 @@ import styles from "./Tabs.module.css";
 export default function GalleryTab({ dictionary }: { dictionary: any }) {
   const dict = dictionary as any;
   const { title, description, images = [] } = dict.news.gallery;
-  console.log("images",images);
   
 
   return (

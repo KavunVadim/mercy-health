@@ -179,17 +179,18 @@
 .contactLink {
   display: flex;
   align-items: center;
-  gap: 1.25rem;
+  gap: 0.75rem;
   text-decoration: none;
   color: var(--foreground);
   font-family: var(--font-e-ukraine-head), sans-serif;
   font-weight: 800;
-  font-size: 1.5rem;
+  font-size: 1.125rem;
   transition: all 0.2s ease;
-  padding: 1.25rem;
+  padding: 0.875rem 1rem;
   background: var(--muted);
-  border-radius: 20px;
+  border-radius: 16px;
   border: 1px solid var(--border);
+  word-break: break-all;
 }
 
 .contactLink:active {
@@ -211,10 +212,20 @@
   .navLinks {
     gap: 1rem;
   }
+
+  .contacts {
+    margin: 1.5rem 0;
+    gap: 0.75rem;
+  }
 }
 
 @media (max-width: 360px) {
   .link {
     font-size: 1.5rem;
+  }
+  
+  .contactLink {
+    font-size: 0.9rem;
+    padding: 0.75rem;
   }
 }
