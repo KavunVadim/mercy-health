@@ -1,5 +1,5 @@
 import type { Metadata, Viewport } from "next";
-import { Inter, Outfit } from "next/font/google";
+import localFont from "next/font/local";
 import "../globals.css";
 import "../variables.css";
 import { i18n, type Locale } from "@/i18n-config";
@@ -9,17 +9,36 @@ import ScrollToTop from "@/components/ScrollToTop";
 import { getDictionary } from "@/get-dictionary";
 import { ThemeProvider } from "@/components/ThemeProvider";
 
-const eUkraineHead = Outfit({
-  subsets: ["latin"],
-  variable: "--font-e-ukraine-head",
-  weight: "700",
-  display: "swap",
+const eUkraine = localFont({
+  src: [
+    {
+      path: "../../../public/fonts/e-Ukraine-Regular.woff2",
+      weight: "400",
+      style: "normal",
+    },
+    {
+      path: "../../../public/fonts/e-Ukraine-Medium.woff2",
+      weight: "500",
+      style: "normal",
+    },
+    {
+      path: "../../../public/fonts/e-Ukraine-Bold.woff2",
+      weight: "700",
+      style: "normal",
+    },
+  ],
+  variable: "--font-e-ukraine",
 });
 
-const eUkraine = Inter({
-  subsets: ["latin", "cyrillic"],
-  variable: "--font-e-ukraine",
-  display: "swap",
+const eUkraineHead = localFont({
+  src: [
+    {
+      path: "../../../public/fonts/e-UkraineHead-Bold.woff2",
+      weight: "700",
+      style: "normal",
+    },
+  ],
+  variable: "--font-e-ukraine-head",
 });
 
 export async function generateStaticParams() {
