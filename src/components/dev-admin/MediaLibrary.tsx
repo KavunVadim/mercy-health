@@ -13,7 +13,9 @@ import {
   CircleNotch,
   CloudArrowUp,
   X,
-  FileArrowUp
+  FileArrowUp,
+  CheckCircle,
+  ArrowsClockwise
 } from '@phosphor-icons/react';
 import { motion, AnimatePresence } from 'framer-motion';
 
@@ -23,7 +25,13 @@ interface MediaFile {
   path: string;
 }
 
-export const MediaLibrary = () => {
+interface MediaLibraryProps {
+  onSelect?: (url: string) => void;
+  isSelectMode?: boolean;
+  onClose?: () => void;
+}
+
+export const MediaLibrary: React.FC<MediaLibraryProps> = ({ onSelect, isSelectMode, onClose }) => {
   const [files, setFiles] = useState<MediaFile[]>([]);
   const [loading, setLoading] = useState(true);
   const [uploading, setUploading] = useState(false);
@@ -103,11 +111,11 @@ export const MediaLibrary = () => {
   return (
     <div className={styles.mediaLibrary}>
       <div className={styles.mediaControls}>
-        <div className={styles.searchContainer} style={{ maxWidth: '400px', flex: 1, margin: 0 }}>
+        <div className={styles.searchContainer}>
           <MagnifyingGlass size={18} className={styles.searchIcon} />
           <input 
             className={styles.searchInput}
-            placeholder="Search images..."
+            placeholder="Search assets by name..."
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
           />
@@ -138,9 +146,10 @@ export const MediaLibrary = () => {
           </button>
 
           <button className={styles.secondaryBtn} onClick={fetchMedia}>
-            <Folder size={18} weight="bold" />
+            <ArrowsClockwise size={18} weight="bold" />
             Refresh
           </button>
+
         </div>
       </div>
 
@@ -160,29 +169,45 @@ export const MediaLibrary = () => {
             {filteredFiles.map((file, i) => (
               <motion.div 
                 key={file.url} 
-                className={styles.mediaCard}
+                className={`${styles.mediaCard} ${isSelectMode ? 'cursor-pointer hover:border-accent' : ''}`}
                 initial={{ opacity: 0, scale: 0.9 }}
                 animate={{ opacity: 1, scale: 1 }}
                 exit={{ opacity: 0, scale: 0.9 }}
                 layout
+                onClick={() => isSelectMode && onSelect?.(file.url)}
               >
                 <div className={styles.mediaPreview}>
                   <img src={file.url} alt={file.name} loading="lazy" />
                   <div className={styles.mediaOverlay}>
-                    <button 
-                      className={styles.mediaActionBtn}
-                      onClick={() => copyToClipboard(file.url, i)}
-                      title="Copy path"
-                    >
-                      {copiedIndex === i ? <Check size={20} className="text-emerald-500" /> : <Copy size={20} />}
-                    </button>
-                    <button 
-                      className={`${styles.mediaActionBtn} ${styles.mediaDeleteBtn}`}
-                      onClick={() => deleteImage(file.url)}
-                      title="Delete file"
-                    >
-                      <Trash size={20} />
-                    </button>
+                    {isSelectMode ? (
+                      <div className="flex flex-col items-center gap-2">
+                        <CheckCircle size={32} weight="fill" className="text-white" />
+                        <span className="text-white text-xs font-bold uppercase">Click to Select</span>
+                      </div>
+                    ) : (
+                      <>
+                        <button 
+                          className={styles.mediaActionBtn}
+                          onClick={(e) => {
+                            e.stopPropagation();
+                            copyToClipboard(file.url, i);
+                          }}
+                          title="Copy path"
+                        >
+                          {copiedIndex === i ? <Check size={20} className="text-emerald-500" /> : <Copy size={20} />}
+                        </button>
+                        <button 
+                          className={`${styles.mediaActionBtn} ${styles.mediaDeleteBtn}`}
+                          onClick={(e) => {
+                            e.stopPropagation();
+                            deleteImage(file.url);
+                          }}
+                          title="Delete file"
+                        >
+                          <Trash size={20} />
+                        </button>
+                      </>
+                    )}
                   </div>
                 </div>
                 <div className={styles.mediaInfo}>

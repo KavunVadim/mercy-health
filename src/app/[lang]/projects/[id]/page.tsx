@@ -13,9 +13,6 @@ interface Project {
   short_description?: string;
   full_description?: string;
   description?: string;
-  collected: number;
-  goal?: number;
-  unit: string;
   gallery?: string[];
 }
 

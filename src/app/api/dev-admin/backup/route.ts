@@ -31,9 +31,9 @@ export async function GET() {
       }
     }
 
-    const blob = await zip.generateAsync({ type: 'nodebuffer' });
-
-    return new NextResponse(blob, {
+    const zipData = await zip.generateAsync({ type: 'uint8array' });
+    
+    return new NextResponse(zipData, {
       headers: {
         'Content-Type': 'application/zip',
         'Content-Disposition': 'attachment; filename=mercy-health-backup.zip',

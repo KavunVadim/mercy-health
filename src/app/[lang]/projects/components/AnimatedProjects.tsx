@@ -11,11 +11,6 @@ type Project = {
   description: string;
   short_description?: string;
   image: string;
-  collected: number;
-  goal?: number;
-  unit: string;
-  category?: string;
-  status?: string;
 };
 
 interface AnimatedProjectsProps {
@@ -61,10 +56,6 @@ export default function AnimatedProjects({ projects, dictionary, lang }: Animate
             title={project.title}
             description={project.short_description || project.description}
             image={project.image}
-            collected={project.collected}
-            goal={project.goal || 0}
-            category={project.category}
-            status={project.status}
             dictionary={dictionary}
             lang={lang as Locale}
           />

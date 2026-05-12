@@ -2,11 +2,6 @@
   "projects": [
     {
       "id": "reanimobili-na-front",
-      "slug": "reanimobili-na-front",
-      "category": "vehicles",
-      "status": "active",
-      "priority": 1,
-      "featured": true,
       "image": "/images/projects/reanimobili.png",
       "title": {
         "uk": "Реанімобілі на фронт",
@@ -20,19 +15,10 @@
         "uk": "Проєкт «Шлях милосердя» — це наша ключова ініціатива, спрямована на порятунок життів українських захисників та цивільного населення в зонах активних бойових дій. Кожен реанімобіль, який ми передаємо на фронт, — це не просто транспорт, а повноцінний мобільний стабілізаційний пункт на колесах.",
         "en": "The 'Path of Mercy' project is our key initiative aimed at saving the lives of Ukrainian defenders and civilians in active combat zones. Every ambulance we hand over to the front is not just transport, but a full-fledged mobile stabilization point on wheels."
       },
-      "collected": 12500000,
-      "goal": 20000000,
-      "unit": {
-        "uk": "грн",
-        "en": "UAH"
-      }
+      "gallery": []
     },
     {
       "id": "tactical-med-standard",
-      "slug": "tactical-med-standard",
-      "category": "medical",
-      "status": "active",
-      "priority": 2,
       "image": "/images/projects/tactical_med.png",
       "title": {
         "uk": "Стандарти такмеду",
@@ -42,19 +28,14 @@
         "uk": "Забезпечення підрозділів сертифікованими турнікетами та аптечками стандарту НАТО.",
         "en": "Providing units with certified tourniquets and NATO-standard medical kits."
       },
-      "collected": 4800000,
-      "goal": 8000000,
-      "unit": {
-        "uk": "грн",
-        "en": "UAH"
-      }
+      "full_description": {
+        "uk": "",
+        "en": ""
+      },
+      "gallery": []
     },
     {
       "id": "mobile-hospitals",
-      "slug": "mobile-hospitals",
-      "category": "medical",
-      "status": "active",
-      "priority": 3,
       "image": "/images/projects/mobile_hospital.png",
       "title": {
         "uk": "Мобільні госпіталі",
@@ -64,19 +45,14 @@
         "uk": "Створення та розгортання автономних медичних стабілізаційних пунктів поблизу лінії фронту.",
         "en": "Creation and deployment of autonomous medical stabilization points near the front line."
       },
-      "collected": 15600000,
-      "goal": 25000000,
-      "unit": {
-        "uk": "грн",
-        "en": "UAH"
-      }
+      "full_description": {
+        "uk": "",
+        "en": ""
+      },
+      "gallery": []
     },
     {
       "id": "rehabilitation-center",
-      "slug": "rehabilitation-center",
-      "category": "social",
-      "status": "active",
-      "priority": 4,
       "image": "/images/projects/rehabilitation.png",
       "title": {
         "uk": "Центр реабілітації",
@@ -86,18 +62,11 @@
         "uk": "Програма фізичного та психологічного відновлення для військових та цивільних.",
         "en": "Physical and psychological recovery program for military and civilians."
       },
-      "collected": 2100000,
-      "goal": 10000000,
-      "unit": {
-        "uk": "грн",
-        "en": "UAH"
-      }
+      "full_description": {
+        "uk": "",
+        "en": ""
+      },
+      "gallery": []
     }
-  ],
-  "categories": [
-    { "id": "all", "label": { "uk": "Усі", "en": "All" } },
-    { "id": "vehicles", "label": { "uk": "Авто", "en": "Vehicles" } },
-    { "id": "medical", "label": { "uk": "Медтехніка", "en": "Medical" } },
-    { "id": "social", "label": { "uk": "Соціальні", "en": "Social" } }
   ]
 }

@@ -86,8 +86,7 @@
     "no_articles": "News articles will be listed here soon.",
     "tabs": {
       "news": "News",
-      "gallery": "Gallery",
-      "others": "Others"
+      "gallery": "Gallery"
     },
     "more": "All materials",
     "items": [],
@@ -189,27 +188,7 @@
   "hero": {
     "partners_description": "Our partners, who help us realize our mission."
   },
-  "footer": {
-    "address_title": "Address",
-    "address_foundation": "Kyiv, Ukraine",
-    "foundation_phone": "+380 93 351 62 00",
-    "foundation_email": "info@mercyandhealth.org",
-    "columns": {
-      "foundation": "Foundation",
-      "projects": "Projects",
-      "socials": "Social Media",
-      "contacts": "Contacts",
-      "legal": "Legal Information"
-    },
-    "social_links": {
-      "facebook": "https://www.facebook.com/mercyandhealth",
-      "instagram": "https://www.instagram.com/mercy_health_foundation/",
-      "instagram_rehab": "https://www.instagram.com/rehab_mercy_and_health",
-      "tiktok": "https://www.tiktok.com/@mercy_health_foundation?_t=8kRiIEepl2b",
-      "telegram": "https://t.me/mercyandhealth"
-    },
-    "copyright": "© 2026 Mercy and Health. All rights reserved."
-  },
+  "footer": {},
   "newsletter": {
     "title": "Stay Informed",
     "description": "Subscribe to our newsletter to receive news about projects and reports.",

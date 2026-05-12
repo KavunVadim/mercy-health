@@ -8,11 +8,8 @@ interface ProjectProps {
   title: string;
   description: string;
   image: string;
-  collected: number | string;
-  goal: number | string;
   category?: string;
   status?: string;
-  unit?: string;
   dictionary: any;
   lang: Locale;
 }
@@ -22,19 +19,11 @@ export default function ProjectCard({
   title,
   description,
   image,
-  collected,
-  goal,
   category,
   status,
-  unit,
   dictionary,
   lang,
 }: ProjectProps) {
-  const collNum = typeof collected === "string" ? parseFloat(collected.replace(/[^0-9.]/g, "")) : collected;
-  const goalNum = typeof goal === "string" ? parseFloat(goal.replace(/[^0-9.]/g, "")) : goal;
-  
-  const progress = goalNum ? Math.min(Math.round((collNum / goalNum) * 100), 100) : 0;
-  const numberLocale = lang === "uk" ? "uk-UA" : "en-US";
   const hasMeta = Boolean(category || status);
 
   return (

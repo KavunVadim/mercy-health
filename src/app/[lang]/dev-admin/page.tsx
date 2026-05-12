@@ -252,12 +252,7 @@ export default function DevAdminPage() {
                 </div>
 
                 <div className="flex items-center gap-3">
-                  <button 
-                    className={styles.secondaryBtn} 
-                    onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')}
-                  >
-                    {mounted && (theme === 'dark' ? <Sun size={20} weight="bold" /> : <Moon size={20} weight="bold" />)}
-                  </button>
+                  {/* Theme toggle removed per user request */}
                 </div>
               </div>
               <MediaLibrary />
@@ -294,15 +289,6 @@ export default function DevAdminPage() {
                       Raw Schema
                     </button>
                   </div>
-
-                  <div className="w-[1px] h-6 bg-text opacity-10 mx-2" />
-
-                  <button 
-                    className={styles.secondaryBtn} 
-                    onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')}
-                  >
-                    {mounted && (theme === 'dark' ? <Sun size={18} weight="bold" /> : <Moon size={18} weight="bold" />)}
-                  </button>
                   
                   <button 
                     className={styles.saveBtn} 

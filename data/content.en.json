@@ -39,43 +39,9 @@
     }
   },
   "news": {
-    "items": [
-      {
-        "id": "1",
-        "date": "19.04.2026",
-        "title": "New batch of ambulances sent to Bakhmut direction",
-        "description": "Providing medics at the most intense frontline areas with necessary transport for evacuation.",
-        "image": "/images/news/ambulances_convoy.png"
-      },
-      {
-        "id": "2",
-        "date": "17.04.2026",
-        "title": "New medical equipment delivered to stabilization point in Kharkiv region",
-        "description": "Handed over scarce medical supplies and equipment for providing first aid to the wounded.",
-        "image": "/images/news/medical_equipment.png"
-      },
-      {
-        "id": "3",
-        "date": "15.04.2026",
-        "title": "Aid to orphanages and institutions for the elderly",
-        "description": "Continuing to support vulnerable groups of the population under martial law.",
-        "image": "/images/news/elders_support.png"
-      },
-      {
-        "id": "4",
-        "date": "12.04.2026",
-        "title": "Repair of mobile hospital for frontline areas completed",
-        "description": "The mobile hospital is again ready for deployment and receiving patients in field conditions.",
-        "image": "/images/news/field_hospital_repair.png"
-      }
-    ],
+    "items": [],
     "others": {
-      "documents": [
-        "Annual Foundation Report 2025",
-        "Foundation Charter",
-        "Financial Audit 2025",
-        "Presentation for Partners"
-      ]
+      "documents": []
     }
   },
   "support": {

@@ -35,8 +35,6 @@ export default async function Home({
                     title={(project as any).title}
                     description={(project as any).short_description || (project as any).description}
                     image={(project as any).image}
-                    collected={(project as any).collected}
-                    goal={(project as any).goal}
                     id={(project as any).id}
                     dictionary={dictionary as any}
                     lang={locale}

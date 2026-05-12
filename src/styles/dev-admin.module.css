@@ -221,66 +221,69 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 1.5rem 3rem;
-  background-color: var(--glass-bg);
-  backdrop-filter: blur(var(--glass-blur));
-  -webkit-backdrop-filter: blur(var(--glass-blur));
+  padding: 1.25rem 2rem;
+  background-color: var(--sidebar-bg); /* Solid background for sticky header */
   border-bottom: 1px solid var(--glass-border);
-  z-index: 100;
-  margin-left: -3rem;
-  margin-right: -3rem;
-  margin-bottom: 3rem;
+  z-index: 110;
+  margin-bottom: 0;
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.03);
 }
 
 .title {
-  font-size: 1.5rem;
-  font-weight: 800;
-  letter-spacing: -0.02em;
+  font-size: 1.25rem;
+  font-weight: 850;
+  letter-spacing: -0.03em;
   margin: 0;
+  color: var(--text);
 }
 
 .textMuted {
-  color: var(--text-muted);
-  font-size: 0.9rem;
+  color: var(--text-dim);
+  font-size: 0.8rem;
+  font-weight: 500;
 }
 
 .viewToggle {
-  background: var(--sidebar-bg);
-  padding: 4px;
-  border-radius: var(--radius-md);
+  background: var(--background);
+  padding: 2px;
+  border-radius: 12px;
   display: flex;
   gap: 2px;
   border: 1px solid var(--glass-border);
 }
 
 .toggleBtn {
-  padding: 0.5rem 1.25rem;
-  border-radius: var(--radius-md);
-  font-size: 0.85rem;
-  font-weight: 600;
-  color: var(--text-muted);
-  transition: all 0.2s;
+  padding: 0.4rem 1rem;
+  border-radius: 10px;
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: var(--text-dim);
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  border: none;
+  background: transparent;
+  cursor: pointer;
 }
 
 .toggleBtnActive {
-  background: var(--background);
+  background: var(--sidebar-bg);
   color: var(--accent);
-  box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+  box-shadow: 0 2px 8px rgba(0,0,0,0.05);
 }
 
 .saveBtn {
-  background: var(--accent-gradient);
+  background: var(--accent);
   color: white;
-  padding: 0.75rem 1.5rem;
-  border-radius: var(--radius-full);
-  font-weight: 700;
-  font-size: 0.9rem;
+  padding: 0.65rem 1.5rem;
+  border-radius: 14px;
+  font-weight: 800;
+  font-size: 0.85rem;
   display: flex;
   align-items: center;
-  gap: 0.75rem;
-  box-shadow: 0 4px 12px rgba(37, 99, 235, 0.3);
-  transition: all var(--transition-normal);
-  border: none;
+  gap: 0.6rem;
+  box-shadow: 0 4px 14px rgba(37, 99, 235, 0.25);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  border: 1px solid rgba(255,255,255,0.1);
+  cursor: pointer;
 }
 
 .saveBtn:hover:not(:disabled) {
@@ -334,17 +337,18 @@
 .collapsibleHeader {
   display: flex;
   align-items: center;
-  gap: 1rem;
+  justify-content: space-between;
+  padding: 1rem;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  border-radius: 12px;
   cursor: pointer;
-  padding: 0.5rem;
-  margin: -0.5rem;
-  border-radius: var(--radius-md);
-  transition: background 0.2s;
-  width: 100%;
+  transition: all 0.2s ease;
 }
 
 .collapsibleHeader:hover {
-  background: var(--accent-soft);
+  background: rgba(255, 255, 255, 0.05);
+  border-color: var(--accent);
 }
 
 .input, .textarea, .rawJsonEditor {
@@ -409,7 +413,7 @@
   justify-content: center;
   gap: 0.75rem;
   padding: 1.25rem;
-  background: var(--background);
+  background: transparent;
   color: var(--accent);
   border: 2px dashed var(--glass-border);
   border-radius: var(--radius-xl);
@@ -417,30 +421,35 @@
   font-size: 0.85rem;
   text-transform: uppercase;
   letter-spacing: 0.05em;
-  transition: all var(--transition-normal);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   margin-top: 1rem;
 }
 
 .addBtn:hover {
   background: var(--accent-soft);
   border-color: var(--accent);
-  transform: scale(1.01);
+  border-style: solid;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px -8px rgba(37, 99, 235, 0.3);
 }
 
 .imageFieldRow {
   display: flex;
-  gap: 1.5rem;
-  align-items: flex-start;
+  gap: 2rem;
+  align-items: stretch;
 }
 
 .imagePreview {
-  width: 120px;
-  height: 120px;
+  width: 140px;
+  aspect-ratio: 1;
   background: var(--background);
-  border-radius: var(--radius-md);
+  border-radius: var(--radius-lg);
   overflow: hidden;
   border: 1px solid var(--glass-border);
   flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .imagePreview img {
@@ -459,36 +468,67 @@
 .secondaryBtn {
   background: var(--sidebar-bg);
   border: 1px solid var(--glass-border);
-  padding: 0.75rem 1.25rem;
-  border-radius: 999px;
-  font-size: 0.875rem;
+  padding: 0.6rem 1.25rem;
+  border-radius: var(--radius-full);
+  font-size: 0.85rem;
   font-weight: 700;
   display: flex;
   align-items: center;
   gap: 0.5rem;
   transition: all 0.2s;
+  color: var(--text-muted);
 }
 
 .secondaryBtn:hover {
-  background: var(--background);
-  border-color: var(--text-muted);
+  background: var(--accent-soft);
+  color: var(--accent);
+  border-color: var(--accent-soft);
+}
+
+.uploadBtn {
+  background: var(--accent);
+  color: white;
+  padding: 0.6rem 1.25rem;
+  border-radius: var(--radius-full);
+  font-size: 0.85rem;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  transition: all 0.2s;
+  border: none;
+}
+
+.uploadBtn:hover {
+  background: var(--accent-hover);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(37, 99, 235, 0.2);
 }
 
 .mediaLibrary {
   display: flex;
   flex-direction: column;
-  gap: 2rem;
+  padding: 2rem;
 }
 
 .mediaControls {
   display: flex;
-  justify-content: space-between;
   align-items: center;
-  gap: 1.5rem;
+  justify-content: space-between;
+  gap: 2rem;
+  margin-bottom: 2rem;
   background: var(--sidebar-bg);
-  padding: 1rem;
-  border-radius: var(--radius-md);
+  padding: 1.25rem 1.5rem;
+  border-radius: 16px;
   border: 1px solid var(--glass-border);
+  flex-wrap: wrap;
+}
+
+.mediaControls .searchContainer {
+  margin: 0;
+  flex: 1;
+  min-width: 280px;
+  max-width: 600px;
 }
 
 .mediaGrid {
@@ -689,18 +729,18 @@
   display: flex;
   align-items: center;
   gap: 0.75rem;
-  background: var(--glass);
+  background: var(--background);
   border: 1px solid var(--glass-border);
-  padding: 0.5rem 1.25rem;
+  padding: 0.6rem 1.5rem;
   border-radius: 99px;
-  width: 240px;
-  box-shadow: var(--glass-refraction);
+  width: 280px;
+  box-shadow: var(--shadow-sm);
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .miniSearch:focus-within {
   border-color: var(--accent);
-  width: 320px;
+  width: 400px;
   box-shadow: var(--shadow-glow);
 }
 
@@ -751,39 +791,35 @@
   transform: translateY(-1px);
 }
 
+
 .arrayItemHeader {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 1rem 1.5rem;
+  padding: 1.25rem;
+  background: rgba(255, 255, 255, 0.03);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  transition: all 0.2s ease;
+}
+
+.arrayItemHeader:hover {
   background: var(--background);
-  border-bottom: 1px solid transparent;
-  transition: all var(--transition-fast);
 }
 
 .arrayItem:not(.collapsed) .arrayItemHeader {
   border-bottom-color: var(--glass-border);
-  background: var(--sidebar-bg);
+  background: var(--background);
 }
 
 .itemBadge {
-  background: var(--accent-soft);
-  color: var(--accent);
+  background: var(--background);
+  color: var(--text-muted);
   font-size: 0.7rem;
-  padding: 0.15rem 0.5rem;
+  padding: 0.2rem 0.6rem;
   border-radius: var(--radius-sm);
   font-weight: 800;
   font-family: var(--font-mono);
-}
-
-.itemBadge {
-  background: var(--accent-soft);
-  color: var(--accent);
-  font-size: 0.7rem;
-  padding: 0.15rem 0.5rem;
-  border-radius: var(--radius-sm);
-  font-weight: 800;
-  font-family: var(--font-mono);
+  border: 1px solid var(--glass-border);
 }
 
 .inputWrapper {
@@ -832,16 +868,16 @@
 
 .editorToolbar {
   position: sticky;
-  top: 72px; /* Below main header */
+  top: 72px;
   z-index: 100;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 0.75rem 2rem;
-  background: var(--background);
+  padding: 1rem 2rem;
+  background-color: var(--background); /* Match background for seamless sticky */
   border-bottom: 1px solid var(--glass-border);
-  margin: 0 -2rem 2rem -2rem;
-  backdrop-filter: blur(12px);
+  margin: 0 -2rem 1.5rem -2rem;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
 }
 
 .langSwitcher {
@@ -1063,7 +1099,7 @@
 }
 
 .cropperHeader {
-  padding: 1rem 1.5rem;
+  padding: 1.5rem 2rem;
   display: flex;
   align-items: center;
   justify-content: space-between;

@@ -12,19 +12,17 @@ export default async function ReportsPage({
   const locale = lang as Locale;
   const dictionary = await getDictionary(locale);
 
-  // Mock data for summary
-  const summaryData = {
-    total: "12,450,000",
-    donations: "8,320",
-    average: "1,500"
+  // Data from dictionary/reports.json
+  const reportsList = dictionary.reports.reports || [];
+  
+  // Calculate summary if not provided in JSON
+  const summaryData = dictionary.reports.summary || {
+    total: reportsList.reduce((acc: number, curr: any) => acc + (curr.stats?.raised || 0), 0).toLocaleString(),
+    donations: reportsList.reduce((acc: number, curr: any) => acc + (curr.stats?.projects_count || 0), 0).toString(),
+    average: reportsList.length > 0 
+      ? Math.round(reportsList.reduce((acc: number, curr: any) => acc + (curr.stats?.raised || 0), 0) / reportsList.length / 100).toLocaleString() 
+      : "0"
   };
-
-  // Mock data for monthly reports
-  const monthlyReports = [
-    { month: dictionary.reports.months.mar, year: "2026", amount: "4,200,000", id: "mar26" },
-    { month: dictionary.reports.months.feb, year: "2026", amount: "3,850,000", id: "feb26" },
-    { month: dictionary.reports.months.jan, year: "2026", amount: "4,400,000", id: "jan26" },
-  ];
 
   return (
     <main className={styles.main}>
@@ -57,13 +55,18 @@ export default async function ReportsPage({
         <div className="container">
           <h2 className={styles.sectionTitle}>{dictionary.reports.history}</h2>
           <div className={styles.reportList}>
-            {monthlyReports.map((report) => (
+            {reportsList.map((report: any) => (
               <div key={report.id} className={styles.reportItem}>
                 <div className={styles.reportInfo}>
-                  <span className={styles.reportMonth}>{report.month} {report.year}</span>
-                  <span className={styles.reportAmount}>{report.amount} ₴</span>
+                  <div className="flex flex-col">
+                    <span className={styles.reportMonth}>{report.title}</span>
+                    <span className="text-xs opacity-50">{report.period}</span>
+                  </div>
+                  <span className={styles.reportAmount}>{report.stats?.raised?.toLocaleString() || 0} ₴</span>
                 </div>
-                <button className={styles.downloadBtn}>PDF</button>
+                <a href={report.pdf_url} target="_blank" rel="noopener noreferrer" className={styles.downloadBtn}>
+                  PDF
+                </a>
               </div>
             ))}
           </div>

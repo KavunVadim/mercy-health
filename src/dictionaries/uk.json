@@ -86,8 +86,7 @@
     "no_articles": "Новини будуть додані найближчим часом.",
     "tabs": {
       "news": "Новини",
-      "gallery": "Галерея",
-      "others": "Інше"
+      "gallery": "Галерея"
     },
     "more": "Всі матеріали",
     "items": [],
@@ -192,23 +191,7 @@
   "footer": {
     "address_title": "Адреса",
     "address_foundation": "м. Київ, Україна",
-    "foundation_phone": "+380 93 351 62 00",
-    "foundation_email": "info@mercyandhealth.org",
-    "columns": {
-      "foundation": "Фонд",
-      "projects": "Проєкти",
-      "socials": "Соцмережі",
-      "contacts": "Контакти",
-      "legal": "Юридична інформація"
-    },
-    "social_links": {
-      "facebook": "https://www.facebook.com/mercyandhealth",
-      "instagram": "https://www.instagram.com/mercy_health_foundation/",
-      "instagram_rehab": "https://www.instagram.com/rehab_mercy_and_health",
-      "tiktok": "https://www.tiktok.com/@mercy_health_foundation?_t=8kRiIEepl2b",
-      "telegram": "https://t.me/mercyandhealth"
-    },
-    "copyright": "© 2026 Милосердя та Здоров'я. Всі права захищені."
+    "copyright": "© 2026 Mercy and Health. Усі права захищені."
   },
   "newsletter": {
     "title": "Будьте в курсі",

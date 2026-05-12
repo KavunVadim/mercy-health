@@ -10,9 +10,6 @@ type Project = {
   description: string;
   short_description?: string;
   image: string;
-  collected: number;
-  goal?: number;
-  unit: string;
 };
 
 export default async function ProjectsPage({

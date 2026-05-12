@@ -76,22 +76,44 @@ export const getDictionary = async (locale: Locale) => {
         localizedNews = localizeData(newsRaw.news || newsRaw, locale);
     } catch (e) {}
 
+    // 5. Load reports and localize them
+    const reportsPath = path.join(dataDir, 'reports.json');
+    let localizedReports = { summary: {}, history: [] };
+    try {
+        const reportsRaw = JSON.parse(await fs.readFile(reportsPath, 'utf8'));
+        localizedReports = localizeData(reportsRaw, locale);
+    } catch (e) {}
+
+    // 6. Load settings and localize them
+    const settingsPath = path.join(dataDir, 'settings.json');
+    let localizedSettings = {};
+    try {
+        const settingsRaw = JSON.parse(await fs.readFile(settingsPath, 'utf8'));
+        localizedSettings = localizeData(settingsRaw, locale);
+    } catch (e) {}
+
     // Deep merge base translations with content data
     const mergedDictionary = deepMerge(baseDictionary, contentData);
 
+    const finalDictionary = deepMerge(mergedDictionary, localizedSettings);
+
     // Override specific items that need custom localization or structure
     return {
-      ...mergedDictionary,
+      ...finalDictionary,
       projects: {
-        ...mergedDictionary.projects,
+        ...finalDictionary.projects,
         items: localizedProjects
       },
       news: {
-        ...mergedDictionary.news,
+        ...finalDictionary.news,
         ...contentData.news, // Preserve potential data-specific news metadata
         items: localizedNews
       },
-      partners: localizedPartners
+      partners: localizedPartners,
+      reports: {
+        ...finalDictionary.reports,
+        ...localizedReports
+      }
     };
   } catch (error) {
     console.warn(`Could not load all data files for locale ${locale}, falling back to dictionary.`, error);
