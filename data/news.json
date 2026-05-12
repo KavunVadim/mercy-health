@@ -1,0 +1,18 @@
+{
+  "news": [
+    {
+      "id": "reanimobiles-delivered",
+      "date": "2024-03-15",
+      "image": "/images/news/IMG_9487.JPG",
+      "title": {
+        "uk": "Нова партія реанімобілів вирушила на передову",
+        "en": "New batch of ambulances sent to the frontline"
+      },
+      "description": {
+        "uk": "Завдяки вашій підтримці ми змогли передати ще 3 автомобілі для евакуації поранених.",
+        "en": "Thanks to your support, we were able to deliver 3 more vehicles for the evacuation of the wounded."
+      },
+      "slug": "reanimobiles-delivered"
+    }
+  ]
+}

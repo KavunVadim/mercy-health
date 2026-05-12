@@ -108,7 +108,6 @@
   border-left: 3px solid color-mix(in oklab, var(--accent) 80%, transparent);
   padding-left: 1.25rem;
   filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.5));
-  position: relative;
 }
 
 .donateBtn {
@@ -292,22 +291,6 @@
     margin-bottom: 32px;
     max-width: 100%;
     -webkit-line-clamp: 3;
-    
-    /* Mobile adaptation for accent line */
-    border-left: none;
-    padding-left: 0;
-    padding-top: 1.25rem;
-  }
-  .description::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 60px;
-    height: 3px;
-    background: color-mix(in oklab, var(--accent) 80%, transparent);
-    border-radius: 2px;
   }
   .cta {
     padding: 1rem 2.5rem;

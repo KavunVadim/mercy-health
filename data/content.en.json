@@ -1,257 +1,111 @@
 {
-  "site": {
-    "name": "Charitable Foundation «Mercy and Health»",
-    "tagline": "Together for Victory",
-    "description": "Charitable Foundation 'Mercy & Health' — we help the army, provide equipment for stabilization points, and support the civilian population during the war.",
-    "phone_fund": "093-351-62-00",
-    "email": "info@fond.specter-it.site",
-    "address": "Vinnytsia, Ukraine",
-    "social": {
-      "facebook": "",
-      "instagram": "",
-      "telegram": ""
-    }
-  },
-  "nav": {
-    "fund": "Charitable Foundation",
-    "about": "About Us",
-    "history": "Fund History",
-    "general_info": "General Information",
-    "gallery": "Photos",
-    "team": "Team",
-    "projects": "Projects",
-    "hospitals": "Hospitals",
-    "stab_points": "Stabilization Points",
-    "social_activity": "Social Activity",
-    "orphanages": "Orphanages",
-    "elderly_homes": "Elderly Care",
-    "animal_help": "Animal Aid",
-    "community": "Community Cooperation",
-    "tacmed": "TacMed",
-    "ambulances": "Ambulances",
-    "vehicles": "Special Vehicles",
-    "pickups": "Pickup Trucks",
-    "armored": "Armored Vehicles",
-    "inclusive_transport": "Inclusive Transport",
-    "na_shchiti": "«Na Shchiti» Program",
-    "fundraising": "Fundraising",
-    "communication": "Communications",
-    "drones": "Drones",
-    "reb": "Electronic Warfare",
-    "med_equipment": "Medical Equipment",
-    "partners": "Partners",
-    "reports": "Reports",
-    "contacts": "Contacts",
-    "donate": "Donate",
-    "branches": "Branches"
-  },
   "hero_slider": [
     {
-      "id": "slide-1",
-      "badge": "PROJECTS",
-      "title": "Ambulances for the Front Line",
-      "description": "Providing combat medics with specialized vehicles to save the lives of our defenders.",
-      "image": "https://images.unsplash.com/photo-1583321500900-82807e458f3c?auto=format&fit=crop&q=80&w=1600",
-      "cta": "Learn more",
-      "href": "/projects/ambulances"
+      "id": "reanimobile-frontline",
+      "badge": "YouTube",
+      "title": "Ambulance — to the Frontline",
+      "description": "Expanding the frontline medical fleet with a modern ambulance for rapid evacuation and saving the lives of our defenders.",
+      "image": "/images/hero/reanimobile_frontline.jpg",
+      "cta": "Watch video",
+      "href": "https://youtu.be/jO78_rVQ94I"
     },
     {
-      "id": "slide-2",
-      "badge": "NEWS",
-      "title": "New Humanitarian Shipment",
-      "description": "Delivered over 10 tons of medicine and equipment to frontline hospitals in Kharkiv region.",
-      "image": "https://images.unsplash.com/photo-1593113598332-cd288d649433?auto=format&fit=crop&q=80&w=1600",
+      "id": "voda-donechchyna",
+      "badge": "Pro100Media",
+      "title": "\"Water for Life\": Building Wells in Donetsk Region",
+      "description": "A large-scale project aimed at improving water supply in a region where access to water is critical.",
+      "image": "/images/hero/voda-donechchyna.jpg",
       "cta": "Read article",
-      "href": "/news/humanitarian-aid"
-    },
-    {
-      "id": "slide-3",
-      "badge": "REPORTING",
-      "title": "Monthly Work Results",
-      "description": "Your donations in action: see the detailed report on how we helped the AFU last month.",
-      "image": "https://images.unsplash.com/photo-1576091160550-2173dad99978?auto=format&fit=crop&q=80&w=1600",
-      "cta": "View report",
-      "href": "/reports"
+      "href": "https://pro100media.com.ua/eksklyuzyv/voda-zarady-zhyttya-yak-na-donechchyni-buduyut-sverdlovyny-dlya-bezperebijnogo-vodozabezpechennya-ta-yaka-z-tsogo-koryst-kramatortsyam/"
     }
   ],
-  "hero": {
-    "headline": "Supporting Those Who Defend Ukraine",
-    "subheadline": "Help for the army, medical equipment, community support — every day since 2022",
-    "cta_primary": "Donate Now",
-    "cta_secondary": "Learn More",
-    "scroll_hint": "Scroll down"
-  },
   "stats": {
-    "title": "Our Impact in Numbers",
-    "items": [
-      { "label": "Aid Provided", "value": 15000, "suffix": "+" },
-      { "label": "Partners", "value": 120, "suffix": "+" },
-      { "label": "Regions Covered", "value": 18, "suffix": "" },
-      { "label": "Volunteers", "value": 350, "suffix": "+" }
-    ]
+    "collected_value": "12.4M ₴",
+    "helped_value": "15.2K",
+    "donors_value": "8.3K"
   },
-  "projects_section": {
-    "title": "Active Campaigns & Projects",
-    "subtitle": "Your support saves lives every day",
-    "view_all": "All Projects",
-    "filters": {
-      "all": "All",
-      "hospitals": "Hospitals",
-      "vehicles": "Vehicles",
-      "drones": "Drones",
-      "medical": "Medical",
-      "social": "Social"
+  "about": {
+    "history": {
+      "title": "Our History",
+      "content": "Charitable Foundation 'Mercy and Health' was founded in 2016 with the goal of providing assistance to the population, medical and social institutions and organizations of any form of ownership.\n\nOur main areas of activity include providing essential medicines and medical equipment, providing consulting and rehabilitation assistance, supplying food, hygiene products, clothing, as well as special-purpose transport — in particular, ambulances.\n\nThe foundation's team has many years of experience in the procurement and logistics of medical equipment.\n\nSince February 24, 2022, the foundation has significantly expanded the scale of its work. We actively established contacts with potential partners and promoted our needs in the media — and this gave results: we managed to attract a significant number of international donors and partners.\n\nToday we are one of the largest suppliers of specialized equipment for the Armed Forces of Ukraine. Our flagship project is 'Ambulances for the Front'. We have delivered over 130 modern vehicles that save the lives of defenders every day. In addition, within the 'On the Shield' program, we supply refrigerated vehicles for the dignified transportation of fallen heroes, as well as pickups and other specialized vehicles for people with disabilities.\n\nThe main direction of our work is medical assistance. We supply medicines, consumables, and medical equipment to frontline cities and villages, helping to save lives every day. Our specialists go directly to the front line, and the foundation's rehabilitation center provides free physical and psychological support to military personnel and their families.\n\nWe also work with the children of fallen defenders and organize educational programs throughout Ukraine.\n\nA separate direction is assistance to orphanages and institutions for the elderly: food, clothing, hygiene products, and basic necessities.\n\nAmong our initiatives is the 'Water for Life' project: we drill wells in Donbas so that local residents have access to clean water even after shelling.\n\nAnd the project — 'Light of Life': we provide generators to military and civilians.\n\nWe don't wait for better conditions. We work in the ones that exist — for the sake of those who need it."
     },
-    "card": {
-      "raised": "Raised",
-      "goal": "Goal",
-      "donate_btn": "Support",
-      "completed": "Completed",
-      "of": "of"
+    "mission": {
+      "title": "Our Mission",
+      "content": "To provide necessary assistance to the military and civilians, to preserve life and health, and to bring our common Victory closer through transparency, speed, and efficiency."
+    },
+    "media": {
+      "title": "Media About Us",
+      "content": "We regularly share our achievements and work in the media. Here you can find articles and videos about our activities."
     }
   },
-  "how_to_help": {
-    "title": "How to Help",
-    "subtitle": "Choose a convenient payment method",
-    "full_details": "Full Bank Details",
-    "methods": [
+  "news": {
+    "items": [
       {
-        "id": "bank",
-        "icon": "building-2",
-        "title": "Bank Transfer",
-        "description": "Transfer to the foundation's account via any bank",
-        "details": "IBAN: UA12 3456 7890 1234 5678 9012 34",
-        "copy_label": "Copy Details",
-        "copied_label": "Copied!"
+        "id": "1",
+        "date": "19.04.2026",
+        "title": "New batch of ambulances sent to Bakhmut direction",
+        "description": "Providing medics at the most intense frontline areas with necessary transport for evacuation.",
+        "image": "/images/news/ambulances_convoy.png"
       },
       {
-        "id": "mono",
-        "icon": "credit-card",
-        "title": "Monobank / PrivatBank",
-        "description": "Fast transfer via Ukrainian mobile banks",
-        "details": "4441 1111 2222 3333",
-        "copy_label": "Copy Card Number",
-        "copied_label": "Copied!"
+        "id": "2",
+        "date": "17.04.2026",
+        "title": "New medical equipment delivered to stabilization point in Kharkiv region",
+        "description": "Handed over scarce medical supplies and equipment for providing first aid to the wounded.",
+        "image": "/images/news/medical_equipment.png"
       },
       {
-        "id": "paypal",
-        "icon": "globe",
-        "title": "International Transfer",
-        "description": "PayPal and international transfers for overseas donors",
-        "details": "info@fond.specter-it.site",
-        "copy_label": "Copy Email",
-        "copied_label": "Copied!"
+        "id": "3",
+        "date": "15.04.2026",
+        "title": "Aid to orphanages and institutions for the elderly",
+        "description": "Continuing to support vulnerable groups of the population under martial law.",
+        "image": "/images/news/elders_support.png"
       },
       {
-        "id": "crypto",
-        "icon": "zap",
-        "title": "Cryptocurrency",
-        "description": "USDT, BTC, ETH — for international anonymous donations",
-        "details": "Contact us by email",
-        "copy_label": "Contact Us",
-        "copied_label": "Copied!"
+        "id": "4",
+        "date": "12.04.2026",
+        "title": "Repair of mobile hospital for frontline areas completed",
+        "description": "The mobile hospital is again ready for deployment and receiving patients in field conditions.",
+        "image": "/images/news/field_hospital_repair.png"
       }
-    ]
+    ],
+    "others": {
+      "documents": [
+        "Annual Foundation Report 2025",
+        "Foundation Charter",
+        "Financial Audit 2025",
+        "Presentation for Partners"
+      ]
+    }
   },
-  "about_fund": {
-    "title": "About the Foundation",
-    "subtitle": "Charitable Foundation «Mercy and Health»",
-    "history_title": "Our History",
-    "history_text": "Charitable Foundation «Mercy and Health» was established in response to Russia's full-scale invasion of Ukraine in 2022. The founders — activists, entrepreneurs, and veterans — united to systematically support the army and affected civilians.",
-    "mission_title": "Mission",
-    "mission_text": "Our mission is comprehensive support for Ukraine's defenders and societal recovery: from supplying the army with necessary equipment to rehabilitating the wounded and providing psychological support to their families.",
-    "values": [
-      { "icon": "shield", "title": "Reliability", "text": "Transparent reporting and responsible use of every donated dollar" },
-      { "icon": "users", "title": "Teamwork", "text": "Volunteers, partners, and donors — one united team" },
-      { "icon": "heart", "title": "Care", "text": "Every request represents a human story — and we never forget that" },
-      { "icon": "eye", "title": "Transparency", "text": "Regular reports and open finances for every donor" }
-    ]
-  },
-
-  "reports": {
-    "title": "Reports & Transparency",
-    "subtitle": "We are open and accountable to every donor",
-    "download": "Download PDF",
-    "view_all": "All Reports"
-  },
-  "partners": {
-    "title": "Our Partners",
-    "subtitle": "Together we achieve more"
-  },
-  "contacts": {
-    "title": "Contact Us",
-    "fund_title": "Charitable Foundation «Mercy and Health»",
-    "phone_label": "Phone",
-    "email_label": "Email",
-    "address_label": "Address",
-    "form_title": "Send Us a Message",
-    "form_name": "Your Name",
-    "form_email": "Email Address",
-    "form_subject": "Subject",
-    "form_message": "Your Message",
-    "form_submit": "Send Message",
-    "form_success": "Thank you! We will contact you shortly.",
-    "form_error": "Something went wrong. Please try again."
-  },
-  "donate_page": {
-    "title": "Donation Details",
-    "subtitle": "Every amount matters — together we win",
-    "bank_transfer": {
-      "title": "Bank Transfer (Ukraine)",
-      "org_name": "Charitable Foundation «Mercy and Health»",
-      "edrpou": "12345678",
-      "iban": "UA12 3456 7890 1234 5678 9012 34",
-      "bank": "JSC PrivatBank",
-      "mfo": "305299",
-      "purpose": "Charitable donation"
+  "support": {
+    "cards": {
+      "items": [
+        {
+          "id": "army",
+          "title": "Collection for 2 Charging Stations",
+          "description": "Darkness is also an enemy weapon. Collecting for 2 charging stations for the 114th brigade - because communication and charged equipment save lives",
+          "bank": "Monobank",
+          "link": "https://send.monobank.ua/jar/A2KXCRZcSX"
+        },
+        {
+          "id": "medics",
+          "title": "Charitable Foundation MERCY AND HEALTH",
+          "description": "IBAN UA 37 322001 00000 2902 3998 0013 27",
+          "bank": "Monobank",
+          "link": "https://send.monobank.ua/jar/9jCSaHumZ6"
+        }
+      ]
     },
-    "international": {
-      "title": "International Transfer",
-      "swift": "PBANK UA2X",
-      "iban_usd": "UA12 3456 7890 1234 5678 9012 35",
-      "beneficiary": "Charitable Foundation Mercy and Health",
-      "address": "Vinnytsia, Ukraine"
-    },
-    "faq_title": "Frequently Asked Questions",
-    "faq": [
-      {
-        "q": "Where do the donations go?",
-        "a": "100% of raised funds go directly to project implementation. Administrative costs are covered separately through partners and grants."
-      },
-      {
-        "q": "How can I get donation confirmation?",
-        "a": "After receiving your transfer, we send confirmation to your email. All expenses are also reflected in our quarterly reports."
-      },
-      {
-        "q": "Can I make a recurring donation?",
-        "a": "Yes! You can set up recurring transfers through your bank or Monobank. This is the most convenient way to systematically support our foundation."
-      },
-      {
-        "q": "Are you a registered organization?",
-        "a": "Yes, we are an officially registered charitable foundation under Ukrainian law. All documents are available on the 'About Us' page."
-      }
-    ]
+    "bank_details": {
+      "beneficiary_value": "CHARITABLE FOUNDATION 'MERCY AND HEALTH'",
+      "edrpou_value": "40347558",
+      "bank_name_value": "JSC CB 'PrivatBank'",
+      "purpose_value": "Charitable assistance"
+    }
   },
-  "footer": {
-    "tagline": "Together for Ukraine's Victory",
-    "fund_links_title": "Charitable Foundation",
-    "info_links_title": "Information",
-    "contacts_title": "Contacts",
-    "copyright": "© 2024 Charitable Foundation «Mercy and Health». All rights reserved.",
-    "privacy": "Privacy Policy",
-    "terms": "Terms of Use",
-    "payment_title": "Payment Methods"
-  },
-  "common": {
-    "loading": "Loading...",
-    "error": "Error. Please try again.",
-    "back": "Back",
-    "read_more": "Read More",
-    "close": "Close",
-    "open_menu": "Open menu",
-    "close_menu": "Close menu",
-    "language_switch": "Українська",
-    "currency": "UAH",
-    "percent_done": "% raised"
+  "hero": {
+    "title": "Mercy & Health",
+    "description": "Charitable Foundation 'Mercy and Health' — medical and humanitarian aid for military and civilians in the conditions of war in Ukraine."
   }
 }
