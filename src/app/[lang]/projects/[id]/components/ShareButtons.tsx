@@ -39,7 +39,7 @@ export default function ShareButtons({ title, shareLabel, dictionary }: ShareBut
     {
       name: "Telegram",
       title: dictionary?.share?.telegram || "Telegram",
-      url: `https://t.me/share/url?url=${encodeURIComponent(currentUrl)}&text=${encodeURIComponent(title)}`,
+      url: `https://t.me/share/url?url=${encodeURIComponent(currentUrl)}`,
       color: "#229ED9",
       icon: (
         <svg viewBox="0 0 24 24" fill="currentColor" width="20" height="20">
@@ -50,7 +50,7 @@ export default function ShareButtons({ title, shareLabel, dictionary }: ShareBut
     {
       name: "WhatsApp",
       title: dictionary?.share?.whatsapp || "WhatsApp",
-      url: `https://api.whatsapp.com/send?text=${encodeURIComponent(title + " " + currentUrl)}`,
+      url: `https://api.whatsapp.com/send?text=${encodeURIComponent(currentUrl)}`,
       color: "#25D366",
       icon: (
         <svg viewBox="0 0 24 24" fill="currentColor" width="20" height="20">
@@ -61,7 +61,7 @@ export default function ShareButtons({ title, shareLabel, dictionary }: ShareBut
     {
       name: "X",
       title: dictionary?.share?.x || "X",
-      url: `https://twitter.com/intent/tweet?url=${encodeURIComponent(currentUrl)}&text=${encodeURIComponent(title)}`,
+      url: `https://twitter.com/intent/tweet?url=${encodeURIComponent(currentUrl)}`,
       color: "#000000",
       icon: (
         <svg viewBox="0 0 24 24" fill="currentColor" width="16" height="16">

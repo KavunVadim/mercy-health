@@ -150,6 +150,38 @@
   --page-header-border: var(--border);
 }
 
+/* ── Media Query Fallback (Prevents FOUC/Flash) ────────────── */
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme='light']) {
+    --background:          oklch(0.22 0.012 255);
+    --foreground:          oklch(0.92 0.006 250);
+    --surface:             oklch(0.26 0.014 255);
+    --card:                oklch(0.25 0.013 255);
+    --popover:             oklch(0.25 0.013 255);
+    --accent:              oklch(0.72 0.14 245);
+    --accent-foreground:   oklch(0.15 0.03 255);
+    --accent-soft:         oklch(0.35 0.08 245);
+    --accent-glow:         oklch(0.7 0.18 245);
+    --accent-hover:        oklch(0.78 0.12 245);
+    --secondary:           oklch(0.3 0.014 255);
+    --secondary-foreground: oklch(0.92 0.006 250);
+    --muted:               oklch(0.29 0.012 255);
+    --muted-foreground:    oklch(0.7 0.012 250);
+    --border:              oklch(0.34 0.012 255);
+    --input:               oklch(0.32 0.012 255);
+    --gradient-bg:
+      radial-gradient(120% 80% at 85% -10%, color-mix(in oklab, var(--accent) 28%, transparent) 0%, transparent 55%),
+      radial-gradient(70% 50% at 0% 10%, color-mix(in oklab, var(--accent-glow) 22%, transparent) 0%, transparent 60%),
+      var(--background);
+    --shadow-elegant:
+      0 1px 0 0 color-mix(in oklab, oklch(1 0 0) 5%, transparent),
+      0 30px 60px -25px oklch(0 0 0 / 0.6),
+      0 8px 20px -12px color-mix(in oklab, var(--accent) 35%, transparent);
+    --glass-bg:            color-mix(in oklab, var(--card) 70%, transparent);
+    --bg-header:           color-mix(in oklab, var(--background) 96%, transparent);
+    --bg-footer:           oklch(0.16 0.01 255);
+  }
+}
 
 /* ═══════════════════════════════════════════════════════════════
    Dark Theme — Graphite

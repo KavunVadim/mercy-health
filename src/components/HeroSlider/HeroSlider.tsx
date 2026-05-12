@@ -65,11 +65,13 @@ export default function HeroSlider({ slides }: { slides: Slide[] }) {
             <div className={styles.overlay} />
             <div className={`container ${styles.content}`}>
               <div className={styles.inner}>
-                <span className={styles.badge}>{slide.badge}</span>
                 <h2 className={styles.title}>
                   <span className={styles.titleWrap}>{slide.title}</span>
                 </h2>
                 <p className={styles.description}>{slide.description}</p>
+                <div className={styles.badgeWrapper}>
+                  <span className={styles.badge}>{slide.badge}</span>
+                </div>
               </div>
             </div>
           </div>

@@ -63,7 +63,10 @@ export default function ProjectImageGallery({
               <div className={styles.contentShareWrapper}>
                 {/* Inner core */}
                 <div className={styles.contentShareInner}>
-                  <ShareButtons title={title} dictionary={dictionary} />
+                  <ShareButtons 
+                    title={title} 
+                    dictionary={dictionary} 
+                  />
 
                   <div className={styles.supportWrapper}>
                     <a href={supportHref} className={styles.donateBtn}>
