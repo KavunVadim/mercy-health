@@ -1,6 +1,23 @@
 {
   "projects": [
     {
+      "id": "ambulances-to-front",
+      "image": "/images/projects/img_9425.webp",
+      "title": {
+        "uk": "Реанімобілі на фронт",
+        "en": "Ambulances for the Front"
+      },
+      "description": {
+        "uk": "Доставка та оснащення медичних автомобілів для евакуації поранених.",
+        "en": "Delivery and equipment of medical vehicles for the evacuation of the wounded."
+      },
+      "full_description": {
+        "uk": "З 2022 року Благодійний Фонд «Милосердя та здоров’я» координує доставку медичних автомобілів із Європи на фронт. Проєкт впроваджено разом з СО “BeForUkraine” Бельгія та передано 130+ спеціалізованих автомобілів, які рятують життя.\n\nРеанімобілі оснащені надсучасним медичним обладнанням:\n• дефібриляторами\n• аспіраторами\n• моніторами пацієнта\n• аптечками\n• витратними матеріалами\n\nГоловна перевага — допомога надається у русі, безпосередньо в момент евакуації пораненого.\n\nПотреба в швидких зростає. Щодня ми отримуємо нові запити від підрозділів, які залишились без транспортних засобів для евакуації. Підтримка партнерів важлива - кожен внесок наближає нас до наступного порятунку.",
+        "en": "Since 2022, the Mercy and Health Charity Foundation has been coordinating the delivery of medical vehicles from Europe to the front. The project was implemented together with BeForUkraine (Belgium), and over 130 specialized vehicles that save lives have been delivered.\n\nThe ambulances are equipped with state-of-the-art medical equipment:\n• defibrillators\n• aspirators\n• patient monitors\n• first aid kits\n• consumables\n\nThe main advantage is that assistance is provided in motion, directly during the evacuation of the wounded.\n\nThe need for ambulances is growing. Every day we receive new requests from units that are left without transport for evacuation. Support from partners is crucial—every contribution brings us closer to the next rescue."
+      },
+      "gallery": []
+    },
+    {
       "id": "disabled-support",
       "image": "/images/projects/img_9349.webp",
       "title": {
@@ -57,25 +74,6 @@
       "gallery": []
     },
     {
-      "id": "water-for-life",
-      "image": "/images/projects/img_9469.webp",
-      "title": {
-        "uk": "Вода заради життя",
-        "en": "Water for Life"
-      },
-      "description": {
-        "uk": "Відновлення водопостачання на Донеччині.",
-        "en": "Restoration of water supply in Donetsk region."
-      },
-      "full_description": {
-        "uk": "У рамках проєкту було проведено відновлення водопостачання на Донеччині.\n\nУ місті Краматорськ здійснені роботи по бурінню та облаштуванню для забору води 5 свердловин у різних частинах міста.\n\nУ місті Святогірськ також здійснені роботи по бурінню та облаштуванню для забору води 2 свердловини, забезпечивши питною водою мешканців міст.",
-        "en": "As part of the project, water supply was restored in the Donetsk region.\n\nIn the city of Kramatorsk, work was carried out on drilling and equipping 5 wells for water intake in different parts of the city.\n\nIn the city of Svyatohirsk, work was also carried out on drilling and equipping 2 wells for water intake, providing residents of the cities with drinking water."
-      },
-      "gallery": [
-        "/images/hero/img_9324.webp"
-      ]
-    },
-    {
       "id": "medical-support",
       "image": "/images/projects/img_9238.webp",
       "title": {
@@ -96,70 +94,38 @@
       ]
     },
     {
-      "id": "psychological-aid",
-      "image": "/images/projects/img_9271.webp",
+      "id": "water-for-life",
+      "image": "/images/projects/img_9469.webp",
       "title": {
-        "uk": "Перша психологічна допомога",
-        "en": "First Psychological Aid"
+        "uk": "Вода заради життя",
+        "en": "Water for Life"
       },
       "description": {
-        "uk": "Психологічна допомога військовим та їх адаптація.",
-        "en": "Psychological aid for military and their adaptation."
+        "uk": "Відновлення водопостачання на Донеччині.",
+        "en": "Restoration of water supply in Donetsk region."
       },
       "full_description": {
-        "uk": "Фонд започатковував проєкт з надання якісної першої психологічної допомоги військовим у період відновлення (між бойовими виїздами), яка дозволить нормалізувати рівень боєздатності бійців та підготувати солдатів і їхніх командирів до подальшої служби, або адаптувати військовослужбовців, які з певних причин повертаються додому до цивільного життя.",
-        "en": "The foundation initiated a project to provide quality first psychological aid to military personnel during the recovery period (between combat missions), which allows normalizing the combat readiness level of the fighters and preparing soldiers and their commanders for further service, or adapting military personnel who, for certain reasons, return home to civilian life."
+        "uk": "У рамках проєкту було проведено відновлення водопостачання на Донеччині.\n\nУ місті Краматорськ здійснені роботи по бурінню та облаштуванню для забору води 5 свердловин у різних частинах міста.\n\nУ місті Святогірськ також здійснені роботи по бурінню та облаштуванню для забору води 2 свердловини, забезпечивши питною водою мешканців міст.",
+        "en": "As part of the project, water supply was restored in the Donetsk region.\n\nIn the city of Kramatorsk, work was carried out on drilling and equipping 5 wells for water intake in different parts of the city.\n\nIn the city of Svyatohirsk, work was also carried out on drilling and equipping 2 wells for water intake, providing residents of the cities with drinking water."
       },
-      "gallery": []
+      "gallery": [
+        "/images/hero/img_9324.webp"
+      ]
     },
     {
-      "id": "animal-welfare",
-      "image": "/images/projects/img_9285.webp",
+      "id": "light-of-life",
+      "image": "/images/projects/img_9487.webp",
       "title": {
-        "uk": "Допомога тваринам",
-        "en": "Animal Welfare"
+        "uk": "«Світло життя»",
+        "en": "Light of Life"
       },
       "description": {
-        "uk": "Евакуація та забезпечення тварин у прифронтових зонах.",
-        "en": "Evacuation and provision for animals in frontline zones."
+        "uk": "Забезпечення генераторами та системами живлення лікарень та прифронтових зон.",
+        "en": "Providing generators and power systems for hospitals and frontline zones."
       },
       "full_description": {
-        "uk": "Фонд забезпечує кормами, ліками та евакуює тварин із прифронтових міст. Частину з них прилаштовуємо у постійні домівки по всій Україні.",
-        "en": "The foundation provides food, medicine, and evacuates animals from frontline cities. Some of them are placed in permanent homes throughout Ukraine."
-      },
-      "gallery": []
-    },
-    {
-      "id": "ambulances-to-front",
-      "image": "/images/projects/img_9425.webp",
-      "title": {
-        "uk": "Реанімобілі на фронт",
-        "en": "Ambulances for the Front"
-      },
-      "description": {
-        "uk": "Доставка та оснащення медичних автомобілів для евакуації поранених.",
-        "en": "Delivery and equipment of medical vehicles for the evacuation of the wounded."
-      },
-      "full_description": {
-        "uk": "З 2022 року Благодійний Фонд «Милосердя та здоров’я» координує доставку медичних автомобілів із Європи на фронт. Проєкт впроваджено разом з СО “BeForUkraine” Бельгія та передано 130+ спеціалізованих автомобілів, які рятують життя.\n\nРеанімобілі оснащені надсучасним медичним обладнанням:\n• дефібриляторами\n• аспіраторами\n• моніторами пацієнта\n• аптечками\n• витратними матеріалами\n\nГоловна перевага — допомога надається у русі, безпосередньо в момент евакуації пораненого.\n\nПотреба в швидких зростає. Щодня ми отримуємо нові запити від підрозділів, які залишились без транспортних засобів для евакуації. Підтримка партнерів важлива - кожен внесок наближає нас до наступного порятунку.",
-        "en": "Since 2022, the Mercy and Health Charity Foundation has been coordinating the delivery of medical vehicles from Europe to the front. The project was implemented together with BeForUkraine (Belgium), and over 130 specialized vehicles that save lives have been delivered.\n\nThe ambulances are equipped with state-of-the-art medical equipment:\n• defibrillators\n• aspirators\n• patient monitors\n• first aid kits\n• consumables\n\nThe main advantage is that assistance is provided in motion, directly during the evacuation of the wounded.\n\nThe need for ambulances is growing. Every day we receive new requests from units that are left without transport for evacuation. Support from partners is crucial—every contribution brings us closer to the next rescue."
-      },
-      "gallery": []
-    },
-    {
-      "id": "rehabilitation",
-      "image": "/images/projects/img_9485.webp",
-      "title": {
-        "uk": "Реабілітація дітей і дорослих",
-        "en": "Rehabilitation for Children and Adults"
-      },
-      "description": {
-        "uk": "Передача реабілітаційного обладнання для відновлення здоров’я.",
-        "en": "Provision of rehabilitation equipment for health recovery."
-      },
-      "full_description": {
-        "uk": "За підтримки бельгійських та британських партнерів передано більше 2000 одиниць обладнання: електричні ліжка, візки, милиці, сходи, бігові доріжки та інше обладнання покращення та відновлення фізичного здоров’я. Все це допомагає пораненим та людям з інвалідністю повернутися до активного життя.",
-        "en": "With the support of Belgian and British partners, over 2,000 pieces of equipment have been delivered: electric beds, wheelchairs, crutches, stairs, treadmills, and other equipment for improving and restoring physical health. All this helps the wounded and people with disabilities return to an active life."
+        "uk": "Фонд забезпечує підрозділи, лікарні, школи та родини на прифронтових територіях генераторами, акумуляторними батареями та системами резервного живлення, щоб навіть у найтемніші часи було світло, тепло та електрика. Цей проєкт допомагає підтримувати безперервну роботу медичних закладів, пунктів допомоги та побутових потреб людей у зонах відключень. Передано близько 70 одиниць генераторів та обладнання резервного живлення.",
+        "en": "The foundation provides units, hospitals, schools, and families in frontline territories with generators, storage batteries, and backup power systems so that even in the darkest times there is light, heat, and electricity. This project helps maintain the continuous operation of medical facilities, assistance points, and domestic needs of people in blackout zones. About 70 units of generators and backup power equipment have been delivered."
       },
       "gallery": []
     },
@@ -181,6 +147,57 @@
       "gallery": []
     },
     {
+      "id": "psychological-aid",
+      "image": "/images/projects/img_9271.webp",
+      "title": {
+        "uk": "Перша психологічна допомога",
+        "en": "First Psychological Aid"
+      },
+      "description": {
+        "uk": "Психологічна допомога військовим та їх адаптація.",
+        "en": "Psychological aid for military and their adaptation."
+      },
+      "full_description": {
+        "uk": "Фонд започатковував проєкт з надання якісної першої психологічної допомоги військовим у період відновлення (між бойовими виїздами), яка дозволить нормалізувати рівень боєздатності бійців та підготувати солдатів і їхніх командирів до подальшої служби, або адаптувати військовослужбовців, які з певних причин повертаються додому до цивільного життя.",
+        "en": "The foundation initiated a project to provide quality first psychological aid to military personnel during the recovery period (between combat missions), which allows normalizing the combat readiness level of the fighters and preparing soldiers and their commanders for further service, or adapting military personnel who, for certain reasons, return home to civilian life."
+      },
+      "gallery": []
+    },
+    {
+      "id": "rehabilitation",
+      "image": "/images/projects/img_9485.webp",
+      "title": {
+        "uk": "Реабілітація дітей і дорослих",
+        "en": "Rehabilitation for Children and Adults"
+      },
+      "description": {
+        "uk": "Передача реабілітаційного обладнання для відновлення здоров’я.",
+        "en": "Provision of rehabilitation equipment for health recovery."
+      },
+      "full_description": {
+        "uk": "За підтримки бельгійських та британських партнерів передано більше 2000 одиниць обладнання: електричні ліжка, візки, милиці, сходи, бігові доріжки та інше обладнання покращення та відновлення фізичного здоров’я. Все це допомагає пораненим та людям з інвалідністю повернутися до активного життя.",
+        "en": "With the support of Belgian and British partners, over 2,000 pieces of equipment have been delivered: electric beds, wheelchairs, crutches, stairs, treadmills, and other equipment for improving and restoring physical health. All this helps the wounded and people with disabilities return to an active life."
+      },
+      "gallery": []
+    },
+    {
+      "id": "animal-welfare",
+      "image": "/images/projects/img_9285.webp",
+      "title": {
+        "uk": "Допомога тваринам",
+        "en": "Animal Welfare"
+      },
+      "description": {
+        "uk": "Евакуація та забезпечення тварин у прифронтових зонах.",
+        "en": "Evacuation and provision for animals in frontline zones."
+      },
+      "full_description": {
+        "uk": "Фонд забезпечує кормами, ліками та евакуює тварин із прифронтових міст. Частину з них прилаштовуємо у постійні домівки по всій Україні.",
+        "en": "The foundation provides food, medicine, and evacuates animals from frontline cities. Some of them are placed in permanent homes throughout Ukraine."
+      },
+      "gallery": []
+    },
+    {
       "id": "first-need",
       "image": "/images/projects/img_9329.webp",
       "title": {
@@ -194,23 +211,6 @@
       "full_description": {
         "uk": "Загальний проєкт, який працює на різні направлення та цільову аудиторію, перекриваючи першочергові нагальні потреби. В рамках цього проєкту наш Фонд передає від продуктів харчування, одягу та гігієни до транспортних засобів (пікапи, вантажівки та інші авто).",
         "en": "A general project working across various directions and target audiences, covering primary urgent needs. Within this project, our Foundation provides everything from food, clothing, and hygiene products to vehicles (pickups, trucks, and other cars)."
-      },
-      "gallery": []
-    },
-    {
-      "id": "light-of-life",
-      "image": "/images/projects/img_9487.webp",
-      "title": {
-        "uk": "«Світло життя»",
-        "en": "Light of Life"
-      },
-      "description": {
-        "uk": "Забезпечення генераторами та системами живлення лікарень та прифронтових зон.",
-        "en": "Providing generators and power systems for hospitals and frontline zones."
-      },
-      "full_description": {
-        "uk": "Фонд забезпечує підрозділи, лікарні, школи та родини на прифронтових територіях генераторами, акумуляторними батареями та системами резервного живлення, щоб навіть у найтемніші часи було світло, тепло та електрика. Цей проєкт допомагає підтримувати безперервну роботу медичних закладів, пунктів допомоги та побутових потреб людей у зонах відключень. Передано близько 70 одиниць генераторів та обладнання резервного живлення.",
-        "en": "The foundation provides units, hospitals, schools, and families in frontline territories with generators, storage batteries, and backup power systems so that even in the darkest times there is light, heat, and electricity. This project helps maintain the continuous operation of medical facilities, assistance points, and domestic needs of people in blackout zones. About 70 units of generators and backup power equipment have been delivered."
       },
       "gallery": []
     }

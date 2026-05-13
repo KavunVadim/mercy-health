@@ -1,33 +1,6 @@
 {
   "hero_slider": [
     {
-      "id": "voda-donechchyna",
-      "badge": "Pro100Media",
-      "title": "«Вода заради життя» будуємо свердловини на Донеччині",
-      "description": "Масштабний проєкт, спрямований на покращення водозабезпечення в регіоні, де ситуація з доступом до води є критичною.",
-      "image": "/images/hero/img_9324.webp",
-      "cta": "Читати статтю",
-      "href": "https://pro100media.com.ua/eksklyuzyv/voda-zarady-zhyttya-yak-na-donechchyni-buduyut-sverdlovyny-dlya-bezperebijnogo-vodozabezpechennya-ta-yaka-z-tsogo-koryst-kramatortsyam/"
-    },
-     {
-      "id": "reanimobiles-vikna",
-      "badge": "Телерадіостудія МО України Бриз",
-      "title": "Реанімобілі для порятунку життів",
-      "description": "БФ «Милосердя та Здоров'я» привіз в Україну нову партію спецтранспорту для порятунку життів військових.",
-      "image": "/images/hero/img_9281.webp",
-      "cta": "Дивитись сюжет",
-      "href": "https://www.youtube.com/watch?v=jO78_rVQ94I"
-    },
-    {
-      "id": "rehab-military",
-      "badge": "Espreso TV",
-      "title": "Психологічна допомога для понад 300 військових",
-      "description": "Під час ротації захисники отримали необхідну підтримку в Київському центрі реабілітації БФ «Милосердя та Здоров’я».",
-      "image": "/images/hero/img_9275.webp",
-      "cta": "Читати статтю",
-      "href": "https://espreso.tv/suspilstvo-ponad-300-viyskovikh-pid-chas-rotatsiii-otrimali-psikhologichnu-dopomogu-v-kiivskomu-tsentri-reabilitatsii-bf-miloserdya-ta-zdorovya-a-zagalom-v-ukraini-ponad-20-tis"
-    },   
-    {
       "id": "saving-lives-video",
       "badge": "Телекомпанія 'Орбіта'",
       "title": "Реанімобілі, що рятують життя",
@@ -38,13 +11,13 @@
       "focus": "50% 80%"
     },
     {
-      "id": "frontline-help",
-      "badge": "Телеканал СК1",
-      "title": "Допомога для захисників",
-      "description": "БО «Милосердя та Здоров’я» передали військовим мінішпиталь на колесах та медичне устаткування",
-      "image": "/images/hero/img_9230.webp",
-      "cta": "Дивитись сюжет",
-      "href": "https://www.youtube.com/watch?v=eqnElHP9TLQ"
+      "id": "equipment-review",
+      "badge": "Телеканал ДніпроTV",
+      "title": "Волонтери привезли допомогу лікарям",
+      "description": "Реанімобіль, рефрижератор, медобладнання",
+      "image": "/images/hero/img_9473.webp",
+      "cta": "Дивитись відео",
+      "href": "https://youtu.be/Rh0fD5_0OhU"
     },
     {
       "id": "mercy-path",
@@ -54,6 +27,24 @@
       "image": "/images/hero/img_9419.webp",
       "cta": "Читати статтю",
       "href": "https://vikna.tv/dlia-tebe/vijna-v-ukrayini/shlyah-myloserdya-blagodijnyky-pryvezly-v-ukrayinu-reanimobili-dlya-poryatunky-zhyttiv-vijskovyh"
+    },
+    {
+      "id": "rehab-military",
+      "badge": "Espreso TV",
+      "title": "Психологічна допомога для понад 300 військових",
+      "description": "Під час ротації захисники отримали необхідну підтримку в Київському центрі реабілітації БФ «Милосердя та Здоров’я».",
+      "image": "/images/hero/img_9275.webp",
+      "cta": "Читати статтю",
+      "href": "https://espreso.tv/suspilstvo-ponad-300-viyskovikh-pid-chas-rotatsiii-otrimali-psikhologichnu-dopomogu-v-kiivskomu-tsentri-reabilitatsii-bf-miloserdya-ta-zdorovya-a-zagalom-v-ukraini-ponad-20-tis"
+    },
+    {
+      "id": "reanimobiles-vikna",
+      "badge": "Телерадіостудія МО України Бриз",
+      "title": "Реанімобілі для порятунку життів",
+      "description": "БФ «Милосердя та Здоров'я» привіз в Україну нову партію спецтранспорту для порятунку життів військових.",
+      "image": "/images/hero/img_9281.webp",
+      "cta": "Дивитись сюжет",
+      "href": "https://www.youtube.com/watch?v=jO78_rVQ94I"
     },
     {
       "id": "reanimobiles-frontline",
@@ -66,13 +57,22 @@
       "focus": "50% 80%"
     },
     {
-      "id": "equipment-review",
-      "badge": "Телеканал ДніпроTV",
-      "title": "Волонтери привезли допомогу лікарям",
-      "description": "Реанімобіль, рефрижератор, медобладнання",
-      "image": "/images/hero/img_9473.webp",
-      "cta": "Дивитись відео",
-      "href": "https://youtu.be/Rh0fD5_0OhU"
+      "id": "voda-donechchyna",
+      "badge": "Pro100Media",
+      "title": "«Вода заради життя» будуємо свердловини на Донеччині",
+      "description": "Масштабний проєкт, спрямований на покращення водозабезпечення в регіоні, де ситуація з доступом до води є критичною.",
+      "image": "/images/hero/img_9324.webp",
+      "cta": "Читати статтю",
+      "href": "https://pro100media.com.ua/eksklyuzyv/voda-zarady-zhyttya-yak-na-donechchyni-buduyut-sverdlovyny-dlya-bezperebijnogo-vodozabezpechennya-ta-yaka-z-tsogo-koryst-kramatortsyam/"
+    },
+    {
+      "id": "frontline-help",
+      "badge": "Телеканал СК1",
+      "title": "Допомога для захисників",
+      "description": "БО «Милосердя та Здоров’я» передали військовим мінішпиталь на колесах та медичне устаткування",
+      "image": "/images/hero/img_9230.webp",
+      "cta": "Дивитись сюжет",
+      "href": "https://www.youtube.com/watch?v=eqnElHP9TLQ"
     }
   ],
   "stats": {

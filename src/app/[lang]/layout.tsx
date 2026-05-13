@@ -1,6 +1,6 @@
 import type { Metadata, Viewport } from "next";
 import localFont from "next/font/local";
-import Script from "next/script";
+
 import "../globals.css";
 import "../variables.css";
 import { i18n, type Locale } from "@/i18n-config";
@@ -73,25 +73,14 @@ export default async function RootLayout({
   const locale = lang as Locale;
   const dictionary = await getDictionary(locale);
 
+  const themeScript = `(function(){try{var t=localStorage.getItem('theme');var d=window.matchMedia('(prefers-color-scheme: dark)').matches;if(!t&&d)t='dark';if(!t)t='light';document.documentElement.setAttribute('data-theme',t);}catch(e){}})();`;
+
   return (
     <html lang={locale} className={`${eUkraineHead.variable} ${eUkraine.variable}`} suppressHydrationWarning>
+      <head>
+        <script dangerouslySetInnerHTML={{ __html: themeScript }} />
+      </head>
       <body>
-        <Script
-          id="theme-strategy"
-          strategy="beforeInteractive"
-        >
-          {`
-            (function() {
-              try {
-                var theme = localStorage.getItem('theme');
-                var supportDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches === true;
-                if (!theme && supportDarkMode) theme = 'dark';
-                if (!theme) theme = 'light';
-                document.documentElement.setAttribute('data-theme', theme);
-              } catch (e) {}
-            })();
-          `}
-        </Script>
         <ThemeProvider>
           <ScrollToTop />
           <Header dictionary={dictionary} lang={locale} />

@@ -32,7 +32,7 @@ export default async function ProjectsPage({
 
       <section className={`container ${styles.section}`}>
         <AnimatedProjects 
-          projects={[...dictionary.projects.items].reverse() as Project[]} 
+          projects={[...dictionary.projects.items] as Project[]} 
           dictionary={dictionary} 
           lang={lang} 
         />

@@ -1,11 +1,11 @@
 "use client";
 
-import React, { useCallback, useLayoutEffect, useState } from "react";
+import React, { useCallback, useLayoutEffect, useState, useEffect } from "react";
 import useEmblaCarousel from "embla-carousel-react";
 import Autoplay from "embla-carousel-autoplay";
 import Image from "next/image";
 import Link from "next/link";
-import { ChevronLeft, ChevronRight } from "lucide-react";
+import { ArrowRight, ArrowUpRight } from "lucide-react";
 import styles from "./HeroSlider.module.css";
 import { clsx } from "clsx";
 
@@ -20,13 +20,16 @@ interface Slide {
   focus?: string;
 }
 
+const AUTOPLAY_DELAY = 6000;
+
 export default function HeroSlider({ slides }: { slides: Slide[] }) {
-  const [emblaRef, emblaApi] = useEmblaCarousel({ loop: true, duration: 20 }, [
-    Autoplay({ delay: 5000, stopOnInteraction: true, stopOnMouseEnter: true }),
+  const [emblaRef, emblaApi] = useEmblaCarousel({ loop: true, duration: 22 }, [
+    Autoplay({ delay: AUTOPLAY_DELAY, stopOnInteraction: true, stopOnMouseEnter: true }),
   ]);
 
   const [selectedIndex, setSelectedIndex] = useState(0);
   const [scrollSnaps, setScrollSnaps] = useState<number[]>([]);
+  const [progress, setProgress] = useState(0);
 
   const scrollPrev = useCallback(() => emblaApi && emblaApi.scrollPrev(), [emblaApi]);
   const scrollNext = useCallback(() => emblaApi && emblaApi.scrollNext(), [emblaApi]);
@@ -35,23 +38,41 @@ export default function HeroSlider({ slides }: { slides: Slide[] }) {
   const onSelect = useCallback(() => {
     if (!emblaApi) return;
     setSelectedIndex(emblaApi.selectedScrollSnap());
+    setProgress(0);
   }, [emblaApi]);
 
   useLayoutEffect(() => {
     if (!emblaApi) return;
-    // eslint-disable-next-line react-hooks/set-state-in-effect
     setSelectedIndex(emblaApi.selectedScrollSnap());
     setScrollSnaps(emblaApi.scrollSnapList());
     emblaApi.on("select", onSelect);
     emblaApi.on("reInit", onSelect);
   }, [emblaApi, onSelect]);
 
+  // Progress bar animation
+  useEffect(() => {
+    setProgress(0);
+    const start = performance.now();
+    let raf: number;
+    const tick = (now: number) => {
+      const elapsed = now - start;
+      const pct = Math.min((elapsed / AUTOPLAY_DELAY) * 100, 100);
+      setProgress(pct);
+      if (pct < 100) raf = requestAnimationFrame(tick);
+    };
+    raf = requestAnimationFrame(tick);
+    return () => cancelAnimationFrame(raf);
+  }, [selectedIndex]);
+
+  const total = slides?.length ?? 0;
+  const currentSlide = slides?.[selectedIndex];
+
   return (
     <section className={styles.viewport} ref={emblaRef}>
       <div className={styles.container}>
         {slides?.map((slide, index) => (
-          <div 
-            className={clsx(styles.slide, index === selectedIndex && styles.slideActive)} 
+          <div
+            className={clsx(styles.slide, index === selectedIndex && styles.slideActive)}
             key={slide.id}
           >
             <Image
@@ -63,23 +84,61 @@ export default function HeroSlider({ slides }: { slides: Slide[] }) {
               style={{ objectPosition: slide.focus || "center 25%" }}
             />
             <div className={styles.overlay} />
-            <div className={`container ${styles.content}`}>
-              <div className={styles.inner}>
-                <h2 className={styles.title}>
-                  <span className={styles.titleWrap}>{slide.title}</span>
-                </h2>
-                <p className={styles.description}>{slide.description}</p>
-                <div className={styles.badgeWrapper}>
-                  <span className={styles.badge}>{slide.badge}</span>
-                </div>
-              </div>
-            </div>
           </div>
         ))}
       </div>
 
-      <div className={styles.controls}>
-        <div className={`container ${styles.controlsInner}`}>
+      {/* Content layer — outside embla container so it doesn't scroll */}
+      <div className={`container ${styles.contentLayer}`}>
+        <div className={styles.progressBar}>
+          <div className={styles.progressFill} style={{ height: `${progress}%` }} />
+        </div>
+
+        <div className={styles.inner}>
+          {/* Badge / Source */}
+          <div className={styles.badgeRow}>
+            <span className={styles.badge}>{currentSlide?.badge}</span>
+          </div>
+
+          {/* Title */}
+          <h2 className={styles.title}>
+            {currentSlide?.title}
+          </h2>
+
+          {/* Description */}
+          <p className={styles.description}>{currentSlide?.description}</p>
+
+          {/* CTA */}
+          {currentSlide?.href?.startsWith("http") ? (
+            <a
+              href={currentSlide.href}
+              className={styles.cta}
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <span>{currentSlide.cta}</span>
+              <ArrowUpRight size={18} strokeWidth={2} />
+            </a>
+          ) : (
+            <Link href={currentSlide?.href || "#"} className={styles.cta}>
+              <span>{currentSlide?.cta}</span>
+              <ArrowRight size={18} strokeWidth={2} />
+            </Link>
+          )}
+        </div>
+
+        {/* Bottom controls */}
+        <div className={styles.controls}>
+          {/* Slide counter */}
+          <div className={styles.counter}>
+            <span className={styles.counterCurrent}>
+              {String(selectedIndex + 1).padStart(2, "0")}
+            </span>
+            <span className={styles.counterSep}>/</span>
+            <span className={styles.counterTotal}>{String(total).padStart(2, "0")}</span>
+          </div>
+
+          {/* Dots */}
           <div className={styles.dots}>
             {scrollSnaps.map((_, index) => (
               <button
@@ -91,32 +150,18 @@ export default function HeroSlider({ slides }: { slides: Slide[] }) {
             ))}
           </div>
 
-          <div className={styles.controlsRight}>
-            <div className={styles.staticActions}>
-              {slides?.[selectedIndex]?.href?.startsWith("http") ? (
-                <a
-                  href={slides[selectedIndex].href}
-                  className={styles.cta}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  {slides[selectedIndex].cta}
-                </a>
-              ) : (
-                <Link href={slides[selectedIndex]?.href || "#"} className={styles.cta}>
-                  {slides[selectedIndex]?.cta}
-                </Link>
-              )}
-            </div>
-
-            <div className={styles.arrows}>
-              <button className={styles.arrow} onClick={scrollPrev} aria-label="Previous slide">
-                <ChevronLeft size={24} />
-              </button>
-              <button className={styles.arrow} onClick={scrollNext} aria-label="Next slide">
-                <ChevronRight size={24} />
-              </button>
-            </div>
+          {/* Arrows */}
+          <div className={styles.arrows}>
+            <button className={styles.arrow} onClick={scrollPrev} aria-label="Previous slide">
+              <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+                <path d="M12 4L6 10L12 16" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+              </svg>
+            </button>
+            <button className={styles.arrow} onClick={scrollNext} aria-label="Next slide">
+              <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+                <path d="M8 4L14 10L8 16" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+              </svg>
+            </button>
           </div>
         </div>
       </div>

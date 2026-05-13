@@ -29,7 +29,7 @@ export default async function Home({
               </Link>
             </div>
             <div className={styles.projectGrid}>
-              {([...(dictionary as any).projects.items] as unknown[]).reverse().slice(0, 4).map((project: unknown) => (
+              {([...(dictionary as any).projects.items] as unknown[]).slice(0, 4).map((project: unknown) => (
                   <ProjectCard
                     key={(project as any).id}
                     title={(project as any).title}
