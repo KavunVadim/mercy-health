@@ -11,6 +11,7 @@ import ScrollToTop from "@/components/ScrollToTop";
 import { getDictionary } from "@/get-dictionary";
 import { ThemeProvider } from "@/components/ThemeProvider";
 import ThemeScript from "@/components/ThemeScript";
+import Preloader from "@/components/Preloader/Preloader";
 
 const eUkraine = localFont({
   src: [
@@ -85,6 +86,7 @@ export default async function RootLayout({
     <html lang={locale} className={`${eUkraineHead.variable} ${eUkraine.variable}`} suppressHydrationWarning>
       <head />
       <body>
+        <Preloader />
         <ThemeScript />
         <ThemeProvider>
           <ScrollToTop />

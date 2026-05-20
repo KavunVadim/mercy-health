@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import Image from "next/image";
+import LogoIcon from "../LogoIcon/LogoIcon";
 import { useEffect, useState } from "react";
 import { createPortal } from "react-dom";
 import { motion, AnimatePresence } from "framer-motion";
@@ -74,13 +74,15 @@ export default function MobileMenu({
             >
               <div className={styles.topBar}>
                 <Link href={`/${lang}`} className={styles.logo} onClick={close}>
-                  <Image
-                    src="/fond-emblem.svg"
-                    alt="Logo"
-                    width={32}
-                    height={32}
+                  <LogoIcon
+                    width={50}
+                    height={50}
                   />
-                  <span className={styles.logoText}>MERCY & HEALTH</span>
+                  <span className={styles.logoText}>
+                    {dictionary.common.site_name.split(" & ")[0]}{" "}
+                    <span className={styles.logoAmp}>&</span>{" "}
+                    {dictionary.common.site_name.split(" & ")[1]}
+                  </span>
                 </Link>
                 <button className={styles.closeBtn} onClick={close} aria-label="Close menu">
                   <X size={28} />

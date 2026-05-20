@@ -1,4 +1,4 @@
-import Image from "next/image";
+import LogoIcon from "../LogoIcon/LogoIcon";
 import Link from "next/link";
 import { Mail, Phone, MapPin } from "lucide-react";
 import { FaFacebookF, FaInstagram, FaTelegramPlane, FaLinkedinIn, FaTiktok } from "react-icons/fa";
@@ -20,15 +20,15 @@ export default function Footer({
       <div className={`container ${styles.container}`}>
         <div className={styles.mainCol}>
           <Link href={`/${lang}`} className={styles.logo}>
-            <Image
-              src="/fond-emblem.svg"
-              alt="Mercy & Health Logo"
+            <LogoIcon
               width={56}
               height={56}
               className={styles.logoMark}
             />
             <span className={styles.logoText}>
-              MERCY <span className={styles.logoAmp}>&</span> HEALTH
+              {dictionary.common.site_name.split(" & ")[0]}{" "}
+              <span className={styles.logoAmp}>&</span>{" "}
+              {dictionary.common.site_name.split(" & ")[1]}
             </span>
           </Link>
           <p className={styles.description}>

@@ -1,6 +1,5 @@
 "use client";
 
-import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
 import { motion, useScroll, useMotionValueEvent } from "framer-motion";
@@ -8,6 +7,8 @@ import styles from "./Header.module.css";
 import LocaleSwitcher from "../LocaleSwitcher/LocaleSwitcher";
 import ThemeToggle from "../ThemeToggle/ThemeToggle";
 import MobileMenu from "./MobileMenu";
+import LogoIcon from "../LogoIcon/LogoIcon";
+
 import type { Locale } from "@/i18n-config";
 import clsx from "clsx";
 
@@ -60,16 +61,15 @@ export default function Header({
     >
       <div className={`container ${styles.container}`}>
         <Link href={`/${lang}`} className={styles.logo}>
-          <Image
-            src="/fond-emblem.svg"
-            alt="Mercy & Health Logo"
-            width={48}
-            height={48}
+          <LogoIcon
+            width={44}
+            height={44}
             className={styles.logoMark}
-            priority
           />
           <span className={styles.logoText}>
-            MERCY <span className={styles.logoAmp}>&</span> HEALTH
+            {dictionary.common.site_name.split(" & ")[0]}{" "}
+            <span className={styles.logoAmp}>&</span>{" "}
+            {dictionary.common.site_name.split(" & ")[1]}
           </span>
         </Link>
 

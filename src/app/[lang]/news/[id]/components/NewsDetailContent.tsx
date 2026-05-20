@@ -3,7 +3,7 @@
 import Image from "next/image";
 import { GalleryProvider, GalleryItem } from "@/components/ui/GalleryProvider";
 import { motion } from "framer-motion";
-import { FaPlay } from "react-icons/fa";
+import { FaPlay, FaEye } from "react-icons/fa";
 import styles from "../page.module.css";
 import galleryStyles from "@/app/[lang]/projects/[id]/components/ProjectGallery.module.css";
 
@@ -14,6 +14,10 @@ interface NewsDetailContentProps {
 }
 
 export default function NewsDetailContent({ newsItem, dictionary, locale }: NewsDetailContentProps) {
+  const hasVideo = !!newsItem.video_link;
+  const hasExternalLink = !!(newsItem.link || newsItem.external_link);
+  const hasSidebar = hasVideo || hasExternalLink;
+
   return (
     <GalleryProvider>
       <div className={styles.contentWrapper}>
@@ -22,59 +26,84 @@ export default function NewsDetailContent({ newsItem, dictionary, locale }: News
           <h1 className={styles.title}>{newsItem.title}</h1>
         </div>
 
-        <div className={styles.heroSection}>
-          <div className={styles.heroImageSide}>
-            <div className={styles.mainImageWrapper}>
-              <GalleryItem src={newsItem.image}>
-                <div style={{ position: 'relative', width: '100%', height: '100%', cursor: 'pointer' }}>
-                  <Image
-                    src={newsItem.image}
-                    alt={newsItem.title}
-                    fill
-                    priority
-                    sizes="(max-width: 768px) 100vw, (max-width: 1200px) 90vw, 1200px"
-                    className={styles.image}
-                  />
-                </div>
-              </GalleryItem>
-            </div>
-            
-            <div className={styles.narrativeSection}>
-              <div className={styles.description}>
-                {newsItem.content && Array.isArray(newsItem.content) ? (
-                  newsItem.content.map((paragraph: string, idx: number) => (
-                    <p key={idx}>{paragraph}</p>
-                  ))
-                ) : (
-                  <p>{newsItem.description}</p>
-                )}
+        <div className={`${styles.heroSection} ${!hasSidebar ? styles.noSidebar : ""}`}>
+          {/* 1. Main Cover Image Wrapper */}
+          <div className={styles.mainImageWrapper}>
+            <GalleryItem src={newsItem.image}>
+              <div style={{ position: 'relative', width: '100%', height: '100%', cursor: 'pointer' }}>
+                <Image
+                  src={newsItem.image}
+                  alt={newsItem.title}
+                  fill
+                  priority
+                  sizes="(max-width: 768px) 100vw, (max-width: 1200px) 90vw, 1200px"
+                  className={styles.image}
+                />
               </div>
-            </div>
+            </GalleryItem>
           </div>
 
-          {/* Action/Video sidebar */}
-          {newsItem.video_link && (
+          {/* 2. Dynamic Action/Video Sidebar */}
+          {hasSidebar && (
             <aside className={styles.heroActionSide}>
               <div className={styles.contentShareWrapper}>
                 <div className={styles.contentShareInner}>
-                  <div className={styles.playIconCircle}>
-                    <FaPlay className={styles.playIcon} />
-                  </div>
-                  <h3 className={styles.videoTitle}>
-                    {newsItem.video_label || dictionary.news.video_story}
-                  </h3>
-                  <a
-                    href={newsItem.video_link}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className={styles.videoLinkButton}
-                  >
-                    {locale === "uk" ? "Дивитись сюжет" : "Watch Story"}
-                  </a>
+                  {/* Option A: Video Link CTA */}
+                  {hasVideo && (
+                    <>
+                      <div className={styles.playIconCircle}>
+                        <FaPlay className={styles.playIcon} />
+                      </div>
+                      <h3 className={styles.videoTitle}>
+                        {newsItem.video_label || dictionary.news.video_story}
+                      </h3>
+                      <a
+                        href={newsItem.video_link}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className={styles.videoLinkButton}
+                      >
+                        {locale === "uk" ? "Дивитись сюжет" : "Watch Story"}
+                      </a>
+                    </>
+                  )}
+
+                  {/* Option B: External Source/Link CTA */}
+                  {!hasVideo && hasExternalLink && (
+                    <>
+                      <div className={styles.playIconCircle} style={{ background: 'var(--accent)' }}>
+                        <FaEye className={styles.playIcon} style={{ marginLeft: 0 }} />
+                      </div>
+                      <h3 className={styles.videoTitle}>
+                        {newsItem.link_label || (locale === "uk" ? "Деталі події" : "Event Details")}
+                      </h3>
+                      <a
+                        href={newsItem.link || newsItem.external_link}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className={styles.videoLinkButton}
+                      >
+                        {locale === "uk" ? "Підглянути" : "Take a Look"}
+                      </a>
+                    </>
+                  )}
                 </div>
               </div>
             </aside>
           )}
+
+          {/* 3. Narrative Text Section */}
+          <div className={styles.narrativeSection}>
+            <div className={styles.description}>
+              {newsItem.content && Array.isArray(newsItem.content) ? (
+                newsItem.content.map((paragraph: string, idx: number) => (
+                  <p key={idx}>{paragraph}</p>
+                ))
+              ) : (
+                <p>{newsItem.description}</p>
+              )}
+            </div>
+          </div>
         </div>
 
         {/* Gallery section */}

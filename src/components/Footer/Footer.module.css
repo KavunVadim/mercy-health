@@ -211,6 +211,21 @@
     border-bottom: 1px solid oklch(1 0 0 / 0.05);
   }
 
+  /* Compact logo on mobile */
+  .logo {
+    gap: 0.625rem;
+  }
+
+  .logoMark {
+    width: 36px !important;
+    height: 36px !important;
+  }
+
+  .logoText {
+    font-size: 1.0625rem;
+    white-space: nowrap;
+  }
+
   .description {
     max-width: none;
     font-size: 0.875rem;

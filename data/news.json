@@ -1,33 +1,103 @@
 {
   "news": [
     {
-      "id": "reanimobiles-delivered",
-      "date": "2024-03-15",
-      "image": "/images/projects/img_9487.webp",
+      "id": "reanimobile-zaporizhzhia-direction",
+      "date": "2026-05-20",
+      "image": "/images/news/reanimobile_zaporizhzhia_original_1.webp",
       "title": {
-        "uk": "Нова партія реанімобілів вирушила на передову",
-        "en": "New batch of ambulances sent to the frontline"
+        "uk": "Передача чергового реанімобіля на Запорізький напрямок",
+        "en": "Delivery of another ambulance to the Zaporizhzhia direction"
       },
       "description": {
-        "uk": "Завдяки вашій підтримці ми змогли передати ще 3 автомобілі для евакуації поранених.",
-        "en": "Thanks to your support, we were able to deliver 3 more vehicles for the evacuation of the wounded."
+        "uk": "Спільно з BeForUkraine передано сучасний реанімобіль для бійців 12-го армійського корпусу.",
+        "en": "Together with BeForUkraine, a modern ambulance was delivered to the fighters of the 12th Army Corps."
       },
-      "slug": "reanimobiles-delivered",
+      "slug": "reanimobile-zaporizhzhia-direction",
       "content": {
         "uk": [
-          "Завдяки спільним зусиллям наших донорів та партнерів, ще три повністю укомплектовані реанімобілі вирушили на передову для виконання бойових завдань та евакуації поранених.",
-          "Кожен автомобіль оснащений сучасним медичним обладнанням: апаратами ШВЛ, дефібриляторами, кисневими концентраторами та необхідними медикаментами для надання невідкладної допомоги в дорозі.",
-          "Це дозволить рятувати життя наших захисників та цивільних мешканців у прифронтових зонах. Дякуємо кожному, хто долучився до збору коштів!"
+          "Фонд «Милосердя та здоров’я» спільно з партнером BeForUkraine передав черговий реанімобіль — цього разу на Запорізький напрямок, до 12-го армійського корпусу.",
+          "Сучасна машина, повністю готова до роботи в найскладніших умовах — прямо на місці подій. Всередині — монітор пацієнта, дефібрилятор, аспіратор, аптечки, турнікети, медвироби та витратні матеріали.",
+          "За кожною такою передачею — місяці підготовки, збору коштів і логістики через пів-Європи. Десятки людей, які працюють заради одного результату.",
+          "Фонд «Милосердя та здоров’я» разом з BeForUkraine продовжує підтримку фронту."
         ],
         "en": [
-          "Thanks to the joint efforts of our donors and partners, three more fully equipped ambulances have headed to the frontlines to perform combat missions and evacuate the wounded.",
-          "Each vehicle is equipped with modern medical equipment: ventilators, defibrillators, oxygen concentrators, and necessary medicines to provide emergency medical care on the go.",
-          "This will help save the lives of our defenders and civilians in frontline areas. We thank everyone who contributed to this fundraiser!"
+          "The Mercy and Health Fund, together with its partner BeForUkraine, delivered another ambulance — this time to the Zaporizhzhia direction, for the 12th Army Corps.",
+          "A modern vehicle, fully ready for operation in the most difficult conditions — directly on-site. Inside, it features a patient monitor, defibrillator, aspirator, first aid kits, tourniquets, medical devices, and consumables.",
+          "Behind every such delivery are months of preparation, fundraising, and logistics across half of Europe. Dozens of people working towards a single result.",
+          "The Mercy and Health Fund, together with BeForUkraine, continues to support the frontlines."
         ]
       },
       "gallery": [
-        "/images/projects/img_9487.webp"
+        "/images/news/reanimobile_zaporizhzhia_original_1.webp",
+        "/images/news/reanimobile_zaporizhzhia_original_2.webp"
       ]
+    },
+    {
+      "id": "reanimobile-azov-pokrovsk",
+      "date": "2026-05-20",
+      "image": "/images/news/reanimobile_azov.webp",
+      "title": {
+        "uk": "Новий реанімобіль для бійців «Азову» на Покровському напрямку",
+        "en": "New ambulance for 'Azov' fighters in the Pokrovsk direction"
+      },
+      "description": {
+        "uk": "Фонд передав повністю укомплектований реанімобіль для медиків 1-го Корпусу НГУ «Азов».",
+        "en": "The Fund delivered a fully equipped ambulance for the medics of the 1st Corps of the NSU 'Azov'."
+      },
+      "slug": "reanimobile-azov-pokrovsk",
+      "content": {
+        "uk": [
+          "Фонд «Милосердя та здоров’я» спільно з BeForUkraine передав черговий реанімобіль на Покровський напрямок — бійцям 1-го Корпусу НГУ «Азов».",
+          "Цей підрозділ тримає одну з найгарячіших ділянок фронту.",
+          "Автомобіль повністю укомплектований сучасним медичним обладнанням — усе необхідне для надання екстреної допомоги прямо на місці, в умовах бойових дій. Монітор пацієнта, дефібрилятор, аспіратор, турнікети, аптечки — все, щоб медики могли діяти швидко і ефективно з першої секунди.",
+          "Разом з BeForUkraine мы продовжуємо працювати, щоб таких машин на фронті було більше. Поки є потреба — ми діємо."
+        ],
+        "en": [
+          "The Mercy and Health Fund, in cooperation with BeForUkraine, delivered another ambulance to the Pokrovsk direction — to the fighters of the 1st Corps of the NSU 'Azov'.",
+          "This unit is holding one of the hottest sectors of the frontline.",
+          "The vehicle is fully equipped with modern medical equipment — everything needed to provide emergency assistance directly on-site under combat conditions. A patient monitor, defibrillator, aspirator, tourniquets, first aid kits — everything so that medics can act quickly and effectively from the very first second.",
+          "Together with BeForUkraine, we continue to work so that there are more such vehicles on the frontline. As long as there is a need — we act."
+        ]
+      },
+      "gallery": [
+        "/images/news/reanimobile_azov.webp"
+      ]
+    },
+    {
+      "id": "refrigerator-ok-zakhid",
+      "date": "2026-05-20",
+      "image": "/images/news/refrigerator_delivery.webp",
+      "title": {
+        "uk": "Спеціалізований рефрижератор для ОК «Захід»",
+        "en": "Specialized refrigerator van delivered to Operational Command 'West'"
+      },
+      "description": {
+        "uk": "Передано автомобіль-рефрижератор для гідного транспортування полеглих захисників до місць поховання.",
+        "en": "A specialized refrigerator vehicle has been delivered for the dignified transportation of fallen defenders to their burial sites."
+      },
+      "slug": "refrigerator-ok-zakhid",
+      "content": {
+        "uk": [
+          "Фонд «Милосердя та здоров’я» спільно з бельгійським партнером BeForUkraine та Оперативним командуванням «Захід» передали спеціалізований автомобіль-рефрижератор для транспортування загиблих захисників до місць поховання.",
+          "Рефрижератор — це не медична техніка. Але це така ж невід’ємна часть підтримки фронту. Бо війна — це не лише про порятунок живих. Це також про повагу до тих, хто вже не повернеться.",
+          "Ми вдячні всім, хто долучився до цієї місії — донорам, волонтерам, міжнародним партнерам.",
+          "Щоб кожен, хто віддав життя за Україну, міг гідно повернутися додому."
+        ],
+        "en": [
+          "The Mercy and Health Fund, together with its Belgian partner BeForUkraine and the Operational Command 'West', delivered a specialized refrigerator vehicle for transporting fallen defenders to their burial sites.",
+          "A refrigerator vehicle is not medical equipment. But it is just as essential a part of supporting the front. Because war is not only about saving the living. It is also about showing respect to those who will never return.",
+          "We are grateful to everyone who contributed to this mission — donors, volunteers, international partners.",
+          "So that everyone who gave their life for Ukraine can return home with dignity."
+        ]
+      },
+      "gallery": [
+        "/images/news/refrigerator_delivery.webp"
+      ],
+      "link": "https://www.facebook.com/mercyhealthua",
+      "link_label": {
+        "uk": "Переглянути допис у Facebook",
+        "en": "View Facebook post"
+      }
     },
     {
       "id": "monomakh-tea-delivery",
@@ -68,6 +138,8 @@
     }
   ],
   "gallery": [
+    "/images/news/reanimobile_zaporizhzhia_original_1.webp",
+    "/images/news/reanimobile_zaporizhzhia_original_2.webp",
     "/images/gallery/IMG_9441.webp",
     "/images/gallery/IMG_9438.webp",
     "/images/gallery/IMG_9437.webp",
