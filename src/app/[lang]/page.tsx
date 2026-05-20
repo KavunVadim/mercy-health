@@ -1,6 +1,7 @@
 import styles from "./page.module.css";
 import { getDictionary } from "@/get-dictionary";
-import type { Locale } from "@/i18n-config";
+import { i18n, type Locale } from "@/i18n-config";
+import { notFound } from "next/navigation";
 import ProjectCard from "@/components/ProjectCard/ProjectCard";
 import NewsCard from "@/components/NewsCard/NewsCard";
 import HeroSlider from "@/components/HeroSlider/HeroSlider";
@@ -12,6 +13,9 @@ export default async function Home({
   params: Promise<{ lang: string }>;
 }) {
   const { lang } = await params;
+  if (!i18n.locales.includes(lang as any)) {
+    notFound();
+  }
   const locale = lang as Locale;
   const dictionary = await getDictionary(locale);
 

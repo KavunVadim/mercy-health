@@ -1,0 +1,320 @@
+/* ─── Entry animation ─────────────────────────────────────── */
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* ─── Page shell ──────────────────────────────────────────── */
+.main {
+  min-height: 100dvh;
+  background-color: var(--background);
+  padding-bottom: 80px;
+  transition: background-color var(--transition-theme);
+}
+
+.header {
+  padding: 0.75rem 0 0.125rem;
+  background-color: var(--background);
+  transition: background-color var(--transition-theme);
+}
+
+.topActions {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 0.25rem;
+}
+
+/* ─── Content wrapper — tight, full-use ──────────────────── */
+.contentWrapper {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 0 16px 40px;
+  animation: fadeUp 0.6s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+@media (min-width: 768px) {
+  .contentWrapper {
+    padding: 0 24px 56px;
+  }
+}
+
+@media (min-width: 1024px) {
+  .contentWrapper {
+    padding: 0 32px 72px;
+  }
+}
+
+/* ─── Eyebrow + Title block ─────────────────────────────── */
+.titleBlock {
+  padding: 12px 0 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+@media (min-width: 1024px) {
+  .titleBlock {
+    padding: 28px 0 20px;
+  }
+}
+
+.eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.6875rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.18em;
+  color: var(--accent);
+  background: color-mix(in oklab, var(--accent) 8%, transparent);
+  border-radius: 100px;
+  padding: 4px 12px;
+  width: fit-content;
+}
+
+.title {
+  font-family: var(--font-e-ukraine-head);
+  font-size: clamp(1.9rem, 4.5vw, 3.5rem);
+  font-weight: 800;
+  line-height: 1.05;
+  color: var(--foreground);
+  letter-spacing: -0.03em;
+  margin: 0;
+}
+
+@media (max-width: 640px) {
+  .title {
+    font-size: clamp(1.6rem, 6.5vw, 2.2rem);
+  }
+}
+
+/* ─── Hero split layout ──────────────────────────────────── */
+.heroSection {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+@media (min-width: 1024px) {
+  .heroSection {
+    display: grid;
+    grid-template-columns: 1fr 340px;
+    align-items: start;
+    gap: 32px;
+  }
+}
+
+@media (min-width: 1280px) {
+  .heroSection {
+    grid-template-columns: 1fr 360px;
+    gap: 24px;
+  }
+}
+
+/* ─── Image side ─────────────────────────────────────────── */
+.heroImageSide {
+  width: 100%;
+}
+
+.mainImageWrapper {
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  position: relative;
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  box-shadow:
+    var(--glass-inset-top),
+    0 20px 56px -14px color-mix(in oklab, var(--foreground) 14%, transparent);
+  border: 1px solid color-mix(in oklab, var(--foreground) 10%, transparent);
+}
+
+@media (max-width: 1023px) {
+  .mainImageWrapper {
+    aspect-ratio: 3 / 2;
+    border-radius: var(--radius-md);
+  }
+}
+
+@media (max-width: 640px) {
+  .mainImageWrapper {
+    aspect-ratio: 4 / 3;
+    border-radius: var(--radius-md);
+  }
+}
+
+.image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 1.2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.mainImageWrapper:hover .image {
+  transform: scale(1.03);
+}
+
+/* ─── Narrative section ──────────────────────────────────── */
+.narrativeSection {
+  max-width: 100%;
+  margin: 0;
+  width: 100%;
+  padding-top: 40px;
+}
+
+@media (max-width: 768px) {
+  .narrativeSection {
+    padding-top: 28px;
+  }
+}
+
+.description {
+  font-size: 1.05rem;
+  line-height: 1.8;
+  color: var(--muted-foreground);
+}
+
+.description p {
+  margin-bottom: 20px;
+}
+
+.description p:last-child {
+  margin-bottom: 0;
+}
+
+/* ─── Action/Video sidebar ───────────────────────────────── */
+.heroActionSide {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  position: sticky;
+  top: 100px;
+  align-self: start;
+  z-index: 10;
+}
+
+.contentShareWrapper {
+  background: color-mix(in oklab, var(--foreground) 3%, transparent);
+  border: 1px solid color-mix(in oklab, var(--foreground) 4%, transparent);
+  border-radius: var(--radius-lg);
+  padding: 4px;
+}
+
+.contentShareInner {
+  background: var(--card);
+  border-radius: calc(var(--radius-lg) - 4px);
+  padding: 24px;
+  box-shadow:
+    var(--glass-inset-top),
+    0 16px 32px -10px color-mix(in oklab, var(--foreground) 6%, transparent);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 20px;
+  transition: background-color var(--transition-theme), border-color 0.3s ease;
+  border: 1px solid color-mix(in oklab, var(--foreground) 4%, transparent);
+}
+
+.contentShareInner:hover {
+  border-color: color-mix(in oklab, var(--accent) 30%, transparent);
+  box-shadow: 
+    var(--glass-inset-top),
+    0 24px 48px -12px color-mix(in oklab, var(--accent) 15%, transparent);
+}
+
+@media (max-width: 1023px) {
+  .heroActionSide {
+    position: relative;
+    top: 0;
+    width: 100%;
+    margin: 0;
+    padding: 16px 0;
+  }
+  .contentShareWrapper {
+    border-radius: var(--radius-md);
+    padding: 0;
+    background: transparent;
+    border: none;
+  }
+  .contentShareInner {
+    padding: 20px;
+    gap: 16px;
+    border-radius: var(--radius-md);
+    box-shadow: none;
+    background: color-mix(in oklab, var(--foreground) 2%, transparent);
+  }
+}
+
+.playIconCircle {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  background: var(--accent);
+  color: var(--accent-foreground);
+  box-shadow: 0 8px 24px color-mix(in oklab, var(--accent) 30%, transparent);
+  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.contentShareInner:hover .playIconCircle {
+  transform: scale(1.08) rotate(8deg);
+  box-shadow: 0 12px 32px color-mix(in oklab, var(--accent) 45%, transparent);
+}
+
+.playIcon {
+  font-size: 1.1rem;
+  margin-left: 3px;
+}
+
+.videoTitle {
+  font-family: var(--font-e-ukraine), sans-serif;
+  font-size: 1.1rem;
+  font-weight: 700;
+  line-height: 1.4;
+  color: var(--foreground);
+  margin: 0;
+}
+
+.videoLinkButton {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  padding: 12px 20px;
+  border-radius: var(--radius-md);
+  background: var(--accent);
+  color: var(--accent-foreground);
+  font-weight: 700;
+  font-size: 0.9rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  text-decoration: none;
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  box-shadow: 0 4px 12px color-mix(in oklab, var(--accent) 15%, transparent);
+}
+
+.videoLinkButton:hover {
+  background: var(--accent-hover);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px color-mix(in oklab, var(--accent) 25%, transparent);
+}
+
+/* ─── Gallery section ────────────────────────────────────── */
+.gallerySection {
+  margin-top: 24px;
+  padding-top: 48px;
+  border-top: 1px solid color-mix(in oklab, var(--foreground) 8%, transparent);
+}
+
+.galleryHeader {
+  font-family: var(--font-e-ukraine-head);
+  font-size: clamp(1.5rem, 3.5vw, 2.2rem);
+  font-weight: 800;
+  margin: 0 0 28px;
+  letter-spacing: -0.02em;
+  color: var(--foreground);
+}

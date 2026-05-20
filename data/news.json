@@ -12,7 +12,59 @@
         "uk": "Завдяки вашій підтримці ми змогли передати ще 3 автомобілі для евакуації поранених.",
         "en": "Thanks to your support, we were able to deliver 3 more vehicles for the evacuation of the wounded."
       },
-      "slug": "reanimobiles-delivered"
+      "slug": "reanimobiles-delivered",
+      "content": {
+        "uk": [
+          "Завдяки спільним зусиллям наших донорів та партнерів, ще три повністю укомплектовані реанімобілі вирушили на передову для виконання бойових завдань та евакуації поранених.",
+          "Кожен автомобіль оснащений сучасним медичним обладнанням: апаратами ШВЛ, дефібриляторами, кисневими концентраторами та необхідними медикаментами для надання невідкладної допомоги в дорозі.",
+          "Це дозволить рятувати життя наших захисників та цивільних мешканців у прифронтових зонах. Дякуємо кожному, хто долучився до збору коштів!"
+        ],
+        "en": [
+          "Thanks to the joint efforts of our donors and partners, three more fully equipped ambulances have headed to the frontlines to perform combat missions and evacuate the wounded.",
+          "Each vehicle is equipped with modern medical equipment: ventilators, defibrillators, oxygen concentrators, and necessary medicines to provide emergency medical care on the go.",
+          "This will help save the lives of our defenders and civilians in frontline areas. We thank everyone who contributed to this fundraiser!"
+        ]
+      },
+      "gallery": [
+        "/images/projects/img_9487.webp"
+      ]
+    },
+    {
+      "id": "monomakh-tea-delivery",
+      "date": "2026-05-20",
+      "image": "/images/news/monomakh_tea_delivery.png",
+      "title": {
+        "uk": "Компанія «Мономах» передала партію чаю для військових медиків",
+        "en": "Monomakh Company delivered a batch of tea for military medics"
+      },
+      "description": {
+        "uk": "Компанія долучилася до гуманітарної місії фонду «Милосердя та здоров’я» і передала велику партію чаю на передову.",
+        "en": "The company joined the humanitarian mission of the Mercy and Health Fund and sent a large batch of tea to the frontlines."
+      },
+      "slug": "monomakh-tea-delivery",
+      "content": {
+        "uk": [
+          "Компанія «Мономах» долучилася до гуманітарної місії фонду «Милосердя та здоров’я» і передала на передову велику партію свого чаю для військових медиків.",
+          "Волонтерський рух в Україні тримається на людях, які вірять і діють. Але без підтримки бізнесу масштаб цієї роботи був би набагато меншим. Саме компанії, які обирають долучатися своєю продукцією, ресурсами, можливостями — надають волонтерам реальну силу.",
+          "І ця співпраця не разова. Ми домовились про регулярні поставки чаю «Мономах» на фронт — для військових медиків, які щодня рятують життя в найважчих умовах. Тепло та турбота тепер надходитимуть на передову системно.",
+          "Дякуємо «Мономах» за небайдужість і за вибір бути частиною цієї місії."
+        ],
+        "en": [
+          "Monomakh Company has joined the humanitarian mission of the Mercy and Health Fund and delivered a large batch of their tea to the frontlines for military medics.",
+          "The volunteer movement in Ukraine relies on people who believe and act. But without the support of business, the scale of this work would be much smaller. It is the companies that choose to contribute their products, resources, and capabilities that give volunteers real strength.",
+          "And this cooperation is not a one-off. We have agreed on regular deliveries of Monomakh tea to the front for military medics who save lives daily in the most difficult conditions. Warmth and care will now arrive systematically on the frontlines.",
+          "We thank Monomakh for their care and for choosing to be part of this mission."
+        ]
+      },
+      "video_link": "https://youtu.be/TGm7ceoEf7M?si=Qywe6ITmqDxkP97q",
+      "video_label": {
+        "uk": "Дивитись сюжет про передачу чаю «Мономах»",
+        "en": "Watch the video about the Monomakh tea delivery"
+      },
+      "gallery": [
+        "/images/news/monomakh_tea_delivery.png",
+        "/images/news/monomakh_tea_medics.png"
+      ]
     }
   ],
   "gallery": [

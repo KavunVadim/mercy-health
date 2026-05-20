@@ -1,5 +1,6 @@
 import type { Metadata, Viewport } from "next";
 import localFont from "next/font/local";
+import { notFound } from "next/navigation";
 
 import "../globals.css";
 import "../variables.css";
@@ -9,6 +10,7 @@ import Footer from "@/components/Footer/Footer";
 import ScrollToTop from "@/components/ScrollToTop";
 import { getDictionary } from "@/get-dictionary";
 import { ThemeProvider } from "@/components/ThemeProvider";
+import ThemeScript from "@/components/ThemeScript";
 
 const eUkraine = localFont({
   src: [
@@ -48,6 +50,9 @@ export async function generateStaticParams() {
 
 export async function generateMetadata({ params }: { params: Promise<{ lang: string }> }): Promise<Metadata> {
   const { lang } = await params;
+  if (!i18n.locales.includes(lang as any)) {
+    return {};
+  }
   const dictionary = await getDictionary(lang as Locale);
   return {
     title: dictionary.metadata.title,
@@ -70,17 +75,17 @@ export default async function RootLayout({
   params: Promise<{ lang: string }>;
 }>) {
   const { lang } = await params;
+  if (!i18n.locales.includes(lang as any)) {
+    notFound();
+  }
   const locale = lang as Locale;
   const dictionary = await getDictionary(locale);
 
-  const themeScript = `(function(){try{var t=localStorage.getItem('theme');var d=window.matchMedia('(prefers-color-scheme: dark)').matches;if(!t&&d)t='dark';if(!t)t='light';document.documentElement.setAttribute('data-theme',t);}catch(e){}})();`;
-
   return (
     <html lang={locale} className={`${eUkraineHead.variable} ${eUkraine.variable}`} suppressHydrationWarning>
-      <head>
-        <script dangerouslySetInnerHTML={{ __html: themeScript }} />
-      </head>
+      <head />
       <body>
+        <ThemeScript />
         <ThemeProvider>
           <ScrollToTop />
           <Header dictionary={dictionary} lang={locale} />

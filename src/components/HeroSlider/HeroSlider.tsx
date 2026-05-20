@@ -129,15 +129,6 @@ export default function HeroSlider({ slides }: { slides: Slide[] }) {
 
         {/* Bottom controls */}
         <div className={styles.controls}>
-          {/* Slide counter */}
-          <div className={styles.counter}>
-            <span className={styles.counterCurrent}>
-              {String(selectedIndex + 1).padStart(2, "0")}
-            </span>
-            <span className={styles.counterSep}>/</span>
-            <span className={styles.counterTotal}>{String(total).padStart(2, "0")}</span>
-          </div>
-
           {/* Dots */}
           <div className={styles.dots}>
             {scrollSnaps.map((_, index) => (
@@ -149,20 +140,20 @@ export default function HeroSlider({ slides }: { slides: Slide[] }) {
               />
             ))}
           </div>
+        </div>
 
-          {/* Arrows */}
-          <div className={styles.arrows}>
-            <button className={styles.arrow} onClick={scrollPrev} aria-label="Previous slide">
-              <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
-                <path d="M12 4L6 10L12 16" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
-              </svg>
-            </button>
-            <button className={styles.arrow} onClick={scrollNext} aria-label="Next slide">
-              <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
-                <path d="M8 4L14 10L8 16" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
-              </svg>
-            </button>
-          </div>
+        {/* Arrows */}
+        <div className={styles.arrows}>
+          <button className={styles.arrow} onClick={scrollPrev} aria-label="Previous slide">
+            <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+              <path d="M12 4L6 10L12 16" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+            </svg>
+          </button>
+          <button className={styles.arrow} onClick={scrollNext} aria-label="Next slide">
+            <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+              <path d="M8 4L14 10L8 16" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+            </svg>
+          </button>
         </div>
       </div>
     </section>
