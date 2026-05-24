@@ -38,6 +38,7 @@ export default function NewsDetailContent({ newsItem, dictionary, locale }: News
                   priority
                   sizes="(max-width: 768px) 100vw, (max-width: 1200px) 90vw, 1200px"
                   className={styles.image}
+                  style={{ objectPosition: newsItem.image_focus || "center" }}
                 />
               </div>
             </GalleryItem>
@@ -46,49 +47,53 @@ export default function NewsDetailContent({ newsItem, dictionary, locale }: News
           {/* 2. Dynamic Action/Video Sidebar */}
           {hasSidebar && (
             <aside className={styles.heroActionSide}>
-              <div className={styles.contentShareWrapper}>
-                <div className={styles.contentShareInner}>
-                  {/* Option A: Video Link CTA */}
-                  {hasVideo && (
-                    <>
-                      <div className={styles.playIconCircle}>
-                        <FaPlay className={styles.playIcon} />
-                      </div>
-                      <h3 className={styles.videoTitle}>
-                        {newsItem.video_label || dictionary.news.video_story}
-                      </h3>
-                      <a
-                        href={newsItem.video_link}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className={styles.videoLinkButton}
-                      >
-                        {locale === "uk" ? "Дивитись сюжет" : "Watch Story"}
-                      </a>
-                    </>
-                  )}
-
-                  {/* Option B: External Source/Link CTA */}
-                  {!hasVideo && hasExternalLink && (
-                    <>
-                      <div className={styles.playIconCircle} style={{ background: 'var(--accent)' }}>
-                        <FaEye className={styles.playIcon} style={{ marginLeft: 0 }} />
-                      </div>
-                      <h3 className={styles.videoTitle}>
-                        {newsItem.link_label || (locale === "uk" ? "Деталі події" : "Event Details")}
-                      </h3>
-                      <a
-                        href={newsItem.link || newsItem.external_link}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className={styles.videoLinkButton}
-                      >
-                        {locale === "uk" ? "Підглянути" : "Take a Look"}
-                      </a>
-                    </>
-                  )}
+              {/* Video Card */}
+              {hasVideo && (
+                <div className={styles.contentShareWrapper}>
+                  <div className={styles.contentShareInner}>
+                    <div className={styles.playIconCircle}>
+                      <FaPlay className={styles.playIcon} />
+                    </div>
+                    <h3 className={styles.videoTitle}>
+                      {typeof newsItem.video_label === 'string' 
+                        ? newsItem.video_label 
+                        : newsItem.video_label?.[locale] || dictionary.news.video_story}
+                    </h3>
+                    <a
+                      href={newsItem.video_link}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className={styles.videoLinkButton}
+                    >
+                      {locale === "uk" ? "Дивитись сюжет" : "Watch Story"}
+                    </a>
+                  </div>
                 </div>
-              </div>
+              )}
+
+              {/* External Link Card */}
+              {hasExternalLink && (
+                <div className={styles.contentShareWrapper}>
+                  <div className={styles.contentShareInner}>
+                    <div className={styles.playIconCircle} style={{ background: 'var(--accent)' }}>
+                      <FaEye className={styles.playIcon} style={{ marginLeft: 0 }} />
+                    </div>
+                    <h3 className={styles.videoTitle}>
+                      {typeof newsItem.link_label === 'string'
+                        ? newsItem.link_label
+                        : newsItem.link_label?.[locale] || (locale === "uk" ? "Деталі події" : "Event Details")}
+                    </h3>
+                    <a
+                      href={newsItem.link || newsItem.external_link}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className={styles.videoLinkButton}
+                    >
+                      {locale === "uk" ? "Деталі події" : "Event Details"}
+                    </a>
+                  </div>
+                </div>
+              )}
             </aside>
           )}
 

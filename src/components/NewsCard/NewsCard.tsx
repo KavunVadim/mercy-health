@@ -15,7 +15,7 @@ export default function NewsCard({ id, date, title, image, description, lang }: 
   return (
     <Link href={`/${lang}/news/${id}`} className={styles.card}>
       <div className={styles.imageWrapper}>
-        <Image src={image} alt={title} fill className={styles.image} />
+        <Image src={image} alt={title} fill sizes="100vw" className={styles.image} />
       </div>
       <div className={styles.content}>
         <span className={styles.date}>{date}</span>
