@@ -3,7 +3,6 @@
 import useEmblaCarousel from "embla-carousel-react";
 import AutoScroll from "embla-carousel-auto-scroll";
 import styles from "./Partners.module.css";
-import Image from "next/image";
 
 export default function Partners({ dictionary }: { dictionary: any }) {
   const dict = dictionary as any;
@@ -27,13 +26,7 @@ export default function Partners({ dictionary }: { dictionary: any }) {
           {[...partners, ...partners].map((partner: any, idx: number) => (
             <div key={`${partner.id}-${idx}`} className={styles.slide}>
               <div className={styles.logoCard}>
-                <Image
-                  src={partner.logo}
-                  alt={partner.name}
-                  width={160}
-                  height={80}
-                  className={styles.logoImage}
-                />
+                <img src={partner.logo} alt={partner.name} className={styles.logoImage} />
               </div>
             </div>
           ))}

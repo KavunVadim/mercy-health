@@ -1,6 +1,85 @@
 {
   "news": [
-     {
+    {
+      "id": "memorandum-cooperation",
+      "date": "2026-05-29",
+      "image": "/images/news/memorandum-cooperation/IMG_1516.webp",
+      "image_focus": "50% 25%",
+      "title": {
+        "uk": "Меморандум про співпрацю",
+        "en": "Memorandum of Cooperation"
+      },
+      "description": {
+        "uk": "НАМН та Благодійний фонд «Милосердя та Здоров’я» підписали меморандум про співпрацю.",
+        "en": "The National Academy of Medical Sciences and the Mercy and Health Charity Foundation signed a memorandum of cooperation."
+      },
+      "slug": "memorandum-cooperation",
+      "content": {
+        "uk": [
+          "Сьогодні Національна академія медичних наук України та Благодійна організація «Благодійний фонд Милосердя та Здоров’я» підписали Меморандум про співпрацю та партнерство.",
+          "Документ підписали Президент НАМН України, академік НАН та НАМН України Василь Лазоришинець та голова правління Благодійної організації «Благодійний фонд Милосердя та Здоров’я» Олександр Яцина.",
+          "Метою Меморандуму є консолідація наукового, медичного, гуманітарного та організаційного потенціалу задля реалізації спільних ініціатив у сфері охорони здоров’я, медичної науки, освіти та благодійної діяльності.",
+          "У межах співпраці сторони планують реалізовувати спільні освітні, науково-практичні та гуманітарні проєкти, спрямовані на розвиток системи охорони здоров’я України, підтримку медичних працівників, допомогу вразливим категоріям населення та посилення доступу громадян до якісної медичної допомоги.",
+          "Серед ключових напрямів взаємодії — проведення наукових конференцій, тренінгів, симпозіумів та навчальних програм, розвиток телемедичних і симуляційних платформ, реалізація проєктів у сфері громадського здоров’я, психологічної та психосоціальної підтримки населення.",
+          "Також Меморандум передбачає співпрацю у сфері залучення гуманітарної та благодійної допомоги, міжнародних грантових програм, медичного обладнання, лікарських засобів та підтримки спільних міжнародних ініціатив.",
+          "Підписання документа стало важливим кроком для розвитку партнерства між науковою медичною спільнотою та благодійним сектором задля посилення стійкості системи охорони здоров’я України в умовах сучасних викликів."
+        ],
+        "en": [
+          "Today the National Academy of Medical Sciences of Ukraine and the Mercy and Health Charity Foundation signed a Memorandum of Cooperation and Partnership.",
+          "The document was signed by the President of NAMS of Ukraine, academician Vasyl Lazoryshynets, and the chairman of the board of the Mercy and Health Charity Foundation, Oleksandr Yatsyna.",
+          "The Memorandum aims to consolidate scientific, medical, humanitarian, and organizational capacities to implement joint initiatives in healthcare, medical science, education, and charitable activities.",
+          "Within the cooperation, the parties plan to implement joint educational, scientific-practical, and humanitarian projects aimed at developing Ukraine’s healthcare system, supporting healthcare workers, assisting vulnerable populations, and strengthening citizens’ access to quality medical care.",
+          "Key areas of interaction include holding scientific conferences, trainings, symposiums and educational programs, developing telemedicine and simulation platforms, and implementing public health, psychological and psychosocial support projects.",
+          "The Memorandum also provides for cooperation in mobilizing humanitarian and charitable aid, international grant programs, medical equipment, medicines, and supporting joint international initiatives.",
+          "The signing of the document is an important step in developing partnership between the scientific medical community and the charitable sector to strengthen the resilience of Ukraine’s healthcare system in the face of current challenges."
+        ]
+      },
+      "gallery": [
+        "/images/news/memorandum-cooperation/IMG_1514.webp",
+        "/images/news/memorandum-cooperation/IMG_1515.webp",
+        "/images/news/memorandum-cooperation/IMG_1516.webp"
+      ]
+    },
+    {
+      "id": "mi-poruch-charity-yoga",
+      "date": "2026-05-23",
+      "image": "/images/news/mi-poruch-charity-yoga/IMG_1508.webp",
+      "title": {
+        "uk": "Благодійна йога «Ми Поруч»: разом зібрали на дрони для ЗСУ",
+        "en": "Charity Yoga 'We Are Near': raised funds for drones for the Armed Forces"
+      },
+      "description": {
+        "uk": "23 травня на ВДНГ у Києві відбулася благодійна йога «Ми Поруч», учасники задонатили на дрони для ЗСУ.",
+        "en": "On May 23 at VDNH in Kyiv, the charity yoga 'We Are Near' took place — participants donated to purchase drones for the Armed Forces."
+      },
+      "slug": "mi-poruch-charity-yoga",
+      "content": {
+        "uk": [
+          "23 травня на ВДНГ у Києві відбулася особлива ранкова подія — благодійна йога «Ми Поруч», організована фондом «Милосердя та Здоров’я» спільно з ініціативою «Чисте небо».",
+          "Учасники зібралися о 10:00, щоб зробити кожен рух частиною спільної справи. Умовою участі був донат від 500 гривень на збір дронів для Збройних сил України. Для УБД та їхніх сімей участь була безкоштовною.",
+          "Після практики відбувся аукціон: кожен учасник мав шанс отримати символічний подарунок за свій внесок. Усіх також очікували батончики від партнера заходу ТМ ФІЗІ.",
+          "Дякуємо кожному, хто прийшов, задонатив і підтримав. Фонд «Милосердя та Здоров’я» працює над розвитком регулярних благодійних ініціатив, щоб підтримка армії та відновлення людей ставали частиною нашого спільного ритму життя."
+        ],
+        "en": [
+          "On May 23 at VDNH in Kyiv, a special morning event took place — the charity yoga 'We Are Near', organized by the Mercy and Health Foundation together with the 'Clear Sky' initiative.",
+          "Participants gathered at 10:00 to make every movement part of a shared cause. The participation condition was a donation starting from 500 UAH to collect drones for the Armed Forces of Ukraine. Veterans and their families attended for free.",
+          "After the practice, an auction was held: each participant had a chance to receive a small gift for their contribution. Attendees also received energy bars from the event partner TM FIZI.",
+          "Thanks to everyone who came, donated and supported. The Foundation continues to work on regular charitable initiatives."
+        ]
+      },
+      "gallery": [
+        "/images/news/mi-poruch-charity-yoga/IMG_1504.webp",
+        "/images/news/mi-poruch-charity-yoga/IMG_1505.webp",
+        "/images/news/mi-poruch-charity-yoga/IMG_1506.webp",
+        "/images/news/mi-poruch-charity-yoga/IMG_1507.webp",
+        "/images/news/mi-poruch-charity-yoga/IMG_1508.webp",
+        "/images/news/mi-poruch-charity-yoga/IMG_1509.webp",
+        "/images/news/mi-poruch-charity-yoga/IMG_1510.webp",
+        "/images/news/mi-poruch-charity-yoga/IMG_1511.webp",
+        "/images/news/mi-poruch-charity-yoga/IMG_1513.webp"
+      ]
+    },
+    {
       "id": "monomakh-tea-delivery",
       "date": "2026-05-20",
       "image": "/images/news/monomakh-tea-delivery/20.webp",
@@ -63,7 +142,7 @@
     {
       "id": "reanimobile-zaporizhzhia-direction",
       "date": "2026-05-20",
-      "image": "/images/news/reanimobile-zaporizhzhia-direction/reanimobile_zaporizhzhia_original_1.webp",
+      "image": "/images/news/reanimobile-zaporizhzhia-direction/IMG_1418.webp",
       "title": {
         "uk": "Передача чергового реанімобіля на Запорізький напрямок",
         "en": "Delivery of another ambulance to the Zaporizhzhia direction"
@@ -88,8 +167,12 @@
         ]
       },
       "gallery": [
-        "/images/news/reanimobile-zaporizhzhia-direction/reanimobile_zaporizhzhia_original_1.webp",
-        "/images/news/reanimobile-zaporizhzhia-direction/reanimobile_zaporizhzhia_original_2.webp"
+        "/images/news/reanimobile-zaporizhzhia-direction/IMG_1418.webp",
+        "/images/news/reanimobile-zaporizhzhia-direction/IMG_1419.webp",
+        "/images/news/reanimobile-zaporizhzhia-direction/IMG_1420.webp",
+        "/images/news/reanimobile-zaporizhzhia-direction/IMG_1421.webp",
+        "/images/news/reanimobile-zaporizhzhia-direction/IMG_1422.webp",
+        "/images/news/reanimobile-zaporizhzhia-direction/IMG_1423.webp"
       ]
     },
     {
@@ -121,7 +204,9 @@
         ]
       },
       "gallery": [
-        "/images/news/reanimobile-azov-pokrovsk/IMG_0857.webp"
+        "/images/news/reanimobile-azov-pokrovsk/IMG_1496.webp",
+        "/images/news/reanimobile-azov-pokrovsk/IMG_1497.webp",
+        "/images/news/reanimobile-azov-pokrovsk/IMG_1498.webp"
       ]
     },
     {
@@ -158,7 +243,6 @@
         "/images/news/refrigerator-ok-zakhid/IMG_0851.webp"
       ]
     }
-   
   ],
   "gallery": [
     "/images/gallery/IMG_9441.webp",

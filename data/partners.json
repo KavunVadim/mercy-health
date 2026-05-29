@@ -2,24 +2,66 @@
   "partners": [
     {
       "id": "p1",
-      "name": "USAID",
-      "logo": "/images/partners/usaid.png",
-      "url": "https://usaid.gov",
-      "category": "international"
+      "name": "Партнер IMG_9495",
+      "logo": "/images/partners/IMG_9495.PNG",
+      "url": "",
+      "category": "other"
     },
     {
       "id": "p2",
-      "name": "UNICEF",
-      "logo": "/images/partners/unicef.png",
-      "url": "https://unicef.org",
-      "category": "international"
+      "name": "Партнер IMG_9496",
+      "logo": "/images/partners/IMG_9496.PNG",
+      "url": "",
+      "category": "other"
     },
     {
       "id": "p3",
-      "name": "Червоний Хрест",
-      "logo": "/images/partners/red-cross.png",
-      "url": "https://redcross.org.ua",
-      "category": "international"
+      "name": "Партнер IMG_9499",
+      "logo": "/images/partners/IMG_9499.PNG",
+      "url": "",
+      "category": "other"
+    },
+    {
+      "id": "p4",
+      "name": "Партнер IMG_9500",
+      "logo": "/images/partners/IMG_9500.PNG",
+      "url": "",
+      "category": "other"
+    },
+    {
+      "id": "p5",
+      "name": "Партнер IMG_9501",
+      "logo": "/images/partners/IMG_9501.PNG",
+      "url": "",
+      "category": "other"
+    },
+    {
+      "id": "p6",
+      "name": "Партнер IMG_9502",
+      "logo": "/images/partners/IMG_9502.PNG",
+      "url": "",
+      "category": "other"
+    },
+    {
+      "id": "p7",
+      "name": "Партнер IMG_9503",
+      "logo": "/images/partners/IMG_9503.PNG",
+      "url": "",
+      "category": "other"
+    },
+    {
+      "id": "p8",
+      "name": "Партнер IMG_9504",
+      "logo": "/images/partners/IMG_9504.PNG",
+      "url": "",
+      "category": "other"
+    },
+    {
+      "id": "p9",
+      "name": "Партнер IMG_9505",
+      "logo": "/images/partners/IMG_9505.PNG",
+      "url": "",
+      "category": "other"
     }
   ]
 }
