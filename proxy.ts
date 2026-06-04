@@ -1,4 +1,4 @@
-// middleware.ts (project root)
+// proxy.ts (project root) — Next.js 16 replaces middleware.ts
 import { NextResponse } from 'next/server';
 import type { NextRequest } from 'next/server';
 import { middleware as adminMiddleware } from './src/lib/auth/middleware';
