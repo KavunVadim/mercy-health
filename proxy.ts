@@ -3,7 +3,7 @@ import { NextResponse } from 'next/server';
 import type { NextRequest } from 'next/server';
 import { middleware as adminMiddleware } from './src/lib/auth/middleware';
 
-export function proxy(request: NextRequest) {
+export async function proxy(request: NextRequest) {
   const { pathname } = request.nextUrl;
 
   // Bypass middleware for all login pages and API auth routes
@@ -15,7 +15,7 @@ export function proxy(request: NextRequest) {
     return NextResponse.next();
   }
 
-  return adminMiddleware(request);
+  return await adminMiddleware(request);
 }
 
 export const config = {
