@@ -3,12 +3,13 @@
 import { FaFacebookF, FaInstagram, FaTelegramPlane, FaLinkedinIn } from "react-icons/fa";
 import { Mail, Phone, MapPin } from "lucide-react";
 import styles from "./Contacts.module.css";
+import type { Dictionary } from "@/types/content";
 
-export default function Contacts({ dictionary }: { dictionary: any }) {
-  const dict = dictionary as any;
+export default function Contacts({ dictionary }: { dictionary: Dictionary }) {
+  const dict = dictionary;
   const formDict = dict.about.contacts_tab.form;
   const footerDict = dict.footer;
-  const socials = footerDict.social_links;
+  const socials = footerDict.social_links || {};
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -36,8 +37,8 @@ export default function Contacts({ dictionary }: { dictionary: any }) {
                 <div className={styles.icon}><Mail size={24} /></div>
                 <div>
                   <span className={styles.label}>{dict.about.contacts_tab.labels.email}</span>
-                  <a href="mailto:info@mercy-health.org" className={styles.value}>
-                    info@mercy-health.org
+                  <a href={`mailto:${footerDict.foundation_email || "info@mercyandhealth.org"}`} className={styles.value}>
+                    {footerDict.foundation_email || "info@mercyandhealth.org"}
                   </a>
                 </div>
               </li>

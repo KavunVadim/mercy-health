@@ -4,10 +4,11 @@ import { useState } from "react";
 import { Copy, Check, Landmark, CreditCard, Receipt, FileText, Info, Globe, Building2, Wallet, Zap } from "lucide-react";
 import styles from "./SupportComponents.module.css";
 import { motion, AnimatePresence } from "framer-motion";
+import type { Dictionary, PaymentItem, PaymentTab } from "@/types/content";
 
 type TabType = "ua" | "intl" | "crypto";
 
-export default function BankDetails({ dictionary }: { dictionary: any }) {
+export default function BankDetails({ dictionary }: { dictionary: Dictionary }) {
   const { bank_details } = dictionary.support;
   const [activeTab, setActiveTab] = useState<TabType>("ua");
   const [copiedId, setCopiedId] = useState<string | null>(null);
@@ -18,13 +19,13 @@ export default function BankDetails({ dictionary }: { dictionary: any }) {
     setTimeout(() => setCopiedId(null), 2000);
   };
 
-  const tabs = [
+  const tabs: PaymentTab[] = [
     { id: "ua", label: dictionary.support.bank_details.tabs.ua, icon: Zap },
     { id: "intl", label: dictionary.support.bank_details.tabs.intl, icon: Globe },
     { id: "crypto", label: dictionary.support.bank_details.tabs.crypto, icon: Wallet },
   ];
 
-  const content = {
+  const content: Record<TabType, PaymentItem[]> = {
     ua: [
       { label: dictionary.support.bank_details.accounts.privat, value: "UA383052990000026005015017860", id: "ua_privat", icon: Landmark },
       { label: dictionary.support.bank_details.accounts.oschad, value: "UA223226690000026007300905964", id: "ua_oschad", icon: Landmark },
@@ -46,7 +47,7 @@ export default function BankDetails({ dictionary }: { dictionary: any }) {
     <div className={styles.bankDetailsContainer}>
       {/* Navigation Tabs */}
       <div className={styles.premiumTabsWrapper}>
-        {tabs.map((tab: any) => (
+        {tabs.map((tab) => (
           <button
             key={tab.id}
             className={`${styles.premiumTabItem} ${activeTab === tab.id ? styles.activeTab : ""}`}
@@ -67,7 +68,7 @@ export default function BankDetails({ dictionary }: { dictionary: any }) {
             transition={{ duration: 0.3 }}
             className={styles.tabContentGrid}
           >
-            {content[activeTab].map((item: any) => (
+            {content[activeTab].map((item) => (
               <PaymentRow 
                 key={item.id} 
                 item={item} 
@@ -94,7 +95,17 @@ export default function BankDetails({ dictionary }: { dictionary: any }) {
   );
 }
 
-function PaymentRow({ item, copiedId, onCopy, dictionary }: any) {
+function PaymentRow({
+  item,
+  copiedId,
+  onCopy,
+  dictionary,
+}: {
+  item: PaymentItem;
+  copiedId: string | null;
+  onCopy: (text: string, id: string) => void;
+  dictionary: Dictionary;
+}) {
   const Icon = item.icon;
   const isCopied = copiedId === item.id;
 

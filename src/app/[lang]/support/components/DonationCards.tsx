@@ -2,6 +2,7 @@
 
 import Image from "next/image";
 import styles from "./SupportComponents.module.css";
+import type { Dictionary } from "@/types/content";
 
 interface DonationCard {
   id: string;
@@ -11,20 +12,8 @@ interface DonationCard {
   link: string;
 }
 
-interface Dictionary {
-  support: {
-    cards: {
-      monobank: string;
-      privatbank: string;
-      details: string;
-      items: DonationCard[];
-    };
-  };
-  [key: string]: any;
-}
-
-export default function DonationCards({ dictionary }: { dictionary: any }) {
-  const { cards } = (dictionary as Dictionary).support;
+export default function DonationCards({ dictionary }: { dictionary: Dictionary }) {
+  const { cards } = dictionary.support;
 
   return (
     <div className={styles.cardsGrid}>

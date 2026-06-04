@@ -5,9 +5,10 @@ import Tabs from "@/components/Tabs/Tabs";
 import NewsTab from "./components/NewsTab";
 import GalleryTab from "./components/GalleryTab";
 import styles from "./page.module.css";
+import type { Dictionary } from "@/types/content";
 
-export default function MaterialsContent({ dictionary, lang }: { dictionary: any, lang: string }) {
-  const dict = dictionary as any;
+export default function MaterialsContent({ dictionary, lang }: { dictionary: Dictionary, lang: string }) {
+  const dict = dictionary;
   const [activeTab, setActiveTab] = useState("news");
 
   const tabs = [

@@ -6,6 +6,7 @@ import { motion } from "framer-motion";
 import styles from "../page.module.css";
 import galleryStyles from "./ProjectGallery.module.css";
 import ShareButtons from "./ShareButtons";
+import type { Dictionary } from "@/types/content";
 
 interface ProjectImageGalleryProps {
   mainImage: string;
@@ -14,7 +15,7 @@ interface ProjectImageGalleryProps {
   shortDescription: string;
   fullDescription: string;
   supportHref: string;
-  dictionary: any;
+  dictionary: Dictionary;
 }
 
 export default function ProjectImageGallery({ 
@@ -93,7 +94,7 @@ export default function ProjectImageGallery({
                 viewport={{ once: true, margin: "-80px" }}
                 transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
               >
-                <p>{shortDescription}</p>
+                <p dangerouslySetInnerHTML={{ __html: shortDescription }} />
               </motion.div>
             )}
 
@@ -107,9 +108,7 @@ export default function ProjectImageGallery({
                 viewport={{ once: true, margin: "-60px" }}
                 transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
               >
-                {fullDescription.split('\n').filter(Boolean).map((paragraph: string, idx: number) => (
-                  <p key={idx}>{paragraph}</p>
-                ))}
+                <p dangerouslySetInnerHTML={{ __html: fullDescription }} />
               </motion.div>
             )}
 

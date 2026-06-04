@@ -16,22 +16,27 @@ export default function Preloader() {
   const isUk = lang === "uk";
 
   useEffect(() => {
-    setMounted(true);
-    
+    const frame = requestAnimationFrame(() => {
+      setMounted(true);
+
+      if (document.readyState !== "complete") {
+        setVisible(true);
+        setDestroy(false);
+      }
+    });
+
+    const handleLoad = () => {
+      setVisible(false);
+    };
+
     if (document.readyState !== "complete") {
-      setVisible(true);
-      setDestroy(false);
-
-      const handleLoad = () => {
-        setVisible(false);
-      };
-
       window.addEventListener("load", handleLoad);
-      
-      return () => {
-        window.removeEventListener("load", handleLoad);
-      };
     }
+
+    return () => {
+      cancelAnimationFrame(frame);
+      window.removeEventListener("load", handleLoad);
+    };
   }, []);
 
   const handleTransitionEnd = (e: React.TransitionEvent<HTMLDivElement>) => {
@@ -58,7 +63,7 @@ export default function Preloader() {
         <h2 className={styles.title}>
           {isUk ? (
             <>
-              МИЛОСЕРДЯ <span className={styles.amp}>&</span> ЗДОРОВ'Я
+              МИЛОСЕРДЯ <span className={styles.amp}>&</span> ЗДОРОВ&apos;Я
             </>
           ) : (
             <>

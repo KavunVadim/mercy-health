@@ -5,10 +5,11 @@ import { usePathname, useRouter } from "next/navigation";
 import { ChevronRight, Home, ArrowLeft } from "lucide-react";
 import styles from "./Breadcrumbs.module.css";
 import { Locale } from "@/i18n-config";
+import type { Dictionary } from "@/types/content";
 
 interface BreadcrumbsProps {
   lang: Locale;
-  dictionary: any;
+  dictionary: Dictionary;
   items?: { label: string; href?: string }[];
   className?: string;
   showBack?: boolean;
@@ -36,10 +37,9 @@ export default function Breadcrumbs({ lang, dictionary, items, className, showBa
       
       // Try to find a translation for this segment
       let label = segment;
-      if (dictionary.navigation[segment]) {
-        label = dictionary.navigation[segment];
-      } else if (dictionary[segment] && typeof dictionary[segment].title === 'string') {
-        label = dictionary[segment].title;
+      const navigationLabel = dictionary.navigation[segment as keyof Dictionary["navigation"]];
+      if (typeof navigationLabel === "string") {
+        label = navigationLabel;
       } else {
         // Capitalize if no translation found
         label = segment.charAt(0).toUpperCase() + segment.slice(1).replace(/-/g, ' ');

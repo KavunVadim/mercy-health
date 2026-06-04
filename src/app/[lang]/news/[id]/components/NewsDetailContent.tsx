@@ -6,11 +6,13 @@ import { motion } from "framer-motion";
 import { FaPlay, FaEye } from "react-icons/fa";
 import styles from "../page.module.css";
 import galleryStyles from "@/app/[lang]/projects/[id]/components/ProjectGallery.module.css";
+import type { Dictionary, NewsItem } from "@/types/content";
+import type { Locale } from "@/i18n-config";
 
 interface NewsDetailContentProps {
-  newsItem: any;
-  dictionary: any;
-  locale: string;
+  newsItem: NewsItem;
+  dictionary: Dictionary;
+  locale: Locale;
 }
 
 export default function NewsDetailContent({ newsItem, dictionary, locale }: NewsDetailContentProps) {
@@ -102,10 +104,10 @@ export default function NewsDetailContent({ newsItem, dictionary, locale }: News
             <div className={styles.description}>
               {newsItem.content && Array.isArray(newsItem.content) ? (
                 newsItem.content.map((paragraph: string, idx: number) => (
-                  <p key={idx}>{paragraph}</p>
+                  <p key={idx} dangerouslySetInnerHTML={{ __html: paragraph }} />
                 ))
               ) : (
-                <p>{newsItem.description}</p>
+                <p dangerouslySetInnerHTML={{ __html: newsItem.description }} />
               )}
             </div>
           </div>

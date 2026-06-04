@@ -2,6 +2,7 @@ import styles from "./page.module.css";
 import { getDictionary } from "@/get-dictionary";
 import type { Locale } from "@/i18n-config";
 import Breadcrumbs from "@/components/Breadcrumbs/Breadcrumbs";
+import type { Report, ReportDocument } from "@/types/content";
 
 export default async function ReportsPage({
   params,
@@ -16,8 +17,8 @@ export default async function ReportsPage({
   const reportsList = dictionary.reports?.reports || [];
   
   // Calculate summary stats from reportsList
-  const totalCollected = reportsList.reduce((acc: number, curr: any) => acc + (curr.total_collected || 0), 0);
-  const totalDonations = reportsList.reduce((acc: number, curr: any) => acc + (curr.donations_count || 0), 0);
+  const totalCollected = reportsList.reduce((acc: number, curr: Report) => acc + curr.total_collected, 0);
+  const totalDonations = reportsList.reduce((acc: number, curr: Report) => acc + curr.donations_count, 0);
   const averageDonation = totalDonations > 0 ? Math.round(totalCollected / totalDonations) : 0;
 
   const stats = {
@@ -57,7 +58,7 @@ export default async function ReportsPage({
         <div className="container">
           <h2 className={styles.sectionTitle}>{dictionary.reports.history}</h2>
           <div className={styles.reportList}>
-            {reportsList.map((report: any) => (
+            {reportsList.map((report: Report) => (
               <div key={report.id} className={styles.reportItem}>
                 <div className={styles.reportInfo}>
                   <div className="flex flex-col">
@@ -80,7 +81,7 @@ export default async function ReportsPage({
           <div className="container">
             <h2 className={styles.historyTitle}>{dictionary.reports.transparency}</h2>
             <div className={styles.documentsGrid}>
-              {dictionary.reports.documents.map((doc: any) => (
+              {dictionary.reports.documents.map((doc: ReportDocument) => (
                 <a key={doc.id} href={doc.url} target="_blank" rel="noopener noreferrer" className={styles.documentCard}>
                   <div className={styles.documentIcon}>
                     <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">

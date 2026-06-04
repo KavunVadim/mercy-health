@@ -3,11 +3,12 @@
 import Image from "next/image";
 import { GalleryProvider, GalleryItem } from "@/components/ui/GalleryProvider";
 import styles from "./ProjectGallery.module.css";
+import type { Dictionary } from "@/types/content";
 
 interface ProjectGalleryProps {
   images: string[];
   title: string;
-  dictionary: any;
+  dictionary: Dictionary;
 }
 
 export default function ProjectGallery({ images, title, dictionary }: ProjectGalleryProps) {

@@ -1,18 +1,19 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useMemo, useState } from "react";
 import { Link as LinkIcon, Check } from "lucide-react";
 import styles from "./ShareButtons.module.css";
+import type { CustomProperties, Dictionary } from "@/types/content";
 
 interface ShareButtonsProps {
   title: string;
   shareLabel?: string;
-  dictionary?: any;
+  dictionary?: Dictionary;
 }
 
-export default function ShareButtons({ title, shareLabel, dictionary }: ShareButtonsProps) {
-  const [currentUrl, setCurrentUrl] = useState("");
+export default function ShareButtons({ shareLabel, dictionary }: ShareButtonsProps) {
   const [copied, setCopied] = useState(false);
+  const currentUrl = typeof window === "undefined" ? "" : window.location.href;
 
   const shareDict = dictionary?.share || {
     title: "Share",
@@ -20,11 +21,7 @@ export default function ShareButtons({ title, shareLabel, dictionary }: ShareBut
     copied: "Copied"
   };
 
-  useEffect(() => {
-    setCurrentUrl(window.location.href);
-  }, []);
-
-  const shareLinks = [
+  const shareLinks = useMemo(() => [
     {
       name: "Facebook",
       title: dictionary?.share?.facebook || "Facebook",
@@ -69,7 +66,7 @@ export default function ShareButtons({ title, shareLabel, dictionary }: ShareBut
         </svg>
       )
     }
-  ];
+  ], [currentUrl, dictionary]);
 
   const handleCopy = () => {
     navigator.clipboard.writeText(currentUrl);
@@ -82,14 +79,14 @@ export default function ShareButtons({ title, shareLabel, dictionary }: ShareBut
       <div className={styles.shareWrapper}>
         <div className={styles.topRow}>
           <div className={styles.socialGrid}>
-            {shareLinks.map((link: any) => (
+            {shareLinks.map((link) => (
               <a
                 key={link.name}
                 href={link.url}
                 target="_blank"
                 rel="noopener noreferrer"
                 className={styles.socialBtn}
-                style={{ "--hover-color": link.color } as any}
+                style={{ "--hover-color": link.color } as CustomProperties}
                 title={`${dictionary?.share?.share_on || "Share on"} ${link.title}`}
               >
                 {link.icon}

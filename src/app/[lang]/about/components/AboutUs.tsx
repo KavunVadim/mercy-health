@@ -5,12 +5,20 @@ import Image from "next/image";
 import { motion, AnimatePresence } from "framer-motion";
 import styles from "./AboutUs.module.css";
 import clsx from "clsx";
+import type { Dictionary } from "@/types/content";
 
-export default function AboutUs({ dictionary }: { dictionary: any }) {
-  const dict = dictionary as any;
+type AboutSectionId = "who_we_are" | "mission" | "media";
+
+interface AboutSection {
+  id: AboutSectionId;
+  label: string;
+}
+
+export default function AboutUs({ dictionary }: { dictionary: Dictionary }) {
+  const dict = dictionary;
   const [activeSection, setActiveSection] = useState("who_we_are");
 
-  const sections = [
+  const sections: AboutSection[] = [
     { id: "who_we_are", label: dict.about.sidebar.who_we_are },
     { id: "mission", label: dict.about.sidebar.mission },
     { id: "media", label: dict.about.sidebar.media },
@@ -19,7 +27,7 @@ export default function AboutUs({ dictionary }: { dictionary: any }) {
   return (
     <div className={styles.container}>
       <aside className={styles.sidebar}>
-        {sections.map((sec: any) => (
+        {sections.map((sec) => (
           <button
             key={sec.id}
             onClick={() => setActiveSection(sec.id)}

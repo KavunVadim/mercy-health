@@ -3,9 +3,10 @@
 import Image from "next/image";
 import { GalleryProvider, GalleryItem } from "@/components/ui/GalleryProvider";
 import styles from "./Tabs.module.css";
+import type { Dictionary } from "@/types/content";
 
-export default function GalleryTab({ dictionary }: { dictionary: any }) {
-  const dict = dictionary as any;
+export default function GalleryTab({ dictionary }: { dictionary: Dictionary }) {
+  const dict = dictionary;
   const { title, description, images = [] } = dict.news.gallery;
   
 

@@ -4,6 +4,7 @@ import { motion, Variants } from "framer-motion";
 import styles from "../page.module.css";
 import ProjectCard from "@/components/ProjectCard/ProjectCard";
 import type { Locale } from "@/i18n-config";
+import type { Dictionary } from "@/types/content";
 
 type Project = {
   id: string;
@@ -15,7 +16,7 @@ type Project = {
 
 interface AnimatedProjectsProps {
   projects: Project[];
-  dictionary: any;
+  dictionary: Dictionary;
   lang: string;
 }
 

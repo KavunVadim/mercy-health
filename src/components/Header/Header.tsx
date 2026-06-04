@@ -10,13 +10,14 @@ import MobileMenu from "./MobileMenu";
 import LogoIcon from "../LogoIcon/LogoIcon";
 
 import type { Locale } from "@/i18n-config";
+import type { Dictionary } from "@/types/content";
 import clsx from "clsx";
 
 export default function Header({
   dictionary,
   lang,
 }: {
-  dictionary: any;
+  dictionary: Dictionary;
   lang: Locale;
 }) {
   const { scrollY } = useScroll();

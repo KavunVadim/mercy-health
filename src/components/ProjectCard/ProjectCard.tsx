@@ -2,6 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 import styles from "./ProjectCard.module.css";
 import type { Locale } from "@/i18n-config";
+import type { Dictionary } from "@/types/content";
 
 interface ProjectProps {
   id: string;
@@ -10,7 +11,7 @@ interface ProjectProps {
   image: string;
   category?: string;
   status?: string;
-  dictionary: any;
+  dictionary: Dictionary;
   lang: Locale;
 }
 
@@ -41,7 +42,7 @@ export default function ProjectCard({
             </div>
           ) : null}
           <h3 className={styles.title}>{title}</h3>
-          <p className={styles.description}>{description}</p>
+          <p className={styles.description} dangerouslySetInnerHTML={{ __html: description }} />
           
 
           <div className={styles.supportBtn}>

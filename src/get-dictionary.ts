@@ -1,19 +1,33 @@
 import "server-only";
 import type { Locale } from "./i18n-config";
-import path from "path";
-import fs from "fs/promises";
+import type { Dictionary } from "./types/content";
+import { getDb } from "@/lib/mongodb";
 
-// Function to recursively localize object fields
-function localizeData(data: any, locale: string): any {
+function isRecord(value: unknown): value is Record<string, unknown> {
+  return value !== null && typeof value === "object" && !Array.isArray(value);
+}
+
+const LOCALE_KEYS = new Set(["uk", "en"]);
+
+function isLocalizedField(data: Record<string, unknown>): boolean {
+  for (const key of LOCALE_KEYS) {
+    if (!(key in data)) return false;
+    const val = data[key];
+    if (val === null || val === undefined) return false;
+    if (typeof val === "object") return false;
+  }
+  const nonLocaleKeys = Object.keys(data).filter(k => !LOCALE_KEYS.has(k));
+  return nonLocaleKeys.length === 0;
+}
+
+function localizeData(data: unknown, locale: string): unknown {
   if (Array.isArray(data)) {
     return data.map(item => localizeData(item, locale));
-  } else if (data !== null && typeof data === 'object') {
-    // If the object has keys that match our locales (uk, en), it's a localized field
-    if (data[locale] !== undefined) {
-      return data[locale];
+  } else if (isRecord(data)) {
+    if (isLocalizedField(data)) {
+      return data[locale] ?? data[locale as keyof typeof data];
     }
-    // Otherwise, recurse into its properties
-    const localized: any = {};
+    const localized: Record<string, unknown> = {};
     for (const key in data) {
       localized[key] = localizeData(data[key], locale);
     }
@@ -27,99 +41,109 @@ const dictionaries = {
   uk: () => import("./dictionaries/uk.json").then((module) => module.default),
 };
 
-function deepMerge(target: any, source: any): any {
-  const output = { ...target };
-  if (source !== null && typeof source === 'object') {
+function deepMerge<T extends Record<string, unknown>>(target: T, source: Record<string, unknown>): T {
+  const output: Record<string, unknown> = { ...target };
+  if (isRecord(source)) {
     Object.keys(source).forEach(key => {
-      if (source[key] !== null && typeof source[key] === 'object' && !Array.isArray(source[key])) {
+      if (isRecord(source[key])) {
         if (!(key in target)) {
           output[key] = source[key];
         } else {
-          output[key] = deepMerge(target[key], source[key]);
+          output[key] = deepMerge(
+            isRecord(target[key]) ? target[key] : {},
+            source[key],
+          );
         }
       } else {
         output[key] = source[key];
       }
     });
   }
-  return output;
+  return output as T;
 }
 
-export const getDictionary = async (locale: Locale) => {
+export const getDictionary = async (locale: Locale): Promise<Dictionary> => {
   const baseDictionary = await (dictionaries[locale]?.() ?? dictionaries.uk());
 
   try {
-    const dataDir = path.join(process.cwd(), 'data');
-    
-    // 1. Load main content file (pre-localized)
-    const contentPath = path.join(dataDir, `content.${locale}.json`);
-    const contentData = JSON.parse(await fs.readFile(contentPath, 'utf8'));
+    const db = await getDb();
 
-    // 2. Load projects and localize them
-    const projectsPath = path.join(dataDir, 'projects.json');
-    const projectsRaw = JSON.parse(await fs.readFile(projectsPath, 'utf8'));
-    const localizedProjects = localizeData(projectsRaw.projects || projectsRaw, locale);
+    const contentCol = locale === "uk" ? "content_uk" : "content_en";
+    const [contentDoc, newsDocs, projectsDocs, partnersDocs, reportsDocs, settingsDoc, galleryPhotos] = await Promise.all([
+      db.collection(contentCol).findOne({ key: "main" }),
+      db.collection("news").find({}).sort({ order: 1, createdAt: -1 }).toArray(),
+      db.collection("projects").find({}).sort({ order: 1, createdAt: -1 }).toArray(),
+      db.collection("partners").find({}).sort({ order: 1, createdAt: -1 }).toArray(),
+      db.collection("reports").find({}).sort({ order: 1, createdAt: -1 }).toArray(),
+      db.collection("settings").findOne({ key: "main" }),
+      db.collection("photos").find({ inGallery: true, visible: { $ne: false } }).sort({ order: 1, createdAt: -1 }).toArray(),
+    ]);
 
-    // 3. Load partners and localize them
-    const partnersPath = path.join(dataDir, 'partners.json');
-    let localizedPartners = [];
-    try {
-        const partnersRaw = JSON.parse(await fs.readFile(partnersPath, 'utf8'));
-        localizedPartners = localizeData(partnersRaw.partners || partnersRaw, locale);
-    } catch (e) {}
+    const contentData: Record<string, unknown> = {};
+    if (contentDoc) {
+      for (const [k, v] of Object.entries(contentDoc)) {
+        if (k !== "_id" && k !== "key" && k !== "updatedAt") contentData[k] = v;
+      }
+    }
 
-    // 4. Load news and localize them
-    const newsPath = path.join(dataDir, 'news.json');
-    let newsData: any = { news: [], gallery: [] };
-    try {
-        const newsRaw = JSON.parse(await fs.readFile(newsPath, 'utf8'));
-        newsData = localizeData(newsRaw, locale);
-    } catch (e) {}
+    function stripMongo(docs: unknown[]): unknown[] {
+      return docs.map((d: any) => {
+        if (d && typeof d === "object") {
+          const { _id, createdAt, updatedAt, ...rest } = d;
+          return rest;
+        }
+        return d;
+      });
+    }
 
-    // 5. Load reports and localize them
-    const reportsPath = path.join(dataDir, 'reports.json');
-    let localizedReports = { summary: {}, history: [] };
-    try {
-        const reportsRaw = JSON.parse(await fs.readFile(reportsPath, 'utf8'));
-        localizedReports = localizeData(reportsRaw, locale);
-    } catch (e) {}
+    function stripMongoOne(doc: any): Record<string, unknown> {
+      if (doc && typeof doc === "object") {
+        const { _id, key, updatedAt, createdAt, ...rest } = doc;
+        return rest;
+      }
+      return doc || {};
+    }
 
-    // 6. Load settings and localize them
-    const settingsPath = path.join(dataDir, 'settings.json');
-    let localizedSettings = {};
-    try {
-        const settingsRaw = JSON.parse(await fs.readFile(settingsPath, 'utf8'));
-        localizedSettings = localizeData(settingsRaw, locale);
-    } catch (e) {}
+    const localizedProjects = localizeData(stripMongo(projectsDocs || []), locale);
+    const localizedPartners = localizeData(stripMongo(partnersDocs || []), locale);
+    const localizedNews = localizeData(stripMongo(newsDocs || []), locale);
+    const localizedReports = localizeData(stripMongo(reportsDocs || []), locale) as Record<string, unknown>[];
+    const reportsData = { reports: localizedReports };
+    const localizedSettings = settingsDoc ? localizeData(stripMongoOne(settingsDoc), locale) as Record<string, unknown> : {};
 
-    // Deep merge base translations with content data
-    const mergedDictionary = deepMerge(baseDictionary, contentData);
+    const mergedDictionary = contentData
+      ? deepMerge(baseDictionary, contentData)
+      : baseDictionary;
 
-    const finalDictionary = deepMerge(mergedDictionary, localizedSettings);
+    const finalDictionary = localizedSettings
+      ? deepMerge(mergedDictionary, localizedSettings)
+      : mergedDictionary;
 
-    // Override specific items that need custom localization or structure
+    const newsGalleryImages = (galleryPhotos || []).map((p: any) => p.url);
+
     return {
       ...finalDictionary,
+      hero_slider: contentData.hero_slider || [],
       projects: {
-        ...finalDictionary.projects,
-        items: localizedProjects
+        ...(finalDictionary.projects || {}),
+        items: localizedProjects || [],
       },
       news: {
-        ...finalDictionary.news,
-        items: newsData.news || [],
+        ...(finalDictionary.news || {}),
+        items: localizedNews || [],
         gallery: {
-          ...finalDictionary.news.gallery,
-          images: newsData.gallery || []
-        }
+          ...((finalDictionary.news as Record<string, unknown>)?.gallery as Record<string, unknown> || {}),
+          images: newsGalleryImages,
+        },
       },
-      partners: localizedPartners,
+      partners: localizedPartners || [],
       reports: {
-        ...finalDictionary.reports,
-        ...localizedReports
-      }
-    };
+        ...(finalDictionary.reports || {}),
+        ...(reportsData || {}),
+      },
+    } as unknown as Dictionary;
   } catch (error) {
-    console.warn(`Could not load all data files for locale ${locale}, falling back to dictionary.`, error);
-    return baseDictionary;
+    console.warn(`Could not load data from MongoDB for locale ${locale}, falling back to dictionary.`, error);
+    return baseDictionary as unknown as Dictionary;
   }
 };

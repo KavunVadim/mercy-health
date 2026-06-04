@@ -6,9 +6,10 @@ import { useEffect, useState } from "react";
 import { createPortal } from "react-dom";
 import { motion, AnimatePresence } from "framer-motion";
 import { Menu, X, Mail, Phone } from "lucide-react";
-import { FaFacebookF, FaInstagram, FaTelegramPlane, FaLinkedinIn, FaTiktok } from "react-icons/fa";
+import { FaFacebookF, FaInstagram, FaTelegramPlane, FaTiktok } from "react-icons/fa";
 import styles from "./MobileMenu.module.css";
 import type { Locale } from "@/i18n-config";
+import type { Dictionary } from "@/types/content";
 import LocaleSwitcher from "../LocaleSwitcher/LocaleSwitcher";
 import ThemeToggle from "../ThemeToggle/ThemeToggle";
 
@@ -17,7 +18,7 @@ export default function MobileMenu({
   lang,
   supportLabel,
 }: {
-  dictionary: any;
+  dictionary: Dictionary;
   lang: Locale;
   supportLabel: string;
 }) {
@@ -25,7 +26,8 @@ export default function MobileMenu({
   const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
-    setMounted(true);
+    const frame = requestAnimationFrame(() => setMounted(true));
+    return () => cancelAnimationFrame(frame);
   }, []);
 
   useEffect(() => {
@@ -49,11 +51,12 @@ export default function MobileMenu({
     { href: `/${lang}/reports`, label: dictionary.navigation.reports },
   ];
 
+  const socialLinks = dictionary.footer.social_links || {};
   const socials = [
-    { icon: FaFacebookF, href: dictionary.footer.social_links.facebook },
-    { icon: FaInstagram, href: dictionary.footer.social_links.instagram },
-    { icon: FaTiktok, href: dictionary.footer.social_links.tiktok },
-    { icon: FaTelegramPlane, href: dictionary.footer.social_links.telegram },
+    { icon: FaFacebookF, href: socialLinks.facebook },
+    { icon: FaInstagram, href: socialLinks.instagram },
+    { icon: FaTiktok, href: socialLinks.tiktok },
+    { icon: FaTelegramPlane, href: socialLinks.telegram },
   ];
 
   return (
@@ -131,9 +134,9 @@ export default function MobileMenu({
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ delay: 0.5 }}
                   >
-                    <a href={`mailto:${dictionary.footer.foundation_email}`} className={styles.contactLink}>
+                    <a href={`mailto:${dictionary.footer.foundation_email || "info@mercyandhealth.org"}`} className={styles.contactLink}>
                       <Mail size={20} />
-                      <span>{dictionary.footer.foundation_email}</span>
+                      <span>{dictionary.footer.foundation_email || "info@mercyandhealth.org"}</span>
                     </a>
                   </motion.div>
                 </div>

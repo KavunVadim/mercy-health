@@ -5,8 +5,9 @@ import Tabs from "@/components/Tabs/Tabs";
 import DonationCards from "./components/DonationCards";
 import BankDetails from "./components/BankDetails";
 import styles from "./page.module.css";
+import type { Dictionary } from "@/types/content";
 
-export default function SupportContent({ dictionary }: { dictionary: any }) {
+export default function SupportContent({ dictionary }: { dictionary: Dictionary }) {
   const [activeTab, setActiveTab] = useState("once");
   const support = dictionary.support;
 

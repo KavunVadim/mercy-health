@@ -3,14 +3,15 @@
 import NewsCard from "@/components/NewsCard/NewsCard";
 import type { Locale } from "@/i18n-config";
 import styles from "./Tabs.module.css";
+import type { Dictionary, NewsItem } from "@/types/content";
 
-export default function NewsTab({ dictionary, lang }: { dictionary: any, lang: string }) {
-  const dict = dictionary as any;
+export default function NewsTab({ dictionary, lang }: { dictionary: Dictionary, lang: string }) {
+  const dict = dictionary;
   const items = dict.news.items;
 
   return (
     <div className={styles.grid}>
-      {items.map((item: any) => (
+      {items.map((item: NewsItem) => (
         <NewsCard
           key={item.id}
           id={item.id}

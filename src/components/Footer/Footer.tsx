@@ -1,19 +1,20 @@
 import LogoIcon from "../LogoIcon/LogoIcon";
 import Link from "next/link";
 import { Mail, Phone, MapPin } from "lucide-react";
-import { FaFacebookF, FaInstagram, FaTelegramPlane, FaLinkedinIn, FaTiktok } from "react-icons/fa";
+import { FaFacebookF, FaInstagram, FaTelegramPlane, FaTiktok } from "react-icons/fa";
 import styles from "./Footer.module.css";
 import type { Locale } from "@/i18n-config";
+import type { Dictionary } from "@/types/content";
 
 export default function Footer({
   dictionary,
   lang,
 }: {
-  dictionary: any;
+  dictionary: Dictionary;
   lang: Locale;
 }) {
   const footer = dictionary.footer;
-  const socialLinks = footer.social_links;
+  const socialLinks = footer.social_links || {};
 
   return (
     <footer className={styles.footer}>

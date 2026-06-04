@@ -1,6 +1,6 @@
 import styles from "./page.module.css";
 import { getDictionary } from "@/get-dictionary";
-import { i18n, type Locale } from "@/i18n-config";
+import { isLocale } from "@/i18n-config";
 import { notFound } from "next/navigation";
 import ProjectCard from "@/components/ProjectCard/ProjectCard";
 import NewsCard from "@/components/NewsCard/NewsCard";
@@ -13,34 +13,34 @@ export default async function Home({
   params: Promise<{ lang: string }>;
 }) {
   const { lang } = await params;
-  if (!i18n.locales.includes(lang as any)) {
+  if (!isLocale(lang)) {
     notFound();
   }
-  const locale = lang as Locale;
+  const locale = lang;
   const dictionary = await getDictionary(locale);
 
   return (
     <div className={styles.page}>
       <main className={`${styles.main} home-main`}>
-        <HeroSlider slides={(dictionary as any).hero_slider} />
+        <HeroSlider slides={dictionary.hero_slider} />
 
         <section className={styles.projectsSection}>
           <div className="container">
             <div className={styles.sectionHeader}>
-              <h2 className={styles.sectionTitle}>{(dictionary as any).projects.title}</h2>
+              <h2 className={styles.sectionTitle}>{dictionary.projects.title}</h2>
               <Link href={`/${locale}/projects`} className={styles.viewAll}>
-                {(dictionary as any).projects.more}
+                {dictionary.projects.more}
               </Link>
             </div>
             <div className={styles.projectGrid}>
-              {([...(dictionary as any).projects.items] as unknown[]).slice(0, 4).map((project: unknown) => (
+              {dictionary.projects.items.slice(0, 4).map((project) => (
                   <ProjectCard
-                    key={(project as any).id}
-                    title={(project as any).title}
-                    description={(project as any).short_description || (project as any).description}
-                    image={(project as any).image}
-                    id={(project as any).id}
-                    dictionary={dictionary as any}
+                    key={project.id}
+                    title={project.title}
+                    description={project.short_description || project.description || ""}
+                    image={project.image}
+                    id={project.id}
+                    dictionary={dictionary}
                     lang={locale}
                   />
               ))}
@@ -52,16 +52,16 @@ export default async function Home({
           <div className="container">
             <div className={styles.statsGrid}>
               <div className={styles.statItem}>
-                <span className={styles.statValue}>{(dictionary as any).stats.collected_value}</span>
-                <span className={styles.statLabel}>{(dictionary as any).stats.items.collected}</span>
+                <span className={styles.statValue}>{dictionary.stats.collected_value}</span>
+                <span className={styles.statLabel}>{dictionary.stats.items.collected}</span>
               </div>
               <div className={styles.statItem}>
-                <span className={styles.statValue}>{(dictionary as any).stats.helped_value}</span>
-                <span className={styles.statLabel}>{(dictionary as any).stats.items.helped}</span>
+                <span className={styles.statValue}>{dictionary.stats.helped_value}</span>
+                <span className={styles.statLabel}>{dictionary.stats.items.helped}</span>
               </div>
               <div className={styles.statItem}>
-                <span className={styles.statValue}>{(dictionary as any).stats.donors_value}</span>
-                <span className={styles.statLabel}>{(dictionary as any).stats.items.donors}</span>
+                <span className={styles.statValue}>{dictionary.stats.donors_value}</span>
+                <span className={styles.statLabel}>{dictionary.stats.items.donors}</span>
               </div>
             </div>
           </div>
@@ -70,20 +70,20 @@ export default async function Home({
         <section className={styles.newsSection}>
           <div className="container">
             <div className={styles.sectionHeader}>
-              <h2 className={styles.sectionTitle}>{(dictionary as any).news.title}</h2>
+              <h2 className={styles.sectionTitle}>{dictionary.news.title}</h2>
               <Link href={`/${locale}/news`} className={styles.viewAll}>
-                {(dictionary as any).news.more}
+                {dictionary.news.more}
               </Link>
             </div>
             <div className={styles.newsGrid}>
-              {((dictionary as any).news.items as unknown[]).slice(0, 4).map((item: unknown) => (
+              {dictionary.news.items.slice(0, 4).map((item) => (
                 <NewsCard
-                  key={(item as any).id}
-                  id={(item as any).id}
-                  date={(item as any).date}
-                  title={(item as any).title}
-                  description={(item as any).description}
-                  image={(item as any).image}
+                  key={item.id}
+                  id={item.id}
+                  date={item.date}
+                  title={item.title}
+                  description={item.description}
+                  image={item.image}
                   lang={locale}
                 />
               ))}

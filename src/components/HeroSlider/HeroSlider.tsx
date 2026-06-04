@@ -43,15 +43,17 @@ export default function HeroSlider({ slides }: { slides: Slide[] }) {
 
   useLayoutEffect(() => {
     if (!emblaApi) return;
-    setSelectedIndex(emblaApi.selectedScrollSnap());
-    setScrollSnaps(emblaApi.scrollSnapList());
+    const frame = requestAnimationFrame(() => {
+      setSelectedIndex(emblaApi.selectedScrollSnap());
+      setScrollSnaps(emblaApi.scrollSnapList());
+    });
     emblaApi.on("select", onSelect);
     emblaApi.on("reInit", onSelect);
+    return () => cancelAnimationFrame(frame);
   }, [emblaApi, onSelect]);
 
   // Progress bar animation
   useEffect(() => {
-    setProgress(0);
     const start = performance.now();
     let raf: number;
     const tick = (now: number) => {
@@ -64,7 +66,6 @@ export default function HeroSlider({ slides }: { slides: Slide[] }) {
     return () => cancelAnimationFrame(raf);
   }, [selectedIndex]);
 
-  const total = slides?.length ?? 0;
   const currentSlide = slides?.[selectedIndex];
 
   return (
@@ -106,7 +107,7 @@ export default function HeroSlider({ slides }: { slides: Slide[] }) {
           </h2>
 
           {/* Description */}
-          <p className={styles.description}>{currentSlide?.description}</p>
+          <p className={styles.description} dangerouslySetInnerHTML={{ __html: currentSlide?.description || '' }} />
 
           {/* CTA */}
           {currentSlide?.href?.startsWith("http") ? (

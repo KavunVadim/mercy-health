@@ -20,7 +20,7 @@ export default function NewsCard({ id, date, title, image, description, lang }: 
       <div className={styles.content}>
         <span className={styles.date}>{date}</span>
         <h3 className={styles.title}>{title}</h3>
-        {description && <p className={styles.description}>{description}</p>}
+        {description && <p className={styles.description} dangerouslySetInnerHTML={{ __html: description }} />}
       </div>
     </Link>
   );
