@@ -6,10 +6,12 @@ import { middleware as adminMiddleware } from './src/lib/auth/middleware';
 export async function proxy(request: NextRequest) {
   const { pathname } = request.nextUrl;
 
-  // Bypass middleware for all login pages and API auth routes
+  // Bypass middleware for all login/register pages and API auth routes
   if (
     pathname === '/admin/login' ||
+    pathname === '/admin/register' ||
     pathname.endsWith('/admin/login') ||
+    pathname.endsWith('/admin/register') ||
     pathname.startsWith('/api/auth')
   ) {
     return NextResponse.next();

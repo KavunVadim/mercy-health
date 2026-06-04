@@ -5,26 +5,39 @@ import bcrypt from 'bcryptjs';
 
 export async function POST(request: Request) {
   try {
-    const body = await request.json();
-    const { username, password } = body;
+    const db = await getDb();
+    const adminCount = await db.collection('users').countDocuments({ role: 'admin' });
 
-    if (!username || !password) {
+    if (adminCount > 0) {
+      return NextResponse.json({ error: 'Admin already exists' }, { status: 409 });
+    }
+
+    const body = await request.json();
+    const { email, password } = body;
+
+    if (!email || !password) {
       return NextResponse.json({ error: 'Email and password are required' }, { status: 400 });
     }
 
-    const db = await getDb();
-    const user = await db.collection('users').findOne({ email: username });
-
-    if (!user) {
-      return NextResponse.json({ error: 'Invalid credentials' }, { status: 401 });
+    if (password.length < 6) {
+      return NextResponse.json({ error: 'Password must be at least 6 characters' }, { status: 400 });
     }
 
-    const passwordMatches = await bcrypt.compare(password, user.passwordHash);
-    if (!passwordMatches) {
-      return NextResponse.json({ error: 'Invalid credentials' }, { status: 401 });
+    const existing = await db.collection('users').findOne({ email });
+    if (existing) {
+      return NextResponse.json({ error: 'User already exists' }, { status: 409 });
     }
 
-    const payload = { sub: user.email, role: user.role };
+    const passwordHash = await bcrypt.hash(password, 10);
+
+    await db.collection('users').insertOne({
+      email,
+      passwordHash,
+      role: 'admin',
+      createdAt: new Date(),
+    });
+
+    const payload = { sub: email, role: 'admin' };
     const [accessToken, refreshToken] = await Promise.all([
       signAccessToken(payload),
       signRefreshToken(payload),
@@ -49,7 +62,7 @@ export async function POST(request: Request) {
 
     return response;
   } catch (e) {
-    console.error('Login error:', e);
+    console.error('Register error:', e);
     return NextResponse.json({ error: 'Server error' }, { status: 500 });
   }
 }
