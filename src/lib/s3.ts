@@ -4,14 +4,26 @@ import crypto from "crypto";
 function getConfig() {
   const region = process.env.AWS_REGION;
   const bucket = process.env.AWS_S3_BUCKET;
+  const accessKeyId = process.env.AWS_ACCESS_KEY_ID;
+  const secretAccessKey = process.env.AWS_SECRET_ACCESS_KEY;
   if (!region || !bucket) return null;
-  return { region, bucket };
+  return { region, bucket, accessKeyId, secretAccessKey };
 }
+
+let cachedClient: S3Client | null = null;
 
 function getClient() {
   const cfg = getConfig();
   if (!cfg) return null;
-  return { client: new S3Client({ region: cfg.region }), cfg };
+  if (!cachedClient) {
+    cachedClient = new S3Client({
+      region: cfg.region,
+      credentials: cfg.accessKeyId && cfg.secretAccessKey
+        ? { accessKeyId: cfg.accessKeyId, secretAccessKey: cfg.secretAccessKey }
+        : undefined,
+    });
+  }
+  return { client: cachedClient, cfg };
 }
 
 export function getS3Url(key: string): string {
@@ -44,6 +56,7 @@ export async function uploadToS3(
     Key: key,
     Body: body,
     ContentType: mime,
+    CacheControl: "public, max-age=31536000, immutable",
   });
   await c.client.send(command);
   return getS3Url(key);

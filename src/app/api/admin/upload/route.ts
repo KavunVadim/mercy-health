@@ -1,6 +1,9 @@
 import { NextResponse } from 'next/server';
+import { revalidateTag } from 'next/cache';
 import { getDb } from '@/lib/mongodb';
-import { uploadToS3, computeFileHash, getS3Url } from '@/lib/s3';
+import { uploadToS3, computeFileHash } from '@/lib/s3';
+
+export const maxDuration = 30;
 
 export async function POST(request: Request) {
   try {
@@ -53,6 +56,8 @@ export async function POST(request: Request) {
     };
 
     const result = await db.collection('photos').insertOne(doc);
+
+    revalidateTag('dictionary', 'max');
 
     return NextResponse.json({ ...doc, _id: result.insertedId, dedup: false }, { status: 201 });
   } catch (e: any) {
