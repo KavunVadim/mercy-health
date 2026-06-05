@@ -6,30 +6,27 @@ import NewsDetailContent from "./components/NewsDetailContent";
 import styles from "./page.module.css";
 import type { Metadata } from "next";
 import type { NewsItem } from "@/types/content";
-import fs from "fs/promises";
-import path from "path";
+import { getDb } from "@/lib/mongodb";
 
 export async function generateStaticParams() {
   const locales = i18n.locales;
   const paths = [];
-  
+
   try {
-    const newsPath = path.join(process.cwd(), "data", "news.json");
-    const newsRaw = JSON.parse(await fs.readFile(newsPath, "utf8"));
-    const newsItems = newsRaw.news || newsRaw;
-    
+    const db = await getDb();
+    const newsDocs = await db.collection("news").find({}).project({ id: 1 }).toArray();
+
     for (const locale of locales) {
-      for (const item of newsItems) {
-        paths.push({
-          lang: locale,
-          id: item.id,
-        });
+      for (const doc of newsDocs) {
+        if (doc.id) {
+          paths.push({ lang: locale, id: doc.id });
+        }
       }
     }
   } catch (e) {
     console.warn("Could not generate static paths for news details:", e);
   }
-  
+
   return paths;
 }
 

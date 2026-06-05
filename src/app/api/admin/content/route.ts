@@ -1,4 +1,5 @@
 import { NextResponse } from 'next/server';
+import { revalidateTag } from 'next/cache';
 import { getDb } from '@/lib/mongodb';
 
 async function getContent(locale: string): Promise<any> {
@@ -111,6 +112,8 @@ export async function PUT(request: Request) {
       setContent('uk', ukUpdate),
       setContent('en', enUpdate),
     ]);
+
+    revalidateTag('dictionary', 'max');
 
     return NextResponse.json({ success: true });
   } catch (e) {

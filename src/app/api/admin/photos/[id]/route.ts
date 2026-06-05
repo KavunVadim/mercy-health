@@ -1,4 +1,5 @@
 import { NextResponse } from 'next/server';
+import { revalidateTag } from 'next/cache';
 import { getDb } from '@/lib/mongodb';
 import { ObjectId } from 'mongodb';
 import { deleteFromS3, extractKeyFromUrl } from '@/lib/s3';
@@ -27,6 +28,7 @@ export async function PUT(request: Request, { params }: { params: Promise<{ id: 
       { returnDocument: 'after' }
     );
     if (!result) return NextResponse.json({ error: 'Not found' }, { status: 404 });
+    revalidateTag('dictionary', 'max');
     return NextResponse.json(result);
   } catch (e) {
     console.error('Failed to update photo:', e);
@@ -47,6 +49,7 @@ export async function DELETE(request: Request, { params }: { params: Promise<{ i
     if (s3Key) await deleteFromS3(s3Key);
 
     await db.collection('photos').deleteOne({ _id: new ObjectId(id) });
+    revalidateTag('dictionary', 'max');
     return NextResponse.json({ success: true });
   } catch (e) {
     console.error('Failed to delete photo:', e);

@@ -1,4 +1,5 @@
 import { NextResponse } from 'next/server';
+import { revalidateTag } from 'next/cache';
 import { getDb } from '@/lib/mongodb';
 import { ObjectId } from 'mongodb';
 
@@ -27,6 +28,7 @@ export async function PUT(request: Request, { params }: { params: Promise<{ id: 
       { returnDocument: 'after' }
     );
     if (!result) return NextResponse.json({ error: 'Not found' }, { status: 404 });
+    revalidateTag('dictionary', 'max');
     return NextResponse.json(result);
   } catch (e) {
     return NextResponse.json({ error: 'Failed to update project' }, { status: 500 });
@@ -41,6 +43,7 @@ export async function DELETE(_request: Request, { params }: { params: Promise<{ 
       ObjectId.isValid(id) ? { _id: new ObjectId(id) } : { id }
     );
     if (result.deletedCount === 0) return NextResponse.json({ error: 'Not found' }, { status: 404 });
+    revalidateTag('dictionary', 'max');
     return NextResponse.json({ success: true });
   } catch (e) {
     return NextResponse.json({ error: 'Failed to delete project' }, { status: 500 });

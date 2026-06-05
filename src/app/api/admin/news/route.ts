@@ -1,4 +1,5 @@
 import { NextResponse } from 'next/server';
+import { revalidateTag } from 'next/cache';
 import { getDb } from '@/lib/mongodb';
 
 export async function GET() {
@@ -19,6 +20,7 @@ export async function POST(request: Request) {
     const order = (maxOrder?.order ?? -1) + 1;
     const doc = { ...body, order, createdAt: new Date(), updatedAt: new Date() };
     const result = await db.collection('news').insertOne(doc);
+    revalidateTag('dictionary', 'max');
     return NextResponse.json({ ...doc, _id: result.insertedId }, { status: 201 });
   } catch (e) {
     return NextResponse.json({ error: 'Failed to create news' }, { status: 500 });

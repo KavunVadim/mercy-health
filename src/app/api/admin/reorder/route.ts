@@ -1,4 +1,5 @@
 import { NextResponse } from 'next/server';
+import { revalidateTag } from 'next/cache';
 import { getDb } from '@/lib/mongodb';
 import { ObjectId } from 'mongodb';
 
@@ -24,6 +25,7 @@ export async function PATCH(request: Request) {
     }));
 
     await db.collection(collection).bulkWrite(ops);
+    revalidateTag('dictionary', 'max');
     return NextResponse.json({ success: true });
   } catch (e) {
     console.error('Reorder failed:', e);

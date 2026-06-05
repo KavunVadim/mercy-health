@@ -1,4 +1,5 @@
 import { NextResponse } from 'next/server';
+import { revalidateTag } from 'next/cache';
 import { getDb } from '@/lib/mongodb';
 import { slugify } from '@/lib/data-utils';
 
@@ -77,6 +78,8 @@ export async function POST(request: Request) {
       setContent('en', { ...enDoc, hero_slider: enSlides }),
     ]);
 
+    revalidateTag('dictionary', 'max');
+
     return NextResponse.json({ ...body, id }, { status: 201 });
   } catch (e) {
     return NextResponse.json({ error: 'Failed to create hero slide' }, { status: 500 });
@@ -103,6 +106,8 @@ export async function PATCH(request: Request) {
       setContent('uk', { ...ukDoc, hero_slider: reorderSlides(ukSlides) }),
       setContent('en', { ...enDoc, hero_slider: reorderSlides(enSlides) }),
     ]);
+
+    revalidateTag('dictionary', 'max');
 
     return NextResponse.json({ success: true });
   } catch (e) {

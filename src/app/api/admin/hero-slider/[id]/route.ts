@@ -1,4 +1,5 @@
 import { NextResponse } from 'next/server';
+import { revalidateTag } from 'next/cache';
 import { getDb } from '@/lib/mongodb';
 
 async function getContent(locale: string): Promise<any> {
@@ -61,6 +62,8 @@ export async function PUT(request: Request, { params }: { params: Promise<{ id: 
       setContent('en', { ...enDoc, hero_slider: enSlides }),
     ]);
 
+    revalidateTag('dictionary', 'max');
+
     return NextResponse.json({ success: true });
   } catch (e) {
     return NextResponse.json({ error: 'Failed to update hero slide' }, { status: 500 });
@@ -79,6 +82,8 @@ export async function DELETE(_request: Request, { params }: { params: Promise<{ 
       setContent('uk', { ...ukDoc, hero_slider: ukSlides }),
       setContent('en', { ...enDoc, hero_slider: enSlides }),
     ]);
+
+    revalidateTag('dictionary', 'max');
 
     return NextResponse.json({ success: true });
   } catch (e) {
