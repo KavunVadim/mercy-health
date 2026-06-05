@@ -1,0 +1,432 @@
+:root {
+  --admin-font: 'Inter', system-ui, sans-serif;
+  --admin-bg: #f1f5f9;
+  --admin-sidebar-bg: #0f172a;
+  --admin-sidebar-hover: #1e293b;
+  --admin-accent: #3b82f6;
+  --admin-accent-dark: #2563eb;
+  --admin-text: #1e293b;
+  --admin-text-light: #64748b;
+  --admin-radius: 10px;
+  --admin-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
+  --sidebar-width: 260px;
+}
+
+.adminLayout {
+  display: flex;
+  min-height: 100dvh;
+  font-family: var(--admin-font);
+  background: var(--admin-bg);
+  color: var(--admin-text);
+  position: relative;
+}
+
+/* ─── Sidebar Toggle Button ─────────────────────── */
+.sidebarToggle {
+  display: none;
+  position: fixed;
+  top: 0.75rem;
+  left: 0.75rem;
+  z-index: 1100;
+  background: var(--admin-sidebar-bg);
+  color: #f8fafc;
+  border: none;
+  border-radius: 8px;
+  padding: 0.5rem;
+  cursor: pointer;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+  min-width: 44px;
+  min-height: 44px;
+  align-items: center;
+  justify-content: center;
+}
+
+/* ─── Sidebar ───────────────────────────────────── */
+.adminSidebar {
+  background: var(--admin-sidebar-bg);
+  color: #f8fafc;
+  width: var(--sidebar-width);
+  flex-shrink: 0;
+  display: flex;
+  flex-direction: column;
+  min-height: 100dvh;
+  position: sticky;
+  top: 0;
+  height: 100dvh;
+  transition: transform 0.25s ease;
+  z-index: 1000;
+}
+
+.sidebarHeader {
+  padding: 1.5rem 1.25rem 0.75rem;
+}
+
+.adminLogo {
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: #f8fafc;
+  margin: 0;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  letter-spacing: -0.02em;
+}
+
+.logoIcon {
+  font-size: 1.3rem;
+}
+
+.sidebarNav {
+  flex: 1;
+  padding: 0.5rem 0.75rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+}
+
+.navLink {
+  color: #94a3b8;
+  text-decoration: none;
+  font-size: 0.875rem;
+  font-weight: 500;
+  padding: 0.65rem 0.875rem;
+  border-radius: var(--admin-radius);
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+  transition: background 0.15s, color 0.15s;
+  min-height: 44px;
+}
+
+.navLink:hover,
+.navLink:focus {
+  background: var(--admin-sidebar-hover);
+  color: #f8fafc;
+  outline: none;
+}
+
+.navLinkActive {
+  background: rgba(59, 130, 246, 0.15);
+  color: #60a5fa;
+}
+
+.sidebarFooter {
+  padding: 0.5rem 0.75rem 1.25rem;
+  border-top: 1px solid #334155;
+  margin-top: auto;
+}
+
+.logoutLink {
+  color: #f87171;
+}
+
+.logoutLink:hover {
+  background: rgba(239, 68, 68, 0.15);
+  color: #fca5a5;
+}
+
+/* ─── Backdrop for mobile ───────────────────────── */
+.sidebarBackdrop {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.4);
+  z-index: 999;
+}
+
+/* ─── Main content area ─────────────────────────── */
+.adminMain {
+  flex: 1;
+  padding: 2rem 2.5rem;
+  overflow-y: auto;
+  max-width: 1400px;
+  min-width: 0;
+}
+
+.adminMain > * {
+  animation: fadeIn 0.25s ease-out;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(6px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* ─── Table horizontal scroll wrapper ────────────── */
+.tableWrapper {
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  width: 100%;
+}
+
+/* ─── Card-style table on mobile ────────────────── */
+@media (max-width: 768px) {
+  .responsiveTable {
+    min-width: 0 !important;
+    width: 100%;
+  }
+
+  .responsiveTable thead {
+    display: none;
+  }
+
+  .responsiveTable tbody tr {
+    display: block;
+    padding: 0.75rem;
+    padding-left: 2rem;
+    margin-bottom: 0.75rem;
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+    position: relative;
+  }
+
+  .responsiveTable tbody tr td {
+    padding: 0.35rem 0 !important;
+    border: none !important;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+    font-size: 0.85rem;
+  }
+
+  .responsiveTable tbody tr td:first-child {
+    position: absolute;
+    left: 0.5rem;
+    top: 50%;
+    transform: translateY(-50%);
+    padding: 0 !important;
+    margin: 0;
+  }
+
+  .responsiveTable tbody tr td::before {
+    content: attr(data-label);
+    font-size: 0.65rem;
+    font-weight: 600;
+    color: var(--admin-text-light);
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    min-width: 55px;
+    flex-shrink: 0;
+  }
+
+  .responsiveTable tbody tr td:first-child::before {
+    display: none;
+  }
+}
+
+/* ─── Responsive ────────────────────────────────── */
+@media (max-width: 768px) {
+  .sidebarToggle {
+    display: flex;
+  }
+
+  .adminSidebar {
+    position: fixed;
+  }
+
+  .sidebarClosed {
+    transform: translateX(-100%);
+  }
+
+  .sidebarOpen {
+    transform: translateX(0);
+    box-shadow: 4px 0 24px rgba(0, 0, 0, 0.3);
+  }
+
+  .sidebarBackdrop {
+    display: block;
+  }
+
+  .adminMain {
+    padding: 1rem;
+    padding-top: 4rem;
+    max-width: 100%;
+  }
+
+  .loginCard {
+    padding: 1.5rem 1.25rem;
+    border-radius: 16px;
+  }
+
+  .loginTitle {
+    font-size: 1.25rem;
+  }
+
+  .adminMain h2 {
+    font-size: 1.2rem !important;
+  }
+}
+
+@media (max-width: 480px) {
+  .adminMain {
+    padding: 0.75rem;
+    padding-top: 3.5rem;
+  }
+
+  .loginCard {
+    padding: 1.25rem 1rem;
+    border-radius: 14px;
+    max-width: 100% !important;
+    margin: 0.5rem;
+    max-height: 85dvh !important;
+  }
+
+  .responsiveTable tbody tr td {
+    font-size: 0.8rem;
+  }
+
+  .responsiveTable tbody tr td img {
+    width: 36px !important;
+    height: 36px !important;
+  }
+}
+
+@media (min-width: 769px) {
+  .sidebarToggle {
+    display: none !important;
+  }
+
+  .sidebarBackdrop {
+    display: none !important;
+  }
+}
+
+/* ─── Form grid ──────────────────────────────────── */
+.formGrid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0 1rem;
+}
+
+@media (max-width: 600px) {
+  .formGrid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* ─── Login page ────────────────────────────────── */
+.loginWrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100dvh;
+  background: linear-gradient(135deg, #f1f5f9 0%, #e2e8f0 100%);
+  padding: 1rem;
+}
+
+.loginCard {
+  background: white;
+  border-radius: 20px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+  padding: 2.5rem 2.25rem;
+  width: 100%;
+  max-width: 400px;
+  position: relative;
+  overflow: hidden;
+}
+
+.loginCard::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: linear-gradient(90deg, #3b82f6, #8b5cf6);
+}
+
+.loginTitle {
+  font-size: 1.5rem;
+  font-weight: 700;
+  text-align: center;
+  margin: 0 0 0.5rem;
+  color: var(--admin-text);
+  letter-spacing: -0.02em;
+}
+
+.loginSubtitle {
+  text-align: center;
+  color: var(--admin-text-light);
+  font-size: 0.875rem;
+  margin: 0 0 2rem;
+}
+
+.loginLabel {
+  display: block;
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--admin-text-light);
+  margin-bottom: 0.35rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.loginInput {
+  width: 100%;
+  padding: 0.75rem 0.9rem;
+  border: 1.5px solid #e2e8f0;
+  border-radius: 10px;
+  font-size: 0.95rem;
+  color: var(--admin-text);
+  background: #f8fafc;
+  box-sizing: border-box;
+  transition: border-color 0.15s, box-shadow 0.15s;
+  margin-bottom: 1.25rem;
+}
+
+.loginInput:focus {
+  outline: none;
+  border-color: var(--admin-accent);
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.15);
+  background: white;
+}
+
+.loginButton {
+  width: 100%;
+  padding: 0.8rem;
+  background: linear-gradient(135deg, var(--admin-accent), var(--admin-accent-dark));
+  color: white;
+  border: none;
+  border-radius: 10px;
+  font-size: 0.95rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: opacity 0.15s, transform 0.1s;
+  margin-top: 0.25rem;
+  min-height: 48px;
+  letter-spacing: 0.01em;
+}
+
+.loginButton:hover {
+  opacity: 0.9;
+}
+
+.loginButton:active {
+  transform: scale(0.98);
+}
+
+.loginButton:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  transform: none;
+}
+
+.loginError {
+  background: #fef2f2;
+  color: #dc2626;
+  border: 1px solid #fecaca;
+  border-radius: 10px;
+  padding: 0.65rem 1rem;
+  font-size: 0.85rem;
+  margin-bottom: 1.25rem;
+  text-align: center;
+}
+
+.loginFooter {
+  text-align: center;
+  margin-top: 1.5rem;
+  font-size: 0.8rem;
+  color: var(--admin-text-light);
+}

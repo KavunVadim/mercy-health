@@ -1,25 +1,23 @@
 'use client';
 
 import React, { useState, useEffect } from 'react';
-import styles from '../admin.module.css';
+import styles from '../../admin.module.css';
 
-export default function AdminRegisterPage() {
-  const [step, setStep] = useState<'checking' | 'form' | 'done'>('checking');
+export default function AdminLoginPage() {
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
+  const [checking, setChecking] = useState(true);
 
   useEffect(() => {
     fetch('/api/auth/admin-exists')
       .then(r => r.json())
       .then(data => {
-        if (data.exists) {
-          window.location.href = '/admin/login';
-        } else {
-          setStep('form');
+        if (!data.exists) {
+          window.location.href = '/admin/register';
         }
       })
-      .catch(() => setStep('form'));
+      .finally(() => setChecking(false));
   }, []);
 
   async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
@@ -28,35 +26,21 @@ export default function AdminRegisterPage() {
     setLoading(true);
 
     const form = e.currentTarget;
-    const email = (form.elements.namedItem('email') as HTMLInputElement).value;
+    const username = (form.elements.namedItem('username') as HTMLInputElement).value;
     const password = (form.elements.namedItem('password') as HTMLInputElement).value;
-    const confirm = (form.elements.namedItem('confirm') as HTMLInputElement).value;
-
-    if (password !== confirm) {
-      setError('Passwords do not match');
-      setLoading(false);
-      return;
-    }
-
-    if (password.length < 6) {
-      setError('Password must be at least 6 characters');
-      setLoading(false);
-      return;
-    }
 
     try {
-      const res = await fetch('/api/auth/register', {
+      const res = await fetch('/api/auth/login', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ email, password }),
+        body: JSON.stringify({ username, password }),
       });
 
       if (res.ok) {
-        setStep('done');
-        setTimeout(() => { window.location.href = '/admin'; }, 1500);
+        window.location.href = '/admin';
       } else {
         const data = await res.json();
-        setError(data.error || 'Registration failed');
+        setError(data.error || 'Invalid credentials');
       }
     } catch {
       setError('Network error. Please try again.');
@@ -65,36 +49,27 @@ export default function AdminRegisterPage() {
     }
   }
 
-  if (step === 'checking') return null;
-
-  if (step === 'done') {
-    return (
-      <div className={styles.loginWrapper}>
-        <div className={styles.loginCard}>
-          <h1 className={styles.loginTitle}>✅ Account Created</h1>
-          <p className={styles.loginSubtitle}>Redirecting to admin panel…</p>
-        </div>
-      </div>
-    );
-  }
+  if (checking) return null;
 
   return (
     <div className={styles.loginWrapper}>
       <div className={styles.loginCard}>
-        <h1 className={styles.loginTitle}>🛠️ Create Admin</h1>
-        <p className={styles.loginSubtitle}>Set up the first administrator account</p>
+        <h1 className={styles.loginTitle}>🛠️ Mercy Admin</h1>
+        <p className={styles.loginSubtitle}>Sign in to manage your foundation</p>
 
         {error && <div className={styles.loginError}>{error}</div>}
 
         <form onSubmit={handleSubmit} noValidate>
           <div>
-            <label htmlFor="email" className={styles.loginLabel}>Email</label>
+            <label htmlFor="username" className={styles.loginLabel}>
+              Email
+            </label>
             <input
               type="email"
-              name="email"
-              id="email"
+              name="username"
+              id="username"
               required
-              autoComplete="email"
+              autoComplete="username"
               className={styles.loginInput}
               placeholder="admin@example.com"
               autoFocus
@@ -102,29 +77,18 @@ export default function AdminRegisterPage() {
           </div>
 
           <div>
-            <label htmlFor="password" className={styles.loginLabel}>Password</label>
-            <input
-              type={showPassword ? 'text' : 'password'}
-              name="password"
-              id="password"
-              required
-              autoComplete="new-password"
-              className={styles.loginInput}
-              placeholder="At least 6 characters"
-            />
-          </div>
-
-          <div>
-            <label htmlFor="confirm" className={styles.loginLabel}>Confirm Password</label>
+            <label htmlFor="password" className={styles.loginLabel}>
+              Password
+            </label>
             <div style={{ position: 'relative' }}>
               <input
                 type={showPassword ? 'text' : 'password'}
-                name="confirm"
-                id="confirm"
+                name="password"
+                id="password"
                 required
-                autoComplete="new-password"
+                autoComplete="current-password"
                 className={styles.loginInput}
-                placeholder="Repeat password"
+                placeholder="••••••••"
                 style={{ marginBottom: 0 }}
               />
               <button
@@ -158,9 +122,13 @@ export default function AdminRegisterPage() {
             disabled={loading}
             className={styles.loginButton}
           >
-            {loading ? 'Creating…' : 'Create Admin Account'}
+            {loading ? 'Signing in…' : 'Sign In'}
           </button>
         </form>
+
+        <p className={styles.loginFooter}>
+          Mercy &amp; Health Foundation
+        </p>
       </div>
     </div>
   );
