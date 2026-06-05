@@ -116,15 +116,16 @@ export default function AdminNewsPage() {
           en: textToArr(form.content_en),
         },
         gallery: textToArr(form.gallery),
-        links: activeLinks.length > 0 ? activeLinks.map(l => ({
+        links: activeLinks.map(l => ({
           url: l.url,
           type: l.type,
           label: { uk: l.label_uk, en: l.label_en },
-        })) : undefined,
-        video_link: videoLink?.url || undefined,
-        video_label: videoLink ? { uk: videoLink.label_uk, en: videoLink.label_en } : undefined,
-        external_link: externalLink?.url || undefined,
-        link_label: externalLink ? { uk: externalLink.label_uk, en: externalLink.label_en } : undefined,
+        })),
+        video_link: videoLink?.url || null,
+        video_label: videoLink ? { uk: videoLink.label_uk, en: videoLink.label_en } : null,
+        external_link: externalLink?.url || null,
+        link: externalLink?.url || null,
+        link_label: externalLink ? { uk: externalLink.label_uk, en: externalLink.label_en } : null,
       };
 
       const url = editing ? `/api/admin/news/${editing._id || editing.id}` : '/api/admin/news';
@@ -306,7 +307,7 @@ export default function AdminNewsPage() {
                 <h4 style={{ margin: 0, color: '#475569' }}>Links (video / article)</h4>
                 <button
                   type="button"
-                  onClick={() => setForm({ ...form, links: [...form.links, { url: '', type: 'video', label_uk: '', label_en: '' }] })}
+                  onClick={() => setForm(prev => ({ ...prev, links: [...prev.links, { url: '', type: 'video', label_uk: '', label_en: '' }] }))}
                   style={{ padding: '0.35rem 0.75rem', background: '#e2e8f0', color: '#334155', border: 'none', borderRadius: '6px', cursor: 'pointer', fontSize: '0.8rem', fontWeight: 600 }}
                 >
                   + Add Link
@@ -324,9 +325,11 @@ export default function AdminNewsPage() {
                       <select
                         value={link.type}
                         onChange={e => {
-                          const updated = [...form.links];
-                          updated[idx] = { ...updated[idx], type: e.target.value as 'video' | 'external' };
-                          setForm({ ...form, links: updated });
+                          setForm(prev => {
+                            const updated = [...prev.links];
+                            updated[idx] = { ...updated[idx], type: e.target.value as 'video' | 'external' };
+                            return { ...prev, links: updated };
+                          });
                         }}
                         style={{ padding: '0.3rem 0.5rem', borderRadius: '6px', border: '1px solid #cbd5e1', fontSize: '0.8rem', background: 'white' }}
                       >
@@ -338,8 +341,10 @@ export default function AdminNewsPage() {
                     <button
                       type="button"
                       onClick={() => {
-                        const updated = form.links.filter((_, i) => i !== idx);
-                        setForm({ ...form, links: updated });
+                        setForm(prev => ({
+                          ...prev,
+                          links: prev.links.filter((_, i) => i !== idx),
+                        }));
                       }}
                       style={{ padding: '0.3rem 0.6rem', background: '#fee2e2', color: '#dc2626', border: 'none', borderRadius: '6px', cursor: 'pointer', fontSize: '0.75rem', fontWeight: 600 }}
                     >
@@ -353,9 +358,11 @@ export default function AdminNewsPage() {
                         className={styles.loginInput}
                         value={link.url}
                         onChange={e => {
-                          const updated = [...form.links];
-                          updated[idx] = { ...updated[idx], url: e.target.value };
-                          setForm({ ...form, links: updated });
+                          setForm(prev => {
+                            const updated = [...prev.links];
+                            updated[idx] = { ...updated[idx], url: e.target.value };
+                            return { ...prev, links: updated };
+                          });
                         }}
                         placeholder={link.type === 'video' ? 'https://youtube.com/...' : 'https://...'}
                       />
@@ -366,9 +373,11 @@ export default function AdminNewsPage() {
                         className={styles.loginInput}
                         value={link.label_uk}
                         onChange={e => {
-                          const updated = [...form.links];
-                          updated[idx] = { ...updated[idx], label_uk: e.target.value };
-                          setForm({ ...form, links: updated });
+                          setForm(prev => {
+                            const updated = [...prev.links];
+                            updated[idx] = { ...updated[idx], label_uk: e.target.value };
+                            return { ...prev, links: updated };
+                          });
                         }}
                         placeholder={link.type === 'video' ? 'Дивитись сюжет...' : 'Деталі події'}
                       />
@@ -379,9 +388,11 @@ export default function AdminNewsPage() {
                         className={styles.loginInput}
                         value={link.label_en}
                         onChange={e => {
-                          const updated = [...form.links];
-                          updated[idx] = { ...updated[idx], label_en: e.target.value };
-                          setForm({ ...form, links: updated });
+                          setForm(prev => {
+                            const updated = [...prev.links];
+                            updated[idx] = { ...updated[idx], label_en: e.target.value };
+                            return { ...prev, links: updated };
+                          });
                         }}
                         placeholder={link.type === 'video' ? 'Watch story...' : 'Event Details'}
                       />

@@ -27,7 +27,7 @@ export async function POST(request: Request) {
       updatedAt: new Date(),
     };
     const result = await db.collection('reports').insertOne(doc);
-    revalidateTag('dictionary', 'max');
+    revalidateTag('dictionary', { expire: 0 });
     return NextResponse.json({ ...doc, _id: result.insertedId }, { status: 201 });
   } catch (e) {
     return NextResponse.json({ error: 'Failed to create report' }, { status: 500 });

@@ -8,6 +8,8 @@ import type { Metadata } from "next";
 import type { NewsItem } from "@/types/content";
 import { getDb } from "@/lib/mongodb";
 
+export const dynamic = 'force-dynamic';
+
 export async function generateStaticParams() {
   const locales = i18n.locales;
   const paths = [];

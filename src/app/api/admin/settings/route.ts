@@ -23,7 +23,7 @@ export async function PUT(request: Request) {
       { $set: { key: 'main', ...body, updatedAt: new Date() } },
       { upsert: true }
     );
-    revalidateTag('dictionary', 'max');
+    revalidateTag('dictionary', { expire: 0 });
     return NextResponse.json({ success: true });
   } catch (e) {
     return NextResponse.json({ error: 'Failed to update settings' }, { status: 500 });

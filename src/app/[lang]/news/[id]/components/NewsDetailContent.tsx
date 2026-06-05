@@ -16,15 +16,23 @@ interface NewsDetailContentProps {
 }
 
 function getLinks(item: NewsItem): LinkItem[] {
-  if (item.links && item.links.length > 0) return item.links;
+  const currentLinks = Array.isArray(item.links)
+    ? item.links.filter(link => link?.url?.trim())
+    : [];
+  if (currentLinks.length > 0) return currentLinks;
+
   const legacy: LinkItem[] = [];
-  if (item.video_link) {
+  const videoLink = typeof item.video_link === 'string' ? item.video_link.trim() : '';
+  const externalLink = typeof item.external_link === 'string' ? item.external_link.trim() : '';
+  const legacyLink = typeof item.link === 'string' ? item.link.trim() : '';
+
+  if (videoLink) {
     const lbl = typeof item.video_label === 'object' ? item.video_label : undefined;
-    legacy.push({ url: item.video_link, label: lbl as { uk: string; en: string } | undefined, type: 'video' });
+    legacy.push({ url: videoLink, label: lbl as { uk: string; en: string } | undefined, type: 'video' });
   }
-  if (item.external_link || item.link) {
+  if (externalLink || legacyLink) {
     const lbl = typeof item.link_label === 'object' ? item.link_label : undefined;
-    legacy.push({ url: item.external_link || item.link || '', label: lbl as { uk: string; en: string } | undefined, type: 'external' });
+    legacy.push({ url: externalLink || legacyLink, label: lbl as { uk: string; en: string } | undefined, type: 'external' });
   }
   return legacy;
 }

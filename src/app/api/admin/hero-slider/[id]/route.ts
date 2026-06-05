@@ -62,7 +62,7 @@ export async function PUT(request: Request, { params }: { params: Promise<{ id: 
       setContent('en', { ...enDoc, hero_slider: enSlides }),
     ]);
 
-    revalidateTag('dictionary', 'max');
+    revalidateTag('dictionary', { expire: 0 });
 
     return NextResponse.json({ success: true });
   } catch (e) {
@@ -83,7 +83,7 @@ export async function DELETE(_request: Request, { params }: { params: Promise<{ 
       setContent('en', { ...enDoc, hero_slider: enSlides }),
     ]);
 
-    revalidateTag('dictionary', 'max');
+    revalidateTag('dictionary', { expire: 0 });
 
     return NextResponse.json({ success: true });
   } catch (e) {

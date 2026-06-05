@@ -78,7 +78,7 @@ export async function POST(request: Request) {
       setContent('en', { ...enDoc, hero_slider: enSlides }),
     ]);
 
-    revalidateTag('dictionary', 'max');
+    revalidateTag('dictionary', { expire: 0 });
 
     return NextResponse.json({ ...body, id }, { status: 201 });
   } catch (e) {
@@ -107,7 +107,7 @@ export async function PATCH(request: Request) {
       setContent('en', { ...enDoc, hero_slider: reorderSlides(enSlides) }),
     ]);
 
-    revalidateTag('dictionary', 'max');
+    revalidateTag('dictionary', { expire: 0 });
 
     return NextResponse.json({ success: true });
   } catch (e) {

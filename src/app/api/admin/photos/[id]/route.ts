@@ -7,6 +7,9 @@ import { deleteFromS3, extractKeyFromUrl, deleteLocalFile } from '@/lib/s3';
 export async function GET(_request: Request, { params }: { params: Promise<{ id: string }> }) {
   try {
     const { id } = await params;
+    if (!ObjectId.isValid(id)) {
+      return NextResponse.json({ error: 'Invalid photo id' }, { status: 400 });
+    }
     const db = await getDb();
     const doc = await db.collection('photos').findOne({ _id: new ObjectId(id) });
     if (!doc) return NextResponse.json({ error: 'Not found' }, { status: 404 });
@@ -20,6 +23,9 @@ export async function GET(_request: Request, { params }: { params: Promise<{ id:
 export async function PUT(request: Request, { params }: { params: Promise<{ id: string }> }) {
   try {
     const { id } = await params;
+    if (!ObjectId.isValid(id)) {
+      return NextResponse.json({ error: 'Invalid photo id' }, { status: 400 });
+    }
     const body = await request.json();
     const db = await getDb();
     const result = await db.collection('photos').findOneAndUpdate(
@@ -27,9 +33,10 @@ export async function PUT(request: Request, { params }: { params: Promise<{ id: 
       { $set: { ...body, updatedAt: new Date() } },
       { returnDocument: 'after' }
     );
-    if (!result) return NextResponse.json({ error: 'Not found' }, { status: 404 });
-    revalidateTag('dictionary', 'max');
-    return NextResponse.json(result);
+    const value = result?.value;
+    if (!value) return NextResponse.json({ error: 'Not found' }, { status: 404 });
+    revalidateTag('dictionary', { expire: 0 });
+    return NextResponse.json(value);
   } catch (e) {
     console.error('Failed to update photo:', e);
     return NextResponse.json({ error: 'Failed to update photo' }, { status: 500 });
@@ -39,6 +46,9 @@ export async function PUT(request: Request, { params }: { params: Promise<{ id: 
 export async function DELETE(request: Request, { params }: { params: Promise<{ id: string }> }) {
   try {
     const { id } = await params;
+    if (!ObjectId.isValid(id)) {
+      return NextResponse.json({ error: 'Invalid photo id' }, { status: 400 });
+    }
     const body = await request.json().catch(() => ({}));
     const db = await getDb();
 
@@ -53,7 +63,7 @@ export async function DELETE(request: Request, { params }: { params: Promise<{ i
     }
 
     await db.collection('photos').deleteOne({ _id: new ObjectId(id) });
-    revalidateTag('dictionary', 'max');
+    revalidateTag('dictionary', { expire: 0 });
     return NextResponse.json({ success: true });
   } catch (e) {
     console.error('Failed to delete photo:', e);

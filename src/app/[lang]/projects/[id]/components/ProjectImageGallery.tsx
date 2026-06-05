@@ -33,6 +33,8 @@ export default function ProjectImageGallery({
   locale,
   links = [],
 }: ProjectImageGalleryProps) {
+  const validLinks = links.filter(link => link?.url?.trim());
+
   return (
     <GalleryProvider>
       <div className={styles.contentWrapper}>
@@ -71,7 +73,7 @@ export default function ProjectImageGallery({
                 {/* Inner core */}
                 <div className={styles.contentShareInner}>
                   {/* Link cards (video / article) */}
-                  {links.map((link, idx) => (
+                  {validLinks.map((link, idx) => (
                     <div key={idx}>
                       <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '10px', textAlign: 'center' }}>
                         <div className={styles.playIconCircle} style={link.type === 'external' ? { background: 'var(--accent)' } : undefined}>

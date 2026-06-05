@@ -32,7 +32,7 @@ export async function POST(request: Request) {
       updatedAt: new Date(),
     };
     const result = await db.collection('photos').insertOne(doc);
-    revalidateTag('dictionary', 'max');
+    revalidateTag('dictionary', { expire: 0 });
     return NextResponse.json({ ...doc, _id: result.insertedId }, { status: 201 });
   } catch (e) {
     console.error('Failed to create photo:', e);

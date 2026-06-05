@@ -113,7 +113,7 @@ export async function PUT(request: Request) {
       setContent('en', enUpdate),
     ]);
 
-    revalidateTag('dictionary', 'max');
+    revalidateTag('dictionary', { expire: 0 });
 
     return NextResponse.json({ success: true });
   } catch (e) {

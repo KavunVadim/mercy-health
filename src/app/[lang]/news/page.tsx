@@ -4,6 +4,8 @@ import styles from "./page.module.css";
 import MaterialsContent from "./MaterialsContent";
 import Breadcrumbs from "@/components/Breadcrumbs/Breadcrumbs";
 
+export const dynamic = 'force-dynamic';
+
 export default async function NewsPage({
   params,
 }: {

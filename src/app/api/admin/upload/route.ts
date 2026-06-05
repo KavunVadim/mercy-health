@@ -65,7 +65,7 @@ export async function POST(request: Request) {
 
     const result = await db.collection('photos').insertOne(doc);
 
-    revalidateTag('dictionary', 'max');
+    revalidateTag('dictionary', { expire: 0 });
 
     return NextResponse.json({ ...doc, _id: result.insertedId, dedup: false }, { status: 201 });
   } catch (e: any) {

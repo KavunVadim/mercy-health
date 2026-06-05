@@ -1,5 +1,5 @@
 import { NextResponse } from 'next/server';
-import { revalidateTag } from 'next/cache';
+import { revalidateTag, revalidatePath } from 'next/cache';
 import { getDb } from '@/lib/mongodb';
 import { ObjectId } from 'mongodb';
 
@@ -27,9 +27,13 @@ export async function PUT(request: Request, { params }: { params: Promise<{ id: 
       { $set: { ...body, updatedAt: new Date() } },
       { returnDocument: 'after' }
     );
-    if (!result) return NextResponse.json({ error: 'Not found' }, { status: 404 });
-    revalidateTag('dictionary', 'max');
-    return NextResponse.json(result);
+    const value = result?.value;
+    if (!value) return NextResponse.json({ error: 'Not found' }, { status: 404 });
+    const projectSlug = body.id || id;
+    revalidateTag('dictionary', { expire: 0 });
+    revalidatePath(`/uk/projects/${projectSlug}`, 'page');
+    revalidatePath(`/en/projects/${projectSlug}`, 'page');
+    return NextResponse.json(value);
   } catch (e) {
     return NextResponse.json({ error: 'Failed to update project' }, { status: 500 });
   }
@@ -43,7 +47,9 @@ export async function DELETE(_request: Request, { params }: { params: Promise<{ 
       ObjectId.isValid(id) ? { _id: new ObjectId(id) } : { id }
     );
     if (result.deletedCount === 0) return NextResponse.json({ error: 'Not found' }, { status: 404 });
-    revalidateTag('dictionary', 'max');
+    revalidateTag('dictionary', { expire: 0 });
+    revalidatePath('/uk/projects', 'page');
+    revalidatePath('/en/projects', 'page');
     return NextResponse.json({ success: true });
   } catch (e) {
     return NextResponse.json({ error: 'Failed to delete project' }, { status: 500 });
