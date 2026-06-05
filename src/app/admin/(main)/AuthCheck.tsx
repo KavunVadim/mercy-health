@@ -1,10 +1,11 @@
 'use client';
 
-import { useEffect } from 'react';
+import { useEffect, useRef } from 'react';
 import { usePathname } from 'next/navigation';
 
 export default function AuthCheck() {
   const pathname = usePathname();
+  const isRefreshing = useRef(false);
 
   useEffect(() => {
     fetch('/api/auth/admin-exists')
@@ -18,16 +19,20 @@ export default function AuthCheck() {
 
   useEffect(() => {
     async function checkAuth() {
+      if (isRefreshing.current) return;
+
       const res = await fetch('/api/auth/me');
+      if (res.ok) return;
 
-      if (res.ok) return; // всe добре
+      // Токен протух — спробуй refresh
+      isRefreshing.current = true;
+      try {
+        const refreshRes = await fetch('/api/auth/refresh', { method: 'POST' });
+        if (refreshRes.ok) return;
+      } finally {
+        isRefreshing.current = false;
+      }
 
-      // Токен протух — спробуй оновити через refreshToken
-      const refreshRes = await fetch('/api/auth/refresh', { method: 'POST' });
-
-      if (refreshRes.ok) return; // оновили успішно
-
-      // refreshToken теж недійсний — логін
       window.location.href = '/admin/login';
     }
 
