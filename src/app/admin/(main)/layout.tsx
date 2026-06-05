@@ -4,7 +4,7 @@ import { verifyToken } from '@/lib/auth/jwt';
 import AdminShell from './AdminShell';
 
 export default async function AdminLayout({ children }: { children: React.ReactNode }) {
-  const token = cookies().get('accessToken')?.value;
+  const token = (await cookies()).get('accessToken')?.value;
 
   if (!token) {
     redirect('/admin/login');
