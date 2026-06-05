@@ -17,12 +17,21 @@ export default function AuthCheck() {
   }, []);
 
   useEffect(() => {
-    fetch('/api/auth/me')
-      .then(r => {
-        if (!r.ok) {
-          window.location.href = '/admin/login';
-        }
-      });
+    async function checkAuth() {
+      const res = await fetch('/api/auth/me');
+
+      if (res.ok) return; // всe добре
+
+      // Токен протух — спробуй оновити через refreshToken
+      const refreshRes = await fetch('/api/auth/refresh', { method: 'POST' });
+
+      if (refreshRes.ok) return; // оновили успішно
+
+      // refreshToken теж недійсний — логін
+      window.location.href = '/admin/login';
+    }
+
+    checkAuth();
   }, [pathname]);
 
   return null;
