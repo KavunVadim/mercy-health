@@ -1,9 +1,9 @@
 import { NextResponse } from 'next/server';
 import { revalidateTag } from 'next/cache';
 import { getDb } from '@/lib/mongodb';
-import { uploadToS3, computeFileHash } from '@/lib/s3';
+import { uploadToS3, uploadLocally, computeFileHash } from '@/lib/s3';
 
-export const maxDuration = 30;
+export const maxDuration = 60;
 
 export async function POST(request: Request) {
   try {
@@ -35,7 +35,15 @@ export async function POST(request: Request) {
 
     const ext = file.name.split('.').pop() || 'webp';
     const key = `uploads/${hash.slice(0, 16)}.${ext}`;
-    const url = await uploadToS3(buffer, key, mime);
+
+    let url: string;
+    let s3Key: string | undefined = key;
+    try {
+      url = await uploadToS3(buffer, key, mime);
+    } catch {
+      url = await uploadLocally(buffer, `${hash.slice(0, 16)}.${ext}`);
+      s3Key = undefined;
+    }
 
     const maxOrder = await db.collection('photos').findOne({}, { sort: { order: -1 }, projection: { order: 1 } });
     const doc = {
@@ -44,7 +52,7 @@ export async function POST(request: Request) {
       alt: title || '',
       description: '',
       hash,
-      s3Key: key,
+      s3Key,
       mime,
       size: buffer.length,
       order: (maxOrder?.order ?? -1) + 1,

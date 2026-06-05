@@ -3,10 +3,12 @@
 import Image from "next/image";
 import { GalleryProvider, GalleryItem } from "@/components/ui/GalleryProvider";
 import { motion } from "framer-motion";
+import { FaPlay, FaEye } from "react-icons/fa";
 import styles from "../page.module.css";
 import galleryStyles from "./ProjectGallery.module.css";
 import ShareButtons from "./ShareButtons";
-import type { Dictionary } from "@/types/content";
+import type { Dictionary, LinkItem } from "@/types/content";
+import type { Locale } from "@/i18n-config";
 
 interface ProjectImageGalleryProps {
   mainImage: string;
@@ -16,6 +18,8 @@ interface ProjectImageGalleryProps {
   fullDescription: string;
   supportHref: string;
   dictionary: Dictionary;
+  locale: Locale;
+  links?: LinkItem[];
 }
 
 export default function ProjectImageGallery({ 
@@ -25,7 +29,9 @@ export default function ProjectImageGallery({
   shortDescription, 
   fullDescription, 
   supportHref,
-  dictionary
+  dictionary,
+  locale,
+  links = [],
 }: ProjectImageGalleryProps) {
   return (
     <GalleryProvider>
@@ -64,6 +70,27 @@ export default function ProjectImageGallery({
               <div className={styles.contentShareWrapper}>
                 {/* Inner core */}
                 <div className={styles.contentShareInner}>
+                  {/* Link cards (video / article) */}
+                  {links.map((link, idx) => (
+                    <div key={idx}>
+                      <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '10px', textAlign: 'center' }}>
+                        <div className={styles.playIconCircle} style={link.type === 'external' ? { background: 'var(--accent)' } : undefined}>
+                          {link.type === 'video' ? <FaPlay className={styles.playIcon} /> : <FaEye className={styles.playIcon} style={{ marginLeft: 0 }} />}
+                        </div>
+                        <h3 className={styles.videoTitle}>
+                          {link.label?.[locale] || (link.type === 'video'
+                            ? (locale === 'uk' ? 'Відеосюжет' : 'Video Story')
+                            : (locale === 'uk' ? 'Деталі події' : 'Event Details'))}
+                        </h3>
+                        <a href={link.url} target="_blank" rel="noopener noreferrer" className={styles.videoLinkButton}>
+                          {link.type === 'video'
+                            ? (locale === 'uk' ? 'Дивитись сюжет' : 'Watch Story')
+                            : (locale === 'uk' ? 'Деталі події' : 'Event Details')}
+                        </a>
+                      </div>
+                    </div>
+                  ))}
+
                   <ShareButtons 
                     title={title} 
                     dictionary={dictionary} 

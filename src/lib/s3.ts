@@ -62,6 +62,31 @@ export async function uploadToS3(
   return getS3Url(key);
 }
 
+export async function uploadLocally(
+  body: Buffer,
+  filename: string,
+): Promise<string> {
+  const fs = await import('fs/promises');
+  const path = await import('path');
+  const dir = path.join(process.cwd(), 'public', 'uploads');
+  await fs.mkdir(dir, { recursive: true });
+  const filePath = path.join(dir, filename);
+  await fs.writeFile(filePath, body);
+  return `/uploads/${filename}`;
+}
+
+export async function deleteLocalFile(url: string): Promise<void> {
+  try {
+    const fs = await import('fs/promises');
+    const path = await import('path');
+    const filename = url.replace('/uploads/', '');
+    const filePath = path.join(process.cwd(), 'public', 'uploads', filename);
+    await fs.unlink(filePath);
+  } catch (e) {
+    console.warn('Local file delete failed:', e);
+  }
+}
+
 export async function deleteFromS3(key: string): Promise<void> {
   const c = getClient();
   if (!c) return;

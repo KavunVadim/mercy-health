@@ -7,6 +7,13 @@ import GalleryEditor from '@/components/admin/GalleryEditor';
 import RichEditor from '@/components/admin/RichEditor';
 import { handleDragStart, handleDragOver, handleDragLeave, handleDrop, handleDragEnd, saveReorder } from '@/lib/dnd-reorder';
 
+interface LinkEntry {
+  url: string;
+  type: 'video' | 'external';
+  label_uk: string;
+  label_en: string;
+}
+
 interface ProjectItem {
   _id?: string;
   id: string;
@@ -17,6 +24,7 @@ interface ProjectItem {
   gallery?: string[];
   status?: string;
   createdAt?: string;
+  links?: { url: string; type?: 'video' | 'external'; label?: { uk: string; en: string } }[];
 }
 
 function slugify(text: string): string {
@@ -53,6 +61,7 @@ export default function AdminProjectsPage() {
     image: '',
     gallery: '',
     status: 'active',
+    links: [] as LinkEntry[],
   });
   const [saving, setSaving] = useState(false);
   const [dragIndex, setDragIndex] = useState<number | null>(null);
@@ -83,6 +92,7 @@ export default function AdminProjectsPage() {
     setSaving(true);
     try {
       const slug = slugify(form.title_uk || form.title_en);
+      const activeLinks = form.links.filter(l => l.url.trim());
       const body: Record<string, unknown> = {
         id: slug,
         image: form.image,
@@ -91,6 +101,11 @@ export default function AdminProjectsPage() {
         full_description: { uk: form.full_description_uk, en: form.full_description_en },
         gallery: textToArr(form.gallery),
         status: form.status,
+        links: activeLinks.length > 0 ? activeLinks.map(l => ({
+          url: l.url,
+          type: l.type,
+          label: { uk: l.label_uk, en: l.label_en },
+        })) : undefined,
       };
 
       const url = editing ? `/api/admin/projects/${editing._id || editing.id}` : '/api/admin/projects';
@@ -107,7 +122,7 @@ export default function AdminProjectsPage() {
           title_uk: '', title_en: '',
           description_uk: '', description_en: '',
           full_description_uk: '', full_description_en: '',
-          image: '', gallery: '', status: 'active',
+          image: '', gallery: '', status: 'active', links: [],
         });
         fetchItems();
       }
@@ -128,6 +143,17 @@ export default function AdminProjectsPage() {
 
   function openEdit(item: ProjectItem) {
     setEditing(item);
+    const existingLinks: LinkEntry[] = [];
+    if (item.links && Array.isArray(item.links) && item.links.length > 0) {
+      item.links.forEach((l: any) => {
+        existingLinks.push({
+          url: l.url || '',
+          type: l.type === 'video' ? 'video' : 'external',
+          label_uk: l.label?.uk || '',
+          label_en: l.label?.en || '',
+        });
+      });
+    }
     setForm({
       title_uk: (item.title as any)?.uk || '',
       title_en: (item.title as any)?.en || '',
@@ -138,6 +164,7 @@ export default function AdminProjectsPage() {
       image: item.image || '',
       gallery: arrToText(item.gallery),
       status: item.status || 'active',
+      links: existingLinks,
     });
     setShowForm(true);
   }
@@ -148,7 +175,7 @@ export default function AdminProjectsPage() {
       title_uk: '', title_en: '',
       description_uk: '', description_en: '',
       full_description_uk: '', full_description_en: '',
-      image: '', gallery: '', status: 'active',
+      image: '', gallery: '', status: 'active', links: [],
     });
     setShowForm(true);
   }
@@ -241,6 +268,95 @@ export default function AdminProjectsPage() {
 
               <label className={styles.loginLabel}>Gallery</label>
               <GalleryEditor value={textToArr(form.gallery)} onChange={urls => setForm({ ...form, gallery: urls.join('\n') })} />
+
+              <hr style={{ margin: '1rem 0', border: 'none', borderTop: '1px solid #e2e8f0' }} />
+              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '0.75rem' }}>
+                <h4 style={{ margin: 0, color: '#475569' }}>Links (video / article)</h4>
+                <button
+                  type="button"
+                  onClick={() => setForm({ ...form, links: [...form.links, { url: '', type: 'video', label_uk: '', label_en: '' }] })}
+                  style={{ padding: '0.35rem 0.75rem', background: '#e2e8f0', color: '#334155', border: 'none', borderRadius: '6px', cursor: 'pointer', fontSize: '0.8rem', fontWeight: 600 }}
+                >
+                  + Add Link
+                </button>
+              </div>
+
+              {form.links.length === 0 && (
+                <p style={{ color: '#94a3b8', fontSize: '0.85rem', margin: '0.5rem 0' }}>No links added yet. Click "+ Add Link" to add a video or article link.</p>
+              )}
+
+              {form.links.map((link, idx) => (
+                <div key={idx} style={{ background: '#f8fafc', border: '1px solid #e2e8f0', borderRadius: '8px', padding: '0.75rem', marginBottom: '0.75rem' }}>
+                  <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '0.5rem' }}>
+                    <div style={{ display: 'flex', gap: '0.5rem', alignItems: 'center' }}>
+                      <select
+                        value={link.type}
+                        onChange={e => {
+                          const updated = [...form.links];
+                          updated[idx] = { ...updated[idx], type: e.target.value as 'video' | 'external' };
+                          setForm({ ...form, links: updated });
+                        }}
+                        style={{ padding: '0.3rem 0.5rem', borderRadius: '6px', border: '1px solid #cbd5e1', fontSize: '0.8rem', background: 'white' }}
+                      >
+                        <option value="video">Video</option>
+                        <option value="external">Article</option>
+                      </select>
+                      <span style={{ fontSize: '0.8rem', color: '#94a3b8' }}>Link #{idx + 1}</span>
+                    </div>
+                    <button
+                      type="button"
+                      onClick={() => {
+                        const updated = form.links.filter((_, i) => i !== idx);
+                        setForm({ ...form, links: updated });
+                      }}
+                      style={{ padding: '0.3rem 0.6rem', background: '#fee2e2', color: '#dc2626', border: 'none', borderRadius: '6px', cursor: 'pointer', fontSize: '0.75rem', fontWeight: 600 }}
+                    >
+                      Remove
+                    </button>
+                  </div>
+                  <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr', gap: '0.5rem' }}>
+                    <div style={{ gridColumn: '1 / -1' }}>
+                      <label style={{ fontSize: '0.75rem', color: '#64748b', fontWeight: 600 }}>URL</label>
+                      <input
+                        className={styles.loginInput}
+                        value={link.url}
+                        onChange={e => {
+                          const updated = [...form.links];
+                          updated[idx] = { ...updated[idx], url: e.target.value };
+                          setForm({ ...form, links: updated });
+                        }}
+                        placeholder={link.type === 'video' ? 'https://youtube.com/...' : 'https://...'}
+                      />
+                    </div>
+                    <div>
+                      <label style={{ fontSize: '0.75rem', color: '#64748b', fontWeight: 600 }}>Label (UK)</label>
+                      <input
+                        className={styles.loginInput}
+                        value={link.label_uk}
+                        onChange={e => {
+                          const updated = [...form.links];
+                          updated[idx] = { ...updated[idx], label_uk: e.target.value };
+                          setForm({ ...form, links: updated });
+                        }}
+                        placeholder={link.type === 'video' ? 'Дивитись сюжет...' : 'Деталі події'}
+                      />
+                    </div>
+                    <div>
+                      <label style={{ fontSize: '0.75rem', color: '#64748b', fontWeight: 600 }}>Label (EN)</label>
+                      <input
+                        className={styles.loginInput}
+                        value={link.label_en}
+                        onChange={e => {
+                          const updated = [...form.links];
+                          updated[idx] = { ...updated[idx], label_en: e.target.value };
+                          setForm({ ...form, links: updated });
+                        }}
+                        placeholder={link.type === 'video' ? 'Watch story...' : 'Event Details'}
+                      />
+                    </div>
+                  </div>
+                </div>
+              ))}
 
               <div style={{ display: 'flex', gap: '0.75rem', marginTop: '1.5rem', paddingTop: '1.5rem', borderTop: '1px solid #e2e8f0' }}>
                 <button type="submit" disabled={saving} className={styles.loginButton} style={{ flex: 1, padding: '0.8rem 2rem' }}>

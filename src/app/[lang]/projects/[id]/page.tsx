@@ -4,7 +4,6 @@ import { notFound } from "next/navigation";
 import styles from "./page.module.css";
 import ProjectImageGallery from "./components/ProjectImageGallery";
 import Breadcrumbs from "@/components/Breadcrumbs/Breadcrumbs";
-import BackButton from "@/components/BackButton/BackButton";
 
 interface Project {
   id: string;
@@ -14,6 +13,7 @@ interface Project {
   full_description?: string;
   description?: string;
   gallery?: string[];
+  links?: { url: string; type?: 'video' | 'external'; label?: { uk: string; en: string } }[];
 }
 
 export default async function ProjectDetailPage({
@@ -61,6 +61,8 @@ export default async function ProjectDetailPage({
         fullDescription={fullDescription}
         supportHref={`/${lang}/support`}
         dictionary={dictionary}
+        locale={locale}
+        links={project.links}
       />
     </main>
   );

@@ -5,6 +5,12 @@ export type Localized<T = string> = {
   en: T;
 };
 
+export interface LinkItem {
+  url: string;
+  label?: { uk: string; en: string };
+  type?: 'video' | 'external';
+}
+
 export interface Project {
   id: string;
   title: string;
@@ -13,6 +19,7 @@ export interface Project {
   full_description?: string;
   description?: string;
   gallery?: string[];
+  links?: LinkItem[];
 }
 
 export interface NewsItem {
@@ -29,6 +36,7 @@ export interface NewsItem {
   link?: string;
   external_link?: string;
   link_label?: string | Partial<Localized>;
+  links?: LinkItem[];
 }
 
 export interface Partner {

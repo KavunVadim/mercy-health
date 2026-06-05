@@ -120,42 +120,37 @@ const fetchMongoData = unstable_cache(
 export const getDictionary = async (locale: Locale): Promise<Dictionary> => {
   const baseDictionary = await (dictionaries[locale]?.() ?? dictionaries.uk());
 
-  try {
-    const { contentData, localizedProjects, localizedPartners, localizedNews, localizedReports, localizedSettings, newsGalleryImages } = await fetchMongoData(locale);
+  const { contentData, localizedProjects, localizedPartners, localizedNews, localizedReports, localizedSettings, newsGalleryImages } = await fetchMongoData(locale);
 
-    const mergedDictionary = contentData
-      ? deepMerge(baseDictionary, contentData)
-      : baseDictionary;
+  const mergedDictionary = contentData
+    ? deepMerge(baseDictionary, contentData)
+    : baseDictionary;
 
-    const finalDictionary = localizedSettings
-      ? deepMerge(mergedDictionary, localizedSettings)
-      : mergedDictionary;
+  const finalDictionary = localizedSettings
+    ? deepMerge(mergedDictionary, localizedSettings)
+    : mergedDictionary;
 
-    const reportsData = { reports: localizedReports };
+  const reportsData = { reports: localizedReports };
 
-    return {
-      ...finalDictionary,
-      hero_slider: contentData.hero_slider || [],
-      projects: {
-        ...(finalDictionary.projects || {}),
-        items: localizedProjects || [],
+  return {
+    ...finalDictionary,
+    hero_slider: contentData.hero_slider || [],
+    projects: {
+      ...(finalDictionary.projects || {}),
+      items: localizedProjects || [],
+    },
+    news: {
+      ...(finalDictionary.news || {}),
+      items: localizedNews || [],
+      gallery: {
+        ...((finalDictionary.news as Record<string, unknown>)?.gallery as Record<string, unknown> || {}),
+        images: newsGalleryImages,
       },
-      news: {
-        ...(finalDictionary.news || {}),
-        items: localizedNews || [],
-        gallery: {
-          ...((finalDictionary.news as Record<string, unknown>)?.gallery as Record<string, unknown> || {}),
-          images: newsGalleryImages,
-        },
-      },
-      partners: localizedPartners || [],
-      reports: {
-        ...(finalDictionary.reports || {}),
-        ...(reportsData || {}),
-      },
-    } as unknown as Dictionary;
-  } catch (error) {
-    console.warn(`Could not load data from MongoDB for locale ${locale}, falling back to dictionary.`, error);
-    return baseDictionary as unknown as Dictionary;
-  }
+    },
+    partners: localizedPartners || [],
+    reports: {
+      ...(finalDictionary.reports || {}),
+      ...(reportsData || {}),
+    },
+  } as unknown as Dictionary;
 };

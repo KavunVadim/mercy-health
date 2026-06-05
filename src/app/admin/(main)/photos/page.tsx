@@ -21,6 +21,7 @@ export default function AdminPhotosPage() {
   const [filter, setFilter] = useState<'all' | 'gallery'>('all');
   const [toggling, setToggling] = useState<string | null>(null);
   const [uploading, setUploading] = useState(false);
+  const [uploadError, setUploadError] = useState('');
   const [editing, setEditing] = useState<PhotoRecord | null>(null);
   const [editForm, setEditForm] = useState({ title: '', alt: '' });
   const [showEdit, setShowEdit] = useState(false);
@@ -42,15 +43,21 @@ export default function AdminPhotosPage() {
   async function handleUpload(files: FileList | null) {
     if (!files?.length) return;
     setUploading(true);
+    setUploadError('');
     try {
       for (let i = 0; i < files.length; i++) {
         const fd = new FormData();
         fd.append('file', files[i]);
         fd.append('title', files[i].name);
-        await fetch('/api/admin/upload', { method: 'POST', body: fd });
+        const res = await fetch('/api/admin/upload', { method: 'POST', body: fd });
+        if (!res.ok) {
+          const err = await res.json().catch(() => ({ error: 'Upload failed' }));
+          throw new Error(err.error || 'Upload failed');
+        }
       }
       fetchItems();
-    } catch (e) {
+    } catch (e: any) {
+      setUploadError(e.message || 'Upload failed');
       console.error(e);
     } finally {
       setUploading(false);
@@ -157,6 +164,12 @@ export default function AdminPhotosPage() {
           </button>
         </div>
       </div>
+
+      {uploadError && (
+        <div style={{ padding: '0.75rem 1rem', background: '#fee2e2', color: '#dc2626', borderRadius: '8px', marginBottom: '1rem', fontSize: '0.875rem', fontWeight: 500 }}>
+          Upload error: {uploadError}
+        </div>
+      )}
 
       <div style={{ display: 'flex', gap: '0.5rem', marginBottom: '1rem', flexWrap: 'wrap' }}>
         <button onClick={() => setFilter('all')} style={{

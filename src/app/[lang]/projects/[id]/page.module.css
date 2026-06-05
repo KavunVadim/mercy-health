@@ -361,3 +361,78 @@
 .grid {
   width: 100%;
 }
+
+/* ─── Link cards (video/article) ──────────────────────────── */
+.playIconCircle {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  background: var(--accent);
+  color: var(--accent-foreground);
+  box-shadow: 0 8px 24px color-mix(in oklab, var(--accent) 30%, transparent);
+  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.contentShareInner:hover .playIconCircle {
+  transform: scale(1.08) rotate(8deg);
+  box-shadow: 0 12px 32px color-mix(in oklab, var(--accent) 45%, transparent);
+}
+
+.playIcon {
+  font-size: 1.1rem;
+  margin-left: 3px;
+}
+
+.videoTitle {
+  font-family: var(--font-e-ukraine), sans-serif;
+  font-size: 1.1rem;
+  font-weight: 700;
+  line-height: 1.4;
+  color: var(--foreground);
+  margin: 0;
+}
+
+.videoLinkButton {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  padding: 12px 20px;
+  border-radius: var(--radius-md);
+  background: var(--accent);
+  color: var(--accent-foreground);
+  font-weight: 700;
+  font-size: 0.9rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  text-decoration: none;
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  box-shadow: 0 4px 12px color-mix(in oklab, var(--accent) 15%, transparent);
+}
+
+.videoLinkButton:hover {
+  background: var(--accent-hover);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px color-mix(in oklab, var(--accent) 25%, transparent);
+}
+
+@media (max-width: 1023px) {
+  .playIconCircle {
+    display: none;
+  }
+
+  .videoTitle {
+    display: none;
+  }
+
+  .videoLinkButton {
+    width: 100%;
+    padding: 13px 20px;
+    font-size: 0.875rem;
+    letter-spacing: 0.06em;
+    border-radius: var(--radius-md);
+  }
+}
