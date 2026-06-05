@@ -18,6 +18,8 @@ const navItems = [
   { href: '/admin/settings', label: 'Settings', icon: Settings },
 ];
 
+import AuthCheck from './AuthCheck';
+
 export default function AdminShell({ children }: { children: React.ReactNode }) {
   const pathname = usePathname();
   const [sidebarOpen, setSidebarOpen] = useState(true);
@@ -37,7 +39,9 @@ export default function AdminShell({ children }: { children: React.ReactNode }) 
   if (!mounted) return null;
 
   return (
-    <div className={styles.adminLayout}>
+    <>
+      <AuthCheck />
+      <div className={styles.adminLayout}>
       <button
         className={styles.sidebarToggle}
         onClick={() => setSidebarOpen(!sidebarOpen)}
@@ -87,5 +91,6 @@ export default function AdminShell({ children }: { children: React.ReactNode }) 
         {children}
       </main>
     </div>
+    </>
   );
 }
