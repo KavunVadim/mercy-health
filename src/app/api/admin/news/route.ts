@@ -5,7 +5,7 @@ import { getDb } from '@/lib/mongodb';
 export async function GET() {
   try {
     const db = await getDb();
-    const docs = await db.collection('news').find({}).sort({ order: 1, createdAt: -1 }).toArray();
+    const docs = await db.collection('news').find({}).sort({ order: -1, createdAt: -1 }).toArray();
     return NextResponse.json(docs);
   } catch (e) {
     return NextResponse.json({ error: 'Failed to fetch news' }, { status: 500 });

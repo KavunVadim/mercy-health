@@ -17,10 +17,11 @@ export async function PATCH(request: Request) {
     }
 
     const db = await getDb();
+    const total = ids.length;
     const ops = ids.map((id: string, index: number) => ({
       updateOne: {
         filter: { _id: new ObjectId(id) },
-        update: { $set: { order: index, updatedAt: new Date() } },
+        update: { $set: { order: total - 1 - index, updatedAt: new Date() } },
       },
     }));
 

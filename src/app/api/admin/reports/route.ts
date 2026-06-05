@@ -6,7 +6,7 @@ import { slugify } from '@/lib/data-utils';
 export async function GET() {
   try {
     const db = await getDb();
-    const docs = await db.collection('reports').find({}).sort({ order: 1, createdAt: -1 }).toArray();
+    const docs = await db.collection('reports').find({}).sort({ order: -1, createdAt: -1 }).toArray();
     return NextResponse.json(docs);
   } catch (e) {
     return NextResponse.json({ error: 'Failed to fetch reports' }, { status: 500 });

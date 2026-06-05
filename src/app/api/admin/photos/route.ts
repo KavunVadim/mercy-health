@@ -9,7 +9,7 @@ export async function GET(request: Request) {
 
     const db = await getDb();
     const filter = galleryFilter === 'true' ? { inGallery: true } : {};
-    const photos = await db.collection('photos').find(filter).sort({ order: 1, createdAt: -1 }).toArray();
+    const photos = await db.collection('photos').find(filter).sort({ order: -1, createdAt: -1 }).toArray();
     return NextResponse.json(photos);
   } catch (e) {
     console.error('Failed to fetch photos:', e);
