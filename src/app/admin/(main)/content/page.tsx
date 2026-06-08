@@ -1,7 +1,10 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import styles from '../admin.module.css';
+import { Check, Plus, X, FileText, SlidersHorizontal, HeartHandshake, CreditCard, FileBadge } from 'lucide-react';
+import styles from '@/app/admin/admin.module.css';
+import { useToast } from '@/components/admin/ui/Toast';
+import SupportCardEditor from '@/components/admin/SupportCardEditor';
 
 export default function AdminContentPage() {
   const [form, setForm] = useState({
@@ -18,12 +21,14 @@ export default function AdminContentPage() {
     edrpou_value: '', bank_name_value_uk: '', bank_name_value_en: '',
     purpose_value_uk: '', purpose_value_en: '',
   });
-  const [supportCards, setSupportCards] = useState<{ id: string; title: string; description: string; bank: string; link: string }[]>([]);
+  const [supportCards, setSupportCards] = useState<{ id: string; title: string; description: string; bank: string; link: string; icon?: string; image?: string }[]>([]);
   const [supportCardsEn, setSupportCardsEn] = useState<{ id: string; title: string; description: string; bank: string; link: string }[]>([]);
   const [documents, setDocuments] = useState<{ id: string; title: string; url: string }[]>([]);
   const [saving, setSaving] = useState(false);
   const [loaded, setLoaded] = useState(false);
+  const [bankAccounts, setBankAccounts] = useState<string>('');
   const [tab, setTab] = useState<'about' | 'hero' | 'support' | 'stats' | 'docs'>('about');
+  const { success, error } = useToast();
 
   useEffect(() => {
     fetch('/api/admin/content').then(r => r.json()).then(d => {
@@ -58,41 +63,23 @@ export default function AdminContentPage() {
       setSupportCards(d.support_cards || []);
       setSupportCardsEn(d.support_cards_en || []);
       setDocuments(d.documents || []);
+      setBankAccounts(d.bank_accounts ? JSON.stringify(d.bank_accounts, null, 2) : '');
       setLoaded(true);
-    }).catch(() => setLoaded(true));
-  }, []);
+    }).catch(() => { setLoaded(true); error('Failed to load content'); });
+  }, [error]);
 
   async function handleSave(e: React.FormEvent) {
     e.preventDefault();
     setSaving(true);
     try {
-      const body = { ...form, support_cards: supportCards, support_cards_en: supportCardsEn, documents };
+      let parsedAccounts = null;
+      try { parsedAccounts = bankAccounts ? JSON.parse(bankAccounts) : null; } catch {}
+      const body = { ...form, support_cards: supportCards, support_cards_en: supportCardsEn, documents, bank_accounts: parsedAccounts };
       const res = await fetch('/api/admin/content', { method: 'PUT', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(body) });
-      if (res.ok) alert('Content saved');
-      else alert('Failed to save content');
-    } finally { setSaving(false); }
-  }
-
-  function addSupportCard() {
-    setSupportCards([...supportCards, { id: `card-${Date.now()}`, title: '', description: '', bank: '', link: '' }]);
-    setSupportCardsEn([...supportCardsEn, { id: `card-${Date.now()}`, title: '', description: '', bank: '', link: '' }]);
-  }
-
-  function updateSupportCard(i: number, field: string, value: string) {
-    const updated = [...supportCards];
-    updated[i] = { ...updated[i], [field]: value };
-    setSupportCards(updated);
-  }
-
-  function updateSupportCardEn(i: number, field: string, value: string) {
-    const updated = [...supportCardsEn];
-    updated[i] = { ...updated[i], [field]: value };
-    setSupportCardsEn(updated);
-  }
-
-  function removeSupportCard(i: number) {
-    setSupportCards(supportCards.filter((_, idx) => idx !== i));
-    setSupportCardsEn(supportCardsEn.filter((_, idx) => idx !== i));
+      if (res.ok) success('Content saved successfully');
+      else error('Failed to save content');
+    } catch { error('Network error'); }
+    finally { setSaving(false); }
   }
 
   function addDocument() {
@@ -109,156 +96,270 @@ export default function AdminContentPage() {
     setDocuments(documents.filter((_, idx) => idx !== i));
   }
 
-  if (!loaded) return <p style={{ color: '#64748b' }}>Loading...</p>;
-
   const tabs = [
-    { key: 'about' as const, label: 'About Page' },
-    { key: 'hero' as const, label: 'Hero Text' },
-    { key: 'support' as const, label: 'Support Cards' },
-    { key: 'stats' as const, label: 'Bank Details' },
-    { key: 'docs' as const, label: 'Documents' },
+    { key: 'about' as const, label: 'About Page', icon: FileText },
+    { key: 'hero' as const, label: 'Hero Text', icon: SlidersHorizontal },
+    { key: 'support' as const, label: 'Support Cards', icon: HeartHandshake },
+    { key: 'stats' as const, label: 'Bank Details', icon: CreditCard },
+    { key: 'docs' as const, label: 'Documents', icon: FileBadge },
   ];
+
+  if (!loaded) {
+    return (
+      <div>
+        <div className={styles.pageHeader}>
+          <div className={styles.pageTitleGroup}>
+            <h1 className={styles.pageTitle}>Content Pages</h1>
+          </div>
+        </div>
+        <div style={{ display: 'flex', gap: '0.5rem', marginBottom: '1.5rem', flexWrap: 'wrap' }}>
+          {[1, 2, 3, 4, 5].map(i => (
+            <div key={i} className={`${styles.skeleton}`} style={{ height: 36, width: 100, borderRadius: 8 }} />
+          ))}
+        </div>
+        {[1, 2].map(i => (
+          <div key={i} className={styles.settingsSection} style={{ marginBottom: '1.25rem' }}>
+            <div className={styles.settingsSectionHeader}>
+              <div className={`${styles.skeleton}`} style={{ width: 140, height: 14, borderRadius: 4 }} />
+            </div>
+            <div className={styles.settingsSectionBody} style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
+              {[1, 2].map(j => (
+                <div key={j} style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1rem' }}>
+                  <div className={styles.skeleton} style={{ height: 38, borderRadius: 8 }} />
+                  <div className={styles.skeleton} style={{ height: 38, borderRadius: 8 }} />
+                </div>
+              ))}
+            </div>
+          </div>
+        ))}
+      </div>
+    );
+  }
 
   return (
     <div>
-      <h2 style={{ marginBottom: '1.5rem', fontSize: '1.5rem', fontWeight: 700 }}>Content Pages</h2>
-
-      <div style={{ display: 'flex', gap: '0.5rem', marginBottom: '1.5rem', flexWrap: 'wrap' }}>
-        {tabs.map(t => (
-          <button key={t.key} onClick={() => setTab(t.key)}
-            style={{
-              padding: '0.5rem 1rem', border: 'none', borderRadius: '8px', cursor: 'pointer',
-              background: tab === t.key ? '#1e293b' : '#e2e8f0',
-              color: tab === t.key ? 'white' : '#475569', fontWeight: 600, fontSize: '0.85rem',
-            }}>
-            {t.label}
-          </button>
-        ))}
-      </div>
-
-      <form onSubmit={handleSave} style={{ maxWidth: '800px' }}>
-        {tab === 'about' && (
-          <>
-            <h3 style={{ margin: '0 0 1rem', color: '#475569' }}>History</h3>
-            <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '0 1rem' }}>
-              <div><label className={styles.loginLabel}>Title (UK)</label><input className={styles.loginInput} value={form.about_history_title_uk} onChange={e => setForm({ ...form, about_history_title_uk: e.target.value })} /></div>
-              <div><label className={styles.loginLabel}>Title (EN)</label><input className={styles.loginInput} value={form.about_history_title_en} onChange={e => setForm({ ...form, about_history_title_en: e.target.value })} /></div>
-            </div>
-            <label className={styles.loginLabel}>Content (UK)</label>
-            <textarea className={styles.loginInput} rows={10} value={form.about_history_content_uk} onChange={e => setForm({ ...form, about_history_content_uk: e.target.value })} style={{ resize: 'vertical' }} />
-            <label className={styles.loginLabel}>Content (EN)</label>
-            <textarea className={styles.loginInput} rows={10} value={form.about_history_content_en} onChange={e => setForm({ ...form, about_history_content_en: e.target.value })} style={{ resize: 'vertical' }} />
-
-            <hr style={{ margin: '1rem 0', border: 'none', borderTop: '1px solid #e2e8f0' }} />
-            <h3 style={{ margin: '0 0 1rem', color: '#475569' }}>Mission</h3>
-            <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '0 1rem' }}>
-              <div><label className={styles.loginLabel}>Title (UK)</label><input className={styles.loginInput} value={form.about_mission_title_uk} onChange={e => setForm({ ...form, about_mission_title_uk: e.target.value })} /></div>
-              <div><label className={styles.loginLabel}>Title (EN)</label><input className={styles.loginInput} value={form.about_mission_title_en} onChange={e => setForm({ ...form, about_mission_title_en: e.target.value })} /></div>
-            </div>
-            <label className={styles.loginLabel}>Content (UK)</label>
-            <textarea className={styles.loginInput} rows={4} value={form.about_mission_content_uk} onChange={e => setForm({ ...form, about_mission_content_uk: e.target.value })} style={{ resize: 'vertical' }} />
-            <label className={styles.loginLabel}>Content (EN)</label>
-            <textarea className={styles.loginInput} rows={4} value={form.about_mission_content_en} onChange={e => setForm({ ...form, about_mission_content_en: e.target.value })} style={{ resize: 'vertical' }} />
-
-            <hr style={{ margin: '1rem 0', border: 'none', borderTop: '1px solid #e2e8f0' }} />
-            <h3 style={{ margin: '0 0 1rem', color: '#475569' }}>Media About Us</h3>
-            <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '0 1rem' }}>
-              <div><label className={styles.loginLabel}>Title (UK)</label><input className={styles.loginInput} value={form.about_media_title_uk} onChange={e => setForm({ ...form, about_media_title_uk: e.target.value })} /></div>
-              <div><label className={styles.loginLabel}>Title (EN)</label><input className={styles.loginInput} value={form.about_media_title_en} onChange={e => setForm({ ...form, about_media_title_en: e.target.value })} /></div>
-            </div>
-            <label className={styles.loginLabel}>Content (UK)</label>
-            <textarea className={styles.loginInput} rows={4} value={form.about_media_content_uk} onChange={e => setForm({ ...form, about_media_content_uk: e.target.value })} style={{ resize: 'vertical' }} />
-            <label className={styles.loginLabel}>Content (EN)</label>
-            <textarea className={styles.loginInput} rows={4} value={form.about_media_content_en} onChange={e => setForm({ ...form, about_media_content_en: e.target.value })} style={{ resize: 'vertical' }} />
-          </>
-        )}
-
-        {tab === 'hero' && (
-          <>
-            <h3 style={{ margin: '0 0 1rem', color: '#475569' }}>Hero Section Text</h3>
-            <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '0 1rem' }}>
-              <div><label className={styles.loginLabel}>Title (UK)</label><input className={styles.loginInput} value={form.hero_title_uk} onChange={e => setForm({ ...form, hero_title_uk: e.target.value })} /></div>
-              <div><label className={styles.loginLabel}>Title (EN)</label><input className={styles.loginInput} value={form.hero_title_en} onChange={e => setForm({ ...form, hero_title_en: e.target.value })} /></div>
-            </div>
-            <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '0 1rem' }}>
-              <div><label className={styles.loginLabel}>Description (UK)</label><textarea className={styles.loginInput} rows={3} value={form.hero_description_uk} onChange={e => setForm({ ...form, hero_description_uk: e.target.value })} style={{ resize: 'vertical' }} /></div>
-              <div><label className={styles.loginLabel}>Description (EN)</label><textarea className={styles.loginInput} rows={3} value={form.hero_description_en} onChange={e => setForm({ ...form, hero_description_en: e.target.value })} style={{ resize: 'vertical' }} /></div>
-            </div>
-          </>
-        )}
-
-        {tab === 'support' && (
-          <>
-            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1rem' }}>
-              <h3 style={{ margin: 0, color: '#475569' }}>Donation Cards</h3>
-              <button type="button" onClick={addSupportCard} className={styles.loginButton} style={{ width: 'auto', padding: '0.4rem 1rem', margin: 0, fontSize: '0.85rem' }}>+ Add Card</button>
-            </div>
-            {supportCards.map((card, i) => (
-              <div key={card.id} style={{ background: '#f8fafc', borderRadius: '8px', padding: '0.75rem', marginBottom: '0.75rem' }}>
-                <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '0.5rem' }}>
-                  <strong style={{ fontSize: '0.85rem' }}>Card {i + 1}</strong>
-                  <button type="button" onClick={() => removeSupportCard(i)} style={{ padding: '0.25rem 0.5rem', background: '#fee2e2', color: '#dc2626', border: 'none', borderRadius: '6px', cursor: 'pointer', fontSize: '0.75rem' }}>Remove</button>
-                </div>
-                <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '0.5rem' }}>
-                  <div><label className={styles.loginLabel}>Title (UK)</label><input className={styles.loginInput} value={card.title} onChange={e => updateSupportCard(i, 'title', e.target.value)} /></div>
-                  <div><label className={styles.loginLabel}>Title (EN)</label><input className={styles.loginInput} value={supportCardsEn[i]?.title || ''} onChange={e => updateSupportCardEn(i, 'title', e.target.value)} /></div>
-                  <div><label className={styles.loginLabel}>Description (UK)</label><textarea className={styles.loginInput} rows={2} value={card.description} onChange={e => updateSupportCard(i, 'description', e.target.value)} /></div>
-                  <div><label className={styles.loginLabel}>Description (EN)</label><textarea className={styles.loginInput} rows={2} value={supportCardsEn[i]?.description || ''} onChange={e => updateSupportCardEn(i, 'description', e.target.value)} /></div>
-                  <div><label className={styles.loginLabel}>Bank</label><input className={styles.loginInput} value={card.bank} onChange={e => updateSupportCard(i, 'bank', e.target.value)} /></div>
-                  <div><label className={styles.loginLabel}>Link</label><input className={styles.loginInput} value={card.link} onChange={e => updateSupportCard(i, 'link', e.target.value)} /></div>
-                </div>
-              </div>
-            ))}
-          </>
-        )}
-
-        {tab === 'stats' && (
-          <>
-            <h3 style={{ margin: '0 0 1rem', color: '#475569' }}>Bank Details</h3>
-            <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '0 1rem' }}>
-              <div><label className={styles.loginLabel}>Beneficiary (UK)</label><input className={styles.loginInput} value={form.beneficiary_value_uk} onChange={e => setForm({ ...form, beneficiary_value_uk: e.target.value })} /></div>
-              <div><label className={styles.loginLabel}>Beneficiary (EN)</label><input className={styles.loginInput} value={form.beneficiary_value_en} onChange={e => setForm({ ...form, beneficiary_value_en: e.target.value })} /></div>
-            </div>
-            <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '0 1rem' }}>
-              <div><label className={styles.loginLabel}>EDRPOU</label><input className={styles.loginInput} value={form.edrpou_value} onChange={e => setForm({ ...form, edrpou_value: e.target.value })} /></div>
-              <div><label className={styles.loginLabel}>Bank Name (UK)</label><input className={styles.loginInput} value={form.bank_name_value_uk} onChange={e => setForm({ ...form, bank_name_value_uk: e.target.value })} /></div>
-              <div><label className={styles.loginLabel}>Bank Name (EN)</label><input className={styles.loginInput} value={form.bank_name_value_en} onChange={e => setForm({ ...form, bank_name_value_en: e.target.value })} /></div>
-              <div><label className={styles.loginLabel}>Purpose (UK)</label><input className={styles.loginInput} value={form.purpose_value_uk} onChange={e => setForm({ ...form, purpose_value_uk: e.target.value })} /></div>
-              <div><label className={styles.loginLabel}>Purpose (EN)</label><input className={styles.loginInput} value={form.purpose_value_en} onChange={e => setForm({ ...form, purpose_value_en: e.target.value })} /></div>
-            </div>
-
-            <hr style={{ margin: '1rem 0', border: 'none', borderTop: '1px solid #e2e8f0' }} />
-            <h3 style={{ margin: '0 0 1rem', color: '#475569' }}>Stats (Homepage)</h3>
-            <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr', gap: '0 1rem' }}>
-              <div><label className={styles.loginLabel}>Collected</label><input className={styles.loginInput} value={form.stats_collected} onChange={e => setForm({ ...form, stats_collected: e.target.value })} placeholder="45.2K" /></div>
-              <div><label className={styles.loginLabel}>Helped</label><input className={styles.loginInput} value={form.stats_helped} onChange={e => setForm({ ...form, stats_helped: e.target.value })} placeholder="8.3K" /></div>
-              <div><label className={styles.loginLabel}>Donors</label><input className={styles.loginInput} value={form.stats_donors} onChange={e => setForm({ ...form, stats_donors: e.target.value })} placeholder="8.3K" /></div>
-            </div>
-          </>
-        )}
-
-        {tab === 'docs' && (
-          <>
-            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1rem' }}>
-              <h3 style={{ margin: 0, color: '#475569' }}>Reports / Documents</h3>
-              <button type="button" onClick={addDocument} className={styles.loginButton} style={{ width: 'auto', padding: '0.4rem 1rem', margin: 0, fontSize: '0.85rem' }}>+ Add Document</button>
-            </div>
-            {documents.map((doc, i) => (
-              <div key={doc.id} style={{ display: 'flex', gap: '0.5rem', alignItems: 'end', marginBottom: '0.5rem' }}>
-                <div style={{ flex: 2 }}><label className={styles.loginLabel}>Title</label><input className={styles.loginInput} value={doc.title} onChange={e => updateDocument(i, 'title', e.target.value)} /></div>
-                <div style={{ flex: 2 }}><label className={styles.loginLabel}>URL</label><input className={styles.loginInput} value={doc.url} onChange={e => updateDocument(i, 'url', e.target.value)} /></div>
-                <button type="button" onClick={() => removeDocument(i)} style={{ padding: '0.5rem 0.75rem', background: '#fee2e2', color: '#dc2626', border: 'none', borderRadius: '6px', cursor: 'pointer', fontSize: '0.8rem', marginBottom: '1px' }}>✕</button>
-              </div>
-            ))}
-          </>
-        )}
-
-        <div style={{ marginTop: '1.5rem' }}>
-          <button type="submit" disabled={saving} className={styles.loginButton} style={{ width: 'auto', padding: '0.6rem 2rem' }}>
-            {saving ? 'Saving...' : 'Save Content'}
+      <div className={styles.pageHeader}>
+        <div className={styles.pageTitleGroup}>
+          <h1 className={styles.pageTitle}>Content Pages</h1>
+          <p className={styles.pageSubtitle}>Manage about page, hero text, donation cards, bank details and documents</p>
+        </div>
+        <div className={styles.pageActions}>
+          <button form="content-form" type="submit" disabled={saving} className={`${styles.btn} ${styles.btnPrimary}`}>
+            <Check size={15} />
+            {saving ? 'Saving…' : 'Save Content'}
           </button>
         </div>
-      </form>
+      </div>
+
+      <div style={{ display: 'flex', gap: '1.5rem', alignItems: 'flex-start' }}>
+        {/* Sidebar tabs */}
+        <div style={{ display: 'flex', flexDirection: 'column', gap: '0.25rem', minWidth: 200, flexShrink: 0, position: 'sticky', top: '1rem' }}>
+          {tabs.map(t => {
+            const Icon = t.icon;
+            return (
+              <button key={t.key} onClick={() => setTab(t.key)}
+                style={{
+                  display: 'flex', alignItems: 'center', gap: '0.625rem', padding: '0.625rem 0.875rem',
+                  borderRadius: 'var(--admin-radius-sm)', border: 'none', cursor: 'pointer',
+                  fontSize: '0.85rem', fontWeight: 600, textAlign: 'left',
+                  background: tab === t.key ? 'var(--admin-accent-light)' : 'transparent',
+                  color: tab === t.key ? 'var(--admin-accent)' : 'var(--admin-text-secondary)',
+                  transition: 'background 0.15s, color 0.15s', fontFamily: 'var(--admin-font)',
+                }}>
+                <Icon size={16} strokeWidth={2} style={{ flexShrink: 0 }} />
+                {t.label}
+              </button>
+            );
+          })}
+        </div>
+
+        {/* Content */}
+        <form id="content-form" onSubmit={handleSave} style={{ flex: 1, minWidth: 0 }}>
+          {tab === 'about' && (
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '1.25rem' }}>
+              <div className={styles.settingsSection}>
+                <div className={styles.settingsSectionHeader}>
+                  <FileText size={16} className={styles.settingsSectionIcon} strokeWidth={2} />
+                  <h2 className={styles.settingsSectionTitle}>History</h2>
+                </div>
+                <div className={styles.settingsSectionBody}>
+                  <div className={styles.formGrid}>
+                    <div className={styles.formGroup}><label className={styles.label}>Title (Ukrainian)</label><input className={styles.input} value={form.about_history_title_uk} onChange={e => setForm({ ...form, about_history_title_uk: e.target.value })} /></div>
+                    <div className={styles.formGroup}><label className={styles.label}>Title (English)</label><input className={styles.input} value={form.about_history_title_en} onChange={e => setForm({ ...form, about_history_title_en: e.target.value })} /></div>
+                  </div>
+                  <div className={styles.formGroup} style={{ marginTop: '1rem' }}><label className={styles.label}>Content (Ukrainian)</label><textarea className={styles.textarea} rows={10} value={form.about_history_content_uk} onChange={e => setForm({ ...form, about_history_content_uk: e.target.value })} /></div>
+                  <div className={styles.formGroup} style={{ marginTop: '1rem' }}><label className={styles.label}>Content (English)</label><textarea className={styles.textarea} rows={10} value={form.about_history_content_en} onChange={e => setForm({ ...form, about_history_content_en: e.target.value })} /></div>
+                </div>
+              </div>
+
+              <div className={styles.settingsSection}>
+                <div className={styles.settingsSectionHeader}>
+                  <FileText size={16} className={styles.settingsSectionIcon} strokeWidth={2} />
+                  <h2 className={styles.settingsSectionTitle}>Mission</h2>
+                </div>
+                <div className={styles.settingsSectionBody}>
+                  <div className={styles.formGrid}>
+                    <div className={styles.formGroup}><label className={styles.label}>Title (Ukrainian)</label><input className={styles.input} value={form.about_mission_title_uk} onChange={e => setForm({ ...form, about_mission_title_uk: e.target.value })} /></div>
+                    <div className={styles.formGroup}><label className={styles.label}>Title (English)</label><input className={styles.input} value={form.about_mission_title_en} onChange={e => setForm({ ...form, about_mission_title_en: e.target.value })} /></div>
+                  </div>
+                  <div className={styles.formGroup} style={{ marginTop: '1rem' }}><label className={styles.label}>Content (Ukrainian)</label><textarea className={styles.textarea} rows={4} value={form.about_mission_content_uk} onChange={e => setForm({ ...form, about_mission_content_uk: e.target.value })} /></div>
+                  <div className={styles.formGroup} style={{ marginTop: '1rem' }}><label className={styles.label}>Content (English)</label><textarea className={styles.textarea} rows={4} value={form.about_mission_content_en} onChange={e => setForm({ ...form, about_mission_content_en: e.target.value })} /></div>
+                </div>
+              </div>
+
+              <div className={styles.settingsSection}>
+                <div className={styles.settingsSectionHeader}>
+                  <FileText size={16} className={styles.settingsSectionIcon} strokeWidth={2} />
+                  <h2 className={styles.settingsSectionTitle}>Media About Us</h2>
+                </div>
+                <div className={styles.settingsSectionBody}>
+                  <div className={styles.formGrid}>
+                    <div className={styles.formGroup}><label className={styles.label}>Title (Ukrainian)</label><input className={styles.input} value={form.about_media_title_uk} onChange={e => setForm({ ...form, about_media_title_uk: e.target.value })} /></div>
+                    <div className={styles.formGroup}><label className={styles.label}>Title (English)</label><input className={styles.input} value={form.about_media_title_en} onChange={e => setForm({ ...form, about_media_title_en: e.target.value })} /></div>
+                  </div>
+                  <div className={styles.formGroup} style={{ marginTop: '1rem' }}><label className={styles.label}>Content (Ukrainian)</label><textarea className={styles.textarea} rows={4} value={form.about_media_content_uk} onChange={e => setForm({ ...form, about_media_content_uk: e.target.value })} /></div>
+                  <div className={styles.formGroup} style={{ marginTop: '1rem' }}><label className={styles.label}>Content (English)</label><textarea className={styles.textarea} rows={4} value={form.about_media_content_en} onChange={e => setForm({ ...form, about_media_content_en: e.target.value })} /></div>
+                </div>
+              </div>
+            </div>
+          )}
+
+          {tab === 'hero' && (
+            <div className={styles.settingsSection}>
+              <div className={styles.settingsSectionHeader}>
+                <SlidersHorizontal size={16} className={styles.settingsSectionIcon} strokeWidth={2} />
+                <h2 className={styles.settingsSectionTitle}>Hero Section Text</h2>
+              </div>
+              <div className={styles.settingsSectionBody}>
+                <div className={styles.formGrid}>
+                  <div className={styles.formGroup}><label className={styles.label}>Title (Ukrainian)</label><input className={styles.input} value={form.hero_title_uk} onChange={e => setForm({ ...form, hero_title_uk: e.target.value })} /></div>
+                  <div className={styles.formGroup}><label className={styles.label}>Title (English)</label><input className={styles.input} value={form.hero_title_en} onChange={e => setForm({ ...form, hero_title_en: e.target.value })} /></div>
+                </div>
+                <div className={styles.formGrid} style={{ marginTop: '1rem' }}>
+                  <div className={styles.formGroup}><label className={styles.label}>Description (Ukrainian)</label><textarea className={styles.textarea} rows={3} value={form.hero_description_uk} onChange={e => setForm({ ...form, hero_description_uk: e.target.value })} /></div>
+                  <div className={styles.formGroup}><label className={styles.label}>Description (English)</label><textarea className={styles.textarea} rows={3} value={form.hero_description_en} onChange={e => setForm({ ...form, hero_description_en: e.target.value })} /></div>
+                </div>
+              </div>
+            </div>
+          )}
+
+          {tab === 'support' && (
+            <div className={styles.settingsSection}>
+              <div className={styles.settingsSectionHeader}>
+                <HeartHandshake size={16} className={styles.settingsSectionIcon} strokeWidth={2} />
+                <h2 className={styles.settingsSectionTitle}>Donation Cards</h2>
+              </div>
+              <div className={styles.settingsSectionBody}>
+                <SupportCardEditor
+                  cards={supportCards}
+                  cardsEn={supportCardsEn}
+                  onCardsChange={setSupportCards}
+                  onCardsEnChange={setSupportCardsEn}
+                />
+              </div>
+            </div>
+          )}
+
+          {tab === 'stats' && (
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '1.25rem' }}>
+              <div className={styles.settingsSection}>
+                <div className={styles.settingsSectionHeader}>
+                  <CreditCard size={16} className={styles.settingsSectionIcon} strokeWidth={2} />
+                  <h2 className={styles.settingsSectionTitle}>Bank Details</h2>
+                </div>
+                <div className={styles.settingsSectionBody}>
+                  <div className={styles.formGrid}>
+                    <div className={styles.formGroup}><label className={styles.label}>Beneficiary (UK)</label><input className={styles.input} value={form.beneficiary_value_uk} onChange={e => setForm({ ...form, beneficiary_value_uk: e.target.value })} /></div>
+                    <div className={styles.formGroup}><label className={styles.label}>Beneficiary (EN)</label><input className={styles.input} value={form.beneficiary_value_en} onChange={e => setForm({ ...form, beneficiary_value_en: e.target.value })} /></div>
+                  </div>
+                  <div className={styles.formGrid} style={{ marginTop: '1rem' }}>
+                    <div className={styles.formGroup}><label className={styles.label}>EDRPOU</label><input className={styles.input} value={form.edrpou_value} onChange={e => setForm({ ...form, edrpou_value: e.target.value })} /></div>
+                    <div className={styles.formGroup}><label className={styles.label}>Bank Name (UK)</label><input className={styles.input} value={form.bank_name_value_uk} onChange={e => setForm({ ...form, bank_name_value_uk: e.target.value })} /></div>
+                    <div className={styles.formGroup}><label className={styles.label}>Bank Name (EN)</label><input className={styles.input} value={form.bank_name_value_en} onChange={e => setForm({ ...form, bank_name_value_en: e.target.value })} /></div>
+                    <div className={styles.formGroup}><label className={styles.label}>Purpose (UK)</label><input className={styles.input} value={form.purpose_value_uk} onChange={e => setForm({ ...form, purpose_value_uk: e.target.value })} /></div>
+                    <div className={styles.formGroup}><label className={styles.label}>Purpose (EN)</label><input className={styles.input} value={form.purpose_value_en} onChange={e => setForm({ ...form, purpose_value_en: e.target.value })} /></div>
+                  </div>
+                </div>
+              </div>
+
+              <div className={styles.settingsSection}>
+                <div className={styles.settingsSectionHeader}>
+                  <CreditCard size={16} className={styles.settingsSectionIcon} strokeWidth={2} />
+                  <h2 className={styles.settingsSectionTitle}>Stats (Homepage)</h2>
+                </div>
+                <div className={styles.settingsSectionBody}>
+                  <div className={styles.formGrid3}>
+                    <div className={styles.formGroup}><label className={styles.label}>Collected</label><input className={styles.input} value={form.stats_collected} onChange={e => setForm({ ...form, stats_collected: e.target.value })} placeholder="45.2K" /></div>
+                    <div className={styles.formGroup}><label className={styles.label}>Helped</label><input className={styles.input} value={form.stats_helped} onChange={e => setForm({ ...form, stats_helped: e.target.value })} placeholder="8.3K" /></div>
+                    <div className={styles.formGroup}><label className={styles.label}>Donors</label><input className={styles.input} value={form.stats_donors} onChange={e => setForm({ ...form, stats_donors: e.target.value })} placeholder="8.3K" /></div>
+                  </div>
+                </div>
+              </div>
+
+              <div className={styles.settingsSection}>
+                <div className={styles.settingsSectionHeader}>
+                  <CreditCard size={16} className={styles.settingsSectionIcon} strokeWidth={2} />
+                  <h2 className={styles.settingsSectionTitle}>Bank Accounts (IBAN / Crypto)</h2>
+                </div>
+                <div className={styles.settingsSectionBody}>
+                  <p className={styles.pageSubtitle} style={{ marginBottom: '0.75rem' }}>
+                    Edit bank account details as JSON. Format: {'{'}"ua": [{'{'}"id": "ua_privat", "label": "PrivatBank", "value": "UA..."{'}'}]{'}'}
+                  </p>
+                  <textarea
+                    className={styles.input}
+                    rows={14}
+                    value={bankAccounts}
+                    onChange={e => setBankAccounts(e.target.value)}
+                    style={{ fontFamily: 'var(--admin-mono)', fontSize: '0.8rem', resize: 'vertical', width: '100%' }}
+                  />
+                </div>
+              </div>
+            </div>
+          )}
+
+          {tab === 'docs' && (
+            <div className={styles.settingsSection}>
+              <div className={styles.settingsSectionHeader}>
+                <FileBadge size={16} className={styles.settingsSectionIcon} strokeWidth={2} />
+                <h2 className={styles.settingsSectionTitle}>Reports / Documents</h2>
+              </div>
+              <div className={styles.settingsSectionBody}>
+                <div style={{ display: 'flex', justifyContent: 'flex-end', marginBottom: '1rem' }}>
+                  <button type="button" onClick={addDocument} className={`${styles.btn} ${styles.btnSm} ${styles.btnPrimary}`}>
+                    <Plus size={14} /> Add Document
+                  </button>
+                </div>
+                {documents.length === 0 ? (
+                  <p style={{ fontSize: '0.875rem', color: 'var(--admin-text-muted)', textAlign: 'center', padding: '2rem 0' }}>No documents yet. Click "Add Document" to create one.</p>
+                ) : (
+                  <div style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
+                    {documents.map((doc, i) => (
+                      <div key={doc.id} className={styles.card} style={{ background: 'var(--admin-secondary)' }}>
+                        <div className={styles.cardContent} style={{ padding: '0.75rem 1rem' }}>
+                          <div style={{ display: 'flex', gap: '0.75rem', alignItems: 'end' }}>
+                            <div className={styles.formGroup} style={{ flex: 2 }}><label className={styles.label}>Title</label><input className={styles.input} value={doc.title} onChange={e => updateDocument(i, 'title', e.target.value)} /></div>
+                            <div className={styles.formGroup} style={{ flex: 2 }}><label className={styles.label}>URL</label><input className={styles.input} value={doc.url} onChange={e => updateDocument(i, 'url', e.target.value)} /></div>
+                            <button type="button" onClick={() => removeDocument(i)} className={`${styles.btn} ${styles.btnSm} ${styles.btnDestructive}`} style={{ marginBottom: '1px' }}>
+                              <X size={12} />
+                            </button>
+                          </div>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                )}
+              </div>
+            </div>
+          )}
+
+          <div style={{ display: 'flex', justifyContent: 'flex-end', marginTop: '1.5rem' }}>
+            <button type="submit" disabled={saving} className={`${styles.btn} ${styles.btnPrimary}`} style={{ minWidth: 140 }}>
+              <Check size={15} />
+              {saving ? 'Saving…' : 'Save Content'}
+            </button>
+          </div>
+        </form>
+      </div>
     </div>
   );
 }

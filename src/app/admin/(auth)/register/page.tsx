@@ -1,7 +1,7 @@
 'use client';
 
 import React, { useState, useEffect } from 'react';
-import styles from '../../admin.module.css';
+import styles from '@/app/admin/admin.module.css';
 
 export default function AdminRegisterPage() {
   const [step, setStep] = useState<'checking' | 'form' | 'done'>('checking');

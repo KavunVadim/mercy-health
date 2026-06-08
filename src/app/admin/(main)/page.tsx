@@ -1,7 +1,46 @@
 import { getDb } from '@/lib/mongodb';
+import {
+  Newspaper,
+  FolderOpen,
+  Images,
+  Users,
+  FileText,
+  ArrowUpRight,
+  Activity,
+  Database,
+} from 'lucide-react';
+import styles from '@/app/admin/admin.module.css';
+import Link from 'next/link';
+
+interface StatCardProps {
+  href: string;
+  icon: React.ComponentType<{ size?: number; strokeWidth?: number }>;
+  count: number;
+  label: string;
+  description: string;
+}
+
+function StatCard({ href, icon: Icon, count, label, description }: StatCardProps) {
+  return (
+    <Link href={href} className={styles.statCard}>
+      <div className={styles.statCardIcon}>
+        <Icon size={20} strokeWidth={1.75} />
+      </div>
+      <div>
+        <div className={styles.statCardValue}>{count}</div>
+        <div className={styles.statCardLabel}>{label}</div>
+      </div>
+      <div style={{ fontSize: '0.75rem', color: 'var(--admin-text-muted)', marginTop: 'auto', lineHeight: 1.4 }}>
+        {description}
+      </div>
+      <ArrowUpRight size={16} className={styles.statCardArrow} />
+    </Link>
+  );
+}
 
 export default async function AdminDashboard() {
   let stats = { news: 0, projects: 0, photos: 0, partners: 0, reports: 0 };
+  let dbOk = false;
 
   try {
     const db = await getDb();
@@ -13,31 +52,181 @@ export default async function AdminDashboard() {
       db.collection('reports').countDocuments(),
     ]);
     stats = { news, projects, photos, partners, reports };
+    dbOk = true;
   } catch (e) {
     console.error('Dashboard: failed to load stats', e);
   }
 
-  const cards = [
-    { href: '/admin/news', emoji: '📰', count: stats.news, label: 'News' },
-    { href: '/admin/projects', emoji: '📁', count: stats.projects, label: 'Projects' },
-    { href: '/admin/photos', emoji: '🖼️', count: stats.photos, label: 'Photos' },
-    { href: '/admin/partners', emoji: '🤝', count: stats.partners, label: 'Partners' },
-    { href: '/admin/reports', emoji: '📊', count: stats.reports, label: 'Reports' },
+  const cards: StatCardProps[] = [
+    {
+      href: '/admin/news',
+      icon: Newspaper,
+      count: stats.news,
+      label: 'News Articles',
+      description: 'Published news and announcements',
+    },
+    {
+      href: '/admin/projects',
+      icon: FolderOpen,
+      count: stats.projects,
+      label: 'Projects',
+      description: 'Active and completed initiatives',
+    },
+    {
+      href: '/admin/photos',
+      icon: Images,
+      count: stats.photos,
+      label: 'Photos',
+      description: 'Media library images',
+    },
+    {
+      href: '/admin/partners',
+      icon: Users,
+      count: stats.partners,
+      label: 'Partners',
+      description: 'Organization partners',
+    },
+    {
+      href: '/admin/reports',
+      icon: FileText,
+      count: stats.reports,
+      label: 'Reports',
+      description: 'Financial and activity reports',
+    },
   ];
+
+  const total = stats.news + stats.projects + stats.photos + stats.partners + stats.reports;
 
   return (
     <div>
-      <style>{`.stat-card { display: block; background: white; border-radius: 16px; padding: 1.5rem; box-shadow: 0 2px 8px rgba(0,0,0,0.06); text-decoration: none; color: inherit; transition: box-shadow 0.15s, transform 0.15s; } .stat-card:hover { box-shadow: 0 4px 16px rgba(0,0,0,0.12); transform: translateY(-2px); }`}</style>
-      <h2 style={{ margin: '0 0 0.25rem', fontSize: '1.5rem', fontWeight: 700 }}>Dashboard</h2>
-      <p style={{ color: '#64748b', marginBottom: '2rem' }}>Ласкаво просимо до панелі управління.</p>
-      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(160px, 1fr))', gap: '1rem' }}>
+      {/* Header */}
+      <div className={styles.pageHeader} style={{ marginBottom: '2.5rem' }}>
+        <div className={styles.pageTitleGroup}>
+          <h1 className={styles.pageTitle}>Dashboard</h1>
+          <p className={styles.pageSubtitle}>
+            Mercy Health content management overview
+          </p>
+        </div>
+        {/* DB Status */}
+        <div style={{
+          display: 'flex',
+          alignItems: 'center',
+          gap: '0.5rem',
+          padding: '0.5rem 0.875rem',
+          background: dbOk ? 'rgba(16, 185, 129, 0.08)' : 'rgba(239, 68, 68, 0.08)',
+          border: `1px solid ${dbOk ? 'rgba(16, 185, 129, 0.2)' : 'rgba(239, 68, 68, 0.2)'}`,
+          borderRadius: '8px',
+          fontSize: '0.75rem',
+          fontWeight: 600,
+          color: dbOk ? 'var(--admin-success)' : 'var(--admin-danger)',
+          whiteSpace: 'nowrap',
+        }}>
+          <Database size={14} strokeWidth={2} />
+          {dbOk ? 'MongoDB Connected' : 'DB Error'}
+        </div>
+      </div>
+
+      {/* Summary row */}
+      <div style={{
+        display: 'grid',
+        gridTemplateColumns: '1fr auto',
+        gap: '1.5rem',
+        marginBottom: '2rem',
+        alignItems: 'stretch',
+      }}>
+        {/* Total items card */}
+        <div className={styles.card} style={{
+          padding: '1.5rem',
+          background: 'linear-gradient(135deg, rgba(20, 184, 166, 0.08) 0%, rgba(20, 184, 166, 0.02) 100%)',
+          borderColor: 'rgba(20, 184, 166, 0.15)',
+          display: 'flex',
+          alignItems: 'center',
+          gap: '1.5rem',
+        }}>
+          <div style={{
+            width: 56,
+            height: 56,
+            borderRadius: 14,
+            background: 'var(--admin-accent-light)',
+            border: '1px solid rgba(20, 184, 166, 0.2)',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            color: 'var(--admin-accent)',
+            flexShrink: 0,
+          }}>
+            <Activity size={24} strokeWidth={1.75} />
+          </div>
+          <div>
+            <div style={{
+              fontSize: '2.5rem',
+              fontWeight: 800,
+              color: 'var(--admin-text)',
+              fontFamily: 'var(--admin-mono)',
+              letterSpacing: '-0.04em',
+              lineHeight: 1,
+            }}>{total}</div>
+            <div style={{ fontSize: '0.875rem', color: 'var(--admin-text-secondary)', marginTop: '0.25rem', fontWeight: 500 }}>
+              Total content records in database
+            </div>
+          </div>
+        </div>
+
+        {/* Quick info */}
+        <div className={styles.card} style={{ padding: '1.5rem', minWidth: 200 }}>
+          <div style={{ fontSize: '0.7rem', fontWeight: 700, color: 'var(--admin-text-muted)', textTransform: 'uppercase', letterSpacing: '0.08em', marginBottom: '0.75rem' }}>
+            Quick Info
+          </div>
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
+            {[
+              { label: 'News', val: stats.news },
+              { label: 'Projects', val: stats.projects },
+              { label: 'Reports', val: stats.reports },
+            ].map(r => (
+              <div key={r.label} style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', gap: '1.5rem' }}>
+                <span style={{ fontSize: '0.8125rem', color: 'var(--admin-text-secondary)' }}>{r.label}</span>
+                <span style={{ fontSize: '0.875rem', fontWeight: 700, color: 'var(--admin-text)', fontFamily: 'var(--admin-mono)' }}>{r.val}</span>
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+
+      {/* Stat Cards Grid */}
+      <div style={{ marginBottom: '0.75rem' }}>
+        <div className={styles.sectionTitle}>Content Sections</div>
+      </div>
+      <div style={{
+        display: 'grid',
+        gridTemplateColumns: 'repeat(auto-fit, minmax(210px, 1fr))',
+        gap: '1rem',
+      }}>
         {cards.map(card => (
-          <a key={card.href} href={card.href} className="stat-card">
-            <div style={{ fontSize: '2rem', marginBottom: '0.5rem' }}>{card.emoji}</div>
-            <div style={{ fontSize: '1.75rem', fontWeight: 700, lineHeight: 1 }}>{card.count}</div>
-            <div style={{ color: '#64748b', fontSize: '0.875rem', marginTop: '0.25rem' }}>{card.label}</div>
-          </a>
+          <StatCard key={card.href} {...card} />
         ))}
+      </div>
+
+      {/* Quick Actions */}
+      <div style={{ marginTop: '2.5rem' }}>
+        <div className={styles.sectionTitle} style={{ marginBottom: '1rem' }}>Quick Actions</div>
+        <div style={{ display: 'flex', gap: '0.625rem', flexWrap: 'wrap' }}>
+          {[
+            { href: '/admin/news', label: 'Add News', icon: Newspaper },
+            { href: '/admin/projects', label: 'Add Project', icon: FolderOpen },
+            { href: '/admin/reports', label: 'Add Report', icon: FileText },
+            { href: '/admin/photos', label: 'Upload Photo', icon: Images },
+          ].map(action => (
+            <Link
+              key={action.href}
+              href={action.href}
+              className={`${styles.btn} ${styles.btnSecondary}`}
+              style={{ gap: '0.5rem' }}
+            >
+              <action.icon size={15} strokeWidth={2} />
+              {action.label}
+            </Link>
+          ))}
+        </div>
       </div>
     </div>
   );

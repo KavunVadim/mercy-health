@@ -1,7 +1,12 @@
 'use client';
 
 import { useState, useEffect, useCallback, useRef } from 'react';
-import styles from '../admin.module.css';
+import { Upload, Search, Images, Eye, EyeOff, LayoutGrid, Trash2, GripVertical, ChevronUp, ChevronDown } from 'lucide-react';
+import styles from '@/app/admin/admin.module.css';
+import { useToast } from '@/components/admin/ui/Toast';
+import ConfirmDialog from '@/components/admin/ui/ConfirmDialog';
+import { SkeletonPhotoGrid } from '@/components/admin/ui/Skeleton';
+import { saveReorder, handleDragStart, handleDragOver, handleDragLeave, handleDrop, handleDragEnd } from '@/lib/dnd-reorder';
 
 interface PhotoRecord {
   _id: string;
@@ -18,238 +23,279 @@ export default function AdminPhotosPage() {
   const [items, setItems] = useState<PhotoRecord[]>([]);
   const [loading, setLoading] = useState(true);
   const [search, setSearch] = useState('');
-  const [filter, setFilter] = useState<'all' | 'gallery'>('all');
+  const [filter, setFilter] = useState<'all' | 'gallery' | 'visible'>('all');
   const [toggling, setToggling] = useState<string | null>(null);
   const [uploading, setUploading] = useState(false);
-  const [uploadError, setUploadError] = useState('');
-  const [editing, setEditing] = useState<PhotoRecord | null>(null);
-  const [editForm, setEditForm] = useState({ title: '', alt: '' });
-  const [showEdit, setShowEdit] = useState(false);
+  const [draggingOver, setDraggingOver] = useState(false);
+  const [dragIndex, setDragIndex] = useState<number | null>(null);
+  const [deleteTarget, setDeleteTarget] = useState<PhotoRecord | null>(null);
+  const [deleting, setDeleting] = useState(false);
   const fileRef = useRef<HTMLInputElement>(null);
+  const { success, error } = useToast();
 
   const fetchItems = useCallback(async () => {
     try {
       const res = await fetch('/api/admin/photos');
       if (res.ok) setItems(await res.json());
-    } catch (e) {
-      console.error(e);
-    } finally {
-      setLoading(false);
-    }
-  }, []);
+      else error('Failed to load photos');
+    } catch { error('Network error'); }
+    finally { setLoading(false); }
+  }, [error]);
 
   useEffect(() => { fetchItems(); }, [fetchItems]);
 
   async function handleUpload(files: FileList | null) {
     if (!files?.length) return;
     setUploading(true);
-    setUploadError('');
+    let uploaded = 0;
     try {
       for (let i = 0; i < files.length; i++) {
         const fd = new FormData();
         fd.append('file', files[i]);
         fd.append('title', files[i].name);
         const res = await fetch('/api/admin/upload', { method: 'POST', body: fd });
-        if (!res.ok) {
-          const err = await res.json().catch(() => ({ error: 'Upload failed' }));
-          throw new Error(err.error || 'Upload failed');
-        }
+        if (!res.ok) throw new Error('Upload failed');
+        uploaded++;
       }
       fetchItems();
+      success(`${uploaded} photo${uploaded !== 1 ? 's' : ''} uploaded`);
     } catch (e: any) {
-      setUploadError(e.message || 'Upload failed');
-      console.error(e);
+      error(e.message || 'Upload failed');
     } finally {
       setUploading(false);
       if (fileRef.current) fileRef.current.value = '';
     }
   }
 
-  async function toggleGallery(id: string, current: boolean) {
-    setToggling(id);
+  async function toggleStatus(id: string, field: 'inGallery' | 'visible', current: boolean) {
+    setToggling(id + field);
     try {
-      await fetch(`/api/admin/photos/${id}`, {
+      const res = await fetch(`/api/admin/photos/${id}`, {
         method: 'PUT',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ inGallery: !current }),
+        body: JSON.stringify({ [field]: !current }),
       });
-      fetchItems();
-    } catch (e) { console.error(e); }
+      if (res.ok) fetchItems();
+      else error('Update failed');
+    } catch { error('Network error'); }
     finally { setToggling(null); }
   }
 
-  async function toggleVisibility(id: string, current: boolean) {
-    setToggling(id);
+  async function handleDeleteConfirm() {
+    if (!deleteTarget) return;
+    setDeleting(true);
     try {
-      await fetch(`/api/admin/photos/${id}`, {
-        method: 'PUT',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ visible: !current }),
-      });
-      fetchItems();
-    } catch (e) { console.error(e); }
-    finally { setToggling(null); }
-  }
-
-  async function handleDelete(id: string, url: string) {
-    if (!confirm('Delete this photo?')) return;
-    try {
-      await fetch(`/api/admin/photos/${id}`, {
+      const res = await fetch(`/api/admin/photos/${deleteTarget._id}`, {
         method: 'DELETE',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ url }),
+        body: JSON.stringify({ url: deleteTarget.url }),
       });
-      fetchItems();
-    } catch (e) {
-      console.error(e);
-    }
+      if (res.ok) { fetchItems(); success('Photo deleted'); }
+      else error('Delete failed');
+    } catch { error('Network error'); }
+    finally { setDeleting(false); setDeleteTarget(null); }
   }
 
-  function openEdit(item: PhotoRecord) {
-    setEditing(item);
-    setEditForm({ title: item.title || '', alt: item.alt || '' });
-    setShowEdit(true);
+  function moveItem(fromIdx: number, direction: -1 | 1) {
+    const toIdx = fromIdx + direction;
+    if (toIdx < 0 || toIdx >= filtered.length) return;
+    const fromId = filtered[fromIdx]._id;
+    const toId = filtered[toIdx]._id;
+    setItems(prev => {
+      const updated = [...prev];
+      const fromPos = updated.findIndex(p => p._id === fromId);
+      const toPos = updated.findIndex(p => p._id === toId);
+      if (fromPos === -1 || toPos === -1) return prev;
+      const [moved] = updated.splice(fromPos, 1);
+      updated.splice(toPos, 0, moved);
+      saveReorder('photos', updated);
+      return updated;
+    });
   }
 
-  async function saveEdit(e: React.FormEvent) {
-    e.preventDefault();
-    if (!editing) return;
-    try {
-      const res = await fetch(`/api/admin/photos/${editing._id}`, {
-        method: 'PUT',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ title: editForm.title, alt: editForm.alt }),
-      });
-      if (res.ok) { setShowEdit(false); setEditing(null); fetchItems(); }
-    } catch (e) { console.error(e); }
-  }
-
-  function copyUrl(url: string) {
-    if (url) navigator.clipboard.writeText(url);
+  function reorderItem(fromIdx: number, toIdx: number) {
+    const fromId = filtered[fromIdx]._id;
+    const toId = filtered[toIdx]._id;
+    setItems(prev => {
+      const updated = [...prev];
+      const fromPos = updated.findIndex(p => p._id === fromId);
+      const toPos = updated.findIndex(p => p._id === toId);
+      if (fromPos === -1 || toPos === -1) return prev;
+      const [moved] = updated.splice(fromPos, 1);
+      updated.splice(toPos, 0, moved);
+      saveReorder('photos', updated);
+      return updated;
+    });
   }
 
   const filtered = items.filter(i => {
     if (filter === 'gallery' && !i.inGallery) return false;
-    if (search && !i.title?.toLowerCase().includes(search.toLowerCase()) && !i.url?.toLowerCase().includes(search.toLowerCase())) return false;
+    if (filter === 'visible' && !i.visible) return false;
+    if (search && !i.title?.toLowerCase().includes(search.toLowerCase())) return false;
     return true;
   });
 
-  if (loading) return <p style={{ color: '#64748b' }}>Loading...</p>;
+  const filterBtns: { key: typeof filter; label: string }[] = [
+    { key: 'all', label: `All (${items.length})` },
+    { key: 'gallery', label: `Gallery (${items.filter(i => i.inGallery).length})` },
+    { key: 'visible', label: `Visible (${items.filter(i => i.visible).length})` },
+  ];
 
   return (
     <div>
-      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1rem', flexWrap: 'wrap', gap: '0.5rem' }}>
-        <h2 style={{ margin: 0, fontSize: '1.5rem', fontWeight: 700 }}>Photos ({items.length})</h2>
-        <div style={{ display: 'flex', gap: '0.5rem', alignItems: 'center' }}>
-          <input
-            type="text" placeholder="Search..."
-            value={search} onChange={e => setSearch(e.target.value)}
-            style={{ padding: '0.5rem 0.8rem', border: '1.5px solid #e2e8f0', borderRadius: '8px', fontSize: '0.85rem', background: 'white', width: '160px' }}
-          />
-          <input
-            ref={fileRef}
-            type="file"
-            accept="image/*"
-            multiple
-            onChange={e => handleUpload(e.target.files)}
-            style={{ display: 'none' }}
-          />
+      <div className={styles.pageHeader}>
+        <div className={styles.pageTitleGroup}>
+          <h1 className={styles.pageTitle}>Photos</h1>
+          <p className={styles.pageSubtitle}>{items.length} image{items.length !== 1 ? 's' : ''} in library</p>
+        </div>
+        <div className={styles.pageActions}>
           <button
             onClick={() => fileRef.current?.click()}
+            className={`${styles.btn} ${styles.btnPrimary}`}
             disabled={uploading}
-            className={styles.loginButton}
-            style={{ width: 'auto', padding: '0.6rem 1.2rem', margin: 0 }}
           >
-            {uploading ? 'Uploading...' : '+ Upload'}
+            <Upload size={15} />
+            {uploading ? 'Uploading…' : 'Upload Photos'}
           </button>
         </div>
       </div>
 
-      {uploadError && (
-        <div style={{ padding: '0.75rem 1rem', background: '#fee2e2', color: '#dc2626', borderRadius: '8px', marginBottom: '1rem', fontSize: '0.875rem', fontWeight: 500 }}>
-          Upload error: {uploadError}
-        </div>
-      )}
+      <input ref={fileRef} type="file" accept="image/*" multiple onChange={e => handleUpload(e.target.files)} style={{ display: 'none' }} />
 
-      <div style={{ display: 'flex', gap: '0.5rem', marginBottom: '1rem', flexWrap: 'wrap' }}>
-        <button onClick={() => setFilter('all')} style={{
-          padding: '0.35rem 0.75rem', border: 'none', borderRadius: '6px', cursor: 'pointer', fontSize: '0.8rem',
-          background: filter === 'all' ? '#1e293b' : '#e2e8f0', color: filter === 'all' ? 'white' : '#475569', fontWeight: 600,
-        }}>
-          All ({items.length})
-        </button>
-        <button onClick={() => setFilter('gallery')} style={{
-          padding: '0.35rem 0.75rem', border: 'none', borderRadius: '6px', cursor: 'pointer', fontSize: '0.8rem',
-          background: filter === 'gallery' ? '#1e293b' : '#e2e8f0', color: filter === 'gallery' ? 'white' : '#475569', fontWeight: 600,
-        }}>
-          Gallery ({items.filter(i => i.inGallery).length})
-        </button>
+      {/* Drop Zone */}
+      <div
+        className={`${styles.dropZone} ${draggingOver ? styles.dropZoneActive : ''}`}
+        style={{ marginBottom: '1.5rem' }}
+        onDragOver={e => { e.preventDefault(); setDraggingOver(true); }}
+        onDragLeave={() => setDraggingOver(false)}
+        onDrop={e => { e.preventDefault(); setDraggingOver(false); handleUpload(e.dataTransfer.files); }}
+        onClick={() => fileRef.current?.click()}
+        role="button"
+        tabIndex={0}
+        onKeyDown={e => e.key === 'Enter' && fileRef.current?.click()}
+        aria-label="Drop images here or click to upload"
+      >
+        <Upload size={22} style={{ margin: '0 auto 0.5rem', display: 'block', opacity: 0.5 }} />
+        <div style={{ fontWeight: 600, fontSize: '0.875rem', marginBottom: '0.25rem' }}>
+          {draggingOver ? 'Release to upload' : 'Drag & drop images here'}
+        </div>
+        <div style={{ fontSize: '0.75rem', opacity: 0.7 }}>or click to browse files — JPG, PNG, WebP, AVIF</div>
       </div>
 
-      {showEdit && editing && (
-        <div className={styles.loginWrapper} style={{ position: 'fixed', inset: 0, zIndex: 1000, background: 'rgba(0,0,0,0.4)' }}>
-          <div className={styles.loginCard} style={{ maxWidth: '500px' }}>
-            <h3 style={{ marginTop: 0 }}>Edit Photo</h3>
-            <form onSubmit={saveEdit}>
-              <label className={styles.loginLabel}>Title</label>
-              <input className={styles.loginInput} value={editForm.title} onChange={e => setEditForm({ ...editForm, title: e.target.value })} />
-              <label className={styles.loginLabel}>Alt Text</label>
-              <input className={styles.loginInput} value={editForm.alt} onChange={e => setEditForm({ ...editForm, alt: e.target.value })} />
-              {editing.url && (
-                <img src={editing.url} alt="" style={{ width: '100%', maxHeight: '200px', objectFit: 'cover', borderRadius: '8px', marginTop: '0.5rem' }} />
-              )}
-              <div style={{ display: 'flex', gap: '0.5rem', marginTop: '0.5rem' }}>
-                <button type="submit" className={styles.loginButton} style={{ flex: 1 }}>Save</button>
-                <button type="button" onClick={() => setShowEdit(false)} className={styles.loginButton} style={{ flex: 1, background: '#64748b' }}>Cancel</button>
-              </div>
-            </form>
-          </div>
+      {/* Controls */}
+      <div style={{ display: 'flex', gap: '0.75rem', marginBottom: '1.25rem', flexWrap: 'wrap', alignItems: 'center' }}>
+        {/* Filter chips */}
+        <div style={{ display: 'flex', gap: '0.375rem' }}>
+          {filterBtns.map(f => (
+            <button
+              key={f.key}
+              onClick={() => setFilter(f.key)}
+              className={`${styles.btn} ${styles.btnSm} ${filter === f.key ? styles.btnPrimary : styles.btnSecondary}`}
+            >
+              {f.label}
+            </button>
+          ))}
         </div>
-      )}
+        {/* Search */}
+        <div className={styles.searchWrapper} style={{ marginLeft: 'auto', minWidth: 200 }}>
+          <Search size={14} className={styles.searchIcon} />
+          <input
+            className={styles.searchInput}
+            placeholder="Search by name…"
+            value={search}
+            onChange={e => setSearch(e.target.value)}
+          />
+        </div>
+      </div>
 
-      {filtered.length === 0 ? (
-        <div style={{ padding: '2rem', textAlign: 'center', color: '#94a3b8' }}>
-          {search ? 'No photos match your search.' : 'No photos yet. Click "Upload" to add images.'}
+      <ConfirmDialog
+        open={!!deleteTarget}
+        title="Delete photo?"
+        message={`"${deleteTarget?.title}" will be permanently removed from the library.`}
+        confirmLabel="Delete"
+        loading={deleting}
+        onConfirm={handleDeleteConfirm}
+        onCancel={() => setDeleteTarget(null)}
+      />
+
+      {loading ? (
+        <SkeletonPhotoGrid count={8} />
+      ) : filtered.length === 0 ? (
+        <div className={`${styles.card} ${styles.emptyState}`}>
+          <div className={styles.emptyStateIcon}><Images size={28} strokeWidth={1.5} /></div>
+          <p className={styles.emptyStateTitle}>{search || filter !== 'all' ? 'No matching photos' : 'No photos yet'}</p>
+          <p className={styles.emptyStateText}>
+            {search ? `No results for "${search}"` : 'Upload your first image to the media library.'}
+          </p>
         </div>
       ) : (
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(200px, 1fr))', gap: '1rem' }}>
-          {filtered.map(item => (
-            <div key={item._id} style={{ background: 'white', borderRadius: '12px', overflow: 'hidden', boxShadow: '0 2px 8px rgba(0,0,0,0.06)' }}>
-              <div style={{ width: '100%', height: '150px', background: '#f1f5f9', overflow: 'hidden' }}>
-                {item.url ? (
-                  <img
-                    src={item.url}
-                    alt={item.alt || item.title}
-                    style={{ width: '100%', height: '100%', objectFit: 'cover', cursor: 'pointer' }}
-                    onClick={() => window.open(item.url, '_blank')}
-                    onError={(e) => { e.currentTarget.style.display = 'none'; }}
-                  />
-                ) : (
-                  <div style={{ width: '100%', height: '100%', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#cbd5e1', fontSize: '0.8rem' }}>No image</div>
-                )}
-              </div>
-              <div style={{ padding: '0.65rem' }}>
-                <div style={{ fontSize: '0.85rem', fontWeight: 600, marginBottom: '0.2rem', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>{item.title}</div>
-                <div style={{ fontSize: '0.7rem', color: '#94a3b8', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
-                  {item?.url ? item.url.split('/').pop() : '—'}
-                  {item.size && ` • ${(item.size / 1024).toFixed(0)}KB`}
+        <div className={styles.photoGrid}>
+          {filtered.map((item, idx) => (
+            <div
+              key={item._id}
+              draggable
+              onDragStart={e => { setDragIndex(idx); handleDragStart(e, idx); }}
+              onDragOver={e => { handleDragOver(e, idx, dragIndex, reorderItem); }}
+              onDragLeave={handleDragLeave}
+              onDrop={e => { handleDrop(e, idx, dragIndex, reorderItem); setDragIndex(null); }}
+              onDragEnd={e => { handleDragEnd(e); setDragIndex(null); }}
+              className={styles.photoCard}
+              style={{ cursor: 'grab', userSelect: 'none' }}
+            >
+              <div style={{ position: 'relative' }}>
+                <img src={item.url} alt={item.alt || item.title} className={styles.photoCardImage} />
+                <div style={{ position: 'absolute', top: 4, left: 4, background: 'rgba(0,0,0,0.5)', borderRadius: 6, width: 26, height: 26, display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#94a3b8', backdropFilter: 'blur(4px)' }}>
+                  <GripVertical size={13} />
                 </div>
-                <div style={{ marginTop: '0.35rem', display: 'flex', gap: '0.35rem', flexWrap: 'wrap' }}>
-                  <button onClick={() => toggleGallery(item._id, !!item.inGallery)} disabled={toggling === item._id} style={{
-                    padding: '0.25rem 0.5rem', border: 'none', borderRadius: '5px', cursor: 'pointer', fontSize: '0.7rem', fontWeight: 600,
-                    background: item.inGallery ? '#dcfce7' : '#f1f5f9', color: item.inGallery ? '#16a34a' : '#94a3b8',
-                  }}>
-                    {item.inGallery ? '✓ Gallery' : 'Add to gallery'}
+              </div>
+              <div className={styles.photoCardBody}>
+                <div className={styles.photoCardName} title={item.title}>{item.title}</div>
+                <div style={{ display: 'flex', flexDirection: 'column', gap: '0.3rem', marginBottom: '0.5rem' }}>
+                  <label className={styles.photoToggleLabel} title="Show in gallery" style={{ width: '100%', justifyContent: 'space-between' }}>
+                    <span style={{ display: 'flex', alignItems: 'center', gap: '0.3rem', fontSize: '0.65rem' }}>
+                      <LayoutGrid size={10} />
+                      Gallery
+                    </span>
+                    <input
+                      type="checkbox"
+                      className={styles.toggleInput}
+                      checked={!!item.inGallery}
+                      disabled={toggling === item._id + 'inGallery'}
+                      onChange={() => toggleStatus(item._id, 'inGallery', !!item.inGallery)}
+                    />
+                    <span className={styles.toggleTrack} />
+                  </label>
+                  <label className={styles.photoToggleLabel} title="Visible on site" style={{ width: '100%', justifyContent: 'space-between' }}>
+                    <span style={{ display: 'flex', alignItems: 'center', gap: '0.3rem', fontSize: '0.65rem' }}>
+                      {item.visible ? <Eye size={10} /> : <EyeOff size={10} />}
+                      Visible
+                    </span>
+                    <input
+                      type="checkbox"
+                      className={styles.toggleInput}
+                      checked={!!item.visible}
+                      disabled={toggling === item._id + 'visible'}
+                      onChange={() => toggleStatus(item._id, 'visible', !!item.visible)}
+                    />
+                    <span className={styles.toggleTrack} />
+                  </label>
+                </div>
+                <div style={{ display: 'flex', gap: '0.3rem' }}>
+                  <div style={{ display: 'flex', gap: '0.2rem' }}>
+                    <button onClick={() => moveItem(idx, -1)} disabled={idx === 0} className={`${styles.btn} ${styles.btnSm} ${styles.btnIcon}`} style={{ minWidth: 26, minHeight: 24, padding: 0 }} title="Move up">
+                      <ChevronUp size={11} />
+                    </button>
+                    <button onClick={() => moveItem(idx, 1)} disabled={idx === filtered.length - 1} className={`${styles.btn} ${styles.btnSm} ${styles.btnIcon}`} style={{ minWidth: 26, minHeight: 24, padding: 0 }} title="Move down">
+                      <ChevronDown size={11} />
+                    </button>
+                  </div>
+                  <button
+                    onClick={() => setDeleteTarget(item)}
+                    className={`${styles.btn} ${styles.btnSm} ${styles.btnDestructive}`}
+                    style={{ flex: 1, fontSize: '0.7rem', padding: '0.25rem 0.4rem', minHeight: 24 }}
+                  >
+                    <Trash2 size={10} /> Delete
                   </button>
-                  <button onClick={() => toggleVisibility(item._id, !!item.visible)} disabled={toggling === item._id} style={{
-                    padding: '0.25rem 0.5rem', border: 'none', borderRadius: '5px', cursor: 'pointer', fontSize: '0.7rem', fontWeight: 600,
-                    background: item.visible !== false ? '#e2e8f0' : '#fef3c7', color: item.visible !== false ? '#64748b' : '#d97706',
-                  }}>
-                    {item.visible !== false ? 'Visible' : 'Hidden'}
-                  </button>
-                  <button onClick={() => openEdit(item)} style={{ padding: '0.25rem 0.5rem', background: '#e2e8f0', border: 'none', borderRadius: '5px', cursor: 'pointer', fontSize: '0.7rem' }}>Edit</button>
-                  <button onClick={() => copyUrl(item.url)} style={{ padding: '0.25rem 0.5rem', background: '#dbeafe', color: '#2563eb', border: 'none', borderRadius: '5px', cursor: 'pointer', fontSize: '0.7rem' }}>Copy URL</button>
-                  <button onClick={() => handleDelete(item._id, item.url)} style={{ padding: '0.25rem 0.5rem', background: '#fee2e2', color: '#dc2626', border: 'none', borderRadius: '5px', cursor: 'pointer', fontSize: '0.7rem' }}>Delete</button>
                 </div>
               </div>
             </div>

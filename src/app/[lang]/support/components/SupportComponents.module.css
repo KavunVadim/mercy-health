@@ -1,6 +1,11 @@
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
 .cardsGrid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
   gap: 1.5rem;
   animation: fadeIn 0.3s ease-out;
 }
@@ -16,18 +21,19 @@
   background: var(--card);
   border: 1px solid var(--border);
   border-radius: var(--radius-lg);
-  padding: 2rem;
+  padding: 0;
   display: flex;
   flex-direction: column;
   box-shadow:
     var(--glass-inset-top),
     0 16px 32px -10px color-mix(in oklab, var(--foreground) 15%, transparent);
   transition: all 0.45s cubic-bezier(0.16, 1, 0.3, 1), background-color var(--transition-theme);
+  overflow: hidden;
 }
 
 @media (max-width: 768px) {
   .donationCard {
-    padding: 1.5rem;
+    padding: 0;
   }
 }
 
@@ -39,6 +45,29 @@
     0 24px 48px -14px color-mix(in oklab, var(--foreground) 22%, transparent);
 }
 
+.cardTopAccent {
+  height: 4px;
+  flex-shrink: 0;
+  transition: height 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.donationCard:hover .cardTopAccent {
+  height: 5px;
+}
+
+.cardInner {
+  padding: 1.75rem 2rem 2rem;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+
+@media (max-width: 768px) {
+  .cardInner {
+    padding: 1.25rem 1.5rem 1.5rem;
+  }
+}
+
 .cardHeader {
   display: flex;
   align-items: center;
@@ -47,21 +76,39 @@
 }
 
 .bankLogoWrapper {
-  width: 48px;
-  height: 48px;
-  background-color: var(--muted);
-  border-radius: 12px;
+  width: 72px;
+  height: 72px;
+  border-radius: 14px;
   display: flex;
   align-items: center;
   justify-content: center;
   flex-shrink: 0;
-  border: 1px solid var(--border);
   overflow: hidden;
+  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  background: var(--muted);
 }
 
-.bankLogo {
-  border-radius: 12px;
+.bankLogoImage {
+  width: 52px;
+  height: 52px;
   object-fit: contain;
+  border-radius: 8px;
+}
+
+.donationCard:hover .bankLogoWrapper {
+  transform: scale(1.08);
+}
+
+.bankLogoImage {
+  width: 52px;
+  height: 52px;
+  object-fit: contain;
+  border-radius: 50%;
+}
+
+.cardTitleGroup {
+  flex: 1;
+  min-width: 0;
 }
 
 .cardTitle {
@@ -69,38 +116,67 @@
   font-size: 1.35rem;
   color: var(--foreground);
   margin: 0;
+  line-height: 1.3;
+}
+
+.cardBankLabel {
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  margin-top: 0.2rem;
+  opacity: 0.7;
 }
 
 .cardDescription {
   color: var(--muted-foreground);
   font-size: 0.9375rem;
   line-height: 1.6;
-  margin-bottom: 2rem;
+  margin-bottom: 1.75rem;
   flex-grow: 1;
+}
+
+.cardFooter {
+  margin-top: auto;
 }
 
 .supportBtn {
   display: flex;
   align-items: center;
   justify-content: center;
+  gap: 0.5rem;
   width: 100%;
-  padding: 1rem;
+  padding: 0.9rem 1.5rem;
   background-color: var(--accent);
   color: var(--accent-foreground);
   font-family: var(--font-e-ukraine-head);
-  font-size: 1rem;
+  font-size: 0.9rem;
   font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 0.05em;
   text-decoration: none;
   border-radius: var(--radius-sm);
   transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+  position: relative;
+  overflow: hidden;
+}
+
+.supportBtn::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, rgba(255,255,255,0.15) 0%, transparent 50%);
+  pointer-events: none;
 }
 
 .supportBtn:hover {
   background-color: var(--accent-hover);
-  transform: translateY(-1px);
-  box-shadow: 0 8px 20px color-mix(in oklab, var(--accent) 25%, transparent);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px color-mix(in oklab, var(--accent) 30%, transparent);
+}
+
+.supportBtn:active {
+  transform: translateY(0);
 }
 
 /* Premium Bank Details */

@@ -25,23 +25,38 @@ export default function BankDetails({ dictionary }: { dictionary: Dictionary }) 
     { id: "crypto", label: dictionary.support.bank_details.tabs.crypto, icon: Wallet },
   ];
 
-  const content: Record<TabType, PaymentItem[]> = {
-    ua: [
-      { label: dictionary.support.bank_details.accounts.privat, value: "UA383052990000026005015017860", id: "ua_privat", icon: Landmark },
-      { label: dictionary.support.bank_details.accounts.oschad, value: "UA223226690000026007300905964", id: "ua_oschad", icon: Landmark },
-      { label: dictionary.support.bank_details.accounts.pumb, value: "UA183348510000000260022228947", id: "ua_pumb", icon: Landmark },
-      { label: dictionary.support.bank_details.accounts.ukrsib, value: "UA863220010000026002080000681", id: "ua_ukrsib", icon: Landmark },
-    ],
-    intl: [
-      { label: dictionary.support.bank_details.accounts.usd, value: "UA098765432109876543210987654", id: "intl_usd", icon: Globe, extra: "JPMorgan Chase Bank" },
-      { label: dictionary.support.bank_details.accounts.eur, value: "UA112233445566778899001122334", id: "intl_eur", icon: Globe, extra: "Deutsche Bank" },
-    ],
-    crypto: [
-      { label: dictionary.support.bank_details.accounts.usdt, value: "TXxxxxxxxxxxxxxxxxxxxxxxxxxxxx", id: "crypto_usdt", icon: Wallet },
-      { label: dictionary.support.bank_details.accounts.btc, value: "1xxxxxxxxxxxxxxxxxxxxxxxxxxxxxx", id: "crypto_btc", icon: Wallet },
-      { label: dictionary.support.bank_details.accounts.eth, value: "0xxxxxxxxxxxxxxxxxxxxxxxxxxxxxx", id: "crypto_eth", icon: Wallet },
-    ]
-  };
+  const rawAccounts = (dictionary.support.bank_details as any)?.accounts || null;
+  const iconMap: Record<string, any> = { Landmark, Globe, Wallet };
+
+  function buildAccounts(tab: TabType): PaymentItem[] {
+    if (rawAccounts?.[tab]) {
+      return rawAccounts[tab].map((a: any) => ({
+        label: a.label,
+        value: a.value,
+        id: a.id,
+        extra: a.extra,
+        icon: iconMap[a.icon] || Landmark,
+      }));
+    }
+    const fallback: Record<TabType, PaymentItem[]> = {
+      ua: [
+        { label: dictionary.support.bank_details.accounts.privat, value: "UA383052990000026005015017860", id: "ua_privat", icon: Landmark },
+        { label: dictionary.support.bank_details.accounts.oschad, value: "UA223226690000026007300905964", id: "ua_oschad", icon: Landmark },
+        { label: dictionary.support.bank_details.accounts.pumb, value: "UA183348510000000260022228947", id: "ua_pumb", icon: Landmark },
+        { label: dictionary.support.bank_details.accounts.ukrsib, value: "UA863220010000026002080000681", id: "ua_ukrsib", icon: Landmark },
+      ],
+      intl: [
+        { label: dictionary.support.bank_details.accounts.usd, value: "UA098765432109876543210987654", id: "intl_usd", icon: Globe, extra: "JPMorgan Chase Bank" },
+        { label: dictionary.support.bank_details.accounts.eur, value: "UA112233445566778899001122334", id: "intl_eur", icon: Globe, extra: "Deutsche Bank" },
+      ],
+      crypto: [
+        { label: dictionary.support.bank_details.accounts.usdt, value: "TXxxxxxxxxxxxxxxxxxxxxxxxxxxxx", id: "crypto_usdt", icon: Wallet },
+        { label: dictionary.support.bank_details.accounts.btc, value: "1xxxxxxxxxxxxxxxxxxxxxxxxxxxxxx", id: "crypto_btc", icon: Wallet },
+        { label: dictionary.support.bank_details.accounts.eth, value: "0xxxxxxxxxxxxxxxxxxxxxxxxxxxxxx", id: "crypto_eth", icon: Wallet },
+      ]
+    };
+    return fallback[tab];
+  }
 
   return (
     <div className={styles.bankDetailsContainer}>
@@ -68,7 +83,7 @@ export default function BankDetails({ dictionary }: { dictionary: Dictionary }) 
             transition={{ duration: 0.3 }}
             className={styles.tabContentGrid}
           >
-            {content[activeTab].map((item) => (
+            {buildAccounts(activeTab).map((item) => (
               <PaymentRow 
                 key={item.id} 
                 item={item} 

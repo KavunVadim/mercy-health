@@ -263,6 +263,8 @@ export interface Dictionary {
         description: string;
         bank: string;
         link: string;
+        icon?: string;
+        image?: string;
       }>;
     };
   };

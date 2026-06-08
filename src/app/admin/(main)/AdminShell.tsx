@@ -1,124 +1,196 @@
-"use client";
+'use client';
 
-import React, { useState, useEffect } from "react";
-import Link from "next/link";
-import { usePathname } from "next/navigation";
+import React, { useState, useEffect, useCallback } from 'react';
+import Link from 'next/link';
+import { usePathname } from 'next/navigation';
 import {
-  Menu,
-  X,
   LayoutDashboard,
   Newspaper,
   FolderOpen,
-  Image,
+  Images,
   LogOut,
   Users,
   FileText,
   Settings,
   SlidersHorizontal,
   FileEdit,
-} from "lucide-react";
-import styles from "./admin.module.css";
+  ChevronLeft,
+  Menu,
+  X,
+  Plus,
+  Heart,
+} from 'lucide-react';
+import { createPortal } from 'react-dom';
+import styles from '@/app/admin/admin.module.css';
+import AuthCheck from './AuthCheck';
+import { ToastProvider } from '@/components/admin/ui/Toast';
 
-const navItems = [
-  { href: "/admin", label: "Dashboard", icon: LayoutDashboard },
-  { href: "/admin/news", label: "News", icon: Newspaper },
-  { href: "/admin/projects", label: "Projects", icon: FolderOpen },
-  { href: "/admin/photos", label: "Photos", icon: Image },
-  { href: "/admin/partners", label: "Partners", icon: Users },
-  { href: "/admin/reports", label: "Reports", icon: FileText },
-  { href: "/admin/hero-slider", label: "Hero Slider", icon: SlidersHorizontal },
-  { href: "/admin/content", label: "Content", icon: FileEdit },
-  { href: "/admin/settings", label: "Settings", icon: Settings },
+const navSections = [
+  {
+    label: 'Overview',
+    items: [
+      { href: '/admin', label: 'Dashboard', icon: LayoutDashboard, exact: true },
+    ],
+  },
+  {
+    label: 'Content',
+    items: [
+      { href: '/admin/news', label: 'News', icon: Newspaper },
+      { href: '/admin/projects', label: 'Projects', icon: FolderOpen },
+      { href: '/admin/reports', label: 'Reports', icon: FileText },
+    ],
+  },
+  {
+    label: 'Media',
+    items: [
+      { href: '/admin/photos', label: 'Photos', icon: Images },
+      { href: '/admin/hero-slider', label: 'Hero Slider', icon: SlidersHorizontal },
+    ],
+  },
+  {
+    label: 'Site',
+    items: [
+      { href: '/admin/partners', label: 'Partners', icon: Users },
+      { href: '/admin/content', label: 'Content', icon: FileEdit },
+      { href: '/admin/settings', label: 'Settings', icon: Settings },
+    ],
+  },
 ];
 
-import AuthCheck from "./AuthCheck";
-
-export default function AdminShell({
-  children,
-}: {
-  children: React.ReactNode;
-}) {
+export default function AdminShell({ children }: { children: React.ReactNode }) {
   const pathname = usePathname();
-  const [sidebarOpen, setSidebarOpen] = useState(true);
+  const [collapsed, setCollapsed] = useState(false);
+  const [mobileOpen, setMobileOpen] = useState(false);
   const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
     setMounted(true);
     const handleResize = () => {
-      if (window.innerWidth < 768) setSidebarOpen(false);
-      else setSidebarOpen(true);
+      if (window.innerWidth < 768) {
+        setMobileOpen(false);
+      }
     };
     handleResize();
-    window.addEventListener("resize", handleResize);
-    return () => window.removeEventListener("resize", handleResize);
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
   }, []);
 
+  const handleLogout = useCallback(async () => {
+    await fetch('/api/auth/logout', { method: 'POST' });
+    window.location.href = '/admin/login';
+  }, []);
+
+  const isActive = (href: string, exact?: boolean) => {
+    if (exact) return pathname === href;
+    return pathname === href || pathname.startsWith(href + '/');
+  };
+
   if (!mounted) return null;
+
+  const sidebarClassNames = [
+    styles.adminSidebar,
+    collapsed ? styles.collapsed : '',
+    mobileOpen ? styles.mobileOpen : '',
+  ].filter(Boolean).join(' ');
+
+  // Mobile backdrop via portal
+  const backdrop = mobileOpen && mounted
+    ? createPortal(
+        <div
+          className={styles.sidebarBackdrop}
+          onClick={() => setMobileOpen(false)}
+        />,
+        document.body
+      )
+    : null;
 
   return (
     <>
       <AuthCheck />
-      <div className={styles.adminLayout}>
-        <button
-          className={styles.sidebarToggle}
-          onClick={() => setSidebarOpen(!sidebarOpen)}
-          aria-label={sidebarOpen ? "Close sidebar" : "Open sidebar"}
-        >
-          {sidebarOpen ? <X size={20} /> : <Menu size={20} />}
-        </button>
+      <ToastProvider>
+        <div className={styles.adminLayout}>
+          {/* Mobile toggle */}
+          <button
+            className={styles.sidebarToggle}
+            onClick={() => setMobileOpen(o => !o)}
+            aria-label={mobileOpen ? 'Close menu' : 'Open menu'}
+            aria-expanded={mobileOpen}
+          >
+            {mobileOpen ? <X size={18} /> : <Menu size={18} />}
+          </button>
 
-        <aside
-          className={`${styles.adminSidebar} ${sidebarOpen ? styles.sidebarOpen : styles.sidebarClosed}`}
-        >
-          <div className={styles.sidebarHeader}>
-            <h1 className={styles.adminLogo}>
-              <span className={styles.logoIcon}>🛠️</span>
-              <span className={styles.logoText}>Mercy Admin</span>
-            </h1>
-          </div>
+          {backdrop}
 
-          <nav className={styles.sidebarNav}>
-            {navItems.map((item) => {
-              const isActive = pathname === item.href;
-              return (
-                <Link
-                  key={item.href}
-                  href={item.href}
-                  className={`${styles.navLink} ${isActive ? styles.navLinkActive : ""}`}
-                  onClick={() => {
-                    if (window.innerWidth < 768) setSidebarOpen(false);
-                  }}
-                >
-                  <item.icon size={18} />
-                  <span>{item.label}</span>
-                </Link>
-              );
-            })}
-          </nav>
+          {/* Sidebar */}
+          <aside className={sidebarClassNames} aria-label="Admin navigation">
+            {/* Header */}
+            <div className={styles.sidebarHeader}>
+              <div className={styles.adminLogo}>
+                <div className={styles.logoMark} aria-hidden="true">
+                  <Heart size={16} strokeWidth={2.5} />
+                </div>
+                <span className={styles.logoText}>Mercy Admin</span>
+              </div>
+              <button
+                className={styles.collapseBtn}
+                onClick={() => setCollapsed(c => !c)}
+                aria-label={collapsed ? 'Expand sidebar' : 'Collapse sidebar'}
+                title={collapsed ? 'Expand' : 'Collapse'}
+                style={{ display: 'none' }} // hidden on mobile, shown on desktop via media query
+              >
+                <ChevronLeft size={16} />
+              </button>
+            </div>
 
-          <div className={styles.sidebarFooter}>
-            <button
-              onClick={async () => {
-                await fetch("/api/auth/logout", { method: "POST" });
-                window.location.href = "/admin/login";
-              }}
-              className={`${styles.navLink} ${styles.logoutLink}`}
-            >
-              <LogOut size={18} />
-              <span>Logout</span>
-            </button>
-          </div>
-        </aside>
+            {/* Nav */}
+            <nav className={styles.sidebarNav}>
+              {navSections.map(section => (
+                <div key={section.label}>
+                  <div className={styles.navSectionLabel}>{section.label}</div>
+                  {section.items.map(item => {
+                    const active = isActive(item.href, (item as any).exact);
+                    return (
+                      <Link
+                        key={item.href}
+                        href={item.href}
+                        className={`${styles.navLink} ${active ? styles.navLinkActive : ''}`}
+                        onClick={() => {
+                          if (window.innerWidth < 768) setMobileOpen(false);
+                        }}
+                        aria-current={active ? 'page' : undefined}
+                        title={collapsed ? item.label : undefined}
+                      >
+                        <item.icon size={17} className={styles.navIcon} strokeWidth={active ? 2.5 : 2} />
+                        <span className={styles.navLabel}>{item.label}</span>
+                      </Link>
+                    );
+                  })}
+                </div>
+              ))}
+            </nav>
 
-        {sidebarOpen && (
-          <div
-            className={styles.sidebarBackdrop}
-            onClick={() => setSidebarOpen(false)}
-          />
-        )}
+            {/* Footer */}
+            <div className={styles.sidebarFooter}>
+              <button
+                onClick={handleLogout}
+                className={`${styles.navLink} ${styles.logoutLink}`}
+                title={collapsed ? 'Logout' : undefined}
+                style={{ width: '100%' }}
+              >
+                <LogOut size={17} className={styles.navIcon} strokeWidth={2} />
+                <span className={styles.navLabel}>Logout</span>
+              </button>
+            </div>
+          </aside>
 
-        <main className={styles.adminMain}>{children}</main>
-      </div>
+          {/* Main */}
+          <main className={styles.adminMain} id="admin-content">
+            <div className={styles.pageContent}>
+              {children}
+            </div>
+          </main>
+        </div>
+      </ToastProvider>
     </>
   );
 }

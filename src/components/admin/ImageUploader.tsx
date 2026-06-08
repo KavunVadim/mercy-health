@@ -131,7 +131,7 @@ export default function ImageUploader({ value, onChange, label }: ImageUploaderP
       {showGallery && (
         <div
           style={{
-            position: 'fixed', inset: 0, zIndex: 2000, background: 'rgba(0,0,0,0.5)',
+            position: 'fixed', inset: 0, zIndex: 2000, background: 'rgba(0,0,0,0.7)', backdropFilter: 'blur(4px)',
             display: 'flex', alignItems: 'center', justifyContent: 'center', padding: '1rem',
           }}
           onClick={() => setShowGallery(false)}
@@ -139,18 +139,18 @@ export default function ImageUploader({ value, onChange, label }: ImageUploaderP
           <div
             onClick={e => e.stopPropagation()}
             style={{
-              background: 'white', borderRadius: '16px', padding: '1.5rem',
-              maxWidth: '800px', width: '100%', maxHeight: '80vh', overflow: 'auto',
+              background: 'var(--admin-surface)', border: '1px solid var(--admin-border)', borderRadius: 'var(--admin-radius-lg)', padding: '1.5rem',
+              maxWidth: '800px', width: '100%', maxHeight: '80vh', overflow: 'auto', color: 'var(--admin-text)'
             }}
           >
             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1rem' }}>
-              <h3 style={{ margin: 0 }}>Select Image</h3>
-              <button onClick={() => setShowGallery(false)} style={{ background: 'none', border: 'none', fontSize: '1.5rem', cursor: 'pointer', padding: '0.25rem' }}>✕</button>
+              <h3 style={{ margin: 0, color: 'var(--admin-text)' }}>Select Image</h3>
+              <button onClick={() => setShowGallery(false)} style={{ background: 'none', border: 'none', fontSize: '1.5rem', cursor: 'pointer', padding: '0.25rem', color: 'var(--admin-text-secondary)' }}>✕</button>
             </div>
             {loadingGallery ? (
-              <p style={{ color: '#64748b' }}>Loading...</p>
+              <p style={{ color: 'var(--admin-text-muted)' }}>Loading...</p>
             ) : gallery.length === 0 ? (
-              <p style={{ color: '#94a3b8' }}>No images uploaded yet.</p>
+              <p style={{ color: 'var(--admin-text-muted)' }}>No images uploaded yet.</p>
             ) : (
               <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(140px, 1fr))', gap: '0.75rem' }}>
                 {gallery.map(photo => (
@@ -159,8 +159,9 @@ export default function ImageUploader({ value, onChange, label }: ImageUploaderP
                     onClick={() => selectFromGallery(photo)}
                     style={{
                       cursor: 'pointer', borderRadius: '8px', overflow: 'hidden',
-                      border: value === photo.url ? '3px solid #3b82f6' : '2px solid #e2e8f0',
+                      border: value === photo.url ? '3px solid var(--admin-accent)' : '2px solid var(--admin-border)',
                       transition: 'border-color 0.15s',
+                      background: 'var(--admin-secondary)'
                     }}
                   >
                     <img
@@ -168,7 +169,7 @@ export default function ImageUploader({ value, onChange, label }: ImageUploaderP
                       alt={photo.title}
                       style={{ width: '100%', height: '100px', objectFit: 'cover', display: 'block' }}
                     />
-                    <div style={{ padding: '0.35rem', fontSize: '0.75rem', color: '#64748b', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
+                    <div style={{ padding: '0.35rem', fontSize: '0.75rem', color: 'var(--admin-text-secondary)', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
                       {photo.title}
                     </div>
                   </div>

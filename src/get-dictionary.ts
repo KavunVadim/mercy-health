@@ -2,7 +2,7 @@ import "server-only";
 import type { Locale } from "./i18n-config";
 import type { Dictionary } from "./types/content";
 import { getDb } from "@/lib/mongodb";
-import { unstable_cache } from "next/cache";
+
 
 function isRecord(value: unknown): value is Record<string, unknown> {
   return value !== null && typeof value === "object" && !Array.isArray(value);
@@ -63,8 +63,7 @@ function deepMerge<T extends Record<string, unknown>>(target: T, source: Record<
   return output as T;
 }
 
-const fetchMongoData = unstable_cache(
-  async (locale: Locale) => {
+async function fetchMongoData(locale: Locale) {
     const db = await getDb();
 
     const contentCol = locale === "uk" ? "content_uk" : "content_en";
@@ -112,10 +111,7 @@ const fetchMongoData = unstable_cache(
     const newsGalleryImages = (galleryPhotos || []).map((p: any) => p.url);
 
     return { contentData, localizedProjects, localizedPartners, localizedNews, localizedReports, localizedSettings, newsGalleryImages };
-  },
-  ["mongo-dictionary"],
-  { tags: ["dictionary"] }
-);
+}
 
 export const getDictionary = async (locale: Locale): Promise<Dictionary> => {
   const baseDictionary = await (dictionaries[locale]?.() ?? dictionaries.uk());
