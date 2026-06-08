@@ -1,5 +1,5 @@
 import { NextResponse } from 'next/server';
-import { revalidateTag } from 'next/cache';
+import { revalidateTag, revalidatePath } from 'next/cache';
 import { getDb } from '@/lib/mongodb';
 import { slugify } from '@/lib/data-utils';
 
@@ -28,6 +28,8 @@ export async function POST(request: Request) {
     };
     const result = await db.collection('partners').insertOne(doc);
     revalidateTag('dictionary', { expire: 0 });
+    revalidatePath('/uk/about', 'page');
+    revalidatePath('/en/about', 'page');
     return NextResponse.json({ ...doc, _id: result.insertedId }, { status: 201 });
   } catch (e) {
     return NextResponse.json({ error: 'Failed to create partner' }, { status: 500 });
