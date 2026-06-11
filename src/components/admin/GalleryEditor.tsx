@@ -41,6 +41,7 @@ export default function GalleryEditor({ value, onChange, label }: GalleryEditorP
     }
     setUploading(true);
     setProgress(0);
+    const accumulated = [...value];
     try {
       for (let i = 0; i < files.length; i++) {
         const fd = new FormData();
@@ -59,7 +60,8 @@ export default function GalleryEditor({ value, onChange, label }: GalleryEditorP
               body: JSON.stringify({ inGallery: true }),
             });
           }
-          onChange([...value, data.url]);
+          accumulated.push(data.url);
+          onChange([...accumulated]);
         }
       }
     } catch (e) { console.error(e); } finally { setUploading(false); setProgress(0); if (fileRef.current) fileRef.current.value = ''; }
