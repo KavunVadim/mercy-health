@@ -7,6 +7,7 @@ import { useToast } from '@/components/admin/ui/Toast';
 import ConfirmDialog from '@/components/admin/ui/ConfirmDialog';
 import { SkeletonPhotoGrid } from '@/components/admin/ui/Skeleton';
 import { saveReorder, handleDragStart, handleDragOver, handleDragLeave, handleDrop, handleDragEnd } from '@/lib/dnd-reorder';
+import { uploadFile } from '@/lib/upload';
 
 interface PhotoRecord {
   _id: string;
@@ -26,6 +27,7 @@ export default function AdminPhotosPage() {
   const [filter, setFilter] = useState<'all' | 'gallery' | 'visible'>('all');
   const [toggling, setToggling] = useState<string | null>(null);
   const [uploading, setUploading] = useState(false);
+  const [progress, setProgress] = useState(0);
   const [draggingOver, setDraggingOver] = useState(false);
   const [dragIndex, setDragIndex] = useState<number | null>(null);
   const [deleteTarget, setDeleteTarget] = useState<PhotoRecord | null>(null);
@@ -46,14 +48,24 @@ export default function AdminPhotosPage() {
 
   async function handleUpload(files: FileList | null) {
     if (!files?.length) return;
+    for (let i = 0; i < files.length; i++) {
+      if (files[i].size > 15 * 1024 * 1024) {
+        error(`Файл "${files[i].name}" занадто великий. Максимальний розмір — 15 МБ.`);
+        return;
+      }
+    }
     setUploading(true);
+    setProgress(0);
     let uploaded = 0;
     try {
       for (let i = 0; i < files.length; i++) {
         const fd = new FormData();
         fd.append('file', files[i]);
         fd.append('title', files[i].name);
-        const res = await fetch('/api/admin/upload', { method: 'POST', body: fd });
+        const res = await uploadFile(fd, (p) => {
+          const overall = Math.round(((i * 100) + p) / files.length);
+          setProgress(overall);
+        });
         if (!res.ok) throw new Error('Upload failed');
         uploaded++;
       }
@@ -63,6 +75,7 @@ export default function AdminPhotosPage() {
       error(e.message || 'Upload failed');
     } finally {
       setUploading(false);
+      setProgress(0);
       if (fileRef.current) fileRef.current.value = '';
     }
   }
@@ -155,7 +168,7 @@ export default function AdminPhotosPage() {
             disabled={uploading}
           >
             <Upload size={15} />
-            {uploading ? 'Uploading…' : 'Upload Photos'}
+            {uploading ? `${progress}%` : 'Upload Photos'}
           </button>
         </div>
       </div>
@@ -169,17 +182,30 @@ export default function AdminPhotosPage() {
         onDragOver={e => { e.preventDefault(); setDraggingOver(true); }}
         onDragLeave={() => setDraggingOver(false)}
         onDrop={e => { e.preventDefault(); setDraggingOver(false); handleUpload(e.dataTransfer.files); }}
-        onClick={() => fileRef.current?.click()}
+        onClick={() => !uploading && fileRef.current?.click()}
         role="button"
         tabIndex={0}
-        onKeyDown={e => e.key === 'Enter' && fileRef.current?.click()}
+        onKeyDown={e => e.key === 'Enter' && !uploading && fileRef.current?.click()}
         aria-label="Drop images here or click to upload"
       >
-        <Upload size={22} style={{ margin: '0 auto 0.5rem', display: 'block', opacity: 0.5 }} />
-        <div style={{ fontWeight: 600, fontSize: '0.875rem', marginBottom: '0.25rem' }}>
-          {draggingOver ? 'Release to upload' : 'Drag & drop images here'}
-        </div>
-        <div style={{ fontSize: '0.75rem', opacity: 0.7 }}>or click to browse files — JPG, PNG, WebP, AVIF</div>
+        {uploading ? (
+          <div style={{ width: '100%', maxWidth: 320, margin: '0 auto' }}>
+            <div style={{ fontWeight: 600, fontSize: '0.875rem', marginBottom: '0.75rem', textAlign: 'center' }}>
+              Uploading… {progress}%
+            </div>
+            <div style={{ height: 6, background: 'var(--admin-border)', borderRadius: 4, overflow: 'hidden' }}>
+              <div style={{ width: `${progress}%`, height: '100%', background: 'var(--admin-accent)', borderRadius: 4, transition: 'width 0.3s ease' }} />
+            </div>
+          </div>
+        ) : (
+          <>
+            <Upload size={22} style={{ margin: '0 auto 0.5rem', display: 'block', opacity: 0.5 }} />
+            <div style={{ fontWeight: 600, fontSize: '0.875rem', marginBottom: '0.25rem' }}>
+              {draggingOver ? 'Release to upload' : 'Drag & drop images here'}
+            </div>
+            <div style={{ fontSize: '0.75rem', opacity: 0.7 }}>or click to browse files — JPG, PNG, WebP, AVIF</div>
+          </>
+        )}
       </div>
 
       {/* Controls */}

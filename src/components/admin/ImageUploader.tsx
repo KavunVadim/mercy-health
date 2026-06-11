@@ -2,6 +2,7 @@
 
 import { useState, useRef, useEffect } from 'react';
 import styles from '@/app/admin/admin.module.css';
+import { uploadFile } from '@/lib/upload';
 
 interface PhotoRecord {
   _id: string;
@@ -19,6 +20,7 @@ interface ImageUploaderProps {
 
 export default function ImageUploader({ value, onChange, label }: ImageUploaderProps) {
   const [uploading, setUploading] = useState(false);
+  const [progress, setProgress] = useState(0);
   const [showGallery, setShowGallery] = useState(false);
   const [gallery, setGallery] = useState<PhotoRecord[]>([]);
   const [loadingGallery, setLoadingGallery] = useState(false);
@@ -33,13 +35,20 @@ export default function ImageUploader({ value, onChange, label }: ImageUploaderP
     const file = e.target.files?.[0];
     if (!file) return;
 
+    if (file.size > 15 * 1024 * 1024) {
+      alert('Файл занадто великий. Максимальний розмір — 15 МБ.');
+      if (inputRef.current) inputRef.current.value = '';
+      return;
+    }
+
     setUploading(true);
+    setProgress(0);
     try {
       const formData = new FormData();
       formData.append('file', file);
       formData.append('title', file.name);
 
-      const res = await fetch('/api/admin/upload', { method: 'POST', body: formData });
+      const res = await uploadFile(formData, setProgress);
       const data = await res.json();
       if (res.ok) {
         onChange(data.url);
@@ -53,6 +62,7 @@ export default function ImageUploader({ value, onChange, label }: ImageUploaderP
       alert('Upload failed');
     } finally {
       setUploading(false);
+      setProgress(0);
       if (inputRef.current) inputRef.current.value = '';
     }
   }
@@ -96,8 +106,16 @@ export default function ImageUploader({ value, onChange, label }: ImageUploaderP
           className={styles.loginButton}
           style={{ width: 'auto', padding: '0.5rem 1rem', margin: 0, fontSize: '0.85rem' }}
         >
-          {uploading ? 'Uploading...' : 'Upload'}
+          {uploading ? `${progress}%` : 'Upload'}
         </button>
+        <span style={{ fontSize: '0.75rem', color: 'var(--admin-text-muted)', whiteSpace: 'nowrap' }}>
+          max 15 MB
+        </span>
+        {uploading && (
+          <div style={{ flex: '1 1 100%', height: 4, background: 'var(--admin-border)', borderRadius: 4, overflow: 'hidden', marginTop: '-0.25rem' }}>
+            <div style={{ width: `${progress}%`, height: '100%', background: 'var(--admin-accent)', borderRadius: 4, transition: 'width 0.2s ease' }} />
+          </div>
+        )}
         <button
           type="button"
           onClick={openGallery}

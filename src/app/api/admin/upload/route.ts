@@ -5,6 +5,33 @@ import { uploadToS3, uploadLocally, computeFileHash } from '@/lib/s3';
 
 export const maxDuration = 60;
 
+const MAX_FILE_SIZE = 15 * 1024 * 1024;
+
+async function compressImage(buf: Buffer, mime: string): Promise<{ buffer: Buffer; mime: string }> {
+  if (!mime.startsWith('image/')) return { buffer: buf, mime };
+
+  try {
+    const sharp = (await import('sharp')).default;
+    const image = sharp(buf);
+    const metadata = await image.metadata();
+
+    const width = Math.min(metadata.width ?? 2400, 2400);
+    const quality = buf.length > 1024 * 1024 ? 80 : 85;
+
+    const compressed = await image
+      .resize(width, undefined, { withoutEnlargement: true, fit: 'inside' })
+      .webp({ quality })
+      .toBuffer();
+
+    if (compressed.length < buf.length) {
+      return { buffer: compressed, mime: 'image/webp' };
+    }
+    return { buffer: buf, mime };
+  } catch {
+    return { buffer: buf, mime };
+  }
+}
+
 export async function POST(request: Request) {
   try {
     const formData = await request.formData();
@@ -15,9 +42,21 @@ export async function POST(request: Request) {
       return NextResponse.json({ error: 'No file provided' }, { status: 400 });
     }
 
-    const buffer = Buffer.from(await file.arrayBuffer());
-    const hash = computeFileHash(buffer);
-    const mime = file.type || 'image/webp';
+    if (file.size > MAX_FILE_SIZE) {
+      return NextResponse.json(
+        { error: 'Файл занадто великий. Максимальний розмір — 15 МБ.' },
+        { status: 413 },
+      );
+    }
+
+    let imageBuffer: Buffer = Buffer.from(await file.arrayBuffer());
+    let mime = file.type || 'image/webp';
+
+    const compressed = await compressImage(imageBuffer, mime);
+    imageBuffer = compressed.buffer;
+    mime = compressed.mime;
+
+    const hash = computeFileHash(imageBuffer);
 
     const db = await getDb();
 
@@ -33,15 +72,15 @@ export async function POST(request: Request) {
       });
     }
 
-    const ext = file.name.split('.').pop() || 'webp';
+    const ext = mime === 'image/webp' ? 'webp' : (file.name.split('.').pop() || 'webp');
     const key = `uploads/${hash.slice(0, 16)}.${ext}`;
 
     let url: string;
     let s3Key: string | undefined = key;
     try {
-      url = await uploadToS3(buffer, key, mime);
+      url = await uploadToS3(imageBuffer, key, mime);
     } catch {
-      url = await uploadLocally(buffer, `${hash.slice(0, 16)}.${ext}`);
+      url = await uploadLocally(imageBuffer, `${hash.slice(0, 16)}.${ext}`);
       s3Key = undefined;
     }
 
@@ -54,7 +93,7 @@ export async function POST(request: Request) {
       hash,
       s3Key,
       mime,
-      size: buffer.length,
+      size: imageBuffer.length,
       order: (maxOrder?.order ?? -1) + 1,
       visible: true,
       inGallery: false,

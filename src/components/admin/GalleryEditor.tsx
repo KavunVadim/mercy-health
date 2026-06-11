@@ -4,6 +4,7 @@ import { useState, useRef } from 'react';
 import { Plus, Trash2, X } from 'lucide-react';
 import styles from '@/app/admin/admin.module.css';
 import { handleDragStart, handleDragOver, handleDragLeave, handleDrop, handleDragEnd } from '@/lib/dnd-reorder';
+import { uploadFile } from '@/lib/upload';
 
 interface GalleryEditorProps {
   value: string[];
@@ -13,6 +14,7 @@ interface GalleryEditorProps {
 
 export default function GalleryEditor({ value, onChange, label }: GalleryEditorProps) {
   const [uploading, setUploading] = useState(false);
+  const [progress, setProgress] = useState(0);
   const [showPicker, setShowPicker] = useState(false);
   const [photos, setPhotos] = useState<any[]>([]);
   const [loadingPhotos, setLoadingPhotos] = useState(false);
@@ -31,13 +33,23 @@ export default function GalleryEditor({ value, onChange, label }: GalleryEditorP
 
   async function handleUpload(files: FileList | null) {
     if (!files?.length) return;
+    for (let i = 0; i < files.length; i++) {
+      if (files[i].size > 15 * 1024 * 1024) {
+        alert(`Файл "${files[i].name}" занадто великий. Максимальний розмір — 15 МБ.`);
+        return;
+      }
+    }
     setUploading(true);
+    setProgress(0);
     try {
       for (let i = 0; i < files.length; i++) {
         const fd = new FormData();
         fd.append('file', files[i]);
         fd.append('title', files[i].name);
-        const res = await fetch('/api/admin/upload', { method: 'POST', body: fd });
+        const res = await uploadFile(fd, (p) => {
+          const overall = Math.round(((i * 100) + p) / files.length);
+          setProgress(overall);
+        });
         if (res.ok) {
           const data = await res.json();
           if (!data.dedup) {
@@ -50,7 +62,7 @@ export default function GalleryEditor({ value, onChange, label }: GalleryEditorP
           onChange([...value, data.url]);
         }
       }
-    } catch (e) { console.error(e); } finally { setUploading(false); if (fileRef.current) fileRef.current.value = ''; }
+    } catch (e) { console.error(e); } finally { setUploading(false); setProgress(0); if (fileRef.current) fileRef.current.value = ''; }
   }
 
   function addFromGallery(url: string) {
@@ -95,8 +107,13 @@ export default function GalleryEditor({ value, onChange, label }: GalleryEditorP
         </button>
         <input ref={fileRef} type="file" accept="image/*" multiple onChange={e => handleUpload(e.target.files)} style={{ display: 'none' }} />
         <button type="button" onClick={() => fileRef.current?.click()} disabled={uploading} className={`${styles.btn} ${styles.btnSecondary}`} style={{ fontSize: '0.8rem', padding: '0.4rem 0.8rem', minHeight: 32 }}>
-          {uploading ? 'Uploading...' : '+ Upload New'}
+          {uploading ? `${progress}%` : '+ Upload New'}
         </button>
+        {uploading && (
+          <div style={{ flex: '1 1 100%', height: 4, background: 'var(--admin-border)', borderRadius: 4, overflow: 'hidden' }}>
+            <div style={{ width: `${progress}%`, height: '100%', background: 'var(--admin-accent)', borderRadius: 4, transition: 'width 0.3s ease' }} />
+          </div>
+        )}
       </div>
 
       {value.length > 0 && (
