@@ -2,7 +2,7 @@ import { NextResponse } from 'next/server';
 import { revalidateTag } from 'next/cache';
 import { getDb } from '@/lib/mongodb';
 import { ObjectId } from 'mongodb';
-import { deleteFromS3, extractKeyFromUrl, deleteLocalFile } from '@/lib/s3';
+import { deleteFromS3, extractKeyFromUrl } from '@/lib/s3';
 
 export async function GET(_request: Request, { params }: { params: Promise<{ id: string }> }) {
   try {
@@ -58,8 +58,6 @@ export async function DELETE(request: Request, { params }: { params: Promise<{ i
     const s3Key = existing.s3Key || (body.url ? extractKeyFromUrl(body.url) : null);
     if (s3Key) {
       await deleteFromS3(s3Key);
-    } else if (body.url?.startsWith('/uploads/')) {
-      await deleteLocalFile(body.url);
     }
 
     await db.collection('photos').deleteOne({ _id: new ObjectId(id) });
