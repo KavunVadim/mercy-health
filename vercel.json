@@ -1,5 +1,4 @@
 {
-  "maxBodySize": 20971520,
   "functions": {
     "src/app/api/admin/upload/route.ts": {
       "maxDuration": 60,
