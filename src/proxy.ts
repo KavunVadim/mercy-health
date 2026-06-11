@@ -3,6 +3,7 @@ import type { NextRequest } from "next/server";
 import { i18n } from "./i18n-config";
 import { match as matchLocale } from "@formatjs/intl-localematcher";
 import Negotiator from "negotiator";
+import { verifyToken } from "@/lib/auth/jwt";
 
 function getLocale(request: NextRequest): string {
   const negotiatorHeaders: Record<string, string> = {};
@@ -18,35 +19,73 @@ function getLocale(request: NextRequest): string {
   }
 }
 
-export function proxy(request: NextRequest) {
-  const pathname = request.nextUrl.pathname;
+export async function proxy(request: NextRequest) {
+  const { pathname } = request.nextUrl;
 
-  // Skip internal paths
+  // Locale detection — redirect missing locale to default
   if (
-    pathname.startsWith("/_next") ||
-    pathname.startsWith("/api") ||
-    pathname.startsWith("/admin") ||
-    pathname.includes(".") // static files
+    !pathname.startsWith("/_next") &&
+    !pathname.startsWith("/api") &&
+    !pathname.startsWith("/admin") &&
+    !pathname.includes(".")
   ) {
-    return;
+    const pathnameIsMissingLocale = i18n.locales.every(
+      (locale) =>
+        !pathname.startsWith(`/${locale}/`) && pathname !== `/${locale}`,
+    );
+
+    if (pathnameIsMissingLocale) {
+      const locale = getLocale(request);
+      return NextResponse.redirect(
+        new URL(`/${locale}${pathname}`, request.url),
+      );
+    }
   }
 
-  const pathnameIsMissingLocale = i18n.locales.every(
-    (locale) =>
-      !pathname.startsWith(`/${locale}/`) && pathname !== `/${locale}`,
-  );
+  // Auth protection for admin routes
+  if (pathname.startsWith("/api/auth")) {
+    return NextResponse.next();
+  }
 
-  if (pathnameIsMissingLocale) {
-    const locale = getLocale(request);
-    return NextResponse.redirect(
-      new URL(
-        `/${locale}${pathname.startsWith("/") ? "" : "/"}${pathname}`,
-        request.url,
-      ),
-    );
+  if (pathname === "/admin/login" || pathname.endsWith("/admin/login")) {
+    return NextResponse.next();
+  }
+
+  const token = request.cookies.get("accessToken")?.value;
+
+  if (pathname.startsWith("/admin")) {
+    if (!token) {
+      const loginUrl = request.nextUrl.clone();
+      loginUrl.pathname = "/admin/login";
+      return NextResponse.redirect(loginUrl);
+    }
+
+    const payload = await verifyToken(token);
+    if (!payload) {
+      const loginUrl = request.nextUrl.clone();
+      loginUrl.pathname = "/admin/login";
+      return NextResponse.redirect(loginUrl);
+    }
+
+    const response = NextResponse.next();
+    response.headers.set("x-admin-id", payload.sub);
+    return response;
+  }
+
+  if (pathname.startsWith("/api/admin")) {
+    if (!token) {
+      return new NextResponse("Unauthorized", { status: 401 });
+    }
+
+    const payload = await verifyToken(token);
+    if (!payload) {
+      return new NextResponse("Unauthorized", { status: 401 });
+    }
+
+    return NextResponse.next();
   }
 }
 
 export const config = {
-  matcher: ["/((?!api|_next/static|_next/image|favicon.ico|.*\\..*).*)"],
+  matcher: ["/((?!_next/static|_next/image|favicon.ico|.*\\..*).*)"],
 };

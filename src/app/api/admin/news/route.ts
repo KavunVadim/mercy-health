@@ -16,9 +16,7 @@ export async function POST(request: Request) {
   try {
     const body = await request.json();
     const db = await getDb();
-    const maxOrder = await db.collection('news').findOne({}, { sort: { order: -1 }, projection: { order: 1 } });
-    const order = (maxOrder?.order ?? -1) + 1;
-    const doc = { ...body, order, createdAt: new Date(), updatedAt: new Date() };
+    const doc = { ...body, order: Date.now(), createdAt: new Date(), updatedAt: new Date() };
     const result = await db.collection('news').insertOne(doc);
     revalidateTag('dictionary', { expire: 0 });
     revalidatePath('/uk/news', 'page');

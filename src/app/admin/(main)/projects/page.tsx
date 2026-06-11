@@ -8,6 +8,7 @@ import ImageUploader from '@/components/admin/ImageUploader';
 import GalleryEditor from '@/components/admin/GalleryEditor';
 import RichEditor from '@/components/admin/RichEditor';
 import { saveReorder, handleDragStart, handleDragOver, handleDragLeave, handleDrop, handleDragEnd } from '@/lib/dnd-reorder';
+import { slugify } from '@/lib/data-utils';
 import { useToast } from '@/components/admin/ui/Toast';
 import ConfirmDialog from '@/components/admin/ui/ConfirmDialog';
 import { SkeletonRows } from '@/components/admin/ui/Skeleton';
@@ -29,20 +30,6 @@ interface ProjectItem {
   gallery?: string[];
   status?: string;
   links?: { url: string; type?: 'video' | 'external'; label?: { uk: string; en: string } }[];
-}
-
-function slugify(text: string): string {
-  const map: Record<string, string> = {
-    а:'a',б:'b',в:'v',г:'h',ґ:'g',д:'d',е:'e',є:'ye',ж:'zh',з:'z',
-    и:'y',і:'i',ї:'yi',й:'i',к:'k',л:'l',м:'m',н:'n',о:'o',п:'p',
-    р:'r',с:'s',т:'t',у:'u',ф:'f',х:'kh',ц:'ts',ч:'ch',ш:'sh',щ:'shch',ю:'yu',я:'ya',
-  };
-  let s = text.toLowerCase().trim();
-  s = s.replace(/[ьъ]/g, '');
-  s = s.replace(/[а-яґєіїюя]/g, (ch) => map[ch] || ch);
-  s = s.replace(/[^a-z0-9]+/g, '-');
-  s = s.replace(/^-+|-+$/g, '');
-  return s || 'project';
 }
 
 function arrToText(arr: string[] | undefined): string {
@@ -93,7 +80,7 @@ export default function AdminProjectsPage() {
     e.preventDefault();
     setSaving(true);
     try {
-      const slug = slugify(form.title_uk || form.title_en);
+      const slug = slugify(form.title_uk || form.title_en, 'project');
       const activeLinks = form.links.filter(l => l.url.trim());
       const body: Record<string, unknown> = {
         id: slug, image: form.image,

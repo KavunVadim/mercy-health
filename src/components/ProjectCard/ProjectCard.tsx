@@ -5,6 +5,7 @@ import Link from "next/link";
 import styles from "./ProjectCard.module.css";
 import type { Locale } from "@/i18n-config";
 import type { Dictionary } from "@/types/content";
+import { sanitizeHtml } from "@/lib/sanitize";
 
 interface ProjectProps {
   id: string;
@@ -44,7 +45,7 @@ export default function ProjectCard({
             </div>
           ) : null}
           <h3 className={styles.title}>{title}</h3>
-          <p className={styles.description} dangerouslySetInnerHTML={{ __html: description }} />
+          <p className={styles.description} dangerouslySetInnerHTML={{ __html: sanitizeHtml(description) }} />
           
 
           <div className={styles.supportBtn}>

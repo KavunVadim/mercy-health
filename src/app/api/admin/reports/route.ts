@@ -17,12 +17,10 @@ export async function POST(request: Request) {
   try {
     const body = await request.json();
     const db = await getDb();
-    const maxOrder = await db.collection('reports').findOne({}, { sort: { order: -1 }, projection: { order: 1 } });
-    const order = (maxOrder?.order ?? -1) + 1;
     const doc = {
       ...body,
       id: body.id || slugify(body.title?.uk || body.title || 'report'),
-      order,
+      order: Date.now(),
       createdAt: new Date(),
       updatedAt: new Date(),
     };

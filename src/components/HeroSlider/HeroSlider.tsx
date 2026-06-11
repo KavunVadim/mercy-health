@@ -8,6 +8,7 @@ import Link from "next/link";
 import { ArrowRight, ArrowUpRight } from "lucide-react";
 import styles from "./HeroSlider.module.css";
 import { clsx } from "clsx";
+import { sanitizeHtml } from "@/lib/sanitize";
 
 interface Slide {
   id: string;
@@ -107,7 +108,7 @@ export default function HeroSlider({ slides }: { slides: Slide[] }) {
           </h2>
 
           {/* Description */}
-          <p className={styles.description} dangerouslySetInnerHTML={{ __html: currentSlide?.description || '' }} />
+           <p className={styles.description} dangerouslySetInnerHTML={{ __html: sanitizeHtml(currentSlide?.description || '') }} />
 
           {/* CTA */}
           {currentSlide?.href?.startsWith("http") ? (

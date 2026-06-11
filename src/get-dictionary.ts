@@ -1,4 +1,5 @@
 import "server-only";
+import { cache } from "react";
 import type { Locale } from "./i18n-config";
 import type { Dictionary } from "./types/content";
 import { getDb } from "@/lib/mongodb";
@@ -84,22 +85,22 @@ async function fetchMongoData(locale: Locale) {
       }
     }
 
-    function stripMongo(docs: unknown[]): unknown[] {
-      return docs.map((d: any) => {
-        if (d && typeof d === "object") {
-          const { _id, createdAt, updatedAt, ...rest } = d;
+    function stripMongo(docs: unknown[]): Record<string, unknown>[] {
+      return docs.map((d) => {
+        if (d && typeof d === "object" && !Array.isArray(d)) {
+          const { _id, createdAt, updatedAt, ...rest } = d as Record<string, unknown>;
           return rest;
         }
-        return d;
+        return {};
       });
     }
 
-    function stripMongoOne(doc: any): Record<string, unknown> {
+    function stripMongoOne(doc: Record<string, unknown> | null): Record<string, unknown> {
       if (doc && typeof doc === "object") {
         const { _id, key, updatedAt, createdAt, ...rest } = doc;
         return rest;
       }
-      return doc || {};
+      return {};
     }
 
     const localizedProjects = localizeData(stripMongo(projectsDocs || []), locale);
@@ -108,12 +109,12 @@ async function fetchMongoData(locale: Locale) {
     const localizedReports = localizeData(stripMongo(reportsDocs || []), locale) as Record<string, unknown>[];
     const localizedSettings = settingsDoc ? localizeData(stripMongoOne(settingsDoc), locale) as Record<string, unknown> : {};
 
-    const newsGalleryImages = (galleryPhotos || []).map((p: any) => p.url);
+    const newsGalleryImages = (galleryPhotos || []).map((p) => (p as unknown as { url: string }).url);
 
     return { contentData, localizedProjects, localizedPartners, localizedNews, localizedReports, localizedSettings, newsGalleryImages };
 }
 
-export const getDictionary = async (locale: Locale): Promise<Dictionary> => {
+export const getDictionary = cache(async (locale: Locale): Promise<Dictionary> => {
   const baseDictionary = await (dictionaries[locale]?.() ?? dictionaries.uk());
 
   const { contentData, localizedProjects, localizedPartners, localizedNews, localizedReports, localizedSettings, newsGalleryImages } = await fetchMongoData(locale);
@@ -149,4 +150,4 @@ export const getDictionary = async (locale: Locale): Promise<Dictionary> => {
       ...(reportsData || {}),
     },
   } as unknown as Dictionary;
-};
+});

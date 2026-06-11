@@ -53,7 +53,6 @@ export default function ImageUploader({ value, onChange, label }: ImageUploaderP
       if (res.ok) {
         onChange(data.url);
         if (data.dedup) {
-          console.log('Dedup: image already exists');
         }
       } else {
         alert(data.error || 'Upload failed');

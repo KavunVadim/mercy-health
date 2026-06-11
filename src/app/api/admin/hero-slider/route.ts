@@ -3,10 +3,25 @@ import { revalidateTag } from 'next/cache';
 import { getDb } from '@/lib/mongodb';
 import { slugify } from '@/lib/data-utils';
 
-async function getContent(locale: string): Promise<any> {
+interface SlideData {
+  id: string;
+  badge?: string;
+  title?: string;
+  description?: string;
+  image?: string;
+  cta?: string;
+  href?: string;
+  focus?: string;
+}
+
+interface ContentDoc {
+  hero_slider?: SlideData[];
+}
+
+async function getContent(locale: string): Promise<ContentDoc> {
   const db = await getDb();
   const col = locale === 'uk' ? 'content_uk' : 'content_en';
-  const doc = await db.collection(col).findOne({ key: 'main' });
+  const doc = await db.collection(col).findOne<ContentDoc>({ key: 'main' });
   return doc || {};
 }
 
@@ -24,24 +39,24 @@ export async function GET() {
   try {
     const [ukDoc, enDoc] = await Promise.all([getContent('uk'), getContent('en')]);
 
-    const ukItems = (ukDoc.hero_slider as Record<string, unknown>[]) || [];
-    const enItems = (enDoc.hero_slider as Record<string, unknown>[]) || [];
+    const ukItems = ukDoc.hero_slider || [];
+    const enItems = enDoc.hero_slider || [];
 
     const merged = ukItems.map((ukItem) => {
-      const enItem = enItems.find((e: any) => e.id === ukItem.id) || {};
+      const enItem = enItems.find((e) => e.id === ukItem.id);
       return {
         id: ukItem.id,
         image: ukItem.image || '',
         href: ukItem.href || '',
         focus: ukItem.focus || '',
         badge_uk: ukItem.badge || '',
-        badge_en: enItem.badge || '',
+        badge_en: enItem?.badge || '',
         title_uk: ukItem.title || '',
-        title_en: enItem.title || '',
+        title_en: enItem?.title || '',
         description_uk: ukItem.description || '',
-        description_en: enItem.description || '',
+        description_en: enItem?.description || '',
         cta_uk: ukItem.cta || '',
-        cta_en: enItem.cta || '',
+        cta_en: enItem?.cta || '',
       };
     });
 
@@ -58,8 +73,8 @@ export async function POST(request: Request) {
 
     const [ukDoc, enDoc] = await Promise.all([getContent('uk'), getContent('en')]);
 
-    const ukSlides = (ukDoc.hero_slider as Record<string, unknown>[]) || [];
-    const enSlides = (enDoc.hero_slider as Record<string, unknown>[]) || [];
+    const ukSlides = ukDoc.hero_slider || [];
+    const enSlides = enDoc.hero_slider || [];
 
     ukSlides.unshift({
       id, badge: body.badge_uk || '', title: body.title_uk || '',
@@ -94,12 +109,12 @@ export async function PATCH(request: Request) {
     }
 
     const [ukDoc, enDoc] = await Promise.all([getContent('uk'), getContent('en')]);
-    const ukSlides = (ukDoc.hero_slider as Record<string, unknown>[]) || [];
-    const enSlides = (enDoc.hero_slider as Record<string, unknown>[]) || [];
+    const ukSlides = ukDoc.hero_slider || [];
+    const enSlides = enDoc.hero_slider || [];
 
-    const reorderSlides = (slides: Record<string, unknown>[]) => {
+    const reorderSlides = (slides: SlideData[]): SlideData[] => {
       const map = new Map(slides.map(s => [s.id, s]));
-      return ids.map(id => map.get(id)).filter(Boolean) as Record<string, unknown>[];
+      return ids.map((id: string) => map.get(id)).filter(Boolean) as SlideData[];
     };
 
     await Promise.all([

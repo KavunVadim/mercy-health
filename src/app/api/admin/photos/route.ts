@@ -21,11 +21,9 @@ export async function POST(request: Request) {
   try {
     const body = await request.json();
     const db = await getDb();
-    const maxOrder = await db.collection('photos').findOne({}, { sort: { order: -1 }, projection: { order: 1 } });
-    const order = (maxOrder?.order ?? -1) + 1;
     const doc = {
       ...body,
-      order,
+      order: Date.now(),
       visible: true,
       inGallery: false,
       createdAt: new Date(),

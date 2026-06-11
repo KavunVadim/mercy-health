@@ -4,6 +4,7 @@ import Image from "next/image";
 import Link from "next/link";
 import styles from "./NewsCard.module.css";
 import type { Locale } from "@/i18n-config";
+import { sanitizeHtml } from "@/lib/sanitize";
 
 interface NewsProps {
   id: string;
@@ -22,7 +23,7 @@ export default function NewsCard({ id, date, title, image, description, lang }: 
       <div className={styles.content}>
         <span className={styles.date}>{date}</span>
         <h3 className={styles.title}>{title}</h3>
-        {description && <p className={styles.description} dangerouslySetInnerHTML={{ __html: description }} />}
+        {description && <p className={styles.description} dangerouslySetInnerHTML={{ __html: sanitizeHtml(description) }} />}
       </div>
     </Link>
   );

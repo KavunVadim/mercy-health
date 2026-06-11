@@ -8,6 +8,7 @@ import styles from "../page.module.css";
 import galleryStyles from "@/app/[lang]/projects/[id]/components/ProjectGallery.module.css";
 import type { Dictionary, NewsItem, LinkItem } from "@/types/content";
 import type { Locale } from "@/i18n-config";
+import { sanitizeHtml } from "@/lib/sanitize";
 
 interface NewsDetailContentProps {
   newsItem: NewsItem;
@@ -100,10 +101,10 @@ export default function NewsDetailContent({ newsItem, dictionary, locale }: News
             <div className={styles.description}>
               {newsItem.content && Array.isArray(newsItem.content) ? (
                 newsItem.content.map((paragraph: string, idx: number) => (
-                  <p key={idx} dangerouslySetInnerHTML={{ __html: paragraph }} />
+                  <p key={idx} dangerouslySetInnerHTML={{ __html: sanitizeHtml(paragraph) }} />
                 ))
               ) : (
-                <p dangerouslySetInnerHTML={{ __html: newsItem.description }} />
+                <p dangerouslySetInnerHTML={{ __html: sanitizeHtml(newsItem.description) }} />
               )}
             </div>
           </div>

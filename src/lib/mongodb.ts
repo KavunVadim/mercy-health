@@ -24,7 +24,6 @@ export async function getDb(): Promise<Db> {
 
   await client.connect();
   db = client.db(dbName);
-  console.log('✅ Connected to MongoDB');
   return db;
 }
 
@@ -36,6 +35,5 @@ export async function closeDb(): Promise<void> {
     await client.close();
     client = null;
     db = null;
-    console.log('🔌 MongoDB connection closed');
   }
 }

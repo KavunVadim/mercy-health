@@ -2,10 +2,32 @@ import { NextResponse } from 'next/server';
 import { revalidateTag } from 'next/cache';
 import { getDb } from '@/lib/mongodb';
 
-async function getContent(locale: string): Promise<any> {
+interface ContentFields {
+  about?: {
+    history?: { title?: string; content?: string };
+    mission?: { title?: string; content?: string };
+    media?: { title?: string; content?: string };
+  };
+  support?: {
+    cards?: { items?: unknown[] };
+    bank_details?: {
+      beneficiary_value?: string;
+      edrpou_value?: string;
+      bank_name_value?: string;
+      purpose_value?: string;
+      accounts?: Record<string, string> | null;
+    };
+  };
+  stats?: { collected_value?: string; helped_value?: string; donors_value?: string };
+  reports?: { documents?: unknown[] };
+  hero?: { title?: string; description?: string };
+  hero_slider?: unknown[];
+}
+
+async function getContent(locale: string): Promise<ContentFields> {
   const db = await getDb();
   const col = locale === 'uk' ? 'content_uk' : 'content_en';
-  const doc = await db.collection(col).findOne({ key: 'main' });
+  const doc = await db.collection(col).findOne<ContentFields>({ key: 'main' });
   return doc || {};
 }
 
@@ -24,36 +46,36 @@ export async function GET() {
     const [ukDoc, enDoc] = await Promise.all([getContent('uk'), getContent('en')]);
 
     return NextResponse.json({
-      about_history_title_uk: (ukDoc.about as any)?.history?.title || '',
-      about_history_title_en: (enDoc.about as any)?.history?.title || '',
-      about_history_content_uk: (ukDoc.about as any)?.history?.content || '',
-      about_history_content_en: (enDoc.about as any)?.history?.content || '',
-      about_mission_title_uk: (ukDoc.about as any)?.mission?.title || '',
-      about_mission_title_en: (enDoc.about as any)?.mission?.title || '',
-      about_mission_content_uk: (ukDoc.about as any)?.mission?.content || '',
-      about_mission_content_en: (enDoc.about as any)?.mission?.content || '',
-      about_media_title_uk: (ukDoc.about as any)?.media?.title || '',
-      about_media_title_en: (enDoc.about as any)?.media?.title || '',
-      about_media_content_uk: (ukDoc.about as any)?.media?.content || '',
-      about_media_content_en: (enDoc.about as any)?.media?.content || '',
-      support_cards: (ukDoc.support as any)?.cards?.items || [],
-      support_cards_en: (enDoc.support as any)?.cards?.items || [],
-      beneficiary_value_uk: (ukDoc.support as any)?.bank_details?.beneficiary_value || '',
-      beneficiary_value_en: (enDoc.support as any)?.bank_details?.beneficiary_value || '',
-      edrpou_value: (ukDoc.support as any)?.bank_details?.edrpou_value || '',
-      bank_name_value_uk: (ukDoc.support as any)?.bank_details?.bank_name_value || '',
-      bank_name_value_en: (enDoc.support as any)?.bank_details?.bank_name_value || '',
-      purpose_value_uk: (ukDoc.support as any)?.bank_details?.purpose_value || '',
-      purpose_value_en: (enDoc.support as any)?.bank_details?.purpose_value || '',
-      bank_accounts: (ukDoc.support as any)?.bank_details?.accounts || null,
-      stats_collected: (ukDoc.stats as any)?.collected_value || '',
-      stats_helped: (ukDoc.stats as any)?.helped_value || '',
-      stats_donors: (ukDoc.stats as any)?.donors_value || '',
-      documents: (ukDoc.reports as any)?.documents || [],
-      hero_title_uk: (ukDoc.hero as any)?.title || '',
-      hero_title_en: (enDoc.hero as any)?.title || '',
-      hero_description_uk: (ukDoc.hero as any)?.description || '',
-      hero_description_en: (enDoc.hero as any)?.description || '',
+      about_history_title_uk: ukDoc.about?.history?.title || '',
+      about_history_title_en: enDoc.about?.history?.title || '',
+      about_history_content_uk: ukDoc.about?.history?.content || '',
+      about_history_content_en: enDoc.about?.history?.content || '',
+      about_mission_title_uk: ukDoc.about?.mission?.title || '',
+      about_mission_title_en: enDoc.about?.mission?.title || '',
+      about_mission_content_uk: ukDoc.about?.mission?.content || '',
+      about_mission_content_en: enDoc.about?.mission?.content || '',
+      about_media_title_uk: ukDoc.about?.media?.title || '',
+      about_media_title_en: enDoc.about?.media?.title || '',
+      about_media_content_uk: ukDoc.about?.media?.content || '',
+      about_media_content_en: enDoc.about?.media?.content || '',
+      support_cards: ukDoc.support?.cards?.items || [],
+      support_cards_en: enDoc.support?.cards?.items || [],
+      beneficiary_value_uk: ukDoc.support?.bank_details?.beneficiary_value || '',
+      beneficiary_value_en: enDoc.support?.bank_details?.beneficiary_value || '',
+      edrpou_value: ukDoc.support?.bank_details?.edrpou_value || '',
+      bank_name_value_uk: ukDoc.support?.bank_details?.bank_name_value || '',
+      bank_name_value_en: enDoc.support?.bank_details?.bank_name_value || '',
+      purpose_value_uk: ukDoc.support?.bank_details?.purpose_value || '',
+      purpose_value_en: enDoc.support?.bank_details?.purpose_value || '',
+      bank_accounts: ukDoc.support?.bank_details?.accounts || null,
+      stats_collected: ukDoc.stats?.collected_value || '',
+      stats_helped: ukDoc.stats?.helped_value || '',
+      stats_donors: ukDoc.stats?.donors_value || '',
+      documents: ukDoc.reports?.documents || [],
+      hero_title_uk: ukDoc.hero?.title || '',
+      hero_title_en: enDoc.hero?.title || '',
+      hero_description_uk: ukDoc.hero?.description || '',
+      hero_description_en: enDoc.hero?.description || '',
     });
   } catch (e) {
     return NextResponse.json({ error: 'Failed to fetch content' }, { status: 500 });
@@ -83,7 +105,7 @@ export async function PUT(request: Request) {
         },
       },
       stats: { collected_value: body.stats_collected || '', helped_value: body.stats_helped || '', donors_value: body.stats_donors || '' },
-      reports: { ...((ukDoc.reports as any) || {}), documents: body.documents || [] },
+      reports: { ...(ukDoc.reports || {}), documents: body.documents || [] },
       hero: { title: body.hero_title_uk || '', description: body.hero_description_uk || '' },
       updatedAt: new Date(),
     };
@@ -106,7 +128,7 @@ export async function PUT(request: Request) {
         },
       },
       stats: { collected_value: body.stats_collected || '', helped_value: body.stats_helped || '', donors_value: body.stats_donors || '' },
-      reports: { ...((enDoc.reports as any) || {}), documents: body.documents || [] },
+      reports: { ...(enDoc.reports || {}), documents: body.documents || [] },
       hero: { title: body.hero_title_en || '', description: body.hero_description_en || '' },
       updatedAt: new Date(),
     };

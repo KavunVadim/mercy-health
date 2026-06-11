@@ -8,6 +8,7 @@ import styles from "../page.module.css";
 import galleryStyles from "./ProjectGallery.module.css";
 import ShareButtons from "./ShareButtons";
 import type { Dictionary, LinkItem } from "@/types/content";
+import { sanitizeHtml } from "@/lib/sanitize";
 import type { Locale } from "@/i18n-config";
 
 interface ProjectImageGalleryProps {
@@ -123,7 +124,7 @@ export default function ProjectImageGallery({
                 viewport={{ once: true, margin: "-80px" }}
                 transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
               >
-                <p dangerouslySetInnerHTML={{ __html: shortDescription }} />
+                <p dangerouslySetInnerHTML={{ __html: sanitizeHtml(shortDescription) }} />
               </motion.div>
             )}
 
@@ -137,7 +138,7 @@ export default function ProjectImageGallery({
                 viewport={{ once: true, margin: "-60px" }}
                 transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
               >
-                <p dangerouslySetInnerHTML={{ __html: fullDescription }} />
+                <p dangerouslySetInnerHTML={{ __html: sanitizeHtml(fullDescription) }} />
               </motion.div>
             )}
 
