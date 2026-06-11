@@ -26,14 +26,12 @@ export default function GalleryEditor({ value, onChange, label }: GalleryEditorP
     setShowPicker(true);
     setLoadingPhotos(true);
     try {
-      const res = await fetch('/api/admin/photos?gallery=true');
+      const res = await fetch('/api/admin/photos');
       if (res.ok) {
-        const data = await res.json();
-        setPhotos(data);
-        if (data.length === 0) console.warn('No photos with inGallery=true found');
+        setPhotos(await res.json());
       } else {
         const data = await res.json().catch(() => ({}));
-        alert(data.error || 'Failed to load gallery photos');
+        alert(data.error || 'Failed to load photos');
         setShowPicker(false);
       }
     } catch {
@@ -164,7 +162,7 @@ export default function GalleryEditor({ value, onChange, label }: GalleryEditorP
         >
           <div className={styles.modal} style={{ maxWidth: '700px' }} onClick={e => e.stopPropagation()}>
             <div className={styles.modalHeader}>
-              <h2 className={styles.modalTitle}>Gallery Photos</h2>
+                  <h2 className={styles.modalTitle}>Select Photo</h2>
               <button className={styles.btnIcon} onClick={() => setShowPicker(false)} aria-label="Close"><X size={16} /></button>
             </div>
             <div className={styles.modalBody}>
@@ -172,7 +170,7 @@ export default function GalleryEditor({ value, onChange, label }: GalleryEditorP
                 <p style={{ color: 'var(--admin-text-muted)' }}>Loading...</p>
               ) : photos.length === 0 ? (
                 <p style={{ color: 'var(--admin-text-muted)', textAlign: 'center', padding: '2rem' }}>
-                  No gallery photos. Upload photos and mark them as "Gallery" in the Photos page first.
+                  No photos yet. Upload photos in the Photos page first.
                 </p>
               ) : (
                 <div className={styles.photoGrid}>
