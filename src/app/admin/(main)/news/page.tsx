@@ -132,9 +132,10 @@ export default function AdminNewsPage() {
         fetchItems();
         success(editing ? 'News updated' : 'News created');
       } else {
-        error('Save failed');
+        const data = await res.json().catch(() => ({}));
+        error(data.error || `Save failed (${res.status})`);
       }
-    } catch {
+    } catch (e: any) {
       error('Network error');
     } finally {
       setSaving(false);

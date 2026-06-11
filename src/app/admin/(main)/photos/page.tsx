@@ -89,7 +89,10 @@ export default function AdminPhotosPage() {
         body: JSON.stringify({ [field]: !current }),
       });
       if (res.ok) fetchItems();
-      else error('Update failed');
+      else {
+        const data = await res.json().catch(() => ({}));
+        error(data.error || `Update failed (${res.status})`);
+      }
     } catch { error('Network error'); }
     finally { setToggling(null); }
   }

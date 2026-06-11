@@ -27,8 +27,19 @@ export default function GalleryEditor({ value, onChange, label }: GalleryEditorP
     setLoadingPhotos(true);
     try {
       const res = await fetch('/api/admin/photos?gallery=true');
-      if (res.ok) setPhotos(await res.json());
-    } catch { } finally { setLoadingPhotos(false); }
+      if (res.ok) {
+        const data = await res.json();
+        setPhotos(data);
+        if (data.length === 0) console.warn('No photos with inGallery=true found');
+      } else {
+        const data = await res.json().catch(() => ({}));
+        alert(data.error || 'Failed to load gallery photos');
+        setShowPicker(false);
+      }
+    } catch {
+      alert('Network error loading gallery');
+      setShowPicker(false);
+    } finally { setLoadingPhotos(false); }
   }
 
   async function handleUpload(files: FileList | null) {
