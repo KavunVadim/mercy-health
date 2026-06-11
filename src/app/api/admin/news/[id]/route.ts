@@ -22,12 +22,11 @@ export async function PUT(request: Request, { params }: { params: Promise<{ id: 
     const { id } = await params;
     const body = await request.json();
     const db = await getDb();
-    const result = await db.collection('news').findOneAndUpdate(
+    const value = await db.collection('news').findOneAndUpdate(
       ObjectId.isValid(id) ? { _id: new ObjectId(id) } : { id },
       { $set: { ...body, updatedAt: new Date() } },
       { returnDocument: 'after' }
     );
-    const value = result?.value;
     if (!value) return NextResponse.json({ error: 'Not found' }, { status: 404 });
     const slug = body.slug || body.id || id;
     revalidateTag('dictionary', { expire: 0 });

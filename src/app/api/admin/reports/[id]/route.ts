@@ -7,12 +7,11 @@ export async function PUT(request: Request, { params }: { params: Promise<{ id: 
     const { id } = await params;
     const body = await request.json();
     const db = await getDb();
-    const result = await db.collection('reports').findOneAndUpdate(
+    const value = await db.collection('reports').findOneAndUpdate(
       { id },
       { $set: { ...body, id, updatedAt: new Date() } },
       { returnDocument: 'after' }
     );
-    const value = result?.value;
     if (!value) return NextResponse.json({ error: 'Not found' }, { status: 404 });
     revalidateTag('dictionary', { expire: 0 });
     return NextResponse.json(value);
