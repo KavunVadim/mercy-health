@@ -2,7 +2,7 @@
   "projects": [
     {
       "id": "ambulances-to-front",
-      "image": "/images/projects/ambulances-to-front/img_9425.webp",
+      "image": "https://bookshop-images-vadim-2026.s3.us-east-1.amazonaws.com/images/projects/ambulances-to-front/img_9425.webp",
       "title": {
         "uk": "Реанімобілі на фронт",
         "en": "Ambulances for the Front"
@@ -16,20 +16,20 @@
         "en": "Since 2022, the Mercy and Health Charity Foundation has been coordinating the delivery of medical vehicles from Europe to the front. The project was implemented together with BeForUkraine (Belgium), and over 130 specialized vehicles that save lives have been delivered.\n\nThe ambulances are equipped with state-of-the-art medical equipment:\n• defibrillators\n• aspirators\n• patient monitors\n• first aid kits\n• consumables\n\nThe main advantage is that assistance is provided in motion, directly during the evacuation of the wounded.\n\nThe need for ambulances is growing. Every day we receive new requests from units that are left without transport for evacuation. Support from partners is crucial—every contribution brings us closer to the next rescue."
       },
       "gallery": [
-        "/images/projects/ambulances-to-front/IMG_1351.webp",
-        "/images/projects/ambulances-to-front/IMG_1370.webp",
-        "/images/projects/ambulances-to-front/IMG_1371.webp",
-        "/images/projects/ambulances-to-front/IMG_1372.webp",
-        "/images/projects/ambulances-to-front/IMG_1374.webp",
-        "/images/projects/ambulances-to-front/IMG_1383.webp",
-        "/images/projects/ambulances-to-front/IMG_1396.webp",
-        "/images/projects/ambulances-to-front/IMG_1397.webp",
-        "/images/projects/ambulances-to-front/IMG_1414.webp"
+        "https://bookshop-images-vadim-2026.s3.us-east-1.amazonaws.com/images/projects/ambulances-to-front/IMG_1351.webp",
+        "https://bookshop-images-vadim-2026.s3.us-east-1.amazonaws.com/images/projects/ambulances-to-front/IMG_1370.webp",
+        "https://bookshop-images-vadim-2026.s3.us-east-1.amazonaws.com/images/projects/ambulances-to-front/IMG_1371.webp",
+        "https://bookshop-images-vadim-2026.s3.us-east-1.amazonaws.com/images/projects/ambulances-to-front/IMG_1372.webp",
+        "https://bookshop-images-vadim-2026.s3.us-east-1.amazonaws.com/images/projects/ambulances-to-front/IMG_1374.webp",
+        "https://bookshop-images-vadim-2026.s3.us-east-1.amazonaws.com/images/projects/ambulances-to-front/IMG_1383.webp",
+        "https://bookshop-images-vadim-2026.s3.us-east-1.amazonaws.com/images/projects/ambulances-to-front/IMG_1396.webp",
+        "https://bookshop-images-vadim-2026.s3.us-east-1.amazonaws.com/images/projects/ambulances-to-front/IMG_1397.webp",
+        "https://bookshop-images-vadim-2026.s3.us-east-1.amazonaws.com/images/projects/ambulances-to-front/IMG_1414.webp"
       ]
     },
     {
       "id": "disabled-support",
-      "image": "/images/projects/disabled-support/img_9349.webp",
+      "image": "https://bookshop-images-vadim-2026.s3.us-east-1.amazonaws.com/images/projects/disabled-support/img_9349.webp",
       "title": {
         "uk": "Допомога людям з інвалідністю",
         "en": "Support for People with Disabilities"
@@ -43,14 +43,14 @@
         "en": "Together with our partners, we managed to make a contribution to the lives of people who need special support:\n\n• 15 transport vehicles for people with disabilities\n• 500+ mechanical and electric wheelchairs\n• charitable psychological consultations."
       },
       "gallery": [
-        "/images/projects/disabled-support/IMG_1353.webp",
-        "/images/projects/disabled-support/IMG_1378.webp",
-        "/images/projects/disabled-support/IMG_1390.webp"    
+        "https://bookshop-images-vadim-2026.s3.us-east-1.amazonaws.com/images/projects/disabled-support/IMG_1353.webp",
+        "https://bookshop-images-vadim-2026.s3.us-east-1.amazonaws.com/images/projects/disabled-support/IMG_1378.webp",
+        "https://bookshop-images-vadim-2026.s3.us-east-1.amazonaws.com/images/projects/disabled-support/IMG_1390.webp"
       ]
     },
     {
       "id": "on-the-shield",
-      "image": "/images/projects/on-the-shield/img_9220.webp",
+      "image": "https://bookshop-images-vadim-2026.s3.us-east-1.amazonaws.com/images/projects/on-the-shield/img_9220.webp",
       "title": {
         "uk": "На Щиті",
         "en": "On the Shield"
@@ -64,17 +64,17 @@
         "en": "With the support of CF «BeForUA» and donors from European countries, 7 refrigerators were handed over for the transportation of fallen Heroes to burial sites.\n\nThis initiative is a gratitude to those who gave their lives for the sake of our freedom."
       },
       "gallery": [
-        "/images/projects/on-the-shield/IMG_1388.webp",
-        "/images/projects/on-the-shield/IMG_1425.webp",
-        "/images/projects/on-the-shield/IMG_1426.webp",
-        "/images/projects/on-the-shield/IMG_1427.webp",
-        "/images/projects/on-the-shield/IMG_1429.webp",
-        "/images/projects/on-the-shield/IMG_1430.webp" 
+        "https://bookshop-images-vadim-2026.s3.us-east-1.amazonaws.com/images/projects/on-the-shield/IMG_1388.webp",
+        "https://bookshop-images-vadim-2026.s3.us-east-1.amazonaws.com/images/projects/on-the-shield/IMG_1425.webp",
+        "https://bookshop-images-vadim-2026.s3.us-east-1.amazonaws.com/images/projects/on-the-shield/IMG_1426.webp",
+        "https://bookshop-images-vadim-2026.s3.us-east-1.amazonaws.com/images/projects/on-the-shield/IMG_1427.webp",
+        "https://bookshop-images-vadim-2026.s3.us-east-1.amazonaws.com/images/projects/on-the-shield/IMG_1429.webp",
+        "https://bookshop-images-vadim-2026.s3.us-east-1.amazonaws.com/images/projects/on-the-shield/IMG_1430.webp"
       ]
     },
     {
       "id": "mobile-workshop",
-      "image": "/images/projects/mobile-workshop/img_9365.webp",
+      "image": "https://bookshop-images-vadim-2026.s3.us-east-1.amazonaws.com/images/projects/mobile-workshop/img_9365.webp",
       "title": {
         "uk": "Авто-майстерня",
         "en": "Mobile Workshop"
@@ -88,17 +88,17 @@
         "en": "A new project introduced with CF «BelUkrAid» (Belgium).\n\nThis is a 'mobile workshop' located in a vehicle that allows for quick response to vehicle breakdowns in frontline areas, including ambulances, building a stabilization point or shelter.\n\nThe vehicle is equipped with a generator, electrical and other tools that allow for the repair and restoration of damaged property.\n\nThe first mobile workshop has been handed over, and we are preparing to transport 6 more vehicles."
       },
       "gallery": [
-        "/images/projects/mobile-workshop/img_9365.webp",
-        "/images/projects/mobile-workshop/IMG_1364.webp",
-        "/images/projects/mobile-workshop/IMG_1365.webp",       
-        "/images/projects/mobile-workshop/IMG_1367.webp",
-        "/images/projects/mobile-workshop/IMG_1368.webp",
-        "/images/projects/mobile-workshop/IMG_1369.webp"
+        "https://bookshop-images-vadim-2026.s3.us-east-1.amazonaws.com/images/projects/mobile-workshop/img_9365.webp",
+        "https://bookshop-images-vadim-2026.s3.us-east-1.amazonaws.com/images/projects/mobile-workshop/IMG_1364.webp",
+        "https://bookshop-images-vadim-2026.s3.us-east-1.amazonaws.com/images/projects/mobile-workshop/IMG_1365.webp",
+        "https://bookshop-images-vadim-2026.s3.us-east-1.amazonaws.com/images/projects/mobile-workshop/IMG_1367.webp",
+        "https://bookshop-images-vadim-2026.s3.us-east-1.amazonaws.com/images/projects/mobile-workshop/IMG_1368.webp",
+        "https://bookshop-images-vadim-2026.s3.us-east-1.amazonaws.com/images/projects/mobile-workshop/IMG_1369.webp"
       ]
     },
     {
       "id": "medical-support",
-      "image": "/images/projects/medical-support/img_9238.webp",
+      "image": "https://bookshop-images-vadim-2026.s3.us-east-1.amazonaws.com/images/projects/medical-support/img_9238.webp",
       "title": {
         "uk": "Підтримка прифронтових лікарень та медиків",
         "en": "Support for Frontline Hospitals and Medics"
@@ -112,18 +112,18 @@
         "en": "We organize the provision of primary care doctors (family doctors, therapists) in frontline areas with everything necessary including: medicines, measuring devices, etc., for providing primary care to the population in the most remote parts of Ukraine (more than 100 doctors received sets).\n\nEvery week, volunteers deliver medicines and necessary equipment to hospitals and stabilization points in frontline areas, and also provide: turniquets, first aid kits, bandages, and other necessary aid that allows saving lives.\n\nHanded over:\n• 15,000 tactical first aid kits\n• 3,000 combat medic backpacks\n• 10,000 turniquets and bandages\nAlso more than 1,500 tons of medical products."
       },
       "gallery": [
-        "/images/projects/medical-support/img_9238.webp",       
-        "/images/projects/medical-support/IMG_1389.webp",
-        "/images/projects/medical-support/IMG_1435.webp",
-        "/images/projects/medical-support/IMG_1436.webp",
-        "/images/projects/medical-support/IMG_1441.webp",
-        "/images/projects/medical-support/IMG_1443.webp",
-        "/images/projects/medical-support/IMG_9778.webp"
+        "https://bookshop-images-vadim-2026.s3.us-east-1.amazonaws.com/images/projects/medical-support/img_9238.webp",
+        "https://bookshop-images-vadim-2026.s3.us-east-1.amazonaws.com/images/projects/medical-support/IMG_1389.webp",
+        "https://bookshop-images-vadim-2026.s3.us-east-1.amazonaws.com/images/projects/medical-support/IMG_1435.webp",
+        "https://bookshop-images-vadim-2026.s3.us-east-1.amazonaws.com/images/projects/medical-support/IMG_1436.webp",
+        "https://bookshop-images-vadim-2026.s3.us-east-1.amazonaws.com/images/projects/medical-support/IMG_1441.webp",
+        "https://bookshop-images-vadim-2026.s3.us-east-1.amazonaws.com/images/projects/medical-support/IMG_1443.webp",
+        "https://bookshop-images-vadim-2026.s3.us-east-1.amazonaws.com/images/projects/medical-support/IMG_9778.webp"
       ]
     },
     {
       "id": "water-for-life",
-      "image": "/images/projects/water-for-life/img_9469.webp",
+      "image": "https://bookshop-images-vadim-2026.s3.us-east-1.amazonaws.com/images/projects/water-for-life/img_9469.webp",
       "title": {
         "uk": "Вода заради життя",
         "en": "Water for Life"
@@ -137,15 +137,15 @@
         "en": "As part of the project, water supply was restored in the Donetsk region.\n\nIn the city of Kramatorsk, work was carried out on drilling and equipping 5 wells for water intake in different parts of the city.\n\nIn the city of Svyatohirsk, work was also carried out on drilling and equipping 2 wells for water intake, providing residents of the cities with drinking water."
       },
       "gallery": [
-        "/images/projects/water-for-life/img_9324.webp",      
-        "/images/projects/water-for-life/IMG_1475.webp",
-        "/images/projects/water-for-life/IMG_1477.webp",
-        "/images/projects/water-for-life/IMG_1478.webp"
+        "https://bookshop-images-vadim-2026.s3.us-east-1.amazonaws.com/images/projects/water-for-life/img_9324.webp",
+        "https://bookshop-images-vadim-2026.s3.us-east-1.amazonaws.com/images/projects/water-for-life/IMG_1475.webp",
+        "https://bookshop-images-vadim-2026.s3.us-east-1.amazonaws.com/images/projects/water-for-life/IMG_1477.webp",
+        "https://bookshop-images-vadim-2026.s3.us-east-1.amazonaws.com/images/projects/water-for-life/IMG_1478.webp"
       ]
     },
     {
       "id": "light-of-life",
-      "image": "/images/projects/light-of-life/IMG_1446.webp",
+      "image": "https://bookshop-images-vadim-2026.s3.us-east-1.amazonaws.com/images/projects/light-of-life/IMG_1446.webp",
       "title": {
         "uk": "«Світло життя»",
         "en": "Light of Life"
@@ -158,19 +158,19 @@
         "uk": "Фонд забезпечує підрозділи, лікарні, школи та родини на прифронтових територіях генераторами, акумуляторними батареями та системами резервного живлення, щоб навіть у найтемніші часи було світло, тепло та електрика. Цей проєкт допомагає підтримувати безперервну роботу медичних закладів, пунктів допомоги та побутових потреб людей у зонах відключень. Передано близько 70 одиниць генераторів та обладнання резервного живлення.",
         "en": "The foundation provides units, hospitals, schools, and families in frontline territories with generators, storage batteries, and backup power systems so that even in the darkest times there is light, heat, and electricity. This project helps maintain the continuous operation of medical facilities, assistance points, and domestic needs of people in blackout zones. About 70 units of generators and backup power equipment have been delivered."
       },
-      "gallery": [     
-        "/images/projects/light-of-life/img_9487.webp",
-        "/images/projects/light-of-life/IMG_1445.webp",
-        "/images/projects/light-of-life/IMG_1446.webp",
-        "/images/projects/light-of-life/IMG_1448.webp",
-        "/images/projects/light-of-life/IMG_1449.webp",
-        "/images/projects/light-of-life/IMG_1450.webp",
-        "/images/projects/light-of-life/IMG_1451.webp"
+      "gallery": [
+        "https://bookshop-images-vadim-2026.s3.us-east-1.amazonaws.com/images/projects/light-of-life/img_9487.webp",
+        "https://bookshop-images-vadim-2026.s3.us-east-1.amazonaws.com/images/projects/light-of-life/IMG_1445.webp",
+        "https://bookshop-images-vadim-2026.s3.us-east-1.amazonaws.com/images/projects/light-of-life/IMG_1446.webp",
+        "https://bookshop-images-vadim-2026.s3.us-east-1.amazonaws.com/images/projects/light-of-life/IMG_1448.webp",
+        "https://bookshop-images-vadim-2026.s3.us-east-1.amazonaws.com/images/projects/light-of-life/IMG_1449.webp",
+        "https://bookshop-images-vadim-2026.s3.us-east-1.amazonaws.com/images/projects/light-of-life/IMG_1450.webp",
+        "https://bookshop-images-vadim-2026.s3.us-east-1.amazonaws.com/images/projects/light-of-life/IMG_1451.webp"
       ]
     },
     {
       "id": "rehab-center",
-      "image": "/images/projects/rehab-center/img_9484.webp",
+      "image": "https://bookshop-images-vadim-2026.s3.us-east-1.amazonaws.com/images/projects/rehab-center/img_9484.webp",
       "title": {
         "uk": "Реабілітаційний центр «Милосердя та Здоровʼя»",
         "en": "Mercy and Health Rehabilitation Center"
@@ -184,21 +184,21 @@
         "en": "The foundation has opened a rehabilitation center to provide comprehensive psychological and physical rehabilitation for veterans, displaced persons, and vulnerable populations, implement modern rehabilitation activities, and develop methodologies for training specialists. A team of psychologists and rehabilitators travels directly to frontline territories to provide free psychological aid, massage sessions, consultations, and physical recovery programs. This project makes it possible to restore mental and physical health and help people adapt to a new life."
       },
       "gallery": [
-          "/images/projects/rehab-center/img_9484.webp",
-        "/images/projects/rehab-center/IMG_0103.webp",
-        "/images/projects/rehab-center/IMG_0320.webp",
-        "/images/projects/rehab-center/IMG_0966.webp",
-        "/images/projects/rehab-center/IMG_1042.webp",
-        "/images/projects/rehab-center/IMG_1104.webp",
-        "/images/projects/rehab-center/IMG_2168.webp",
-        "/images/projects/rehab-center/IMG_2684.webp",
-        "/images/projects/rehab-center/IMG_8701.webp",
-        "/images/projects/rehab-center/IMG_9929.webp"
+        "https://bookshop-images-vadim-2026.s3.us-east-1.amazonaws.com/images/projects/rehab-center/img_9484.webp",
+        "https://bookshop-images-vadim-2026.s3.us-east-1.amazonaws.com/images/projects/rehab-center/IMG_0103.webp",
+        "https://bookshop-images-vadim-2026.s3.us-east-1.amazonaws.com/images/projects/rehab-center/IMG_0320.webp",
+        "https://bookshop-images-vadim-2026.s3.us-east-1.amazonaws.com/images/projects/rehab-center/IMG_0966.webp",
+        "https://bookshop-images-vadim-2026.s3.us-east-1.amazonaws.com/images/projects/rehab-center/IMG_1042.webp",
+        "https://bookshop-images-vadim-2026.s3.us-east-1.amazonaws.com/images/projects/rehab-center/IMG_1104.webp",
+        "https://bookshop-images-vadim-2026.s3.us-east-1.amazonaws.com/images/projects/rehab-center/IMG_2168.webp",
+        "https://bookshop-images-vadim-2026.s3.us-east-1.amazonaws.com/images/projects/rehab-center/IMG_2684.webp",
+        "https://bookshop-images-vadim-2026.s3.us-east-1.amazonaws.com/images/projects/rehab-center/IMG_8701.webp",
+        "https://bookshop-images-vadim-2026.s3.us-east-1.amazonaws.com/images/projects/rehab-center/IMG_9929.webp"
       ]
     },
     {
       "id": "psychological-aid",
-      "image": "/images/projects/psychological-aid/img_9271.webp",
+      "image": "https://bookshop-images-vadim-2026.s3.us-east-1.amazonaws.com/images/projects/psychological-aid/img_9271.webp",
       "title": {
         "uk": "Перша психологічна допомога",
         "en": "First Psychological Aid"
@@ -211,18 +211,18 @@
         "uk": "Фонд започатковував проєкт з надання якісної першої психологічної допомоги військовим у період відновлення (між бойовими виїздами), яка дозволить нормалізувати рівень боєздатності бійців та підготувати солдатів і їхніх командирів до подальшої служби, або адаптувати військовослужбовців, які з певних причин повертаються додому до цивільного життя.",
         "en": "The foundation initiated a project to provide quality first psychological aid to military personnel during the recovery period (between combat missions), which allows normalizing the combat readiness level of the fighters and preparing soldiers and their commanders for further service, or adapting military personnel who, for certain reasons, return home to civilian life."
       },
-      "gallery": [       
-        "/images/projects/psychological-aid/IMG_1431.webp",
-        "/images/projects/psychological-aid/IMG_1433.webp",
-        "/images/projects/psychological-aid/IMG_1437.webp",
-        "/images/projects/psychological-aid/IMG_1438.webp",
-        "/images/projects/psychological-aid/IMG_1439.webp",
-        "/images/projects/psychological-aid/IMG_1440.webp"
+      "gallery": [
+        "https://bookshop-images-vadim-2026.s3.us-east-1.amazonaws.com/images/projects/psychological-aid/IMG_1431.webp",
+        "https://bookshop-images-vadim-2026.s3.us-east-1.amazonaws.com/images/projects/psychological-aid/IMG_1433.webp",
+        "https://bookshop-images-vadim-2026.s3.us-east-1.amazonaws.com/images/projects/psychological-aid/IMG_1437.webp",
+        "https://bookshop-images-vadim-2026.s3.us-east-1.amazonaws.com/images/projects/psychological-aid/IMG_1438.webp",
+        "https://bookshop-images-vadim-2026.s3.us-east-1.amazonaws.com/images/projects/psychological-aid/IMG_1439.webp",
+        "https://bookshop-images-vadim-2026.s3.us-east-1.amazonaws.com/images/projects/psychological-aid/IMG_1440.webp"
       ]
     },
     {
       "id": "rehabilitation",
-      "image": "/images/projects/rehabilitation/img_9485.webp",
+      "image": "https://bookshop-images-vadim-2026.s3.us-east-1.amazonaws.com/images/projects/rehabilitation/img_9485.webp",
       "title": {
         "uk": "Реабілітація дітей і дорослих",
         "en": "Rehabilitation for Children and Adults"
@@ -235,15 +235,15 @@
         "uk": "За підтримки бельгійських та британських партнерів передано більше 2000 одиниць обладнання: електричні ліжка, візки, милиці, сходи, бігові доріжки та інше обладнання покращення та відновлення фізичного здоров’я. Все це допомагає пораненим та людям з інвалідністю повернутися до активного життя.",
         "en": "With the support of Belgian and British partners, over 2,000 pieces of equipment have been delivered: electric beds, wheelchairs, crutches, stairs, treadmills, and other equipment for improving and restoring physical health. All this helps the wounded and people with disabilities return to an active life."
       },
-      "gallery": [       
-        "/images/projects/rehabilitation/IMG_1465.webp",
-        "/images/projects/rehabilitation/IMG_1481.webp",
-        "/images/projects/rehabilitation/IMG_1482.webp"
+      "gallery": [
+        "https://bookshop-images-vadim-2026.s3.us-east-1.amazonaws.com/images/projects/rehabilitation/IMG_1465.webp",
+        "https://bookshop-images-vadim-2026.s3.us-east-1.amazonaws.com/images/projects/rehabilitation/IMG_1481.webp",
+        "https://bookshop-images-vadim-2026.s3.us-east-1.amazonaws.com/images/projects/rehabilitation/IMG_1482.webp"
       ]
     },
     {
       "id": "animal-welfare",
-      "image": "/images/projects/animal-welfare/img_9285.webp",
+      "image": "https://bookshop-images-vadim-2026.s3.us-east-1.amazonaws.com/images/projects/animal-welfare/img_9285.webp",
       "title": {
         "uk": "Допомога тваринам",
         "en": "Animal Welfare"
@@ -257,14 +257,14 @@
         "en": "The foundation provides food, medicine, and evacuates animals from frontline cities. Some of them are placed in permanent homes throughout Ukraine."
       },
       "gallery": [
-        "/images/projects/animal-welfare/IMG_1485.webp",
-        "/images/projects/animal-welfare/IMG_1489.webp",
-        "/images/projects/animal-welfare/IMG_9792_11zon.webp"
+        "https://bookshop-images-vadim-2026.s3.us-east-1.amazonaws.com/images/projects/animal-welfare/IMG_1485.webp",
+        "https://bookshop-images-vadim-2026.s3.us-east-1.amazonaws.com/images/projects/animal-welfare/IMG_1489.webp",
+        "https://bookshop-images-vadim-2026.s3.us-east-1.amazonaws.com/images/projects/animal-welfare/IMG_9792_11zon.webp"
       ]
     },
     {
       "id": "first-need",
-      "image": "/images/projects/first-need/img_9329.webp",
+      "image": "https://bookshop-images-vadim-2026.s3.us-east-1.amazonaws.com/images/projects/first-need/img_9329.webp",
       "title": {
         "uk": "«Перша потреба»",
         "en": "First Need"
@@ -277,10 +277,10 @@
         "uk": "Загальний проєкт, який працює на різні направлення та цільову аудиторію, перекриваючи першочергові нагальні потреби. В рамках цього проєкту наш Фонд передає від продуктів харчування, одягу та гігієни до транспортних засобів (пікапи, вантажівки та інші авто).",
         "en": "A general project working across various directions and target audiences, covering primary urgent needs. Within this project, our Foundation provides everything from food, clothing, and hygiene products to vehicles (pickups, trucks, and other cars)."
       },
-      "gallery": [        
-        "/images/projects/first-need/IMG_1456.webp",
-        "/images/projects/first-need/IMG_1460.webp",
-        "/images/projects/first-need/IMG_1464.webp"
+      "gallery": [
+        "https://bookshop-images-vadim-2026.s3.us-east-1.amazonaws.com/images/projects/first-need/IMG_1456.webp",
+        "https://bookshop-images-vadim-2026.s3.us-east-1.amazonaws.com/images/projects/first-need/IMG_1460.webp",
+        "https://bookshop-images-vadim-2026.s3.us-east-1.amazonaws.com/images/projects/first-need/IMG_1464.webp"
       ]
     }
   ]

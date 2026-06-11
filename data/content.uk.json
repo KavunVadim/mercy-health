@@ -5,7 +5,7 @@
       "badge": "Телекомпанія 'Орбіта'",
       "title": "Реанімобілі, що рятують життя",
       "description": "Передача чергової партії сучасних автомобілів швидкої допомоги для евакуації поранених захисників.",
-      "image": "/images/hero/img_9287.webp",
+      "image": "https://bookshop-images-vadim-2026.s3.us-east-1.amazonaws.com/images/hero/img_9287.webp",
       "cta": "Дивитись відео",
       "href": "https://youtu.be/gh2GM-jeh6E",
       "focus": "50% 80%"
@@ -15,7 +15,7 @@
       "badge": "Телеканал ДніпроTV",
       "title": "Волонтери привезли допомогу лікарям",
       "description": "Реанімобіль, рефрижератор, медобладнання",
-      "image": "/images/hero/img_9473.webp",
+      "image": "https://bookshop-images-vadim-2026.s3.us-east-1.amazonaws.com/images/hero/img_9473.webp",
       "cta": "Дивитись відео",
       "href": "https://youtu.be/Rh0fD5_0OhU"
     },
@@ -24,7 +24,7 @@
       "badge": "Вікна-новини",
       "title": "Масштабний проект для порятунку життів та евакуації полеглих",
       "description": "Доставили п’ять повністю укомплектованих реанімобілів, а також три рефрижератори",
-      "image": "/images/hero/img_9419.webp",
+      "image": "https://bookshop-images-vadim-2026.s3.us-east-1.amazonaws.com/images/hero/img_9419.webp",
       "cta": "Читати статтю",
       "href": "https://vikna.tv/dlia-tebe/vijna-v-ukrayini/shlyah-myloserdya-blagodijnyky-pryvezly-v-ukrayinu-reanimobili-dlya-poryatunky-zhyttiv-vijskovyh"
     },
@@ -33,7 +33,7 @@
       "badge": "Espreso TV",
       "title": "Психологічна допомога для понад 300 військових",
       "description": "Під час ротації захисники отримали необхідну підтримку в Київському центрі реабілітації БФ «Милосердя та Здоров’я».",
-      "image": "/images/hero/img_9275.webp",
+      "image": "https://bookshop-images-vadim-2026.s3.us-east-1.amazonaws.com/images/hero/img_9275.webp",
       "cta": "Читати статтю",
       "href": "https://espreso.tv/suspilstvo-ponad-300-viyskovikh-pid-chas-rotatsiii-otrimali-psikhologichnu-dopomogu-v-kiivskomu-tsentri-reabilitatsii-bf-miloserdya-ta-zdorovya-a-zagalom-v-ukraini-ponad-20-tis"
     },
@@ -42,7 +42,7 @@
       "badge": "Телерадіостудія МО України Бриз",
       "title": "Реанімобілі для порятунку життів",
       "description": "БФ «Милосердя та Здоров'я» привіз в Україну нову партію спецтранспорту для порятунку життів військових.",
-      "image": "/images/hero/img_9281.webp",
+      "image": "https://bookshop-images-vadim-2026.s3.us-east-1.amazonaws.com/images/hero/img_9281.webp",
       "cta": "Дивитись сюжет",
       "href": "https://www.youtube.com/watch?v=jO78_rVQ94I"
     },
@@ -51,7 +51,7 @@
       "badge": "Телекомпанія 'Орбіта'",
       "title": "Спецтранспорт для фронту",
       "description": "Вадим Філашкін зустрівся із представниками БФ «Милосердя та здоров’я»",
-      "image": "/images/hero/img_9407.webp",
+      "image": "https://bookshop-images-vadim-2026.s3.us-east-1.amazonaws.com/images/hero/img_9407.webp",
       "cta": "Дивитись відео",
       "href": "https://www.youtube.com/watch?v=CpcSH3X3LvI",
       "focus": "50% 80%"
@@ -61,7 +61,7 @@
       "badge": "Pro100Media",
       "title": "«Вода заради життя» будуємо свердловини на Донеччині",
       "description": "Масштабний проєкт, спрямований на покращення водозабезпечення в регіоні, де ситуація з доступом до води є критичною.",
-      "image": "/images/hero/img_9324.webp",
+      "image": "https://bookshop-images-vadim-2026.s3.us-east-1.amazonaws.com/images/hero/img_9324.webp",
       "cta": "Читати статтю",
       "href": "https://pro100media.com.ua/eksklyuzyv/voda-zarady-zhyttya-yak-na-donechchyni-buduyut-sverdlovyny-dlya-bezperebijnogo-vodozabezpechennya-ta-yaka-z-tsogo-koryst-kramatortsyam/"
     },
@@ -70,7 +70,7 @@
       "badge": "Телеканал СК1",
       "title": "Допомога для захисників",
       "description": "БО «Милосердя та Здоров’я» передали військовим мінішпиталь на колесах та медичне устаткування",
-      "image": "/images/hero/img_9230.webp",
+      "image": "https://bookshop-images-vadim-2026.s3.us-east-1.amazonaws.com/images/hero/img_9230.webp",
       "cta": "Дивитись сюжет",
       "href": "https://www.youtube.com/watch?v=eqnElHP9TLQ"
     }
@@ -101,14 +101,14 @@
         "date": "2025-05-10",
         "title": "Допомога Бахмутському напрямку",
         "description": "Передали партію медикаментів та перев'язувальних матеріалів для стабілізаційних пунктів на Донеччині.",
-        "image": "/images/news/news-1.jpg"
+        "image": "https://bookshop-images-vadim-2026.s3.us-east-1.amazonaws.com/images/news/news-1.jpg"
       },
       {
         "id": "news-2",
         "date": "2025-05-05",
         "title": "Новий реанімобіль для госпіталю",
         "description": "Завдяки внескам наших благодійників ми придбали та переобладнали сучасний реанімобіль для евакуації поранених.",
-        "image": "/images/news/news-2.jpg"
+        "image": "https://bookshop-images-vadim-2026.s3.us-east-1.amazonaws.com/images/news/news-2.jpg"
       }
     ]
   },

@@ -5,7 +5,7 @@
       "badge": "YouTube",
       "title": "Ambulances that save lives",
       "description": "Delivery of another batch of modern ambulances for the evacuation of wounded defenders.",
-      "image": "/images/hero/img_9287.webp",
+      "image": "https://bookshop-images-vadim-2026.s3.us-east-1.amazonaws.com/images/hero/img_9287.webp",
       "cta": "Watch video",
       "href": "https://youtu.be/gh2GM-jeh6E",
       "focus": "50% 80%"
@@ -15,7 +15,7 @@
       "badge": "YouTube",
       "title": "Ambulance equipment review",
       "description": "The medical equipment of our vehicles allows providing assistance in the most critical conditions.",
-      "image": "/images/hero/img_9473.webp",
+      "image": "https://bookshop-images-vadim-2026.s3.us-east-1.amazonaws.com/images/hero/img_9473.webp",
       "cta": "Watch video",
       "href": "https://youtu.be/Rh0fD5_0OhU"
     },
@@ -24,7 +24,7 @@
       "badge": "Vikna TV",
       "title": "Ambulances for saving lives",
       "description": "\"Mercy and Health\" Foundation brought a new batch of specialized transport to Ukraine to save military lives.",
-      "image": "/images/hero/img_9419.webp",
+      "image": "https://bookshop-images-vadim-2026.s3.us-east-1.amazonaws.com/images/hero/img_9419.webp",
       "cta": "Read article",
       "href": "https://vikna.tv/dlia-tebe/vijna-v-ukrayini/shlyah-myloserdyya-blagodijnyky-pryvezly-v-ukrayinu-reanimobili-dlya-poryatunku-zhyttiv-vijskovyh/"
     },
@@ -33,7 +33,7 @@
       "badge": "Espreso TV",
       "title": "Psychological help for over 300 military personnel",
       "description": "During rotation, defenders received necessary support at the Kyiv Rehabilitation Center of the \"Mercy and Health\" Foundation.",
-      "image": "/images/hero/img_9275.webp",
+      "image": "https://bookshop-images-vadim-2026.s3.us-east-1.amazonaws.com/images/hero/img_9275.webp",
       "cta": "Read article",
       "href": "https://espreso.tv/suspilstvo-ponad-300-viyskovikh-pid-chas-rotatsii-otrimali-psikhologichnu-dopomogu-v-kiivskomu-tsentri-reabilitatsii-bf-miloserdya-ta-zdorovya-a-zagalom-v-ukraini-ponad-20-tis"
     },
@@ -42,17 +42,16 @@
       "badge": "YouTube",
       "title": "Reanimobile to the frontline",
       "description": "Replenishing the fleet of medics on the frontline with a modern reanimobile for rapid evacuation.",
-      "image": "/images/hero/img_9281.webp",
+      "image": "https://bookshop-images-vadim-2026.s3.us-east-1.amazonaws.com/images/hero/img_9281.webp",
       "cta": "Watch video",
       "href": "https://youtu.be/jO78_rVQ94I"
-       
     },
     {
       "id": "mercy-path",
       "badge": "YouTube",
       "title": "Path of Mercy",
       "description": "A project that unites volunteers and donors to help Ukrainian defenders and civilians.",
-      "image": "/images/hero/img_9407.webp",
+      "image": "https://bookshop-images-vadim-2026.s3.us-east-1.amazonaws.com/images/hero/img_9407.webp",
       "cta": "Watch video",
       "href": "https://youtu.be/CpcSH3X3Lvl",
       "focus": "50% 80%"
@@ -62,17 +61,17 @@
       "badge": "Pro100Media",
       "title": "\"Water for Life\": building wells in Donetsk region",
       "description": "Large-scale project aimed at improving water supply in the region where access to water is critical.",
-      "image": "/images/hero/img_9324.webp",
+      "image": "https://bookshop-images-vadim-2026.s3.us-east-1.amazonaws.com/images/hero/img_9324.webp",
       "cta": "Read article",
       "href": "https://pro100media.com.ua/eksklyuzyv/voda-zarady-zhyttya-yak-na-donechchyni-buduyut-sverdlovyny-dlya-bezperebijnogo-vodozabezpechennya-ta-yaka-z-tsogo-koryst-kramatortsyam/",
-       "focus": "50% 35%"
+      "focus": "50% 35%"
     },
     {
       "id": "frontline-help",
       "badge": "YouTube",
       "title": "Help for the frontline",
       "description": "Supplying medicines and equipment for frontline hospitals and stabilization points.",
-      "image": "/images/hero/img_9230.webp",
+      "image": "https://bookshop-images-vadim-2026.s3.us-east-1.amazonaws.com/images/hero/img_9230.webp",
       "cta": "Watch video",
       "href": "https://youtu.be/eqneElHP9TLQ"
     },
@@ -81,7 +80,7 @@
       "badge": "Support",
       "title": "Support for people with disabilities",
       "description": "Delivered 15 specialized vehicles and 500+ wheelchairs for people who need special support.",
-      "image": "/images/projects/disabled-support/img_9349.webp",
+      "image": "https://bookshop-images-vadim-2026.s3.us-east-1.amazonaws.com/images/projects/disabled-support/img_9349.webp",
       "cta": "Learn more",
       "href": "#projects",
       "focus": "50% 50%"
@@ -113,14 +112,14 @@
         "date": "2025-05-10",
         "title": "Help for Bakhmut Direction",
         "description": "Delivered a batch of medicines and dressing materials for stabilization points in the Donetsk region.",
-        "image": "/images/news/news-1.jpg"
+        "image": "https://bookshop-images-vadim-2026.s3.us-east-1.amazonaws.com/images/news/news-1.jpg"
       },
       {
         "id": "news-2",
         "date": "2025-05-05",
         "title": "New Ambulance for Hospital",
         "description": "Thanks to the contributions of our donors, we purchased and equipped a modern ambulance for the evacuation of the wounded.",
-        "image": "/images/news/news-2.jpg"
+        "image": "https://bookshop-images-vadim-2026.s3.us-east-1.amazonaws.com/images/news/news-2.jpg"
       }
     ]
   },
