@@ -1,7 +1,7 @@
 'use client';
 
 import { useState, useRef } from 'react';
-import { Plus, Trash2, X } from 'lucide-react';
+import { Plus, Trash2, X, GripVertical } from 'lucide-react';
 import styles from '@/app/admin/admin.module.css';
 import { handleDragStart, handleDragOver, handleDragLeave, handleDrop, handleDragEnd } from '@/lib/dnd-reorder';
 import { uploadFile } from '@/lib/upload';
@@ -142,7 +142,9 @@ export default function GalleryEditor({ value, onChange, label }: GalleryEditorP
             >
               <div style={{ position: 'relative' }}>
                 <img src={url} alt="" className={styles.photoCardImage} />
-                <div style={{ position: 'absolute', top: 4, left: 4, color: '#94a3b8', fontSize: '1.1rem', lineHeight: 1, textShadow: '0 1px 3px rgba(0,0,0,0.3)' }}>⠿</div>
+                <div style={{ position: 'absolute', top: 4, left: 4, background: 'rgba(0,0,0,0.4)', borderRadius: 6, width: 26, height: 26, display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#94a3b8', backdropFilter: 'blur(4px)', cursor: 'grab' }}>
+                  <GripVertical size={14} />
+                </div>
               </div>
               <div className={styles.photoCardBody}>
                 <div className={styles.photoCardName}>{url.split('/').pop()}</div>
