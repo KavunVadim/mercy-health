@@ -83,11 +83,19 @@
   color: var(--accent-blue);
 }
 
+.heroContent {
+  overflow-wrap: break-word;
+  word-break: break-word;
+}
+
 .heroLead {
   font-size: 1.125rem;
   line-height: 1.6;
   color: var(--text-slate);
   max-width: 500px;
+  overflow-wrap: break-word;
+  word-break: break-word;
+  hyphens: auto;
 }
 
 .heroImageWrapper {
@@ -185,6 +193,9 @@
   font-size: 1.125rem;
   line-height: 1.8;
   color: rgba(255, 255, 255, 0.8);
+  overflow-wrap: break-word;
+  word-break: break-word;
+  hyphens: auto;
 }
 
 /* Gallery Section */
@@ -357,12 +368,36 @@
 
 @media (max-width: 768px) {
   .heroTitle {
-    font-size: 2.75rem;
+    font-size: 1.75rem;
+    word-break: break-word;
+    hyphens: auto;
+  }
+  
+  .heroLead {
+    font-size: 1rem;
+    word-break: break-word;
+    hyphens: auto;
+    max-width: 100%;
+  }
+
+  .heroContent {
+    padding: 0 0.5rem;
   }
   
   .honorSection {
-    padding: 3rem 1.5rem;
-    border-radius: 40px;
+    padding: 2rem 1.25rem;
+    border-radius: 32px;
+  }
+
+  .sectionTitle {
+    font-size: 1.75rem;
+    word-break: break-word;
+  }
+
+  .historyPara {
+    font-size: 0.95rem;
+    word-break: break-word;
+    hyphens: auto;
   }
   
   .galleryGrid {
@@ -377,10 +412,22 @@
     align-items: flex-start;
     gap: 1rem;
   }
+
+  .galleryHeader .sectionTitle {
+    white-space: normal;
+  }
   
   .titleLine {
     width: 60px;
     flex-grow: 0;
+  }
+
+  .heroImageWrapper {
+    height: 300px;
+  }
+
+  .patchFrame {
+    height: 280px;
   }
 
   .lightboxContent {

@@ -6,25 +6,17 @@ import Image from "next/image";
 import styles from "./WhoWeAreRedesign.module.css";
 import clsx from "clsx";
 import { 
-  PencilLine, 
-  Plus, 
-  Trash2, 
-  LayoutDashboard,
-  ShieldCheck,
   X,
   ChevronLeft,
   ChevronRight
 } from "lucide-react";
 import type { Dictionary } from "@/types/content";
 
-import Link from "next/link";
-
 interface WhoWeAreRedesignProps {
   dictionary: Dictionary;
 }
 
 export default function WhoWeAreRedesign({ dictionary }: WhoWeAreRedesignProps) {
-  const [isAdminMode, setIsAdminMode] = useState(false);
   const [lightboxOpen, setLightboxOpen] = useState(false);
   const [lightboxIndex, setLightboxIndex] = useState(0);
 
@@ -81,20 +73,6 @@ export default function WhoWeAreRedesign({ dictionary }: WhoWeAreRedesignProps) 
 
   return (
     <div className={styles.wrapper}>
-      {/* Admin Toggle Floating Button */}
-      <Link href="/admin/content" className={styles.adminToggle} style={{ bottom: '5.5rem' }}>
-          <LayoutDashboard size={20} />
-          <span>До адмінки</span>
-      </Link>
-      <button 
-        onClick={() => setIsAdminMode(!isAdminMode)}
-        className={clsx(styles.adminToggle, isAdminMode && styles.adminActive)}
-        title={isAdminMode ? "Вийти з режиму редагування" : "Увійти в режим адміна"}
-      >
-        {isAdminMode ? <ShieldCheck size={20} /> : <PencilLine size={20} />}
-        <span>{isAdminMode ? "Admin: ON" : "Edit Preview"}</span>
-      </button>
-
       {/* Section 1: Hero Section */}
       <section className={styles.heroSection}>
         <div className={styles.heroGrid}>
@@ -109,12 +87,6 @@ export default function WhoWeAreRedesign({ dictionary }: WhoWeAreRedesignProps) 
             <p className={styles.heroLead}>
               {historyParagraphs[0]}
             </p>
-            {isAdminMode && (
-              <Link href="/admin/content" className={styles.editOverlay}>
-                <PencilLine size={16} />
-                <span>Редагувати текст в адмінці</span>
-              </Link>
-            )}
           </div>
           <div className={styles.heroImageWrapper}>
             <Image 
@@ -124,12 +96,6 @@ export default function WhoWeAreRedesign({ dictionary }: WhoWeAreRedesignProps) 
               className={styles.heroImage}
               priority
             />
-            {isAdminMode && (
-              <Link href="/admin/content" className={styles.editOverlay}>
-                <PencilLine size={16} />
-                <span>Змінити фото в адмінці</span>
-              </Link>
-            )}
           </div>
         </div>
       </section>
@@ -148,12 +114,6 @@ export default function WhoWeAreRedesign({ dictionary }: WhoWeAreRedesignProps) 
               <div className={styles.frameDecoration} />
             </div>
             <p className={styles.imageCaption}>Стіна подяк від наших захисників</p>
-            {isAdminMode && (
-              <Link href="/admin/content" className={styles.editOverlay}>
-                <PencilLine size={16} />
-                <span>Оновити Стіну Пошани в адмінці</span>
-              </Link>
-            )}
           </div>
           <div className={styles.honorContent}>
             <h2 className={styles.sectionTitle}>Шлях Милосердя</h2>
@@ -162,12 +122,6 @@ export default function WhoWeAreRedesign({ dictionary }: WhoWeAreRedesignProps) 
                 <p key={i} className={styles.historyPara}>{p}</p>
               ))}
             </div>
-            {isAdminMode && (
-              <Link href="/admin/content" className={styles.editOverlay}>
-                <PencilLine size={16} />
-                <span>Редагувати текст в адмінці</span>
-              </Link>
-            )}
           </div>
         </div>
       </section>
@@ -184,7 +138,7 @@ export default function WhoWeAreRedesign({ dictionary }: WhoWeAreRedesignProps) 
             <div
               key={idx}
               className={clsx(styles.galleryItem, styles[`item${idx + 1}`])}
-              onClick={() => !isAdminMode && openLightbox(idx)}
+              onClick={() => openLightbox(idx)}
             >
               <Image 
                 src={img.url}
@@ -195,20 +149,8 @@ export default function WhoWeAreRedesign({ dictionary }: WhoWeAreRedesignProps) 
               <div className={styles.galleryInfo}>
                 <p>{img.caption}</p>
               </div>
-              {isAdminMode && (
-                <div className={styles.adminImageActions}>
-                  <Link href="/admin/content" className={styles.iconBtn}><PencilLine size={14} /></Link>
-                  <Link href="/admin/content" className={styles.iconBtn}><Trash2 size={14} /></Link>
-                </div>
-              )}
             </div>
           ))}
-          {isAdminMode && (
-            <Link href="/admin/content" className={styles.addPhotoCard}>
-              <Plus size={32} />
-              <span>Додати фото в адмінці</span>
-            </Link>
-          )}
         </div>
       </section>
 
