@@ -58,58 +58,50 @@ export default function WhoWeAreRedesign({ dictionary }: WhoWeAreRedesignProps) 
         {heroImage && (
         <section className={styles.heroSection}>
           <div className={styles.heroImageWrapper}>
-            <GalleryItem src={heroImage}>
-              <div className={styles.clickableWrapper}>
-                <Image
-                  src={heroImage}
-                  alt={pathOfMercyTitle}
-                  fill
-                  priority
-                  sizes="100vw"
-                  className={styles.heroImage}
+            <div className={styles.clickableWrapper}>
+              <Image
+                src={heroImage}
+                alt={pathOfMercyTitle}
+                fill
+                priority
+                sizes="100vw"
+                className={styles.heroImage}
+              />
+              <div className={styles.heroOverlay} />
+
+              {/* Top bar */}
+              <div className={styles.heroTopBar}>
+                <div className={styles.heroPill}>
+                  <span className={styles.heroPillDot} />
+                  {dictionary.about.sidebar.who_we_are}
+                </div>
+                <div className={styles.heroYear}>{about.hero_year}</div>
+              </div>
+
+              {/* Bottom content */}
+              <div className={styles.heroContent}>
+                <h1
+                  className={styles.heroTitle}
+                  dangerouslySetInnerHTML={{
+                    __html: pathOfMercyTitle
+                      .toUpperCase()
+                      .replace("МИЛОСЕРДЯ", `<span class="${styles.accentText}">МИЛОСЕРДЯ</span>`)
+                      .replace("MERCY", `<span class="${styles.accentText}">MERCY</span>`),
+                  }}
                 />
-                <div className={styles.heroOverlay} />
-
-                {/* Top bar */}
-                <div className={styles.heroTopBar}>
-                  <div className={styles.heroPill}>
-                    <span className={styles.heroPillDot} />
-                    {dictionary.about.sidebar.who_we_are}
-                  </div>
-                  <div className={styles.heroYear}>{about.hero_year}</div>
-                </div>
-
-                {/* Bottom content */}
-                <div className={styles.heroContent}>
-                  <h1
-                    className={styles.heroTitle}
-                    dangerouslySetInnerHTML={{
-                      __html: pathOfMercyTitle
-                        .toUpperCase()
-                        .replace("МИЛОСЕРДЯ", `<span class="${styles.accentText}">МИЛОСЕРДЯ</span>`)
-                        .replace("MERCY", `<span class="${styles.accentText}">MERCY</span>`),
-                    }}
-                  />
-                  <div className={styles.heroStats}>
-                    {heroStats.map((stat, si) => (
-                      <React.Fragment key={si}>
-                        {si > 0 && <div className={styles.heroStatDivider} />}
-                        <div className={styles.heroStat}>
-                          <span className={styles.heroStatNum}>{stat.number}</span>
-                          <span className={styles.heroStatLabel}>{stat.label}</span>
-                        </div>
-                      </React.Fragment>
-                    ))}
-                  </div>
-                </div>
-
-                <div className={styles.heroZoomBadge}>
-                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-                    <path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7" />
-                  </svg>
+                <div className={styles.heroStats}>
+                  {heroStats.map((stat, si) => (
+                    <React.Fragment key={si}>
+                      {si > 0 && <div className={styles.heroStatDivider} />}
+                      <div className={styles.heroStat}>
+                        <span className={styles.heroStatNum}>{stat.number}</span>
+                        <span className={styles.heroStatLabel}>{stat.label}</span>
+                      </div>
+                    </React.Fragment>
+                  ))}
                 </div>
               </div>
-            </GalleryItem>
+            </div>
           </div>
         </section>
         )}
