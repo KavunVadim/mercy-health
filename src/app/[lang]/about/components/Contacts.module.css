@@ -16,7 +16,11 @@
   display: grid;
   grid-template-columns: 1fr 1.5fr;
   gap: 4rem;
-  align-items: start;
+  align-items: stretch;
+}
+
+.infoCol {
+  display: flex;
 }
 
 .infoCard {
@@ -26,6 +30,20 @@
   border: 1px solid var(--border);
   box-shadow: var(--shadow-sm);
   transition: background-color var(--transition-theme);
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.socialTitle {
+  font-family: var(--font-e-ukraine-head);
+  font-size: 1.5rem;
+  margin-bottom: 2rem;
+  color: var(--foreground);
+  text-transform: uppercase;
+  font-weight: 800;
+  letter-spacing: 0.05em;
+  margin-top: auto;
 }
 
 .contactList {
@@ -80,16 +98,6 @@ a.value:hover {
   transform: translateX(5px);
 }
 
-.socialTitle {
-  font-family: var(--font-e-ukraine-head);
-  font-size: 1.5rem;
-  margin-bottom: 2rem;
-  color: var(--foreground);
-  text-transform: uppercase;
-  font-weight: 800;
-  letter-spacing: 0.05em;
-}
-
 .socialsList {
   display: flex;
   gap: 1.25rem;
@@ -121,12 +129,15 @@ a.value:hover {
   border: 1px solid var(--border);
   box-shadow: var(--shadow-lg);
   transition: background-color var(--transition-theme);
+  display: flex;
+  flex-direction: column;
 }
 
 .form {
   display: flex;
   flex-direction: column;
   gap: 2rem;
+  flex: 1;
 }
 
 .inputGroup {
@@ -197,10 +208,52 @@ a.value:hover {
 
 @media (max-width: 768px) {
   .infoCard, .formCol {
-    padding: 2rem;
+    padding: 1.5rem;
   }
-  
+
+  .contactList {
+    gap: 1.5rem;
+  }
+
+  .contactList li {
+    gap: 1rem;
+  }
+
+  .icon {
+    width: 44px;
+    height: 44px;
+    border-radius: 12px;
+  }
+
+  .icon svg {
+    width: 20px;
+    height: 20px;
+  }
+
+  .value {
+    font-size: 1rem;
+    word-break: break-all;
+  }
+
   .title {
-    font-size: 2rem;
+    font-size: 1.5rem;
+    word-break: break-word;
+    hyphens: auto;
+    margin-bottom: 2rem;
+  }
+
+  .socialTitle {
+    font-size: 1.25rem;
+    margin-bottom: 1.25rem;
+  }
+
+  .socLink {
+    width: 44px;
+    height: 44px;
+    border-radius: 12px;
+  }
+
+  .socialsList {
+    gap: 0.75rem;
   }
 }

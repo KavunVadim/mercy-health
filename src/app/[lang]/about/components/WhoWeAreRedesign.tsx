@@ -31,30 +31,40 @@ export default function WhoWeAreRedesign({ dictionary }: WhoWeAreRedesignProps) 
   const historyTitle = dictionary.about.history.title || "НАША ІСТОРІЯ";
   const pathOfMercyTitle = dictionary.about.sidebar.path_of_mercy || "ШЛЯХ МИЛОСЕРДЯ";
   const rawHistoryContent = dictionary.about.history.content || "";
-  const historyParagraphs = rawHistoryContent.split('\n\n');
+  const historyParagraphs = rawHistoryContent.split("\n\n");
 
-  const heroImage = dictionary.about.hero_image || "https://bookshop-images-vadim-2026.s3.us-east-1.amazonaws.com/uploads/18fb78a2301bb8e0.webp";
-  const patchesImage = dictionary.about.patches_image || "https://bookshop-images-vadim-2026.s3.us-east-1.amazonaws.com/uploads/73306f706831d53f.jpeg";
+  const heroImage =
+    dictionary.about.hero_image ||
+    "https://bookshop-images-vadim-2026.s3.us-east-1.amazonaws.com/uploads/18fb78a2301bb8e0.webp";
+  const patchesImage =
+    dictionary.about.patches_image ||
+    "https://bookshop-images-vadim-2026.s3.us-east-1.amazonaws.com/uploads/73306f706831d53f.jpeg";
+
   const galleryImages = (dictionary.about.history.images || []).map((url, idx) => ({
     url,
-    caption: idx === 0 ? "Доставка допомоги" : 
-             idx === 1 ? "Забезпечення водою" :
-             idx === 2 ? "Реанімобіль" :
-             idx === 3 ? "Медична евакуація" : "Допомога дітям"
+    caption:
+      idx === 0 ? "Доставка допомоги" :
+      idx === 1 ? "Забезпечення водою" :
+      idx === 2 ? "Реанімобіль" :
+      idx === 3 ? "Медична евакуація" : "Допомога дітям",
   }));
 
-  const displayGallery = galleryImages.length > 0 ? galleryImages : [
-    { url: "https://bookshop-images-vadim-2026.s3.us-east-1.amazonaws.com/uploads/1ab6c82fcb63943f.webp", caption: "Доставка допомоги" },
-    { url: "https://bookshop-images-vadim-2026.s3.us-east-1.amazonaws.com/uploads/e59a9f52636d86e0.webp", caption: "Забезпечення водою" },
-    { url: "https://bookshop-images-vadim-2026.s3.us-east-1.amazonaws.com/uploads/d8a6a79d7184b3f9.JPG", caption: "Реанімобіль" },
-    { url: "https://bookshop-images-vadim-2026.s3.us-east-1.amazonaws.com/uploads/8ceeb51d684fcd4d.JPG", caption: "Медична евакуація" },
-    { url: "https://bookshop-images-vadim-2026.s3.us-east-1.amazonaws.com/uploads/d677557cfe4838b8.webp", caption: "Допомога дітям" }
-  ];
+  const displayGallery =
+    galleryImages.length > 0
+      ? galleryImages
+      : [
+          { url: "https://bookshop-images-vadim-2026.s3.us-east-1.amazonaws.com/uploads/1ab6c82fcb63943f.webp", caption: "Доставка допомоги" },
+          { url: "https://bookshop-images-vadim-2026.s3.us-east-1.amazonaws.com/uploads/e59a9f52636d86e0.webp", caption: "Забезпечення водою" },
+          { url: "https://bookshop-images-vadim-2026.s3.us-east-1.amazonaws.com/uploads/d8a6a79d7184b3f9.JPG",  caption: "Реанімобіль" },
+          { url: "https://bookshop-images-vadim-2026.s3.us-east-1.amazonaws.com/uploads/8ceeb51d684fcd4d.JPG",  caption: "Медична евакуація" },
+          { url: "https://bookshop-images-vadim-2026.s3.us-east-1.amazonaws.com/uploads/d677557cfe4838b8.webp", caption: "Допомога дітям" },
+        ];
 
   return (
     <GalleryProvider>
       <div className={styles.wrapper}>
-        {/* ───── Section 1: Hero Image ───── */}
+
+        {/* ───── Section 1: Hero ───── */}
         <section className={styles.heroSection}>
           <div className={styles.heroImageWrapper}>
             <GalleryItem src={heroImage}>
@@ -64,15 +74,22 @@ export default function WhoWeAreRedesign({ dictionary }: WhoWeAreRedesignProps) 
                   alt={pathOfMercyTitle}
                   fill
                   priority
-                  sizes="(max-width: 768px) 100vw, 100vw"
+                  sizes="100vw"
                   className={styles.heroImage}
                 />
                 <div className={styles.heroOverlay} />
-                <div className={styles.heroContent}>
-                  <div className={styles.heroEyebrow}>
-                    <span>{dictionary.about.sidebar.who_we_are}</span>
-                    <div className={styles.heroDot} />
+
+                {/* Top bar */}
+                <div className={styles.heroTopBar}>
+                  <div className={styles.heroPill}>
+                    <span className={styles.heroPillDot} />
+                    {dictionary.about.sidebar.who_we_are}
                   </div>
+                  <div className={styles.heroYear}>З 2016 року</div>
+                </div>
+
+                {/* Bottom content */}
+                <div className={styles.heroContent}>
                   <h1
                     className={styles.heroTitle}
                     dangerouslySetInnerHTML={{
@@ -82,10 +99,32 @@ export default function WhoWeAreRedesign({ dictionary }: WhoWeAreRedesignProps) 
                         .replace("MERCY", `<span class="${styles.accentText}">MERCY</span>`),
                     }}
                   />
+                  <div className={styles.heroStats}>
+                    <div className={styles.heroStat}>
+                      <span className={styles.heroStatNum}>130+</span>
+                      <span className={styles.heroStatLabel}>реанімобілів на фронт</span>
+                    </div>
+                    <div className={styles.heroStatDivider} />
+                    <div className={styles.heroStat}>
+                      <span className={styles.heroStatNum}>300+</span>
+                      <span className={styles.heroStatLabel}>військових реабілітовано</span>
+                    </div>
+                    <div className={styles.heroStatDivider} />
+                    <div className={styles.heroStat}>
+                      <span className={styles.heroStatNum}>8.3K</span>
+                      <span className={styles.heroStatLabel}>допомогли</span>
+                    </div>
+                    <div className={styles.heroStatDivider} />
+                    <div className={styles.heroStat}>
+                      <span className={styles.heroStatNum}>45.2K</span>
+                      <span className={styles.heroStatLabel}>благодійників</span>
+                    </div>
+                  </div>
                 </div>
+
                 <div className={styles.heroZoomBadge}>
                   <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-                    <path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/>
+                    <path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7" />
                   </svg>
                 </div>
               </div>
@@ -93,14 +132,50 @@ export default function WhoWeAreRedesign({ dictionary }: WhoWeAreRedesignProps) 
           </div>
         </section>
 
-        {/* ───── Section 2: Our Story ───── */}
+        {/* ───── Section 2: Story — pull-quote + timeline layout ───── */}
         <section className={styles.storySection}>
-          <motion.div {...fadeUp}>
-            <h2 className={styles.storyTitle}>{historyTitle.toUpperCase()}</h2>
-          </motion.div>
+          <div className={styles.storyHeader}>
+            <motion.div {...fadeUp}>
+              <p className={styles.storyEyebrow}>Наша Місія</p>
+              <h2 className={styles.storyTitle}>{historyTitle.toUpperCase()}</h2>
+            </motion.div>
+            <motion.blockquote
+              className={styles.pullQuote}
+              initial={{ opacity: 0, x: 24 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true, margin: "-60px" }}
+              transition={{ duration: 0.7, delay: 0.15, ease }}
+            >
+              <span className={styles.pullQuoteMark}>"</span>
+              Ми не чекаємо кращих умов. Ми працюємо в тих, що є — заради тих, хто цього потребує.
+            </motion.blockquote>
+          </div>
+
           <div className={styles.storyGrid}>
+            {/* Timeline column */}
+            <div className={styles.timelineCol}>
+              {[
+                { year: "2016", label: "Старт", text: "Заснування фонду. Медикаменти, одяг, продукти харчування — для населення і медичних установ будь-якої форми власності." },
+                { year: "2022", label: "Перелом", text: "З 24 лютого — повномасштабне вторгнення. Разом з СО \"BeForUkraine\" (Бельгія) запущено проєкт «Реанімобілі для фронту». Залучено міжнародних донорів." },
+                { year: "2026", label: "Сьогодні", text: "130+ спеціалізованих авто для ЗСУ. Реабілітаційний центр — виїзди на прифронтові території. 12 активних проєктів." },
+              ].map((item, i) => (
+                <motion.div key={item.year} className={styles.tlItem} {...staggerFadeUp(i)}>
+                  <div className={styles.tlYearWrap}>
+                    <span className={styles.tlYear}>{item.year}</span>
+                    <span className={styles.tlLabel}>{item.label}</span>
+                  </div>
+                  <div className={styles.tlConnector}>
+                    <div className={styles.tlDot} />
+                    {i < 2 && <div className={styles.tlLine} />}
+                  </div>
+                  <p className={styles.tlText}>{item.text}</p>
+                </motion.div>
+              ))}
+            </div>
+
+            {/* Text column */}
             <div className={styles.storyTextCol}>
-              {historyParagraphs.slice(0, Math.ceil(historyParagraphs.length / 2)).map((p, i) => (
+              {historyParagraphs.map((p, i) => (
                 <motion.p
                   key={i}
                   {...staggerFadeUp(i)}
@@ -111,29 +186,41 @@ export default function WhoWeAreRedesign({ dictionary }: WhoWeAreRedesignProps) 
                 </motion.p>
               ))}
             </div>
-            <div className={styles.storyTextCol}>
-              {historyParagraphs.slice(Math.ceil(historyParagraphs.length / 2)).map((p, i) => (
-                <motion.p
-                  key={i + Math.ceil(historyParagraphs.length / 2)}
-                  {...staggerFadeUp(i + Math.ceil(historyParagraphs.length / 2))}
-                  className={styles.storyPara}
-                >
-                  {p}
-                </motion.p>
-              ))}
-            </div>
           </div>
         </section>
 
-        {/* ───── Section 3: Patches of Honor ───── */}
+        {/* ───── Section 3: Dark — 130+ dominant number + patches image ───── */}
         <section className={styles.honorSection}>
+          {/* Background glow blobs */}
+          <div className={styles.honorGlow1} />
+          <div className={styles.honorGlow2} />
+
           <div className={styles.honorInner}>
             <motion.div
-              className={styles.honorImageCol}
+              className={styles.honorTextCol}
               initial={{ opacity: 0, x: -40 }}
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true, margin: "-80px" }}
-              transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+              transition={{ duration: 0.8, ease }}
+            >
+              <p className={styles.honorEyebrow}>Флагманський проєкт</p>
+              <div className={styles.honorBigNum}>130<span className={styles.honorPlus}>+</span></div>
+              <p className={styles.honorNumLabel}>спеціалізованих авто<br />доставлено на фронт разом з BeForUkraine</p>
+              <p className={styles.honorText}>{historyParagraphs[3] ?? historyParagraphs[0]}</p>
+              <div className={styles.honorTags}>
+                <span className={styles.honorTag}>Реанімобілі на фронт</span>
+                <span className={styles.honorTag}>На Щиті</span>
+                <span className={styles.honorTag}>Авто-майстерня</span>
+                <span className={styles.honorTag}>Допомога з інвалідністю</span>
+              </div>
+            </motion.div>
+
+            <motion.div
+              className={styles.honorImageCol}
+              initial={{ opacity: 0, x: 40 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true, margin: "-80px" }}
+              transition={{ duration: 0.8, ease, delay: 0.1 }}
             >
               <div className={styles.patchFrame}>
                 <GalleryItem src={patchesImage}>
@@ -148,7 +235,7 @@ export default function WhoWeAreRedesign({ dictionary }: WhoWeAreRedesignProps) 
                     <div className={styles.patchFrameInner} />
                     <div className={styles.patchZoomBadge}>
                       <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-                        <path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/>
+                        <path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7" />
                       </svg>
                     </div>
                   </div>
@@ -156,24 +243,16 @@ export default function WhoWeAreRedesign({ dictionary }: WhoWeAreRedesignProps) 
               </div>
               <p className={styles.honorCaption}>Стіна подяк від наших захисників</p>
             </motion.div>
-
-            <motion.div
-              className={styles.honorTextCol}
-              initial={{ opacity: 0, x: 40 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true, margin: "-80px" }}
-              transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1], delay: 0.1 }}
-            >
-              <h2 className={styles.sectionTitle}>{historyTitle.toUpperCase()}</h2>
-              <p className={styles.honorText}>{historyParagraphs[0]}</p>
-            </motion.div>
           </div>
         </section>
 
-        {/* ───── Section 4: Photo Gallery ───── */}
+        {/* ───── Section 4: Gallery ───── */}
         <section className={styles.gallerySection}>
           <div className={styles.galleryHeader}>
-            <h2 className={styles.galleryTitle}>{dictionary.about.gallery_title}</h2>
+            <motion.div {...fadeUp}>
+              <p className={styles.galleryEyebrow}>Хроніка</p>
+              <h2 className={styles.galleryTitle}>{dictionary.about.gallery_title}</h2>
+            </motion.div>
             <div className={styles.titleLine} />
           </div>
 
@@ -181,7 +260,7 @@ export default function WhoWeAreRedesign({ dictionary }: WhoWeAreRedesignProps) 
             initial={{ opacity: 0, y: 40 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: "-100px" }}
-            transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+            transition={{ duration: 0.8, ease }}
           >
             <div className={styles.galleryGrid}>
               {displayGallery.map((img, idx) => {
@@ -197,7 +276,7 @@ export default function WhoWeAreRedesign({ dictionary }: WhoWeAreRedesignProps) 
                       initial={{ opacity: 0, scale: 0.96 }}
                       whileInView={{ opacity: 1, scale: 1 }}
                       viewport={{ once: true, margin: "-50px" }}
-                      transition={{ duration: 0.55, delay: (idx % 4) * 0.08, ease: [0.16, 1, 0.3, 1] }}
+                      transition={{ duration: 0.55, delay: (idx % 4) * 0.08, ease }}
                       className={clsx(styles.galleryItem, bentoClass)}
                     >
                       <Image
@@ -208,9 +287,10 @@ export default function WhoWeAreRedesign({ dictionary }: WhoWeAreRedesignProps) 
                         className={styles.galleryImg}
                       />
                       <div className={styles.zoomOverlay} />
+                      <div className={styles.galleryCaption}>{img.caption}</div>
                       <div className={styles.zoomIcon}>
                         <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                          <path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/>
+                          <path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7" />
                         </svg>
                       </div>
                     </motion.div>
@@ -220,6 +300,7 @@ export default function WhoWeAreRedesign({ dictionary }: WhoWeAreRedesignProps) 
             </div>
           </motion.div>
         </section>
+
       </div>
     </GalleryProvider>
   );
