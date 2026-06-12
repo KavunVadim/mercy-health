@@ -7,6 +7,7 @@ import clsx from "clsx";
 import type { Dictionary } from "@/types/content";
 import AboutHero from "./AboutHero";
 import HistoryGallery from "./HistoryGallery";
+import WhoWeAreRedesign from "./WhoWeAreRedesign";
 
 type AboutSectionId = "who_we_are" | "mission" | "media";
 
@@ -49,25 +50,7 @@ export default function AboutUs({ dictionary }: { dictionary: Dictionary }) {
             transition={{ duration: 0.4, ease: "easeOut" }}
           >
             {activeSection === "who_we_are" && (
-              <div className={styles.sectionBlock}>
-                <AboutHero images={dict.about.hero_images || []} />
-                <h2 className={styles.title}>{dict.about.history.title}</h2>
-                {(() => {
-                  const paragraphs = dict.about.history.content.split('\n\n');
-                  const mid = Math.ceil(paragraphs.length / 2);
-                  return (
-                    <>
-                      {paragraphs.slice(0, mid).map((p, i) => (
-                        <p key={i} className={styles.text}>{p}</p>
-                      ))}
-                      <HistoryGallery images={dict.about.history.images || []} />
-                      {paragraphs.slice(mid).map((p, i) => (
-                        <p key={mid + i} className={styles.text}>{p}</p>
-                      ))}
-                    </>
-                  );
-                })()}
-              </div>
+              <WhoWeAreRedesign dictionary={dictionary} />
             )}
 
             {activeSection === "mission" && (

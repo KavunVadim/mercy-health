@@ -6,6 +6,7 @@ import styles from '@/app/admin/admin.module.css';
 import { useToast } from '@/components/admin/ui/Toast';
 import SupportCardEditor from '@/components/admin/SupportCardEditor';
 import GalleryEditor from '@/components/admin/GalleryEditor';
+import ImageUploader from '@/components/admin/ImageUploader';
 
 export default function AdminContentPage() {
   const [form, setForm] = useState({
@@ -26,6 +27,8 @@ export default function AdminContentPage() {
     card_label_details_uk: '', card_label_details_en: '',
   });
   const [aboutHeroImages, setAboutHeroImages] = useState<string[]>([]);
+  const [aboutHeroImage, setAboutHeroImage] = useState<string>('');
+  const [aboutPatchesImage, setAboutPatchesImage] = useState<string>('');
   const [aboutHistoryImages, setAboutHistoryImages] = useState<string[]>([]);
   const [supportCards, setSupportCards] = useState<{ id: string; title: string; description: string; bank: string; link: string; icon?: string; image?: string }[]>([]);
   const [supportCardsEn, setSupportCardsEn] = useState<{ id: string; title: string; description: string; bank: string; link: string; image?: string }[]>([]);
@@ -73,6 +76,8 @@ export default function AdminContentPage() {
         card_label_details_en: d.card_label_details_en || '',
       });
       setAboutHeroImages(d.about_hero_images || []);
+      setAboutHeroImage(d.about_hero_image || '');
+      setAboutPatchesImage(d.about_patches_image || '');
       setAboutHistoryImages(d.about_history_images || []);
       setSupportCards(d.support_cards || []);
       setSupportCardsEn(d.support_cards_en || []);
@@ -88,7 +93,17 @@ export default function AdminContentPage() {
     try {
       let parsedAccounts = null;
       try { parsedAccounts = bankAccounts ? JSON.parse(bankAccounts) : null; } catch {}
-      const body = { ...form, support_cards: supportCards, support_cards_en: supportCardsEn, documents, bank_accounts: parsedAccounts, about_hero_images: aboutHeroImages, about_history_images: aboutHistoryImages };
+      const body = { 
+        ...form, 
+        support_cards: supportCards, 
+        support_cards_en: supportCardsEn, 
+        documents, 
+        bank_accounts: parsedAccounts, 
+        about_hero_images: aboutHeroImages, 
+        about_hero_image: aboutHeroImage,
+        about_patches_image: aboutPatchesImage,
+        about_history_images: aboutHistoryImages 
+      };
       const res = await fetch('/api/admin/content', { method: 'PUT', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(body) });
       if (res.ok) success('Content saved successfully');
       else error('Failed to save content');
@@ -191,10 +206,31 @@ export default function AdminContentPage() {
                   <h2 className={styles.settingsSectionTitle}>About Us Hero Images</h2>
                 </div>
                 <div className={styles.settingsSectionBody}>
-                  <GalleryEditor
-                    value={aboutHeroImages}
-                    onChange={setAboutHeroImages}
-                    label="Hero Gallery"
+                  <ImageUploader
+                    value={aboutHeroImage}
+                    onChange={setAboutHeroImage}
+                    label="Main Hero Image (featured next to title)"
+                  />
+                  <div style={{ marginTop: '1.5rem' }}>
+                    <GalleryEditor
+                      value={aboutHeroImages}
+                      onChange={setAboutHeroImages}
+                      label="Alternative Hero Images (Carousel)"
+                    />
+                  </div>
+                </div>
+              </div>
+
+              <div className={styles.settingsSection}>
+                <div className={styles.settingsSectionHeader}>
+                  <Image size={16} className={styles.settingsSectionIcon} strokeWidth={2} />
+                  <h2 className={styles.settingsSectionTitle}>Honor Wall (Patches)</h2>
+                </div>
+                <div className={styles.settingsSectionBody}>
+                  <ImageUploader
+                    value={aboutPatchesImage}
+                    onChange={setAboutPatchesImage}
+                    label="Wall of Honor Image (Patches)"
                   />
                 </div>
               </div>

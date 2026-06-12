@@ -8,6 +8,8 @@ interface ContentFields {
     mission?: { title?: string; content?: string };
     media?: { title?: string; content?: string };
     hero_images?: string[];
+    hero_image?: string;
+    patches_image?: string;
   };
   support?: {
     cards?: { items?: unknown[]; monobank?: string; privatbank?: string; details?: string };
@@ -81,6 +83,8 @@ export async function GET() {
       stats_donors: ukDoc.stats?.donors_value || '',
       documents: ukDoc.reports?.documents || [],
       about_hero_images: ukDoc.about?.hero_images || [],
+      about_hero_image: ukDoc.about?.hero_image || '',
+      about_patches_image: ukDoc.about?.patches_image || '',
       hero_title_uk: ukDoc.hero?.title || '',
       hero_title_en: enDoc.hero?.title || '',
       hero_description_uk: ukDoc.hero?.description || '',
@@ -103,6 +107,8 @@ export async function PUT(request: Request) {
         mission: { title: body.about_mission_title_uk || '', content: body.about_mission_content_uk || '' },
         media: { title: body.about_media_title_uk || '', content: body.about_media_content_uk || '' },
         hero_images: body.about_hero_images || [],
+        hero_image: body.about_hero_image || '',
+        patches_image: body.about_patches_image || '',
       },
       support: {
         cards: {
@@ -132,6 +138,8 @@ export async function PUT(request: Request) {
         mission: { title: body.about_mission_title_en || '', content: body.about_mission_content_en || '' },
         media: { title: body.about_media_title_en || '', content: body.about_media_content_en || '' },
         hero_images: body.about_hero_images || [],
+        hero_image: body.about_hero_image || '',
+        patches_image: body.about_patches_image || '',
       },
       support: {
         cards: {

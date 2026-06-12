@@ -178,6 +178,8 @@ export interface Dictionary {
       images?: string[];
     };
     hero_images?: string[];
+    hero_image?: string;
+    patches_image?: string;
     mission: {
       title: string;
       content: string;
