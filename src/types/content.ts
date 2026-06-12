@@ -169,6 +169,7 @@ export interface Dictionary {
     };
     sidebar: {
       who_we_are: string;
+      path_of_mercy?: string;
       mission: string;
       media: string;
     };
@@ -177,6 +178,7 @@ export interface Dictionary {
       content: string;
       images?: string[];
     };
+    gallery_title: string;
     hero_images?: string[];
     hero_image?: string;
     patches_image?: string;

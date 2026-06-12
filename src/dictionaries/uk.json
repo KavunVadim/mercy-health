@@ -39,6 +39,7 @@
     },
     "sidebar": {
       "who_we_are": "Хто ми",
+      "path_of_mercy": "Шлях Милосердя",
       "mission": "Місія та цінності",
       "media": "Медіа про нас"
     },
@@ -52,6 +53,7 @@
     "media": {
       "title": "Медіа про нас"
     },
+    "gallery_title": "Фотогалерея",
     "contacts_tab": {
       "title": "Зв'яжіться з нами",
       "form": {

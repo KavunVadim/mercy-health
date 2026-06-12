@@ -153,8 +153,8 @@ export default function RedesignedAboutUs({ dictionary }: RedesignedAboutUsProps
                     <div className={styles.honorContent}>
                       <h2 className={styles.sectionTitle}>Шлях Милосердя</h2>
                       <div className={styles.historyColumns}>
+                        <p className={styles.historyText}>{historyText[0]}</p>
                         <p className={styles.historyText}>{historyText[1]}</p>
-                        <p className={styles.historyText}>{historyText[2]}</p>
                       </div>
                       {isAdminMode && (
                         <div className={styles.editOverlay}>

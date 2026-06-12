@@ -39,6 +39,7 @@
     },
     "sidebar": {
       "who_we_are": "Who We Are",
+      "path_of_mercy": "Path of Mercy",
       "mission": "Mission & Values",
       "media": "Media About Us"
     },
@@ -51,6 +52,7 @@
     "media": {
       "title": "Media About Us"
     },
+    "gallery_title": "Photo Gallery",
     "contacts_tab": {
       "title": "Get in Touch",
       "form": {
