@@ -104,6 +104,12 @@ export default function BankDetails({ dictionary }: { dictionary: Dictionary }) 
         <p className={styles.orgValue}>{bank_details.beneficiary_value}</p>
         <div className={styles.orgMeta}>
           <span>{bank_details.edrpou}: <b>{bank_details.edrpou_value}</b></span>
+          {bank_details.bank_name_value && (
+            <span>{bank_details.bank_name}: <b>{bank_details.bank_name_value}</b></span>
+          )}
+          {bank_details.purpose_value && (
+            <span>{bank_details.purpose}: <b>{bank_details.purpose_value}</b></span>
+          )}
         </div>
       </div>
     </div>

@@ -1,5 +1,5 @@
 import { NextResponse } from 'next/server';
-import { revalidateTag } from 'next/cache';
+import { revalidatePath } from 'next/cache';
 import { getDb } from '@/lib/mongodb';
 
 export async function GET(request: Request) {
@@ -30,7 +30,8 @@ export async function POST(request: Request) {
       updatedAt: new Date(),
     };
     const result = await db.collection('photos').insertOne(doc);
-    revalidateTag('dictionary', { expire: 0 });
+    revalidatePath('/uk/news');
+    revalidatePath('/en/news');
     return NextResponse.json({ ...doc, _id: result.insertedId }, { status: 201 });
   } catch (e) {
     console.error('Failed to create photo:', e);

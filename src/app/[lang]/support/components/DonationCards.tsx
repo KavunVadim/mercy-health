@@ -22,17 +22,22 @@ interface BankBrand {
 
 const BANK_BRANDS: Record<string, BankBrand> = {
   monobank:    { logo: '/icons/banks/monobank.png',    color: '#000000',   label: 'Monobank' },
+  монобанк:   { logo: '/icons/banks/monobank.png',    color: '#000000',   label: 'Monobank' },
   privatbank:  { logo: '/icons/banks/privatbank.svg',  color: '#7B2CBF',   label: 'PrivatBank' },
+  приватбанк:  { logo: '/icons/banks/privatbank.svg',  color: '#7B2CBF',   label: 'PrivatBank' },
   privat24:    { logo: '/icons/banks/privatbank.svg',  color: '#7B2CBF',   label: 'Privat24' },
   pumb:        { logo: '/icons/banks/pumb.svg',        color: '#E30613',   label: 'PUMB' },
   tascombank:  { logo: '/icons/banks/tascombank.svg',  color: '#003D7A',   label: 'Tascombank' },
   sensebank:   { logo: '/icons/banks/sensebank.svg',   color: '#00ADEF',   label: 'Sense Bank' },
+  осчадбанк:  { logo: '/icons/banks/oschadbank.svg',  color: '#006B3F',   label: 'Oschadbank' },
+  ощадбанк:   { logo: '/icons/banks/oschadbank.svg',  color: '#006B3F',   label: 'Oschadbank' },
   oschadbank:  { logo: '/icons/banks/oschadbank.svg',  color: '#006B3F',   label: 'Oschadbank' },
   ukrgasbank:  { logo: '/icons/banks/ukrgasbank.svg',  color: '#003B7A',   label: 'Ukrgasbank' },
+  укргазбанк: { logo: '/icons/banks/ukrgasbank.svg',  color: '#003B7A',   label: 'Ukrgasbank' },
 };
 
 function findBank(bank: string): BankBrand | null {
-  const key = bank.toLowerCase().replace(/[^a-z0-9]/g, '');
+  const key = bank.toLowerCase().replace(/[^a-zа-яіїєґ0-9]/g, '');
   for (const [name, brand] of Object.entries(BANK_BRANDS)) {
     if (key.includes(name)) return brand;
   }
@@ -63,14 +68,10 @@ export default function DonationCards({ dictionary }: { dictionary: Dictionary }
     <div className={styles.cardsGrid}>
       {cards.items.map((item: DonationCard) => {
         const bank = findBank(item.bank);
-        const brandColor = bank?.color || 'var(--accent)';
 
         return (
           <div key={item.id} className={styles.donationCard}>
-            <div
-              className={styles.cardTopAccent}
-              style={{ background: brandColor }}
-            />
+            <div className={styles.cardTopAccent} />
 
             <div className={styles.cardInner}>
               <div className={styles.cardHeader}>
@@ -80,14 +81,9 @@ export default function DonationCards({ dictionary }: { dictionary: Dictionary }
 
                 <div className={styles.cardTitleGroup}>
                   <h3 className={styles.cardTitle}>{item.title}</h3>
-                  {bank && (
-                    <div
-                      className={styles.cardBankLabel}
-                      style={{ color: brandColor }}
-                    >
-                      {bank.label}
-                    </div>
-                  )}
+                  <div className={styles.cardBankLabel}>
+                    {bank?.label || item.bank}
+                  </div>
                 </div>
               </div>
 
@@ -100,7 +96,9 @@ export default function DonationCards({ dictionary }: { dictionary: Dictionary }
                   rel="noopener noreferrer"
                   className={styles.supportBtn}
                 >
-                  {cards.monobank}
+                  {item.bank.toLowerCase().includes('mono') || item.bank.toLowerCase().includes('моно') ? cards.monobank
+                    : item.bank.toLowerCase().includes('privat') || item.bank.toLowerCase().includes('приват') ? cards.privatbank
+                    : (bank?.label || item.bank)}
                   <ArrowUpRight size={16} strokeWidth={2.5} />
                 </a>
               </div>

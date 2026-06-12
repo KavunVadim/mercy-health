@@ -175,7 +175,9 @@ export interface Dictionary {
     history: {
       title: string;
       content: string;
+      images?: string[];
     };
+    hero_images?: string[];
     mission: {
       title: string;
       content: string;
@@ -248,6 +250,10 @@ export interface Dictionary {
       beneficiary_value: string;
       edrpou: string;
       edrpou_value: string;
+      bank_name: string;
+      bank_name_value: string;
+      purpose: string;
+      purpose_value: string;
       copied: string;
       copy: string;
       tabs: Record<"ua" | "intl" | "crypto", string>;

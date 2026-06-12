@@ -1,10 +1,11 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import { Check, Plus, X, FileText, SlidersHorizontal, HeartHandshake, CreditCard, FileBadge } from 'lucide-react';
+import { Check, Plus, X, FileText, SlidersHorizontal, HeartHandshake, CreditCard, FileBadge, Image } from 'lucide-react';
 import styles from '@/app/admin/admin.module.css';
 import { useToast } from '@/components/admin/ui/Toast';
 import SupportCardEditor from '@/components/admin/SupportCardEditor';
+import GalleryEditor from '@/components/admin/GalleryEditor';
 
 export default function AdminContentPage() {
   const [form, setForm] = useState({
@@ -20,9 +21,14 @@ export default function AdminContentPage() {
     beneficiary_value_uk: '', beneficiary_value_en: '',
     edrpou_value: '', bank_name_value_uk: '', bank_name_value_en: '',
     purpose_value_uk: '', purpose_value_en: '',
+    card_label_monobank_uk: '', card_label_monobank_en: '',
+    card_label_privatbank_uk: '', card_label_privatbank_en: '',
+    card_label_details_uk: '', card_label_details_en: '',
   });
+  const [aboutHeroImages, setAboutHeroImages] = useState<string[]>([]);
+  const [aboutHistoryImages, setAboutHistoryImages] = useState<string[]>([]);
   const [supportCards, setSupportCards] = useState<{ id: string; title: string; description: string; bank: string; link: string; icon?: string; image?: string }[]>([]);
-  const [supportCardsEn, setSupportCardsEn] = useState<{ id: string; title: string; description: string; bank: string; link: string }[]>([]);
+  const [supportCardsEn, setSupportCardsEn] = useState<{ id: string; title: string; description: string; bank: string; link: string; image?: string }[]>([]);
   const [documents, setDocuments] = useState<{ id: string; title: string; url: string }[]>([]);
   const [saving, setSaving] = useState(false);
   const [loaded, setLoaded] = useState(false);
@@ -59,7 +65,15 @@ export default function AdminContentPage() {
         bank_name_value_en: d.bank_name_value_en || '',
         purpose_value_uk: d.purpose_value_uk || '',
         purpose_value_en: d.purpose_value_en || '',
+        card_label_monobank_uk: d.card_label_monobank_uk || '',
+        card_label_monobank_en: d.card_label_monobank_en || '',
+        card_label_privatbank_uk: d.card_label_privatbank_uk || '',
+        card_label_privatbank_en: d.card_label_privatbank_en || '',
+        card_label_details_uk: d.card_label_details_uk || '',
+        card_label_details_en: d.card_label_details_en || '',
       });
+      setAboutHeroImages(d.about_hero_images || []);
+      setAboutHistoryImages(d.about_history_images || []);
       setSupportCards(d.support_cards || []);
       setSupportCardsEn(d.support_cards_en || []);
       setDocuments(d.documents || []);
@@ -74,7 +88,7 @@ export default function AdminContentPage() {
     try {
       let parsedAccounts = null;
       try { parsedAccounts = bankAccounts ? JSON.parse(bankAccounts) : null; } catch {}
-      const body = { ...form, support_cards: supportCards, support_cards_en: supportCardsEn, documents, bank_accounts: parsedAccounts };
+      const body = { ...form, support_cards: supportCards, support_cards_en: supportCardsEn, documents, bank_accounts: parsedAccounts, about_hero_images: aboutHeroImages, about_history_images: aboutHistoryImages };
       const res = await fetch('/api/admin/content', { method: 'PUT', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(body) });
       if (res.ok) success('Content saved successfully');
       else error('Failed to save content');
@@ -151,23 +165,17 @@ export default function AdminContentPage() {
         </div>
       </div>
 
-      <div style={{ display: 'flex', gap: '1.5rem', alignItems: 'flex-start' }}>
-        {/* Sidebar tabs */}
-        <div style={{ display: 'flex', flexDirection: 'column', gap: '0.25rem', minWidth: 200, flexShrink: 0, position: 'sticky', top: '1rem' }}>
+      <div className={styles.contentTabsLayout}>
+        {/* Tab bar - horizontal on mobile, vertical sidebar on desktop */}
+        <div className={styles.contentTabsSidebar}>
           {tabs.map(t => {
             const Icon = t.icon;
             return (
               <button key={t.key} onClick={() => setTab(t.key)}
-                style={{
-                  display: 'flex', alignItems: 'center', gap: '0.625rem', padding: '0.625rem 0.875rem',
-                  borderRadius: 'var(--admin-radius-sm)', border: 'none', cursor: 'pointer',
-                  fontSize: '0.85rem', fontWeight: 600, textAlign: 'left',
-                  background: tab === t.key ? 'var(--admin-accent-light)' : 'transparent',
-                  color: tab === t.key ? 'var(--admin-accent)' : 'var(--admin-text-secondary)',
-                  transition: 'background 0.15s, color 0.15s', fontFamily: 'var(--admin-font)',
-                }}>
+                className={`${styles.contentTabBtn} ${tab === t.key ? styles.contentTabBtnActive : ''}`}
+                title={tab !== t.key ? t.label : undefined}>
                 <Icon size={16} strokeWidth={2} style={{ flexShrink: 0 }} />
-                {t.label}
+                <span className={styles.contentTabLabel}>{t.label}</span>
               </button>
             );
           })}
@@ -177,6 +185,20 @@ export default function AdminContentPage() {
         <form id="content-form" onSubmit={handleSave} style={{ flex: 1, minWidth: 0 }}>
           {tab === 'about' && (
             <div style={{ display: 'flex', flexDirection: 'column', gap: '1.25rem' }}>
+              <div className={styles.settingsSection}>
+                <div className={styles.settingsSectionHeader}>
+                  <Image size={16} className={styles.settingsSectionIcon} strokeWidth={2} />
+                  <h2 className={styles.settingsSectionTitle}>About Us Hero Images</h2>
+                </div>
+                <div className={styles.settingsSectionBody}>
+                  <GalleryEditor
+                    value={aboutHeroImages}
+                    onChange={setAboutHeroImages}
+                    label="Hero Gallery"
+                  />
+                </div>
+              </div>
+
               <div className={styles.settingsSection}>
                 <div className={styles.settingsSectionHeader}>
                   <FileText size={16} className={styles.settingsSectionIcon} strokeWidth={2} />
@@ -189,6 +211,13 @@ export default function AdminContentPage() {
                   </div>
                   <div className={styles.formGroup} style={{ marginTop: '1rem' }}><label className={styles.label}>Content (Ukrainian)</label><textarea className={styles.textarea} rows={10} value={form.about_history_content_uk} onChange={e => setForm({ ...form, about_history_content_uk: e.target.value })} /></div>
                   <div className={styles.formGroup} style={{ marginTop: '1rem' }}><label className={styles.label}>Content (English)</label><textarea className={styles.textarea} rows={10} value={form.about_history_content_en} onChange={e => setForm({ ...form, about_history_content_en: e.target.value })} /></div>
+                  <div style={{ marginTop: '1rem' }}>
+                    <GalleryEditor
+                      value={aboutHistoryImages}
+                      onChange={setAboutHistoryImages}
+                      label="History Gallery (appears within the text)"
+                    />
+                  </div>
                 </div>
               </div>
 
@@ -244,18 +273,54 @@ export default function AdminContentPage() {
           )}
 
           {tab === 'support' && (
-            <div className={styles.settingsSection}>
-              <div className={styles.settingsSectionHeader}>
-                <HeartHandshake size={16} className={styles.settingsSectionIcon} strokeWidth={2} />
-                <h2 className={styles.settingsSectionTitle}>Donation Cards</h2>
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '1.25rem' }}>
+              <div className={styles.settingsSection}>
+                <div className={styles.settingsSectionHeader}>
+                  <HeartHandshake size={16} className={styles.settingsSectionIcon} strokeWidth={2} />
+                  <h2 className={styles.settingsSectionTitle}>Donation Cards</h2>
+                </div>
+                <div className={styles.settingsSectionBody}>
+                  <SupportCardEditor
+                    cards={supportCards}
+                    cardsEn={supportCardsEn}
+                    onCardsChange={setSupportCards}
+                    onCardsEnChange={setSupportCardsEn}
+                  />
+                </div>
               </div>
-              <div className={styles.settingsSectionBody}>
-                <SupportCardEditor
-                  cards={supportCards}
-                  cardsEn={supportCardsEn}
-                  onCardsChange={setSupportCards}
-                  onCardsEnChange={setSupportCardsEn}
-                />
+              <div className={styles.settingsSection}>
+                <div className={styles.settingsSectionHeader}>
+                  <HeartHandshake size={16} className={styles.settingsSectionIcon} strokeWidth={2} />
+                  <h2 className={styles.settingsSectionTitle}>Card Button Labels</h2>
+                </div>
+                <div className={styles.settingsSectionBody}>
+                  <div className={styles.formGrid}>
+                    <div className={styles.formGroup}>
+                      <label className={styles.label}>Monobank button (UK)</label>
+                      <input className={styles.input} value={form.card_label_monobank_uk} onChange={e => setForm({ ...form, card_label_monobank_uk: e.target.value })} placeholder="Підтримати на Monobank" />
+                    </div>
+                    <div className={styles.formGroup}>
+                      <label className={styles.label}>Monobank button (EN)</label>
+                      <input className={styles.input} value={form.card_label_monobank_en} onChange={e => setForm({ ...form, card_label_monobank_en: e.target.value })} placeholder="Support on Monobank" />
+                    </div>
+                    <div className={styles.formGroup}>
+                      <label className={styles.label}>PrivatBank button (UK)</label>
+                      <input className={styles.input} value={form.card_label_privatbank_uk} onChange={e => setForm({ ...form, card_label_privatbank_uk: e.target.value })} placeholder="Переказати через Приват24" />
+                    </div>
+                    <div className={styles.formGroup}>
+                      <label className={styles.label}>PrivatBank button (EN)</label>
+                      <input className={styles.input} value={form.card_label_privatbank_en} onChange={e => setForm({ ...form, card_label_privatbank_en: e.target.value })} placeholder="Transfer via Privat24" />
+                    </div>
+                    <div className={styles.formGroup}>
+                      <label className={styles.label}>Other banks button (UK)</label>
+                      <input className={styles.input} value={form.card_label_details_uk} onChange={e => setForm({ ...form, card_label_details_uk: e.target.value })} placeholder="Переглянути деталі" />
+                    </div>
+                    <div className={styles.formGroup}>
+                      <label className={styles.label}>Other banks button (EN)</label>
+                      <input className={styles.input} value={form.card_label_details_en} onChange={e => setForm({ ...form, card_label_details_en: e.target.value })} placeholder="View details" />
+                    </div>
+                  </div>
+                </div>
               </div>
             </div>
           )}

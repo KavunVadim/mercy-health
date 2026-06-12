@@ -1,5 +1,5 @@
 import { NextResponse } from 'next/server';
-import { revalidateTag } from 'next/cache';
+import { revalidatePath } from 'next/cache';
 import { getDb } from '@/lib/mongodb';
 import { uploadToS3, computeFileHash } from '@/lib/s3';
 
@@ -98,7 +98,8 @@ export async function POST(request: Request) {
 
     const result = await db.collection('photos').insertOne(doc);
 
-    revalidateTag('dictionary', { expire: 0 });
+    revalidatePath('/uk');
+    revalidatePath('/en');
 
     return NextResponse.json({ ...doc, _id: result.insertedId, dedup: false }, { status: 201 });
   } catch (e: any) {

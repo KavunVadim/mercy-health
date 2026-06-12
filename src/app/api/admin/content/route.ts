@@ -1,15 +1,16 @@
 import { NextResponse } from 'next/server';
-import { revalidateTag } from 'next/cache';
+import { revalidatePath } from 'next/cache';
 import { getDb } from '@/lib/mongodb';
 
 interface ContentFields {
   about?: {
-    history?: { title?: string; content?: string };
+    history?: { title?: string; content?: string; images?: string[] };
     mission?: { title?: string; content?: string };
     media?: { title?: string; content?: string };
+    hero_images?: string[];
   };
   support?: {
-    cards?: { items?: unknown[] };
+    cards?: { items?: unknown[]; monobank?: string; privatbank?: string; details?: string };
     bank_details?: {
       beneficiary_value?: string;
       edrpou_value?: string;
@@ -50,6 +51,7 @@ export async function GET() {
       about_history_title_en: enDoc.about?.history?.title || '',
       about_history_content_uk: ukDoc.about?.history?.content || '',
       about_history_content_en: enDoc.about?.history?.content || '',
+      about_history_images: ukDoc.about?.history?.images || [],
       about_mission_title_uk: ukDoc.about?.mission?.title || '',
       about_mission_title_en: enDoc.about?.mission?.title || '',
       about_mission_content_uk: ukDoc.about?.mission?.content || '',
@@ -60,6 +62,12 @@ export async function GET() {
       about_media_content_en: enDoc.about?.media?.content || '',
       support_cards: ukDoc.support?.cards?.items || [],
       support_cards_en: enDoc.support?.cards?.items || [],
+      card_label_monobank_uk: ukDoc.support?.cards?.monobank || '',
+      card_label_monobank_en: enDoc.support?.cards?.monobank || '',
+      card_label_privatbank_uk: ukDoc.support?.cards?.privatbank || '',
+      card_label_privatbank_en: enDoc.support?.cards?.privatbank || '',
+      card_label_details_uk: ukDoc.support?.cards?.details || '',
+      card_label_details_en: enDoc.support?.cards?.details || '',
       beneficiary_value_uk: ukDoc.support?.bank_details?.beneficiary_value || '',
       beneficiary_value_en: enDoc.support?.bank_details?.beneficiary_value || '',
       edrpou_value: ukDoc.support?.bank_details?.edrpou_value || '',
@@ -72,6 +80,7 @@ export async function GET() {
       stats_helped: ukDoc.stats?.helped_value || '',
       stats_donors: ukDoc.stats?.donors_value || '',
       documents: ukDoc.reports?.documents || [],
+      about_hero_images: ukDoc.about?.hero_images || [],
       hero_title_uk: ukDoc.hero?.title || '',
       hero_title_en: enDoc.hero?.title || '',
       hero_description_uk: ukDoc.hero?.description || '',
@@ -90,12 +99,18 @@ export async function PUT(request: Request) {
     const ukUpdate = {
       ...ukDoc,
       about: {
-        history: { title: body.about_history_title_uk || '', content: body.about_history_content_uk || '' },
+        history: { title: body.about_history_title_uk || '', content: body.about_history_content_uk || '', images: body.about_history_images || [] },
         mission: { title: body.about_mission_title_uk || '', content: body.about_mission_content_uk || '' },
         media: { title: body.about_media_title_uk || '', content: body.about_media_content_uk || '' },
+        hero_images: body.about_hero_images || [],
       },
       support: {
-        cards: { items: body.support_cards || [] },
+        cards: {
+          items: body.support_cards || [],
+          ...(body.card_label_monobank_uk ? { monobank: body.card_label_monobank_uk } : {}),
+          ...(body.card_label_privatbank_uk ? { privatbank: body.card_label_privatbank_uk } : {}),
+          ...(body.card_label_details_uk ? { details: body.card_label_details_uk } : {}),
+        },
         bank_details: {
           beneficiary_value: body.beneficiary_value_uk || '',
           edrpou_value: body.edrpou_value || '',
@@ -113,12 +128,18 @@ export async function PUT(request: Request) {
     const enUpdate = {
       ...enDoc,
       about: {
-        history: { title: body.about_history_title_en || '', content: body.about_history_content_en || '' },
+        history: { title: body.about_history_title_en || '', content: body.about_history_content_en || '', images: body.about_history_images || [] },
         mission: { title: body.about_mission_title_en || '', content: body.about_mission_content_en || '' },
         media: { title: body.about_media_title_en || '', content: body.about_media_content_en || '' },
+        hero_images: body.about_hero_images || [],
       },
       support: {
-        cards: { items: body.support_cards_en || [] },
+        cards: {
+          items: body.support_cards_en || [],
+          ...(body.card_label_monobank_en ? { monobank: body.card_label_monobank_en } : {}),
+          ...(body.card_label_privatbank_en ? { privatbank: body.card_label_privatbank_en } : {}),
+          ...(body.card_label_details_en ? { details: body.card_label_details_en } : {}),
+        },
         bank_details: {
           beneficiary_value: body.beneficiary_value_en || '',
           edrpou_value: body.edrpou_value || '',
@@ -138,7 +159,12 @@ export async function PUT(request: Request) {
       setContent('en', enUpdate),
     ]);
 
-    revalidateTag('dictionary', { expire: 0 });
+    revalidatePath('/uk/support');
+    revalidatePath('/en/support');
+    revalidatePath('/uk/about');
+    revalidatePath('/en/about');
+    revalidatePath('/uk');
+    revalidatePath('/en');
 
     return NextResponse.json({ success: true });
   } catch (e) {

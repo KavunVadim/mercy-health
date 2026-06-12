@@ -1,5 +1,5 @@
 import { NextResponse } from 'next/server';
-import { revalidateTag } from 'next/cache';
+import { revalidatePath } from 'next/cache';
 import { getDb } from '@/lib/mongodb';
 import { ObjectId } from 'mongodb';
 
@@ -36,7 +36,14 @@ export async function PATCH(request: Request) {
     });
 
     await db.collection(collection).bulkWrite(ops);
-    revalidateTag('dictionary', { expire: 0 });
+    revalidatePath('/uk/news');
+    revalidatePath('/en/news');
+    revalidatePath('/uk/projects');
+    revalidatePath('/en/projects');
+    revalidatePath('/uk/reports');
+    revalidatePath('/en/reports');
+    revalidatePath('/uk');
+    revalidatePath('/en');
     return NextResponse.json({ success: true });
   } catch (e) {
     console.error('Reorder failed:', e);

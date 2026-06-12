@@ -1,5 +1,5 @@
 import { NextResponse } from 'next/server';
-import { revalidateTag, revalidatePath } from 'next/cache';
+import { revalidatePath } from 'next/cache';
 import { getDb } from '@/lib/mongodb';
 import { ObjectId } from 'mongodb';
 
@@ -29,7 +29,6 @@ export async function PUT(request: Request, { params }: { params: Promise<{ id: 
     );
     if (!value) return NextResponse.json({ error: 'Not found' }, { status: 404 });
     const slug = body.slug || body.id || id;
-    revalidateTag('dictionary', { expire: 0 });
     revalidatePath(`/uk/news/${slug}`, 'page');
     revalidatePath(`/en/news/${slug}`, 'page');
     return NextResponse.json(value);
@@ -46,7 +45,6 @@ export async function DELETE(_request: Request, { params }: { params: Promise<{ 
       ObjectId.isValid(id) ? { _id: new ObjectId(id) } : { id }
     );
     if (result.deletedCount === 0) return NextResponse.json({ error: 'Not found' }, { status: 404 });
-    revalidateTag('dictionary', { expire: 0 });
     revalidatePath('/uk/news', 'page');
     revalidatePath('/en/news', 'page');
     return NextResponse.json({ success: true });

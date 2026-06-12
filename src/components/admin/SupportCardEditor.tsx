@@ -16,16 +16,17 @@ interface SupportCard {
 
 interface SupportCardEditorProps {
   cards: SupportCard[];
-  cardsEn: { id: string; title: string; description: string; bank: string; link: string }[];
+  cardsEn: { id: string; title: string; description: string; bank: string; link: string; image?: string }[];
   onCardsChange: (cards: SupportCard[]) => void;
-  onCardsEnChange: (cards: { id: string; title: string; description: string; bank: string; link: string }[]) => void;
+  onCardsEnChange: (cards: { id: string; title: string; description: string; bank: string; link: string; image?: string }[]) => void;
 }
 
 export default function SupportCardEditor({ cards, cardsEn, onCardsChange, onCardsEnChange }: SupportCardEditorProps) {
   function addCard() {
     const id = `card-${Date.now()}`;
-    onCardsChange([...cards, { id, title: '', description: '', bank: '', link: '', image: '' }]);
-    onCardsEnChange([...cardsEn, { id: `card-en-${Date.now()}`, title: '', description: '', bank: '', link: '' }]);
+    const image = '';
+    onCardsChange([...cards, { id, title: '', description: '', bank: '', link: '', image }]);
+    onCardsEnChange([...cardsEn, { id: `card-en-${Date.now()}`, title: '', description: '', bank: '', link: '', image }]);
   }
 
   function removeCard(i: number) {
@@ -37,6 +38,12 @@ export default function SupportCardEditor({ cards, cardsEn, onCardsChange, onCar
     const updated = [...cards];
     (updated[i] as any)[field] = value;
     onCardsChange(updated);
+    const sharedFields = ['image', 'bank', 'link'];
+    if (sharedFields.includes(field)) {
+      const updatedEn = [...cardsEn];
+      (updatedEn[i] as any)[field] = value;
+      onCardsEnChange(updatedEn);
+    }
   }
 
   function updateCardEn(i: number, field: string, value: string) {

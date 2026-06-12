@@ -1,6 +1,8 @@
 'use client';
 
 import { useState, useRef, useEffect } from 'react';
+import { createPortal } from 'react-dom';
+import { X } from 'lucide-react';
 import styles from '@/app/admin/admin.module.css';
 import { uploadFile } from '@/lib/upload';
 
@@ -145,56 +147,57 @@ export default function ImageUploader({ value, onChange, label }: ImageUploaderP
         </div>
       )}
 
-      {showGallery && (
+      {showGallery && typeof window !== 'undefined' && createPortal(
         <div
-          style={{
-            position: 'fixed', inset: 0, zIndex: 2000, background: 'rgba(0,0,0,0.7)', backdropFilter: 'blur(4px)',
-            display: 'flex', alignItems: 'center', justifyContent: 'center', padding: '1rem',
-          }}
+          className={styles.modalBackdrop}
           onClick={() => setShowGallery(false)}
         >
           <div
             onClick={e => e.stopPropagation()}
-            style={{
-              background: 'var(--admin-surface)', border: '1px solid var(--admin-border)', borderRadius: 'var(--admin-radius-lg)', padding: '1.5rem',
-              maxWidth: '800px', width: '100%', maxHeight: '80vh', overflow: 'auto', color: 'var(--admin-text)'
-            }}
+            className={styles.modal}
+            style={{ maxWidth: '700px' }}
           >
-            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1rem' }}>
-              <h3 style={{ margin: 0, color: 'var(--admin-text)' }}>Select Image</h3>
-              <button onClick={() => setShowGallery(false)} style={{ background: 'none', border: 'none', fontSize: '1.5rem', cursor: 'pointer', padding: '0.25rem', color: 'var(--admin-text-secondary)' }}>✕</button>
+            <div className={styles.modalHeader}>
+              <h3 className={styles.modalTitle}>Select Image</h3>
+              <button className={styles.btnIcon} onClick={() => setShowGallery(false)} aria-label="Close"><X size={16} /></button>
             </div>
-            {loadingGallery ? (
-              <p style={{ color: 'var(--admin-text-muted)' }}>Loading...</p>
-            ) : gallery.length === 0 ? (
-              <p style={{ color: 'var(--admin-text-muted)' }}>No images uploaded yet.</p>
-            ) : (
-              <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(140px, 1fr))', gap: '0.75rem' }}>
-                {gallery.map(photo => (
-                  <div
-                    key={photo._id}
-                    onClick={() => selectFromGallery(photo)}
-                    style={{
-                      cursor: 'pointer', borderRadius: '8px', overflow: 'hidden',
-                      border: value === photo.url ? '3px solid var(--admin-accent)' : '2px solid var(--admin-border)',
-                      transition: 'border-color 0.15s',
-                      background: 'var(--admin-secondary)'
-                    }}
-                  >
-                    <img
-                      src={photo.url}
-                      alt={photo.title}
-                      style={{ width: '100%', height: '100px', objectFit: 'cover', display: 'block' }}
-                    />
-                    <div style={{ padding: '0.35rem', fontSize: '0.75rem', color: 'var(--admin-text-secondary)', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
-                      {photo.title}
+            <div className={styles.modalBody}>
+              {loadingGallery ? (
+                <p style={{ color: 'var(--admin-text-muted)' }}>Loading...</p>
+              ) : gallery.length === 0 ? (
+                <p style={{ color: 'var(--admin-text-muted)' }}>No images uploaded yet.</p>
+              ) : (
+                <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(140px, 1fr))', gap: '0.75rem' }}>
+                  {gallery.map(photo => (
+                    <div
+                      key={photo._id}
+                      onClick={() => selectFromGallery(photo)}
+                      style={{
+                        cursor: 'pointer', borderRadius: '8px', overflow: 'hidden',
+                        border: value === photo.url ? '3px solid var(--admin-accent)' : '2px solid var(--admin-border)',
+                        transition: 'border-color 0.15s',
+                        background: 'var(--admin-secondary)'
+                      }}
+                    >
+                      <img
+                        src={photo.url}
+                        alt={photo.title}
+                        style={{ width: '100%', height: '100px', objectFit: 'cover', display: 'block' }}
+                      />
+                      <div style={{ padding: '0.35rem', fontSize: '0.75rem', color: 'var(--admin-text-secondary)', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
+                        {photo.title}
+                      </div>
                     </div>
-                  </div>
-                ))}
-              </div>
-            )}
+                  ))}
+                </div>
+              )}
+            </div>
+            <div className={styles.modalFooter}>
+              <button type="button" onClick={() => setShowGallery(false)} className={`${styles.btn} ${styles.btnSecondary}`}>Close</button>
+            </div>
           </div>
-        </div>
+        </div>,
+        document.body
       )}
     </div>
   );

@@ -1,5 +1,5 @@
 import { NextResponse } from 'next/server';
-import { revalidateTag, revalidatePath } from 'next/cache';
+import { revalidatePath } from 'next/cache';
 import { getDb } from '@/lib/mongodb';
 import { slugify } from '@/lib/data-utils';
 
@@ -25,7 +25,8 @@ export async function POST(request: Request) {
       updatedAt: new Date(),
     };
     const result = await db.collection('partners').insertOne(doc);
-    revalidateTag('dictionary', { expire: 0 });
+    revalidatePath('/uk');
+    revalidatePath('/en');
     revalidatePath('/uk/about', 'page');
     revalidatePath('/en/about', 'page');
     return NextResponse.json({ ...doc, _id: result.insertedId }, { status: 201 });

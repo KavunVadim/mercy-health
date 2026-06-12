@@ -1,6 +1,7 @@
 'use client';
 
-import { useState, useRef } from 'react';
+import { useState, useRef, useEffect } from 'react';
+import { createPortal } from 'react-dom';
 import { Plus, Trash2, X, GripVertical } from 'lucide-react';
 import styles from '@/app/admin/admin.module.css';
 import { handleDragStart, handleDragOver, handleDragLeave, handleDrop, handleDragEnd } from '@/lib/dnd-reorder';
@@ -157,7 +158,7 @@ export default function GalleryEditor({ value, onChange, label }: GalleryEditorP
         </div>
       )}
 
-      {showPicker && (
+      {showPicker && typeof window !== 'undefined' && createPortal(
         <div
           className={styles.modalBackdrop}
           onClick={e => { if (e.target === e.currentTarget) setShowPicker(false); }}
@@ -215,7 +216,8 @@ export default function GalleryEditor({ value, onChange, label }: GalleryEditorP
               <button type="button" onClick={() => setShowPicker(false)} className={`${styles.btn} ${styles.btnSecondary}`}>Close</button>
             </div>
           </div>
-        </div>
+        </div>,
+        document.body
       )}
     </div>
   );

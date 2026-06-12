@@ -1,11 +1,12 @@
 "use client";
 
 import { useState } from "react";
-import Image from "next/image";
 import { motion, AnimatePresence } from "framer-motion";
 import styles from "./AboutUs.module.css";
 import clsx from "clsx";
 import type { Dictionary } from "@/types/content";
+import AboutHero from "./AboutHero";
+import HistoryGallery from "./HistoryGallery";
 
 type AboutSectionId = "who_we_are" | "mission" | "media";
 
@@ -49,18 +50,23 @@ export default function AboutUs({ dictionary }: { dictionary: Dictionary }) {
           >
             {activeSection === "who_we_are" && (
               <div className={styles.sectionBlock}>
+                <AboutHero images={dict.about.hero_images || []} />
                 <h2 className={styles.title}>{dict.about.history.title}</h2>
-                {dict.about.history.content.split('\n\n').map((paragraph: string, index: number) => (
-                  <p key={index} className={styles.text}>{paragraph}</p>
-                ))}
-                <div className={styles.imageWrapper}>
-                  <Image 
-                    src="https://images.unsplash.com/photo-1593113598332-cd288d649433?auto=format&fit=crop&q=80&w=1000" 
-                    alt="Foundation history" 
-                    fill 
-                    className={styles.image}
-                  />
-                </div>
+                {(() => {
+                  const paragraphs = dict.about.history.content.split('\n\n');
+                  const mid = Math.ceil(paragraphs.length / 2);
+                  return (
+                    <>
+                      {paragraphs.slice(0, mid).map((p, i) => (
+                        <p key={i} className={styles.text}>{p}</p>
+                      ))}
+                      <HistoryGallery images={dict.about.history.images || []} />
+                      {paragraphs.slice(mid).map((p, i) => (
+                        <p key={mid + i} className={styles.text}>{p}</p>
+                      ))}
+                    </>
+                  );
+                })()}
               </div>
             )}
 

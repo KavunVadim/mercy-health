@@ -1,5 +1,5 @@
 import { NextResponse } from 'next/server';
-import { revalidateTag } from 'next/cache';
+import { revalidatePath } from 'next/cache';
 import { getDb } from '@/lib/mongodb';
 
 export async function GET() {
@@ -23,7 +23,8 @@ export async function PUT(request: Request) {
       { $set: { key: 'main', ...body, updatedAt: new Date() } },
       { upsert: true }
     );
-    revalidateTag('dictionary', { expire: 0 });
+    revalidatePath('/uk');
+    revalidatePath('/en');
     return NextResponse.json({ success: true });
   } catch (e) {
     return NextResponse.json({ error: 'Failed to update settings' }, { status: 500 });

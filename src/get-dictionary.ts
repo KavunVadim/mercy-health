@@ -56,7 +56,7 @@ function deepMerge<T extends Record<string, unknown>>(target: T, source: Record<
             source[key],
           );
         }
-      } else {
+      } else if (source[key] !== '' && source[key] !== null && source[key] !== undefined) {
         output[key] = source[key];
       }
     });
@@ -68,8 +68,10 @@ async function fetchMongoData(locale: Locale) {
     const db = await getDb();
 
     const contentCol = locale === "uk" ? "content_uk" : "content_en";
-    const [contentDoc, newsDocs, projectsDocs, partnersDocs, reportsDocs, settingsDoc, galleryPhotos] = await Promise.all([
+    const ukContentCol = "content_uk";
+    const [contentDoc, ukContentDoc, newsDocs, projectsDocs, partnersDocs, reportsDocs, settingsDoc, galleryPhotos] = await Promise.all([
       db.collection(contentCol).findOne({ key: "main" }),
+      db.collection(ukContentCol).findOne({ key: "main" }),
       db.collection("news").find({}).sort({ order: -1, createdAt: -1 }).toArray(),
       db.collection("projects").find({}).sort({ order: -1, createdAt: -1 }).toArray(),
       db.collection("partners").find({}).sort({ order: -1, createdAt: -1 }).toArray(),
@@ -77,6 +79,24 @@ async function fetchMongoData(locale: Locale) {
       db.collection("settings").findOne({ key: "main" }),
       db.collection("photos").find({ inGallery: true, visible: { $ne: false } }).sort({ order: -1, createdAt: -1 }).toArray(),
     ]);
+
+    if (locale === "en" && ukContentDoc && contentDoc) {
+      const ukCards = (ukContentDoc as any).support?.cards?.items as Record<string, unknown>[] | undefined;
+      const enCards = (contentDoc as any).support?.cards?.items as Record<string, unknown>[] | undefined;
+      if (ukCards && enCards) {
+        const mergedCards = enCards.map((card, i) => {
+          const ukCard = ukCards[i];
+          if (!ukCard) return card;
+          return {
+            ...card,
+            image: card.image || ukCard.image || '',
+            bank: card.bank || ukCard.bank || '',
+            link: card.link || ukCard.link || '',
+          };
+        });
+        (contentDoc as any).support.cards.items = mergedCards;
+      }
+    }
 
     const contentData: Record<string, unknown> = {};
     if (contentDoc) {

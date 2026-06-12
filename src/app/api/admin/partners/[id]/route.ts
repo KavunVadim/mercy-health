@@ -1,5 +1,5 @@
 import { NextResponse } from 'next/server';
-import { revalidateTag, revalidatePath } from 'next/cache';
+import { revalidatePath } from 'next/cache';
 import { getDb } from '@/lib/mongodb';
 
 export async function PUT(request: Request, { params }: { params: Promise<{ id: string }> }) {
@@ -13,7 +13,8 @@ export async function PUT(request: Request, { params }: { params: Promise<{ id: 
       { returnDocument: 'after' }
     );
     if (!value) return NextResponse.json({ error: 'Not found' }, { status: 404 });
-    revalidateTag('dictionary', { expire: 0 });
+    revalidatePath('/uk');
+    revalidatePath('/en');
     revalidatePath('/uk/about', 'page');
     revalidatePath('/en/about', 'page');
     return NextResponse.json(value);
@@ -28,7 +29,8 @@ export async function DELETE(_request: Request, { params }: { params: Promise<{ 
     const db = await getDb();
     const result = await db.collection('partners').deleteOne({ id });
     if (result.deletedCount === 0) return NextResponse.json({ error: 'Not found' }, { status: 404 });
-    revalidateTag('dictionary', { expire: 0 });
+    revalidatePath('/uk');
+    revalidatePath('/en');
     revalidatePath('/uk/about', 'page');
     revalidatePath('/en/about', 'page');
     return NextResponse.json({ success: true });
