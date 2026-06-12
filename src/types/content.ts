@@ -178,7 +178,22 @@ export interface Dictionary {
       content: string;
       images?: string[];
     };
+    story_eyebrow: string;
+    hero_year: string;
+    hero_stats: Array<{ number: string; label: string }>;
+    pull_quote: string;
+    timeline: Array<{ year: string; label: string; text: string }>;
+    honor: {
+      eyebrow: string;
+      big_number: string;
+      num_label: string;
+      tags: string[];
+      caption: string;
+      patch_alt: string;
+    };
+    gallery_eyebrow: string;
     gallery_title: string;
+    gallery_captions: string[];
     hero_images?: string[];
     hero_image?: string;
     patches_image?: string;

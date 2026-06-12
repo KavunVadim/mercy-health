@@ -44,8 +44,18 @@
       "media": "Media About Us"
     },
     "history": {
-      "title": "Our History"
+      "title": "Our History",
+      "content": "Our main areas of activity include providing essential medicines and medical equipment, offering consultation and rehabilitation assistance, supplying food, hygiene products, clothing, and special-purpose vehicles — including ambulances.\n\nThe foundation team has many years of experience in medical equipment procurement and logistics.\n\nSince February 24, 2022, the foundation has significantly expanded its operations. We actively established connections with potential partners, promoted our needs in the media — and it paid off: we managed to attract a significant number of international donors and partners.\n\nToday, we are one of the largest suppliers of specialized equipment to the Armed Forces of Ukraine. Our flagship project is \"Ambulances for the Front.\" We have delivered over 130 modern vehicles that save the lives of defenders every day. Additionally, under the \"On the Shield\" program, we supply refrigerated vehicles for the dignified transportation of fallen heroes, as well as pickup trucks and other specialized vehicles for people with disabilities.\n\nThe main focus of our work is medical aid. We deliver medicines, consumables, and medical equipment to front-line cities and villages, helping save lives every day. Our specialists travel directly to the front line, and the foundation's rehabilitation center provides free physical and psychological support to military personnel and their families.\n\nWe also work with the children of fallen defenders and organize educational programs throughout Ukraine.\n\nA separate area is assistance to orphanages and institutions for the elderly: food, clothing, hygiene products, and essential goods.\n\nAmong our initiatives is the \"Water for Life\" project: we drill wells in Donetsk region so local residents have access to clean water even after shelling.\n\nAnd the \"Light of Life\" project: we provide generators to military and civilians.\n\nWe don't wait for better conditions. We work in the conditions we have — for those who need it.",
+      "images": [
+        "https://bookshop-images-vadim-2026.s3.us-east-1.amazonaws.com/uploads/1ab6c82fcb63943f.webp",
+        "https://bookshop-images-vadim-2026.s3.us-east-1.amazonaws.com/uploads/e59a9f52636d86e0.webp",
+        "https://bookshop-images-vadim-2026.s3.us-east-1.amazonaws.com/uploads/d8a6a79d7184b3f9.JPG",
+        "https://bookshop-images-vadim-2026.s3.us-east-1.amazonaws.com/uploads/8ceeb51d684fcd4d.JPG",
+        "https://bookshop-images-vadim-2026.s3.us-east-1.amazonaws.com/uploads/d677557cfe4838b8.webp"
+      ]
     },
+    "hero_image": "https://bookshop-images-vadim-2026.s3.us-east-1.amazonaws.com/uploads/18fb78a2301bb8e0.webp",
+    "patches_image": "https://bookshop-images-vadim-2026.s3.us-east-1.amazonaws.com/uploads/73306f706831d53f.jpeg",
     "mission": {
       "title": "Our Mission"
     },
@@ -53,6 +63,30 @@
       "title": "Media About Us"
     },
     "gallery_title": "Photo Gallery",
+    "story_eyebrow": "Our Mission",
+    "hero_year": "Since 2016",
+    "hero_stats": [
+      { "number": "130+", "label": "ambulances to the front" },
+      { "number": "300+", "label": "military rehabilitated" },
+      { "number": "8.3K", "label": "people helped" },
+      { "number": "45.2K", "label": "donors" }
+    ],
+    "pull_quote": "We don't wait for better conditions. We work in the conditions we have — for those who need it.",
+    "timeline": [
+      { "year": "2016", "label": "Start", "text": "Foundation established. Medicines, clothing, food — for the population and medical institutions of all forms of ownership." },
+      { "year": "2022", "label": "Turning Point", "text": "Since February 24 — full-scale invasion. Together with the BeForUkraine NGO (Belgium), the project \"Ambulances for the Front\" was launched. International donors were engaged." },
+      { "year": "2026", "label": "Today", "text": "130+ specialized vehicles for the Armed Forces. Rehabilitation center — trips to front-line territories. 12 active projects." }
+    ],
+    "honor": {
+      "eyebrow": "Flagship Project",
+      "big_number": "130",
+      "num_label": "specialized vehicles delivered to the front together with BeForUkraine",
+      "tags": ["Ambulances to the Front", "On the Shield", "Auto Workshop", "Disability Assistance"],
+      "caption": "Wall of gratitude from our defenders",
+      "patch_alt": "Wall of Honor"
+    },
+    "gallery_eyebrow": "Chronicle",
+    "gallery_captions": ["Delivering aid", "Water supply", "Ambulance", "Medical evacuation", "Helping children"],
     "contacts_tab": {
       "title": "Get in Touch",
       "form": {

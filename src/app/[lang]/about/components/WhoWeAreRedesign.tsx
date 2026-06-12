@@ -1,5 +1,6 @@
 "use client";
 
+import React from "react";
 import { motion } from "framer-motion";
 import Image from "next/image";
 import styles from "./WhoWeAreRedesign.module.css";
@@ -28,43 +29,33 @@ const staggerFadeUp = (idx: number) => ({
 });
 
 export default function WhoWeAreRedesign({ dictionary }: WhoWeAreRedesignProps) {
-  const historyTitle = dictionary.about.history.title || "НАША ІСТОРІЯ";
-  const pathOfMercyTitle = dictionary.about.sidebar.path_of_mercy || "ШЛЯХ МИЛОСЕРДЯ";
-  const rawHistoryContent = dictionary.about.history.content || "";
+  const { about } = dictionary;
+  const historyTitle = about.history.title || "НАША ІСТОРІЯ";
+  const pathOfMercyTitle = about.sidebar.path_of_mercy || "ШЛЯХ МИЛОСЕРДЯ";
+  const rawHistoryContent = about.history.content || "";
   const historyParagraphs = rawHistoryContent.split("\n\n");
 
-  const heroImage =
-    dictionary.about.hero_image ||
-    "https://bookshop-images-vadim-2026.s3.us-east-1.amazonaws.com/uploads/18fb78a2301bb8e0.webp";
-  const patchesImage =
-    dictionary.about.patches_image ||
-    "https://bookshop-images-vadim-2026.s3.us-east-1.amazonaws.com/uploads/73306f706831d53f.jpeg";
+  const heroImage = about.hero_image || null;
+  const patchesImage = about.patches_image || null;
 
-  const galleryImages = (dictionary.about.history.images || []).map((url, idx) => ({
-    url,
-    caption:
-      idx === 0 ? "Доставка допомоги" :
-      idx === 1 ? "Забезпечення водою" :
-      idx === 2 ? "Реанімобіль" :
-      idx === 3 ? "Медична евакуація" : "Допомога дітям",
-  }));
+  const galleryCaptions = about.gallery_captions || [];
+  const displayGallery = (about.history.images || [])
+    .filter(Boolean)
+    .map((url, idx) => ({
+      url,
+      caption: galleryCaptions[idx] || "",
+    }));
 
-  const displayGallery =
-    galleryImages.length > 0
-      ? galleryImages
-      : [
-          { url: "https://bookshop-images-vadim-2026.s3.us-east-1.amazonaws.com/uploads/1ab6c82fcb63943f.webp", caption: "Доставка допомоги" },
-          { url: "https://bookshop-images-vadim-2026.s3.us-east-1.amazonaws.com/uploads/e59a9f52636d86e0.webp", caption: "Забезпечення водою" },
-          { url: "https://bookshop-images-vadim-2026.s3.us-east-1.amazonaws.com/uploads/d8a6a79d7184b3f9.JPG",  caption: "Реанімобіль" },
-          { url: "https://bookshop-images-vadim-2026.s3.us-east-1.amazonaws.com/uploads/8ceeb51d684fcd4d.JPG",  caption: "Медична евакуація" },
-          { url: "https://bookshop-images-vadim-2026.s3.us-east-1.amazonaws.com/uploads/d677557cfe4838b8.webp", caption: "Допомога дітям" },
-        ];
+  const heroStats = about.hero_stats || [];
+  const timelineData = about.timeline || [];
+  const honorTags = about.honor?.tags || [];
 
   return (
     <GalleryProvider>
       <div className={styles.wrapper}>
 
         {/* ───── Section 1: Hero ───── */}
+        {heroImage && (
         <section className={styles.heroSection}>
           <div className={styles.heroImageWrapper}>
             <GalleryItem src={heroImage}>
@@ -85,7 +76,7 @@ export default function WhoWeAreRedesign({ dictionary }: WhoWeAreRedesignProps) 
                     <span className={styles.heroPillDot} />
                     {dictionary.about.sidebar.who_we_are}
                   </div>
-                  <div className={styles.heroYear}>З 2016 року</div>
+                  <div className={styles.heroYear}>{about.hero_year}</div>
                 </div>
 
                 {/* Bottom content */}
@@ -100,25 +91,15 @@ export default function WhoWeAreRedesign({ dictionary }: WhoWeAreRedesignProps) 
                     }}
                   />
                   <div className={styles.heroStats}>
-                    <div className={styles.heroStat}>
-                      <span className={styles.heroStatNum}>130+</span>
-                      <span className={styles.heroStatLabel}>реанімобілів на фронт</span>
-                    </div>
-                    <div className={styles.heroStatDivider} />
-                    <div className={styles.heroStat}>
-                      <span className={styles.heroStatNum}>300+</span>
-                      <span className={styles.heroStatLabel}>військових реабілітовано</span>
-                    </div>
-                    <div className={styles.heroStatDivider} />
-                    <div className={styles.heroStat}>
-                      <span className={styles.heroStatNum}>8.3K</span>
-                      <span className={styles.heroStatLabel}>допомогли</span>
-                    </div>
-                    <div className={styles.heroStatDivider} />
-                    <div className={styles.heroStat}>
-                      <span className={styles.heroStatNum}>45.2K</span>
-                      <span className={styles.heroStatLabel}>благодійників</span>
-                    </div>
+                    {heroStats.map((stat, si) => (
+                      <React.Fragment key={si}>
+                        {si > 0 && <div className={styles.heroStatDivider} />}
+                        <div className={styles.heroStat}>
+                          <span className={styles.heroStatNum}>{stat.number}</span>
+                          <span className={styles.heroStatLabel}>{stat.label}</span>
+                        </div>
+                      </React.Fragment>
+                    ))}
                   </div>
                 </div>
 
@@ -131,12 +112,13 @@ export default function WhoWeAreRedesign({ dictionary }: WhoWeAreRedesignProps) 
             </GalleryItem>
           </div>
         </section>
+        )}
 
         {/* ───── Section 2: Story — pull-quote + timeline layout ───── */}
         <section className={styles.storySection}>
           <div className={styles.storyHeader}>
             <motion.div {...fadeUp}>
-              <p className={styles.storyEyebrow}>Наша Місія</p>
+              <p className={styles.storyEyebrow}>{about.story_eyebrow}</p>
               <h2 className={styles.storyTitle}>{historyTitle.toUpperCase()}</h2>
             </motion.div>
             <motion.blockquote
@@ -147,18 +129,14 @@ export default function WhoWeAreRedesign({ dictionary }: WhoWeAreRedesignProps) 
               transition={{ duration: 0.7, delay: 0.15, ease }}
             >
               <span className={styles.pullQuoteMark}>"</span>
-              Ми не чекаємо кращих умов. Ми працюємо в тих, що є — заради тих, хто цього потребує.
+              {about.pull_quote}
             </motion.blockquote>
           </div>
 
           <div className={styles.storyGrid}>
             {/* Timeline column */}
             <div className={styles.timelineCol}>
-              {[
-                { year: "2016", label: "Старт", text: "Заснування фонду. Медикаменти, одяг, продукти харчування — для населення і медичних установ будь-якої форми власності." },
-                { year: "2022", label: "Перелом", text: "З 24 лютого — повномасштабне вторгнення. Разом з СО \"BeForUkraine\" (Бельгія) запущено проєкт «Реанімобілі для фронту». Залучено міжнародних донорів." },
-                { year: "2026", label: "Сьогодні", text: "130+ спеціалізованих авто для ЗСУ. Реабілітаційний центр — виїзди на прифронтові території. 12 активних проєктів." },
-              ].map((item, i) => (
+              {timelineData.map((item, i) => (
                 <motion.div key={item.year} className={styles.tlItem} {...staggerFadeUp(i)}>
                   <div className={styles.tlYearWrap}>
                     <span className={styles.tlYear}>{item.year}</span>
@@ -203,18 +181,18 @@ export default function WhoWeAreRedesign({ dictionary }: WhoWeAreRedesignProps) 
               viewport={{ once: true, margin: "-80px" }}
               transition={{ duration: 0.8, ease }}
             >
-              <p className={styles.honorEyebrow}>Флагманський проєкт</p>
-              <div className={styles.honorBigNum}>130<span className={styles.honorPlus}>+</span></div>
-              <p className={styles.honorNumLabel}>спеціалізованих авто<br />доставлено на фронт разом з BeForUkraine</p>
+              <p className={styles.honorEyebrow}>{about.honor.eyebrow}</p>
+              <div className={styles.honorBigNum}>{about.honor.big_number}<span className={styles.honorPlus}>+</span></div>
+              <p className={styles.honorNumLabel}>{about.honor.num_label}</p>
               <p className={styles.honorText}>{historyParagraphs[3] ?? historyParagraphs[0]}</p>
               <div className={styles.honorTags}>
-                <span className={styles.honorTag}>Реанімобілі на фронт</span>
-                <span className={styles.honorTag}>На Щиті</span>
-                <span className={styles.honorTag}>Авто-майстерня</span>
-                <span className={styles.honorTag}>Допомога з інвалідністю</span>
+                {honorTags.map((tag, ti) => (
+                  <span key={ti} className={styles.honorTag}>{tag}</span>
+                ))}
               </div>
             </motion.div>
 
+            {patchesImage && (
             <motion.div
               className={styles.honorImageCol}
               initial={{ opacity: 0, x: 40 }}
@@ -227,7 +205,7 @@ export default function WhoWeAreRedesign({ dictionary }: WhoWeAreRedesignProps) 
                   <div className={styles.clickableWrapper}>
                     <Image
                       src={patchesImage}
-                      alt="Стіна пошани"
+                      alt={about.honor.patch_alt}
                       fill
                       sizes="(max-width: 768px) 100vw, 50vw"
                       className={styles.patchImage}
@@ -241,8 +219,9 @@ export default function WhoWeAreRedesign({ dictionary }: WhoWeAreRedesignProps) 
                   </div>
                 </GalleryItem>
               </div>
-              <p className={styles.honorCaption}>Стіна подяк від наших захисників</p>
+              <p className={styles.honorCaption}>{about.honor.caption}</p>
             </motion.div>
+            )}
           </div>
         </section>
 
@@ -250,12 +229,13 @@ export default function WhoWeAreRedesign({ dictionary }: WhoWeAreRedesignProps) 
         <section className={styles.gallerySection}>
           <div className={styles.galleryHeader}>
             <motion.div {...fadeUp}>
-              <p className={styles.galleryEyebrow}>Хроніка</p>
+              <p className={styles.galleryEyebrow}>{about.gallery_eyebrow}</p>
               <h2 className={styles.galleryTitle}>{dictionary.about.gallery_title}</h2>
             </motion.div>
             <div className={styles.titleLine} />
           </div>
 
+          {displayGallery.length > 0 && (
           <motion.div
             initial={{ opacity: 0, y: 40 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -299,6 +279,7 @@ export default function WhoWeAreRedesign({ dictionary }: WhoWeAreRedesignProps) 
               })}
             </div>
           </motion.div>
+          )}
         </section>
 
       </div>

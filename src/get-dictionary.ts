@@ -56,6 +56,8 @@ function deepMerge<T extends Record<string, unknown>>(target: T, source: Record<
             source[key],
           );
         }
+      } else if (Array.isArray(source[key]) && source[key].length === 0) {
+        // Skip empty arrays — preserve the JSON default
       } else if (source[key] !== '' && source[key] !== null && source[key] !== undefined) {
         output[key] = source[key];
       }

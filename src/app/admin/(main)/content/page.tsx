@@ -16,6 +16,14 @@ export default function AdminContentPage() {
     about_mission_content_uk: '', about_mission_content_en: '',
     about_media_title_uk: '', about_media_title_en: '',
     about_media_content_uk: '', about_media_content_en: '',
+    about_story_eyebrow_uk: '', about_story_eyebrow_en: '',
+    about_hero_year_uk: '', about_hero_year_en: '',
+    about_hero_stats_uk: '', about_hero_stats_en: '',
+    about_pull_quote_uk: '', about_pull_quote_en: '',
+    about_timeline_uk: '', about_timeline_en: '',
+    about_honor_uk: '', about_honor_en: '',
+    about_gallery_eyebrow_uk: '', about_gallery_eyebrow_en: '',
+    about_gallery_captions_uk: '', about_gallery_captions_en: '',
     hero_title_uk: '', hero_title_en: '',
     hero_description_uk: '', hero_description_en: '',
     stats_collected: '', stats_helped: '', stats_donors: '',
@@ -54,6 +62,22 @@ export default function AdminContentPage() {
         about_media_title_en: d.about_media_title_en || '',
         about_media_content_uk: d.about_media_content_uk || '',
         about_media_content_en: d.about_media_content_en || '',
+        about_story_eyebrow_uk: d.about_story_eyebrow_uk || '',
+        about_story_eyebrow_en: d.about_story_eyebrow_en || '',
+        about_hero_year_uk: d.about_hero_year_uk || '',
+        about_hero_year_en: d.about_hero_year_en || '',
+        about_hero_stats_uk: d.about_hero_stats_uk ? JSON.stringify(d.about_hero_stats_uk, null, 2) : '[]',
+        about_hero_stats_en: d.about_hero_stats_en ? JSON.stringify(d.about_hero_stats_en, null, 2) : '[]',
+        about_pull_quote_uk: d.about_pull_quote_uk || '',
+        about_pull_quote_en: d.about_pull_quote_en || '',
+        about_timeline_uk: d.about_timeline_uk ? JSON.stringify(d.about_timeline_uk, null, 2) : '[]',
+        about_timeline_en: d.about_timeline_en ? JSON.stringify(d.about_timeline_en, null, 2) : '[]',
+        about_honor_uk: d.about_honor_uk ? JSON.stringify(d.about_honor_uk, null, 2) : '{}',
+        about_honor_en: d.about_honor_en ? JSON.stringify(d.about_honor_en, null, 2) : '{}',
+        about_gallery_eyebrow_uk: d.about_gallery_eyebrow_uk || '',
+        about_gallery_eyebrow_en: d.about_gallery_eyebrow_en || '',
+        about_gallery_captions_uk: d.about_gallery_captions_uk ? JSON.stringify(d.about_gallery_captions_uk, null, 2) : '[]',
+        about_gallery_captions_en: d.about_gallery_captions_en ? JSON.stringify(d.about_gallery_captions_en, null, 2) : '[]',
         hero_title_uk: d.hero_title_uk || '',
         hero_title_en: d.hero_title_en || '',
         hero_description_uk: d.hero_description_uk || '',
@@ -200,92 +224,223 @@ export default function AdminContentPage() {
         <form id="content-form" onSubmit={handleSave} style={{ flex: 1, minWidth: 0 }}>
           {tab === 'about' && (
             <div style={{ display: 'flex', flexDirection: 'column', gap: '1.25rem' }}>
+
+              {/* ─── 1. Hero Section ─── */}
               <div className={styles.settingsSection}>
                 <div className={styles.settingsSectionHeader}>
                   <Image size={16} className={styles.settingsSectionIcon} strokeWidth={2} />
-                  <h2 className={styles.settingsSectionTitle}>About Us Hero Images</h2>
+                  <h2 className={styles.settingsSectionTitle}>1. Hero — Full-Screen Banner</h2>
                 </div>
                 <div className={styles.settingsSectionBody}>
+                  <p style={{ fontSize: '0.8rem', color: 'var(--admin-text-muted)', marginBottom: '1rem' }}>
+                    This image appears as the large full-screen banner at the very top of the page.
+                  </p>
                   <ImageUploader
                     value={aboutHeroImage}
                     onChange={setAboutHeroImage}
-                    label="Main Hero Image (featured next to title)"
+                    label="Hero Background Image"
                   />
-                  <div style={{ marginTop: '1.5rem' }}>
-                    <GalleryEditor
-                      value={aboutHeroImages}
-                      onChange={setAboutHeroImages}
-                      label="Alternative Hero Images (Carousel)"
-                    />
+                </div>
+              </div>
+
+              {/* ─── 2. Hero Stats + Year Badge + Pull Quote ─── */}
+              <div className={styles.settingsSection}>
+                <div className={styles.settingsSectionHeader}>
+                  <SlidersHorizontal size={16} className={styles.settingsSectionIcon} strokeWidth={2} />
+                  <h2 className={styles.settingsSectionTitle}>2. Hero Info — Badge, Stats, Quote</h2>
+                </div>
+                <div className={styles.settingsSectionBody}>
+                  <p style={{ fontSize: '0.8rem', color: 'var(--admin-text-muted)', marginBottom: '1rem' }}>
+                    These texts appear over the hero banner: the year badge (top-right), the stats row (bottom), and the pull quote (story section).
+                  </p>
+                  <div className={styles.formGrid}>
+                    <div className={styles.formGroup}>
+                      <label className={styles.label}>Year badge (UA) — зверху справа</label>
+                      <input className={styles.input} value={form.about_hero_year_uk} onChange={e => setForm({ ...form, about_hero_year_uk: e.target.value })} placeholder="З 2016 року" />
+                    </div>
+                    <div className={styles.formGroup}>
+                      <label className={styles.label}>Year badge (EN)</label>
+                      <input className={styles.input} value={form.about_hero_year_en} onChange={e => setForm({ ...form, about_hero_year_en: e.target.value })} placeholder="Since 2016" />
+                    </div>
+                  </div>
+                  <div className={styles.formGroup} style={{ marginTop: '1rem' }}>
+                    <label className={styles.label}>Pull quote (UA) — виділена цитата в розділі історії</label>
+                    <textarea className={styles.textarea} rows={2} value={form.about_pull_quote_uk} onChange={e => setForm({ ...form, about_pull_quote_uk: e.target.value })} />
+                  </div>
+                  <div className={styles.formGroup} style={{ marginTop: '0.75rem' }}>
+                    <label className={styles.label}>Pull quote (EN)</label>
+                    <textarea className={styles.textarea} rows={2} value={form.about_pull_quote_en} onChange={e => setForm({ ...form, about_pull_quote_en: e.target.value })} />
                   </div>
                 </div>
               </div>
 
+              {/* ─── 3. Hero Stats ─── */}
+              <div className={styles.settingsSection}>
+                <div className={styles.settingsSectionHeader}>
+                  <FileText size={16} className={styles.settingsSectionIcon} strokeWidth={2} />
+                  <h2 className={styles.settingsSectionTitle}>3. Hero Stats — цифри на банері</h2>
+                </div>
+                <div className={styles.settingsSectionBody}>
+                  <p style={{ fontSize: '0.8rem', color: 'var(--admin-text-muted)', marginBottom: '0.75rem' }}>
+                    Кожен елемент має <code>number</code> (число) і <code>label</code> (підпис). Формат — JSON масив:
+                  </p>
+                  <pre style={{ fontSize: '0.75rem', background: 'var(--admin-secondary)', padding: '0.75rem', borderRadius: 8, marginBottom: '0.75rem' }}>
+{`[
+  { "number": "130+", "label": "реанімобілів на фронт" },
+  { "number": "300+", "label": "військових реабілітовано" }
+]`}
+                  </pre>
+                  <div className={styles.formGrid}>
+                    <div className={styles.formGroup}><label className={styles.label}>Stats (Ukrainian)</label><textarea className={styles.textarea} rows={5} value={form.about_hero_stats_uk} onChange={e => setForm({ ...form, about_hero_stats_uk: e.target.value })} /></div>
+                    <div className={styles.formGroup}><label className={styles.label}>Stats (English)</label><textarea className={styles.textarea} rows={5} value={form.about_hero_stats_en} onChange={e => setForm({ ...form, about_hero_stats_en: e.target.value })} /></div>
+                  </div>
+                </div>
+              </div>
+
+              {/* ─── 4. Story Section — History Text + Timeline ─── */}
+              <div className={styles.settingsSection}>
+                <div className={styles.settingsSectionHeader}>
+                  <FileText size={16} className={styles.settingsSectionIcon} strokeWidth={2} />
+                  <h2 className={styles.settingsSectionTitle}>4. Story — текст історії + таймлайн</h2>
+                </div>
+                <div className={styles.settingsSectionBody}>
+                  <div className={styles.formGrid}>
+                    <div className={styles.formGroup}><label className={styles.label}>Section title (UA)</label><input className={styles.input} value={form.about_history_title_uk} onChange={e => setForm({ ...form, about_history_title_uk: e.target.value })} /></div>
+                    <div className={styles.formGroup}><label className={styles.label}>Section title (EN)</label><input className={styles.input} value={form.about_history_title_en} onChange={e => setForm({ ...form, about_history_title_en: e.target.value })} /></div>
+                  </div>
+                  <div className={styles.formGrid} style={{ marginTop: '1rem' }}>
+                    <div className={styles.formGroup}><label className={styles.label}>Eyebrow label (UA) — малий підпис над заголовком</label><input className={styles.input} value={form.about_story_eyebrow_uk} onChange={e => setForm({ ...form, about_story_eyebrow_uk: e.target.value })} placeholder="Наша Місія" /></div>
+                    <div className={styles.formGroup}><label className={styles.label}>Eyebrow label (EN)</label><input className={styles.input} value={form.about_story_eyebrow_en} onChange={e => setForm({ ...form, about_story_eyebrow_en: e.target.value })} placeholder="Our Mission" /></div>
+                  </div>
+                  <div className={styles.formGroup} style={{ marginTop: '1rem' }}><label className={styles.label}>History content (UA) — текст з абзацами, розділеними пустим рядком</label><textarea className={styles.textarea} rows={10} value={form.about_history_content_uk} onChange={e => setForm({ ...form, about_history_content_uk: e.target.value })} /></div>
+                  <div className={styles.formGroup} style={{ marginTop: '0.75rem' }}><label className={styles.label}>History content (EN)</label><textarea className={styles.textarea} rows={10} value={form.about_history_content_en} onChange={e => setForm({ ...form, about_history_content_en: e.target.value })} /></div>
+                </div>
+              </div>
+
+              {/* ─── 5. Timeline ─── */}
+              <div className={styles.settingsSection}>
+                <div className={styles.settingsSectionHeader}>
+                  <FileText size={16} className={styles.settingsSectionIcon} strokeWidth={2} />
+                  <h2 className={styles.settingsSectionTitle}>5. Timeline — хронологія (ліва колонка)</h2>
+                </div>
+                <div className={styles.settingsSectionBody}>
+                  <p style={{ fontSize: '0.8rem', color: 'var(--admin-text-muted)', marginBottom: '0.75rem' }}>
+                    Кожен елемент: <code>year</code> (рік), <code>label</code> (короткий заголовок), <code>text</code> (опис). Формат — JSON масив:
+                  </p>
+                  <pre style={{ fontSize: '0.75rem', background: 'var(--admin-secondary)', padding: '0.75rem', borderRadius: 8, marginBottom: '0.75rem' }}>
+{`[
+  { "year": "2016", "label": "Старт", "text": "Опис події..." }
+]`}
+                  </pre>
+                  <div className={styles.formGrid}>
+                    <div className={styles.formGroup}><label className={styles.label}>Timeline (Ukrainian)</label><textarea className={styles.textarea} rows={6} value={form.about_timeline_uk} onChange={e => setForm({ ...form, about_timeline_uk: e.target.value })} /></div>
+                    <div className={styles.formGroup}><label className={styles.label}>Timeline (English)</label><textarea className={styles.textarea} rows={6} value={form.about_timeline_en} onChange={e => setForm({ ...form, about_timeline_en: e.target.value })} /></div>
+                  </div>
+                </div>
+              </div>
+
+              {/* ─── 6. Honor Section ─── */}
               <div className={styles.settingsSection}>
                 <div className={styles.settingsSectionHeader}>
                   <Image size={16} className={styles.settingsSectionIcon} strokeWidth={2} />
-                  <h2 className={styles.settingsSectionTitle}>Honor Wall (Patches)</h2>
+                  <h2 className={styles.settingsSectionTitle}>6. Honor Section — темний блок з цифрою 130+</h2>
                 </div>
                 <div className={styles.settingsSectionBody}>
+                  <p style={{ fontSize: '0.8rem', color: 'var(--admin-text-muted)', marginBottom: '0.75rem' }}>
+                    Зображення (шеврони/нашивки) для правої колонки:
+                  </p>
                   <ImageUploader
                     value={aboutPatchesImage}
                     onChange={setAboutPatchesImage}
-                    label="Wall of Honor Image (Patches)"
+                    label="Patches / Wall of Honor Image"
                   />
-                </div>
-              </div>
-
-              <div className={styles.settingsSection}>
-                <div className={styles.settingsSectionHeader}>
-                  <FileText size={16} className={styles.settingsSectionIcon} strokeWidth={2} />
-                  <h2 className={styles.settingsSectionTitle}>History</h2>
-                </div>
-                <div className={styles.settingsSectionBody}>
-                  <div className={styles.formGrid}>
-                    <div className={styles.formGroup}><label className={styles.label}>Title (Ukrainian)</label><input className={styles.input} value={form.about_history_title_uk} onChange={e => setForm({ ...form, about_history_title_uk: e.target.value })} /></div>
-                    <div className={styles.formGroup}><label className={styles.label}>Title (English)</label><input className={styles.input} value={form.about_history_title_en} onChange={e => setForm({ ...form, about_history_title_en: e.target.value })} /></div>
-                  </div>
-                  <div className={styles.formGroup} style={{ marginTop: '1rem' }}><label className={styles.label}>Content (Ukrainian)</label><textarea className={styles.textarea} rows={10} value={form.about_history_content_uk} onChange={e => setForm({ ...form, about_history_content_uk: e.target.value })} /></div>
-                  <div className={styles.formGroup} style={{ marginTop: '1rem' }}><label className={styles.label}>Content (English)</label><textarea className={styles.textarea} rows={10} value={form.about_history_content_en} onChange={e => setForm({ ...form, about_history_content_en: e.target.value })} /></div>
-                  <div style={{ marginTop: '1rem' }}>
-                    <GalleryEditor
-                      value={aboutHistoryImages}
-                      onChange={setAboutHistoryImages}
-                      label="History Gallery (appears within the text)"
-                    />
+                  <div style={{ marginTop: '1.5rem' }}>
+                    <p style={{ fontSize: '0.8rem', color: 'var(--admin-text-muted)', marginBottom: '0.75rem' }}>
+                      Текстова частина — формат JSON. Поля: <code>eyebrow</code>, <code>big_number</code>, <code>num_label</code>, <code>tags[]</code>, <code>caption</code>, <code>patch_alt</code>.
+                    </p>
+                    <pre style={{ fontSize: '0.75rem', background: 'var(--admin-secondary)', padding: '0.75rem', borderRadius: 8, marginBottom: '0.75rem' }}>
+{`{
+  "eyebrow": "Флагманський проєкт",
+  "big_number": "130",
+  "num_label": "спеціалізованих авто...",
+  "tags": ["Тег1", "Тег2"],
+  "caption": "Підпис під фото",
+  "patch_alt": "Alt текст для фото"
+}`}
+                    </pre>
+                    <div className={styles.formGrid}>
+                      <div className={styles.formGroup}><label className={styles.label}>Honor data (Ukrainian)</label><textarea className={styles.textarea} rows={8} value={form.about_honor_uk} onChange={e => setForm({ ...form, about_honor_uk: e.target.value })} /></div>
+                      <div className={styles.formGroup}><label className={styles.label}>Honor data (English)</label><textarea className={styles.textarea} rows={8} value={form.about_honor_en} onChange={e => setForm({ ...form, about_honor_en: e.target.value })} /></div>
+                    </div>
                   </div>
                 </div>
               </div>
 
+              {/* ─── 7. Photo Gallery ─── */}
               <div className={styles.settingsSection}>
                 <div className={styles.settingsSectionHeader}>
-                  <FileText size={16} className={styles.settingsSectionIcon} strokeWidth={2} />
-                  <h2 className={styles.settingsSectionTitle}>Mission</h2>
+                  <Image size={16} className={styles.settingsSectionIcon} strokeWidth={2} />
+                  <h2 className={styles.settingsSectionTitle}>7. Photo Gallery — сітка світлин (bento grid)</h2>
                 </div>
                 <div className={styles.settingsSectionBody}>
-                  <div className={styles.formGrid}>
-                    <div className={styles.formGroup}><label className={styles.label}>Title (Ukrainian)</label><input className={styles.input} value={form.about_mission_title_uk} onChange={e => setForm({ ...form, about_mission_title_uk: e.target.value })} /></div>
-                    <div className={styles.formGroup}><label className={styles.label}>Title (English)</label><input className={styles.input} value={form.about_mission_title_en} onChange={e => setForm({ ...form, about_mission_title_en: e.target.value })} /></div>
+                  <p style={{ fontSize: '0.8rem', color: 'var(--admin-text-muted)', marginBottom: '0.75rem' }}>
+                    Завантажте зображення для галереї. Порядок визначає розташування в сітці.
+                  </p>
+                  <GalleryEditor
+                    value={aboutHistoryImages}
+                    onChange={setAboutHistoryImages}
+                    label="Gallery Images"
+                  />
+                  <div className={styles.formGrid} style={{ marginTop: '1.5rem' }}>
+                    <div className={styles.formGroup}><label className={styles.label}>Eyebrow label (UA) — малий підпис</label><input className={styles.input} value={form.about_gallery_eyebrow_uk} onChange={e => setForm({ ...form, about_gallery_eyebrow_uk: e.target.value })} placeholder="Хроніка" /></div>
+                    <div className={styles.formGroup}><label className={styles.label}>Eyebrow label (EN)</label><input className={styles.input} value={form.about_gallery_eyebrow_en} onChange={e => setForm({ ...form, about_gallery_eyebrow_en: e.target.value })} placeholder="Chronicle" /></div>
                   </div>
-                  <div className={styles.formGroup} style={{ marginTop: '1rem' }}><label className={styles.label}>Content (Ukrainian)</label><textarea className={styles.textarea} rows={4} value={form.about_mission_content_uk} onChange={e => setForm({ ...form, about_mission_content_uk: e.target.value })} /></div>
-                  <div className={styles.formGroup} style={{ marginTop: '1rem' }}><label className={styles.label}>Content (English)</label><textarea className={styles.textarea} rows={4} value={form.about_mission_content_en} onChange={e => setForm({ ...form, about_mission_content_en: e.target.value })} /></div>
+                  <div className={styles.formGrid} style={{ marginTop: '1rem' }}>
+                    <div className={styles.formGroup}>
+                      <label className={styles.label}>Captions (UA) — підписи під фото, порядок = порядок фото</label>
+                      <textarea className={styles.textarea} rows={3} value={form.about_gallery_captions_uk} onChange={e => setForm({ ...form, about_gallery_captions_uk: e.target.value })} />
+                    </div>
+                    <div className={styles.formGroup}>
+                      <label className={styles.label}>Captions (EN)</label>
+                      <textarea className={styles.textarea} rows={3} value={form.about_gallery_captions_en} onChange={e => setForm({ ...form, about_gallery_captions_en: e.target.value })} />
+                    </div>
+                  </div>
+                  <details style={{ marginTop: '0.75rem', fontSize: '0.8rem', color: 'var(--admin-text-muted)' }}>
+                    <summary style={{ cursor: 'pointer' }}>Формат підписів</summary>
+                    <p style={{ marginTop: '0.5rem' }}>JSON масив рядків, по одному на кожне фото:</p>
+                    <pre style={{ fontSize: '0.75rem', background: 'var(--admin-secondary)', padding: '0.75rem', borderRadius: 8, marginTop: '0.25rem' }}>
+{`["Доставка допомоги", "Забезпечення водою", "Реанімобіль"]`}
+                    </pre>
+                  </details>
                 </div>
               </div>
 
+              {/* ─── 8. Mission + Media (sidebar tabs) ─── */}
               <div className={styles.settingsSection}>
                 <div className={styles.settingsSectionHeader}>
                   <FileText size={16} className={styles.settingsSectionIcon} strokeWidth={2} />
-                  <h2 className={styles.settingsSectionTitle}>Media About Us</h2>
+                  <h2 className={styles.settingsSectionTitle}>8. Mission + Media — бічні вкладки</h2>
                 </div>
                 <div className={styles.settingsSectionBody}>
+                  <p style={{ fontSize: '0.8rem', color: 'var(--admin-text-muted)', marginBottom: '0.75rem' }}>
+                    Ці секції відображаються при перемиканні бічних вкладок (Місія / Медіа про нас).
+                  </p>
                   <div className={styles.formGrid}>
-                    <div className={styles.formGroup}><label className={styles.label}>Title (Ukrainian)</label><input className={styles.input} value={form.about_media_title_uk} onChange={e => setForm({ ...form, about_media_title_uk: e.target.value })} /></div>
-                    <div className={styles.formGroup}><label className={styles.label}>Title (English)</label><input className={styles.input} value={form.about_media_title_en} onChange={e => setForm({ ...form, about_media_title_en: e.target.value })} /></div>
+                    <div className={styles.formGroup}><label className={styles.label}>Mission title (UA)</label><input className={styles.input} value={form.about_mission_title_uk} onChange={e => setForm({ ...form, about_mission_title_uk: e.target.value })} /></div>
+                    <div className={styles.formGroup}><label className={styles.label}>Mission title (EN)</label><input className={styles.input} value={form.about_mission_title_en} onChange={e => setForm({ ...form, about_mission_title_en: e.target.value })} /></div>
                   </div>
-                  <div className={styles.formGroup} style={{ marginTop: '1rem' }}><label className={styles.label}>Content (Ukrainian)</label><textarea className={styles.textarea} rows={4} value={form.about_media_content_uk} onChange={e => setForm({ ...form, about_media_content_uk: e.target.value })} /></div>
-                  <div className={styles.formGroup} style={{ marginTop: '1rem' }}><label className={styles.label}>Content (English)</label><textarea className={styles.textarea} rows={4} value={form.about_media_content_en} onChange={e => setForm({ ...form, about_media_content_en: e.target.value })} /></div>
+                  <div className={styles.formGroup} style={{ marginTop: '0.75rem' }}><label className={styles.label}>Mission content (UA)</label><textarea className={styles.textarea} rows={4} value={form.about_mission_content_uk} onChange={e => setForm({ ...form, about_mission_content_uk: e.target.value })} /></div>
+                  <div className={styles.formGroup} style={{ marginTop: '0.75rem' }}><label className={styles.label}>Mission content (EN)</label><textarea className={styles.textarea} rows={4} value={form.about_mission_content_en} onChange={e => setForm({ ...form, about_mission_content_en: e.target.value })} /></div>
+                  <div style={{ borderTop: '1px solid var(--border)', margin: '1.5rem 0' }} />
+                  <div className={styles.formGrid}>
+                    <div className={styles.formGroup}><label className={styles.label}>Media title (UA)</label><input className={styles.input} value={form.about_media_title_uk} onChange={e => setForm({ ...form, about_media_title_uk: e.target.value })} /></div>
+                    <div className={styles.formGroup}><label className={styles.label}>Media title (EN)</label><input className={styles.input} value={form.about_media_title_en} onChange={e => setForm({ ...form, about_media_title_en: e.target.value })} /></div>
+                  </div>
+                  <div className={styles.formGroup} style={{ marginTop: '0.75rem' }}><label className={styles.label}>Media content (UA)</label><textarea className={styles.textarea} rows={4} value={form.about_media_content_uk} onChange={e => setForm({ ...form, about_media_content_uk: e.target.value })} /></div>
+                  <div className={styles.formGroup} style={{ marginTop: '0.75rem' }}><label className={styles.label}>Media content (EN)</label><textarea className={styles.textarea} rows={4} value={form.about_media_content_en} onChange={e => setForm({ ...form, about_media_content_en: e.target.value })} /></div>
                 </div>
               </div>
+
             </div>
           )}
 
