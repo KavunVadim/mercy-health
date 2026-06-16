@@ -26,7 +26,7 @@ export default function AdminContentPage() {
     about_gallery_captions_uk: '', about_gallery_captions_en: '',
     hero_title_uk: '', hero_title_en: '',
     hero_description_uk: '', hero_description_en: '',
-    stats_collected: '', stats_helped: '', stats_donors: '',
+    stats_projects: '', stats_roads: '', stats_aid: '',
     beneficiary_value_uk: '', beneficiary_value_en: '',
     edrpou_value: '', bank_name_value_uk: '', bank_name_value_en: '',
     purpose_value_uk: '', purpose_value_en: '',
@@ -82,9 +82,9 @@ export default function AdminContentPage() {
         hero_title_en: d.hero_title_en || '',
         hero_description_uk: d.hero_description_uk || '',
         hero_description_en: d.hero_description_en || '',
-        stats_collected: d.stats_collected || '',
-        stats_helped: d.stats_helped || '',
-        stats_donors: d.stats_donors || '',
+        stats_projects: d.stats_projects || '',
+        stats_roads: d.stats_roads || '',
+        stats_aid: d.stats_aid || '',
         beneficiary_value_uk: d.beneficiary_value_uk || '',
         beneficiary_value_en: d.beneficiary_value_en || '',
         edrpou_value: d.edrpou_value || '',
@@ -545,9 +545,9 @@ export default function AdminContentPage() {
                 </div>
                 <div className={styles.settingsSectionBody}>
                   <div className={styles.formGrid3}>
-                    <div className={styles.formGroup}><label className={styles.label}>Collected</label><input className={styles.input} value={form.stats_collected} onChange={e => setForm({ ...form, stats_collected: e.target.value })} placeholder="45.2K" /></div>
-                    <div className={styles.formGroup}><label className={styles.label}>Helped</label><input className={styles.input} value={form.stats_helped} onChange={e => setForm({ ...form, stats_helped: e.target.value })} placeholder="8.3K" /></div>
-                    <div className={styles.formGroup}><label className={styles.label}>Donors</label><input className={styles.input} value={form.stats_donors} onChange={e => setForm({ ...form, stats_donors: e.target.value })} placeholder="8.3K" /></div>
+                    <div className={styles.formGroup}><label className={styles.label}>Projects</label><input className={styles.input} value={form.stats_projects} onChange={e => setForm({ ...form, stats_projects: e.target.value })} placeholder="12" /></div>
+                    <div className={styles.formGroup}><label className={styles.label}>Roads (km)</label><input className={styles.input} value={form.stats_roads} onChange={e => setForm({ ...form, stats_roads: e.target.value })} placeholder="550 000+" /></div>
+                    <div className={styles.formGroup}><label className={styles.label}>Aid (tons)</label><input className={styles.input} value={form.stats_aid} onChange={e => setForm({ ...form, stats_aid: e.target.value })} placeholder="370+" /></div>
                   </div>
                 </div>
               </div>

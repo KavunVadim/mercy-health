@@ -343,7 +343,7 @@
 
   .statsGrid {
     grid-template-columns: repeat(3, 1fr);
-    gap: 0.5rem;
+    gap: 1rem;
     width: 100%;
   }
 
@@ -355,14 +355,45 @@
   }
 
   .statValue {
-    font-size: 1.75rem; /* Balanced size for mobile */
+    font-size: clamp(1.5rem, 5vw, 2.25rem);
   }
 
   .statLabel {
     font-size: 0.65rem;
-    margin-top: 0.25rem;
+    margin-top: 0.35rem;
     letter-spacing: 0.02em;
-    white-space: nowrap;
+    max-width: 100%;
+    line-height: 1.2;
+  }
+}
+
+@media (max-width: 480px) {
+  .statsGrid {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 0.5rem;
+  }
+
+  .statValue {
+    font-size: clamp(1.125rem, 4.5vw, 1.5rem);
+  }
+
+  .statLabel {
+    font-size: 0.6rem;
+    margin-top: 0.25rem;
+  }
+}
+
+@media (min-width: 769px) and (max-width: 1024px) {
+  .statsGrid {
+    gap: 1.5rem;
+  }
+
+  .statValue {
+    font-size: clamp(2.5rem, 5vw, 4rem);
+  }
+
+  .statLabel {
+    font-size: 0.75rem;
   }
 }
 
@@ -370,10 +401,6 @@
   .projectGrid, .newsGrid {
     grid-template-columns: 1fr;
     gap: 1.5rem;
-  }
-  
-  .statValue {
-    font-size: 1.5rem;
   }
 
   .sectionTitle {

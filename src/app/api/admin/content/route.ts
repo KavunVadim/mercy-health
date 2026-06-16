@@ -36,7 +36,7 @@ interface ContentFields {
       accounts?: Record<string, string> | null;
     };
   };
-  stats?: { collected_value?: string; helped_value?: string; donors_value?: string };
+  stats?: { projects_value?: string; roads_value?: string; aid_value?: string };
   reports?: { documents?: unknown[] };
   hero?: { title?: string; description?: string };
   hero_slider?: unknown[];
@@ -93,9 +93,9 @@ export async function GET() {
       purpose_value_uk: ukDoc.support?.bank_details?.purpose_value || '',
       purpose_value_en: enDoc.support?.bank_details?.purpose_value || '',
       bank_accounts: ukDoc.support?.bank_details?.accounts || null,
-      stats_collected: ukDoc.stats?.collected_value || '',
-      stats_helped: ukDoc.stats?.helped_value || '',
-      stats_donors: ukDoc.stats?.donors_value || '',
+      stats_projects: ukDoc.stats?.projects_value || '',
+      stats_roads: ukDoc.stats?.roads_value || '',
+      stats_aid: ukDoc.stats?.aid_value || '',
       documents: ukDoc.reports?.documents || [],
       about_hero_images: ukDoc.about?.hero_images || [],
       about_hero_image: ukDoc.about?.hero_image || '',
@@ -188,7 +188,11 @@ export async function PUT(request: Request) {
           accounts: body.bank_accounts || undefined,
         },
       },
-      stats: { collected_value: body.stats_collected || '', helped_value: body.stats_helped || '', donors_value: body.stats_donors || '' },
+      stats: {
+        projects_value: body.stats_projects || '',
+        roads_value: body.stats_roads || '',
+        aid_value: body.stats_aid || '',
+      },
       reports: { ...(ukDoc.reports || {}), documents: body.documents || [] },
       hero: { title: body.hero_title_uk || '', description: body.hero_description_uk || '' },
       updatedAt: new Date(),
@@ -227,7 +231,11 @@ export async function PUT(request: Request) {
           accounts: body.bank_accounts || undefined,
         },
       },
-      stats: { collected_value: body.stats_collected || '', helped_value: body.stats_helped || '', donors_value: body.stats_donors || '' },
+      stats: {
+        projects_value: body.stats_projects || '',
+        roads_value: body.stats_roads || '',
+        aid_value: body.stats_aid || '',
+      },
       reports: { ...(enDoc.reports || {}), documents: body.documents || [] },
       hero: { title: body.hero_title_en || '', description: body.hero_description_en || '' },
       updatedAt: new Date(),

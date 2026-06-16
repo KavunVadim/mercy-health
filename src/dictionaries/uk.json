@@ -20,13 +20,13 @@
     "privacy": "Конфіденційність"
   },
   "stats": {
-    "collected_value": "12.5M+",
-    "helped_value": "45K+",
-    "donors_value": "8.2K+",
+    "projects_value": "12",
+    "roads_value": "550 000+",
+    "aid_value": "370+",
     "items": {
-      "collected": "Зібрано",
-      "helped": "Допомогли",
-      "donors": "Благодійників"
+      "projects": "проєктів",
+      "roads": "км дорогами України",
+      "aid": "тонн гуманітарної допомоги"
     }
   },
   "about": {

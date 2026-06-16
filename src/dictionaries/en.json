@@ -20,13 +20,13 @@
     "privacy": "Privacy Policy"
   },
   "stats": {
-    "collected_value": "12.5M+",
-    "helped_value": "45K+",
-    "donors_value": "8.2K+",
+    "projects_value": "12",
+    "roads_value": "550 000+",
+    "aid_value": "370+",
     "items": {
-      "collected": "Collected",
-      "helped": "People Helped",
-      "donors": "Total Donors"
+      "projects": "projects",
+      "roads": "km by roads of Ukraine",
+      "aid": "tons of humanitarian aid"
     }
   },
   "about": {

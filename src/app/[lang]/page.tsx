@@ -52,16 +52,16 @@ export default async function Home({
           <div className="container">
             <div className={styles.statsGrid}>
               <div className={styles.statItem}>
-                <span className={styles.statValue}>{dictionary.stats.collected_value}</span>
-                <span className={styles.statLabel}>{dictionary.stats.items.collected}</span>
+                <span className={styles.statValue}>{dictionary.stats.projects_value}</span>
+                <span className={styles.statLabel}>{dictionary.stats.items.projects}</span>
               </div>
               <div className={styles.statItem}>
-                <span className={styles.statValue}>{dictionary.stats.helped_value}</span>
-                <span className={styles.statLabel}>{dictionary.stats.items.helped}</span>
+                <span className={styles.statValue}>{dictionary.stats.roads_value}</span>
+                <span className={styles.statLabel}>{dictionary.stats.items.roads}</span>
               </div>
               <div className={styles.statItem}>
-                <span className={styles.statValue}>{dictionary.stats.donors_value}</span>
-                <span className={styles.statLabel}>{dictionary.stats.items.donors}</span>
+                <span className={styles.statValue}>{dictionary.stats.aid_value}</span>
+                <span className={styles.statLabel}>{dictionary.stats.items.aid}</span>
               </div>
             </div>
           </div>

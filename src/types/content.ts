@@ -134,13 +134,13 @@ export interface Dictionary {
     items: Project[];
   };
   stats: {
-    collected_value: string;
-    helped_value: string;
-    donors_value: string;
+    projects_value: string;
+    roads_value: string;
+    aid_value: string;
     items: {
-      collected: string;
-      helped: string;
-      donors: string;
+      projects: string;
+      roads: string;
+      aid: string;
     };
   };
   news: {
