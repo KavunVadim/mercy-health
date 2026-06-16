@@ -1,9 +1,11 @@
 'use client';
 
-import { Plus, X } from 'lucide-react';
+import { useState } from 'react';
+import { Plus, X, GripVertical, ChevronUp, ChevronDown } from 'lucide-react';
 import styles from '@/app/admin/admin.module.css';
 import ExpandableCard from '@/components/admin/ui/ExpandableCard';
 import ImageUploader from '@/components/admin/ImageUploader';
+import { handleDragStart, handleDragOver, handleDragLeave, handleDrop, handleDragEnd } from '@/lib/dnd-reorder';
 
 interface SupportCard {
   id: string;
@@ -22,6 +24,8 @@ interface SupportCardEditorProps {
 }
 
 export default function SupportCardEditor({ cards, cardsEn, onCardsChange, onCardsEnChange }: SupportCardEditorProps) {
+  const [dragIndex, setDragIndex] = useState<number | null>(null);
+
   function addCard() {
     const id = `card-${Date.now()}`;
     const image = '';
@@ -52,9 +56,29 @@ export default function SupportCardEditor({ cards, cardsEn, onCardsChange, onCar
     onCardsEnChange(updated);
   }
 
+  function reorderCard(from: number, to: number) {
+    if (to < 0 || to >= cards.length || from === to) return;
+    const updatedCards = [...cards];
+    const [movedCard] = updatedCards.splice(from, 1);
+    updatedCards.splice(to, 0, movedCard);
+    onCardsChange(updatedCards);
+
+    const updatedCardsEn = [...cardsEn];
+    const [movedCardEn] = updatedCardsEn.splice(from, 1);
+    updatedCardsEn.splice(to, 0, movedCardEn);
+    onCardsEnChange(updatedCardsEn);
+  }
+
+  function moveItem(from: number, direction: -1 | 1) {
+    reorderCard(from, from + direction);
+  }
+
   function collapsedView(card: SupportCard, i: number) {
     return (
       <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
+        <div style={{ color: 'var(--admin-text-muted)', display: 'flex', cursor: 'grab', flexShrink: 0 }}>
+          <GripVertical size={16} />
+        </div>
         <div style={{
           width: 52, height: 52, borderRadius: '8px',
           overflow: 'hidden', flexShrink: 0, background: 'var(--admin-secondary)',
@@ -75,6 +99,28 @@ export default function SupportCardEditor({ cards, cardsEn, onCardsChange, onCar
           <div style={{ fontSize: '0.75rem', color: 'var(--admin-text-muted)' }}>
             {card.bank || 'No bank set'}
           </div>
+        </div>
+        <div style={{ display: 'flex', gap: '0.2rem', flexShrink: 0 }}>
+          <button
+            type="button"
+            onClick={e => { e.stopPropagation(); moveItem(i, -1); }}
+            disabled={i === 0}
+            className={`${styles.btn} ${styles.btnSm} ${styles.btnIcon}`}
+            style={{ minWidth: 28, minHeight: 26, padding: 0 }}
+            title="Move up"
+          >
+            <ChevronUp size={13} />
+          </button>
+          <button
+            type="button"
+            onClick={e => { e.stopPropagation(); moveItem(i, 1); }}
+            disabled={i === cards.length - 1}
+            className={`${styles.btn} ${styles.btnSm} ${styles.btnIcon}`}
+            style={{ minWidth: 28, minHeight: 26, padding: 0 }}
+            title="Move down"
+          >
+            <ChevronDown size={13} />
+          </button>
         </div>
         <button
           type="button"
@@ -173,11 +219,21 @@ export default function SupportCardEditor({ cards, cardsEn, onCardsChange, onCar
       ) : (
         <div style={{ display: 'flex', flexDirection: 'column', gap: '0.75rem' }}>
           {cards.map((card, i) => (
-            <ExpandableCard
+            <div
               key={card.id}
-              collapsedContent={collapsedView(card, i)}
-              expandedContent={expandedView(card, i)}
-            />
+              draggable
+              onDragStart={e => { setDragIndex(i); handleDragStart(e, i); }}
+              onDragOver={e => { handleDragOver(e, i, dragIndex, reorderCard); }}
+              onDragLeave={handleDragLeave}
+              onDrop={e => { handleDrop(e, i, dragIndex, reorderCard); setDragIndex(null); }}
+              onDragEnd={e => { handleDragEnd(e); setDragIndex(null); }}
+              style={{ cursor: 'grab', userSelect: 'none' }}
+            >
+              <ExpandableCard
+                collapsedContent={collapsedView(card, i)}
+                expandedContent={expandedView(card, i)}
+              />
+            </div>
           ))}
         </div>
       )}

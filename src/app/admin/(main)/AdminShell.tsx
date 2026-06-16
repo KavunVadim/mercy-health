@@ -27,32 +27,32 @@ import { ToastProvider } from '@/components/admin/ui/Toast';
 
 const navSections = [
   {
-    label: 'Overview',
+    label: 'Огляд / Overview',
     items: [
       { href: '/admin', label: 'Dashboard', icon: LayoutDashboard, exact: true },
     ],
   },
   {
-    label: 'Content',
+    label: 'Контент / Content',
     items: [
-      { href: '/admin/news', label: 'News', icon: Newspaper },
-      { href: '/admin/projects', label: 'Projects', icon: FolderOpen },
-      { href: '/admin/reports', label: 'Reports', icon: FileText },
+      { href: '/admin/news', label: 'Новини / News', icon: Newspaper },
+      { href: '/admin/projects', label: 'Проєкти / Projects', icon: FolderOpen },
+      { href: '/admin/reports', label: 'Звіти / Reports', icon: FileText },
     ],
   },
   {
-    label: 'Media',
+    label: 'Медіа / Media',
     items: [
-      { href: '/admin/photos', label: 'Photos', icon: Images },
-      { href: '/admin/hero-slider', label: 'Hero Slider', icon: SlidersHorizontal },
+      { href: '/admin/photos', label: 'Фото / Photos', icon: Images },
+      { href: '/admin/hero-slider', label: 'Слайдер / Hero Slider', icon: SlidersHorizontal },
     ],
   },
   {
-    label: 'Site',
+    label: 'Сайт / Site',
     items: [
-      { href: '/admin/partners', label: 'Partners', icon: Users },
-      { href: '/admin/content', label: 'Content', icon: FileEdit },
-      { href: '/admin/settings', label: 'Settings', icon: Settings },
+      { href: '/admin/partners', label: 'Партнери / Partners', icon: Users },
+      { href: '/admin/content', label: 'Сторінки / Page Content', icon: FileEdit },
+      { href: '/admin/settings', label: 'Налаштування / Settings', icon: Settings },
     ],
   },
 ];

@@ -1737,6 +1737,18 @@
     width: var(--sidebar-width) !important;
   }
 
+  .adminLayout {
+    height: 100dvh;
+    overflow-y: hidden;
+  }
+
+  .adminMain {
+    flex: 1;
+    min-width: 0;
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+
   .adminSidebar.mobileOpen {
     transform: translateX(0);
     box-shadow: 4px 0 32px rgba(0, 0, 0, 0.5);
@@ -1816,16 +1828,41 @@
 
   .modalBackdrop {
     padding: 0;
+    align-items: stretch;
   }
   
   .modal {
     border-radius: 0;
-    min-height: 100dvh;
+    height: 100dvh;
     border: none;
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .modal.confirmModal {
+    height: auto;
+    min-height: 40dvh;
+    max-width: none;
+    margin: auto 1rem;
+    border-radius: var(--admin-radius);
+  }
+
+  .modal form {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
   }
   
   .modalBody {
     max-height: none;
+    flex: 1;
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .modalFooter {
+    flex-shrink: 0;
   }
 
   .btn {
