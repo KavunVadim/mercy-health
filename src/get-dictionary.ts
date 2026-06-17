@@ -16,7 +16,7 @@ function isLocalizedField(data: Record<string, unknown>): boolean {
     if (!(key in data)) return false;
     const val = data[key];
     if (val === null || val === undefined) return false;
-    if (typeof val === "object") return false;
+    if (typeof val === "object" && !Array.isArray(val)) return false;
   }
   const nonLocaleKeys = Object.keys(data).filter(k => !LOCALE_KEYS.has(k));
   return nonLocaleKeys.length === 0;
