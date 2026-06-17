@@ -1,3 +1,5 @@
+export const dynamic = 'force-dynamic';
+
 import styles from "./page.module.css";
 import { getDictionary } from "@/get-dictionary";
 import { isLocale } from "@/i18n-config";

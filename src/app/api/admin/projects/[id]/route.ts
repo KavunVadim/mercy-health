@@ -31,6 +31,10 @@ export async function PUT(request: Request, { params }: { params: Promise<{ id: 
     const projectSlug = body.id || id;
     revalidatePath(`/uk/projects/${projectSlug}`, 'page');
     revalidatePath(`/en/projects/${projectSlug}`, 'page');
+    revalidatePath('/uk/projects', 'page');
+    revalidatePath('/en/projects', 'page');
+    revalidatePath('/uk', 'page');
+    revalidatePath('/en', 'page');
     return NextResponse.json(value);
   } catch (e) {
     return NextResponse.json({ error: 'Failed to update project' }, { status: 500 });

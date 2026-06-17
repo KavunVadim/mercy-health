@@ -36,14 +36,14 @@ export async function PATCH(request: Request) {
     });
 
     await db.collection(collection).bulkWrite(ops);
-    revalidatePath('/uk/news');
-    revalidatePath('/en/news');
-    revalidatePath('/uk/projects');
-    revalidatePath('/en/projects');
-    revalidatePath('/uk/reports');
-    revalidatePath('/en/reports');
-    revalidatePath('/uk');
-    revalidatePath('/en');
+    revalidatePath('/uk/news', 'page');
+    revalidatePath('/en/news', 'page');
+    revalidatePath('/uk/projects', 'page');
+    revalidatePath('/en/projects', 'page');
+    revalidatePath('/uk/reports', 'page');
+    revalidatePath('/en/reports', 'page');
+    revalidatePath('/uk', 'page');
+    revalidatePath('/en', 'page');
     return NextResponse.json({ success: true });
   } catch (e) {
     console.error('Reorder failed:', e);
