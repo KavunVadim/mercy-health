@@ -28,12 +28,10 @@ function getLinks(item: NewsItem): LinkItem[] {
   const legacyLink = typeof item.link === 'string' ? item.link.trim() : '';
 
   if (videoLink) {
-    const lbl = typeof item.video_label === 'object' ? item.video_label : undefined;
-    legacy.push({ url: videoLink, label: lbl as { uk: string; en: string } | undefined, type: 'video' });
+    legacy.push({ url: videoLink, label: typeof item.video_label === 'string' ? item.video_label : undefined, type: 'video' });
   }
   if (externalLink || legacyLink) {
-    const lbl = typeof item.link_label === 'object' ? item.link_label : undefined;
-    legacy.push({ url: externalLink || legacyLink, label: lbl as { uk: string; en: string } | undefined, type: 'external' });
+    legacy.push({ url: externalLink || legacyLink, label: typeof item.link_label === 'string' ? item.link_label : undefined, type: 'external' });
   }
   return legacy;
 }
@@ -78,7 +76,7 @@ export default function NewsDetailContent({ newsItem, dictionary, locale }: News
                       {link.type === 'video' ? <FaPlay className={styles.playIcon} /> : <FaEye className={styles.playIcon} style={{ marginLeft: 0 }} />}
                     </div>
                     <h3 className={styles.videoTitle}>
-                      {link.label?.[locale] || (link.type === 'video' ? dictionary.news.video_story : (locale === "uk" ? "Деталі події" : "Event Details"))}
+                      {link.label || (link.type === 'video' ? dictionary.news.video_story : (locale === "uk" ? "Деталі події" : "Event Details"))}
                     </h3>
                     <a
                       href={link.url}
@@ -100,9 +98,13 @@ export default function NewsDetailContent({ newsItem, dictionary, locale }: News
           <div className={styles.narrativeSection}>
             <div className={styles.description}>
               {newsItem.content && Array.isArray(newsItem.content) ? (
-                newsItem.content.map((paragraph: string, idx: number) => (
-                  <p key={idx} dangerouslySetInnerHTML={{ __html: sanitizeHtml(paragraph) }} />
-                ))
+                newsItem.content.map((segment: string, idx: number) => {
+                  const html = sanitizeHtml(segment);
+                  if (html.startsWith('<')) {
+                    return <div key={idx} dangerouslySetInnerHTML={{ __html: html }} />;
+                  }
+                  return <p key={idx} dangerouslySetInnerHTML={{ __html: html }} />;
+                })
               ) : (
                 <p dangerouslySetInnerHTML={{ __html: sanitizeHtml(newsItem.description) }} />
               )}

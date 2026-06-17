@@ -81,7 +81,7 @@ export default function ProjectImageGallery({
                           {link.type === 'video' ? <FaPlay className={styles.playIcon} /> : <FaEye className={styles.playIcon} style={{ marginLeft: 0 }} />}
                         </div>
                         <h3 className={styles.videoTitle}>
-                          {link.label?.[locale] || (link.type === 'video'
+                          {link.label || (link.type === 'video'
                             ? (locale === 'uk' ? 'Відеосюжет' : 'Video Story')
                             : (locale === 'uk' ? 'Деталі події' : 'Event Details'))}
                         </h3>

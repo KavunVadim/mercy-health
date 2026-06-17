@@ -7,7 +7,7 @@ export type Localized<T = string> = {
 
 export interface LinkItem {
   url: string;
-  label?: { uk: string; en: string };
+  label?: string;
   type?: 'video' | 'external';
 }
 

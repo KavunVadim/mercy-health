@@ -40,10 +40,9 @@ function arrToText(arr: string[] | string | undefined): string {
 function textToArr(text: string): string[] {
   if (!text) return [];
   if (text.includes('<')) {
-    return text.match(/<p>([\s\S]*?)<\/p>/g)
-      ?.map(m => m.replace(/<\/?p>/g, '').trim())
-      .filter(Boolean)
-      || text.split('\n').filter(s => s.trim());
+    const blocks = text.match(/<p>[\s\S]*?<\/p>|<h[23]>[\s\S]*?<\/h[23]>|<blockquote>[\s\S]*?<\/blockquote>|<ul>[\s\S]*?<\/ul>|<ol>[\s\S]*?<\/ol>|<li>[\s\S]*?<\/li>|<pre>[\s\S]*?<\/pre>/g);
+    if (blocks) return blocks.map(b => b.trim()).filter(Boolean);
+    return [text];
   }
   return text.split('\n').filter(s => s.trim());
 }

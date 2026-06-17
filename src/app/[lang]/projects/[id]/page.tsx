@@ -6,6 +6,7 @@ import { notFound } from "next/navigation";
 import styles from "./page.module.css";
 import ProjectImageGallery from "./components/ProjectImageGallery";
 import Breadcrumbs from "@/components/Breadcrumbs/Breadcrumbs";
+import type { LinkItem } from "@/types/content";
 
 interface Project {
   id: string;
@@ -15,7 +16,7 @@ interface Project {
   full_description?: string;
   description?: string;
   gallery?: string[];
-  links?: { url: string; type?: 'video' | 'external'; label?: { uk: string; en: string } }[];
+  links?: LinkItem[];
 }
 
 export default async function ProjectDetailPage({
