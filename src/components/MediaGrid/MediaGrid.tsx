@@ -29,15 +29,17 @@ export default function MediaGrid({ items }: { items: MediaItem[] }) {
             className={styles.card}
           >
             <div className={styles.imageWrapper}>
-              <img
-                src={item.image}
-                alt={item.title}
-                className={styles.image}
-                loading="lazy"
-              />
+              {item.image && (
+                <img
+                  src={item.image}
+                  alt={item.title}
+                  className={styles.image}
+                  loading="lazy"
+                />
+              )}
               {item.type === 'video' && (
                 <div className={styles.playOverlay}>
-                  <svg viewBox="0 0 24 24" fill="currentColor" width="32" height="32">
+                  <svg viewBox="0 0 24 24" fill="currentColor" width="28" height="28">
                     <path d="M8 5v14l11-7z" />
                   </svg>
                 </div>
@@ -45,13 +47,15 @@ export default function MediaGrid({ items }: { items: MediaItem[] }) {
             </div>
             <div className={styles.body}>
               <span className={styles.source}>{item.source}</span>
-              <h3 className={styles.title}>{item.title}</h3>
+              {item.title && (
+                <h3 className={styles.title}>{item.title}</h3>
+              )}
               {item.description && (
                 <p className={styles.description}>{item.description}</p>
               )}
             </div>
             <div className={styles.footer}>
-              <span className={styles.date}>{item.date}</span>
+              <span className={styles.date}>{item.date || ''}</span>
               <span className={styles.readLink}>
                 {item.type === 'video' ? 'ДИВИТИСЬ' : 'ЧИТАТИ'}
               </span>
