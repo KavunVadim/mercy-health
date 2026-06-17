@@ -10,6 +10,7 @@ import ImageUploader from '@/components/admin/ImageUploader';
 import ArrayEditor from '@/components/admin/ArrayEditor';
 import HonorEditor from '@/components/admin/HonorEditor';
 import RichEditor from '@/components/admin/RichEditor';
+import MediaEditor from '@/components/admin/MediaEditor';
 
 function syncArrayLength(arr: string[], targetLen: number): string[] {
   if (arr.length === targetLen) return arr;
@@ -54,6 +55,8 @@ export default function AdminContentPage() {
   const [supportCards, setSupportCards] = useState<{ id: string; title: string; description: string; bank: string; link: string; icon?: string; image?: string }[]>([]);
   const [supportCardsEn, setSupportCardsEn] = useState<{ id: string; title: string; description: string; bank: string; link: string; image?: string }[]>([]);
   const [documents, setDocuments] = useState<{ id: string; title: string; url: string }[]>([]);
+  const [mediaLinks, setMediaLinks] = useState<{ id: string; image: string; source: string; title: string; description: string; date: string; url: string }[]>([]);
+  const [mediaLinksEn, setMediaLinksEn] = useState<{ id: string; image: string; source: string; title: string; description: string; date: string; url: string }[]>([]);
   const [saving, setSaving] = useState(false);
   const [loaded, setLoaded] = useState(false);
   const [bankAccounts, setBankAccounts] = useState<string>('');
@@ -119,6 +122,8 @@ export default function AdminContentPage() {
       setSupportCards(d.support_cards || []);
       setSupportCardsEn(d.support_cards_en || []);
       setDocuments(d.documents || []);
+      setMediaLinks(d.about_media_links_uk || []);
+      setMediaLinksEn(d.about_media_links_en || []);
       setBankAccounts(d.bank_accounts ? JSON.stringify(d.bank_accounts, null, 2) : '');
       setLoaded(true);
     }).catch(() => { setLoaded(true); error('Не вдалося завантажити контент'); });
@@ -155,7 +160,9 @@ export default function AdminContentPage() {
         about_hero_images: aboutHeroImages, 
         about_hero_image: aboutHeroImage,
         about_patches_image: aboutPatchesImage,
-        about_history_images: aboutHistoryImages 
+        about_history_images: aboutHistoryImages,
+        about_media_links_uk: mediaLinks,
+        about_media_links_en: mediaLinksEn,
       };
       const res = await fetch('/api/admin/content', { method: 'PUT', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(body) });
       if (res.ok) success('Контент збережено');
@@ -530,6 +537,16 @@ export default function AdminContentPage() {
                   </div>
                   <RichEditor label="Текст «Медіа» (UA)" value={form.about_media_content_uk} onChange={v => setForm({ ...form, about_media_content_uk: v })} height={200} />
                   <RichEditor label="Текст «Медіа» (EN)" value={form.about_media_content_en} onChange={v => setForm({ ...form, about_media_content_en: v })} height={200} />
+                  <div style={{ borderTop: '1px solid var(--border)', margin: '1.5rem 0' }} />
+                  <p style={{ fontSize: '0.8rem', color: 'var(--admin-text-muted)', marginBottom: '0.75rem' }}>
+                    Картки медіа про нас. Кожна картка містить зображення, назву видання, заголовок, опис, дату та посилання.
+                  </p>
+                  <MediaEditor
+                    items={mediaLinks}
+                    itemsEn={mediaLinksEn}
+                    onItemsChange={setMediaLinks}
+                    onItemsEnChange={setMediaLinksEn}
+                  />
                 </div>
               </div>
 

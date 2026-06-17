@@ -39,6 +39,17 @@ export interface NewsItem {
   links?: LinkItem[];
 }
 
+export interface MediaItem {
+  id: string;
+  image: string;
+  source: string;
+  title: string;
+  description: string;
+  date: string;
+  url: string;
+  type?: 'article' | 'video';
+}
+
 export interface Partner {
   id: string;
   name: string;
@@ -205,6 +216,7 @@ export interface Dictionary {
     media: {
       title: string;
       content: string;
+      links?: MediaItem[];
     };
     contacts_tab: {
       title: string;

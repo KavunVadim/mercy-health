@@ -6,7 +6,7 @@ interface ContentFields {
   about?: {
     history?: { title?: string; content?: string; images?: string[] };
     mission?: { title?: string; content?: string };
-    media?: { title?: string; content?: string };
+    media?: { title?: string; content?: string; links?: unknown[] };
     hero_images?: string[];
     hero_image?: string;
     patches_image?: string;
@@ -77,6 +77,8 @@ export async function GET() {
       about_media_title_en: enDoc.about?.media?.title || '',
       about_media_content_uk: ukDoc.about?.media?.content || '',
       about_media_content_en: enDoc.about?.media?.content || '',
+      about_media_links_uk: ukDoc.about?.media?.links || [],
+      about_media_links_en: enDoc.about?.media?.links || [],
       support_cards: ukDoc.support?.cards?.items || [],
       support_cards_en: enDoc.support?.cards?.items || [],
       card_label_monobank_uk: ukDoc.support?.cards?.monobank || '',
@@ -160,7 +162,7 @@ export async function PUT(request: Request) {
       about: {
         history: { title: body.about_history_title_uk || '', content: body.about_history_content_uk || '', images: imagesUk },
         mission: { title: body.about_mission_title_uk || '', content: body.about_mission_content_uk || '' },
-        media: { title: body.about_media_title_uk || '', content: body.about_media_content_uk || '' },
+        media: { title: body.about_media_title_uk || '', content: body.about_media_content_uk || '', links: body.about_media_links_uk || [] },
         hero_images: body.about_hero_images || [],
         hero_image: body.about_hero_image || ukDoc.about?.hero_image || '',
         patches_image: body.about_patches_image || ukDoc.about?.patches_image || '',
@@ -203,7 +205,7 @@ export async function PUT(request: Request) {
       about: {
         history: { title: body.about_history_title_en || '', content: body.about_history_content_en || '', images: imagesEn },
         mission: { title: body.about_mission_title_en || '', content: body.about_mission_content_en || '' },
-        media: { title: body.about_media_title_en || '', content: body.about_media_content_en || '' },
+        media: { title: body.about_media_title_en || '', content: body.about_media_content_en || '', links: body.about_media_links_en || [] },
         hero_images: body.about_hero_images || [],
         hero_image: body.about_hero_image || enDoc.about?.hero_image || '',
         patches_image: body.about_patches_image || enDoc.about?.patches_image || '',
