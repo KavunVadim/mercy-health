@@ -21,8 +21,8 @@ export default function ConfirmDialog({
   open,
   title,
   message,
-  confirmLabel = 'Delete',
-  cancelLabel = 'Cancel',
+  confirmLabel = 'Видалити',
+  cancelLabel = 'Скасувати',
   loading = false,
   onConfirm,
   onCancel,
@@ -81,7 +81,7 @@ export default function ConfirmDialog({
             onClick={onConfirm}
             disabled={loading}
           >
-            {loading ? 'Deleting…' : confirmLabel}
+            {loading ? 'Видалення…' : confirmLabel}
           </button>
           <button
             className={`${styles.btn} ${styles.btnSecondary}`}

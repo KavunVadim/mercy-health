@@ -1,10 +1,10 @@
 // src/lib/auth/jwt.ts
-// JWT helper for the admin panel (access token 15 min, refresh token 7 days)
+// JWT helper for the admin panel (access token 1 h, refresh token 7 days)
 // Uses jose (works in both Node.js and Edge runtime)
 
 import { SignJWT, jwtVerify } from 'jose';
 
-const ACCESS_TOKEN_EXPIRES_IN = 15 * 60; // 15 min in seconds
+const ACCESS_TOKEN_EXPIRES_IN = 60 * 60; // 1 hour in seconds
 const REFRESH_TOKEN_EXPIRES_IN = 7 * 24 * 60 * 60; // 7 days in seconds
 
 export interface JwtPayload {

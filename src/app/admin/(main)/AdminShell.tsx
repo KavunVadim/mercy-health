@@ -27,32 +27,32 @@ import { ToastProvider } from '@/components/admin/ui/Toast';
 
 const navSections = [
   {
-    label: 'Огляд / Overview',
+    label: 'Огляд',
     items: [
-      { href: '/admin', label: 'Dashboard', icon: LayoutDashboard, exact: true },
+      { href: '/admin', label: 'Панель керування', icon: LayoutDashboard, exact: true },
     ],
   },
   {
-    label: 'Контент / Content',
+    label: 'Контент',
     items: [
-      { href: '/admin/news', label: 'Новини / News', icon: Newspaper },
-      { href: '/admin/projects', label: 'Проєкти / Projects', icon: FolderOpen },
-      { href: '/admin/reports', label: 'Звіти / Reports', icon: FileText },
+      { href: '/admin/news', label: 'Новини', icon: Newspaper },
+      { href: '/admin/projects', label: 'Проєкти', icon: FolderOpen },
+      { href: '/admin/reports', label: 'Звіти', icon: FileText },
     ],
   },
   {
-    label: 'Медіа / Media',
+    label: 'Медіа',
     items: [
-      { href: '/admin/photos', label: 'Фото / Photos', icon: Images },
-      { href: '/admin/hero-slider', label: 'Слайдер / Hero Slider', icon: SlidersHorizontal },
+      { href: '/admin/photos', label: 'Фото', icon: Images },
+      { href: '/admin/hero-slider', label: 'Слайдер', icon: SlidersHorizontal },
     ],
   },
   {
-    label: 'Сайт / Site',
+    label: 'Сайт',
     items: [
-      { href: '/admin/partners', label: 'Партнери / Partners', icon: Users },
-      { href: '/admin/content', label: 'Сторінки / Page Content', icon: FileEdit },
-      { href: '/admin/settings', label: 'Налаштування / Settings', icon: Settings },
+      { href: '/admin/partners', label: 'Партнери', icon: Users },
+      { href: '/admin/content', label: 'Сторінки', icon: FileEdit },
+      { href: '/admin/settings', label: 'Налаштування', icon: Settings },
     ],
   },
 ];
@@ -113,7 +113,7 @@ export default function AdminShell({ children }: { children: React.ReactNode }) 
           <button
             className={styles.sidebarToggle}
             onClick={() => setMobileOpen(o => !o)}
-            aria-label={mobileOpen ? 'Close menu' : 'Open menu'}
+            aria-label={mobileOpen ? 'Закрити меню' : 'Відкрити меню'}
             aria-expanded={mobileOpen}
           >
             {mobileOpen ? <X size={18} /> : <Menu size={18} />}
@@ -129,13 +129,13 @@ export default function AdminShell({ children }: { children: React.ReactNode }) 
                 <div className={styles.logoMark} aria-hidden="true">
                   <Heart size={16} strokeWidth={2.5} />
                 </div>
-                <span className={styles.logoText}>Mercy Admin</span>
+                <span className={styles.logoText}>Mercy & Health</span>
               </div>
               <button
                 className={styles.collapseBtn}
                 onClick={() => setCollapsed(c => !c)}
-                aria-label={collapsed ? 'Expand sidebar' : 'Collapse sidebar'}
-                title={collapsed ? 'Expand' : 'Collapse'}
+                aria-label={collapsed ? 'Розгорнути' : 'Згорнути'}
+                title={collapsed ? 'Розгорнути' : 'Згорнути'}
                 style={{ display: 'none' }} // hidden on mobile, shown on desktop via media query
               >
                 <ChevronLeft size={16} />
@@ -174,11 +174,11 @@ export default function AdminShell({ children }: { children: React.ReactNode }) 
               <button
                 onClick={handleLogout}
                 className={`${styles.navLink} ${styles.logoutLink}`}
-                title={collapsed ? 'Logout' : undefined}
+                title={collapsed ? 'Вийти' : undefined}
                 style={{ width: '100%' }}
               >
                 <LogOut size={17} className={styles.navIcon} strokeWidth={2} />
-                <span className={styles.navLabel}>Logout</span>
+                <span className={styles.navLabel}>Вийти</span>
               </button>
             </div>
           </aside>

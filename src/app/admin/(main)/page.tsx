@@ -62,36 +62,36 @@ export default async function AdminDashboard() {
       href: '/admin/news',
       icon: Newspaper,
       count: stats.news,
-      label: 'News Articles',
-      description: 'Published news and announcements',
+      label: 'Новини',
+      description: 'Опубліковані новини та анонси',
     },
     {
       href: '/admin/projects',
       icon: FolderOpen,
       count: stats.projects,
-      label: 'Projects',
-      description: 'Active and completed initiatives',
+      label: 'Проєкти',
+      description: 'Активні та завершені проєкти',
     },
     {
       href: '/admin/photos',
       icon: Images,
       count: stats.photos,
-      label: 'Photos',
-      description: 'Media library images',
+      label: 'Фото',
+      description: 'Зображення в медіатеці',
     },
     {
       href: '/admin/partners',
       icon: Users,
       count: stats.partners,
-      label: 'Partners',
-      description: 'Organization partners',
+      label: 'Партнери',
+      description: 'Організації-партнери',
     },
     {
       href: '/admin/reports',
       icon: FileText,
       count: stats.reports,
-      label: 'Reports',
-      description: 'Financial and activity reports',
+      label: 'Звіти',
+      description: 'Фінансові звіти та звіти про діяльність',
     },
   ];
 
@@ -102,9 +102,9 @@ export default async function AdminDashboard() {
       {/* Header */}
       <div className={styles.pageHeader} style={{ marginBottom: '2.5rem' }}>
         <div className={styles.pageTitleGroup}>
-          <h1 className={styles.pageTitle}>Dashboard</h1>
+          <h1 className={styles.pageTitle}>Панель керування</h1>
           <p className={styles.pageSubtitle}>
-            Mercy Health content management overview
+            Керування контентом Mercy & Health
           </p>
         </div>
         {/* DB Status */}
@@ -122,7 +122,7 @@ export default async function AdminDashboard() {
           whiteSpace: 'nowrap',
         }}>
           <Database size={14} strokeWidth={2} />
-          {dbOk ? 'MongoDB Connected' : 'DB Error'}
+          {dbOk ? 'MongoDB Підключено' : 'Помилка БД'}
         </div>
       </div>
 
@@ -167,7 +167,7 @@ export default async function AdminDashboard() {
               lineHeight: 1,
             }}>{total}</div>
             <div style={{ fontSize: '0.875rem', color: 'var(--admin-text-secondary)', marginTop: '0.25rem', fontWeight: 500 }}>
-              Total content records in database
+              Всього записів у базі даних
             </div>
           </div>
         </div>
@@ -175,13 +175,13 @@ export default async function AdminDashboard() {
         {/* Quick info */}
         <div className={styles.card} style={{ padding: '1.5rem', minWidth: 200 }}>
           <div style={{ fontSize: '0.7rem', fontWeight: 700, color: 'var(--admin-text-muted)', textTransform: 'uppercase', letterSpacing: '0.08em', marginBottom: '0.75rem' }}>
-            Quick Info
+            Швидка інформація
           </div>
           <div style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
             {[
-              { label: 'News', val: stats.news },
-              { label: 'Projects', val: stats.projects },
-              { label: 'Reports', val: stats.reports },
+              { label: 'Новини', val: stats.news },
+              { label: 'Проєкти', val: stats.projects },
+              { label: 'Звіти', val: stats.reports },
             ].map(r => (
               <div key={r.label} style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', gap: '1.5rem' }}>
                 <span style={{ fontSize: '0.8125rem', color: 'var(--admin-text-secondary)' }}>{r.label}</span>
@@ -194,7 +194,7 @@ export default async function AdminDashboard() {
 
       {/* Stat Cards Grid */}
       <div style={{ marginBottom: '0.75rem' }}>
-        <div className={styles.sectionTitle}>Content Sections</div>
+        <div className={styles.sectionTitle}>Розділи контенту</div>
       </div>
       <div style={{
         display: 'grid',
@@ -208,13 +208,13 @@ export default async function AdminDashboard() {
 
       {/* Quick Actions */}
       <div style={{ marginTop: '2.5rem' }}>
-        <div className={styles.sectionTitle} style={{ marginBottom: '1rem' }}>Quick Actions</div>
+        <div className={styles.sectionTitle} style={{ marginBottom: '1rem' }}>Швидкі дії</div>
         <div style={{ display: 'flex', gap: '0.625rem', flexWrap: 'wrap' }}>
           {[
-            { href: '/admin/news', label: 'Add News', icon: Newspaper },
-            { href: '/admin/projects', label: 'Add Project', icon: FolderOpen },
-            { href: '/admin/reports', label: 'Add Report', icon: FileText },
-            { href: '/admin/photos', label: 'Upload Photo', icon: Images },
+            { href: '/admin/news', label: 'Додати новину', icon: Newspaper },
+            { href: '/admin/projects', label: 'Додати проєкт', icon: FolderOpen },
+            { href: '/admin/reports', label: 'Додати звіт', icon: FileText },
+            { href: '/admin/photos', label: 'Завантажити фото', icon: Images },
           ].map(action => (
             <Link
               key={action.href}

@@ -33,13 +33,13 @@ export default function AdminRegisterPage() {
     const confirm = (form.elements.namedItem('confirm') as HTMLInputElement).value;
 
     if (password !== confirm) {
-      setError('Passwords do not match');
+      setError('Паролі не співпадають');
       setLoading(false);
       return;
     }
 
     if (password.length < 6) {
-      setError('Password must be at least 6 characters');
+      setError('Пароль має містити щонайменше 6 символів');
       setLoading(false);
       return;
     }
@@ -56,10 +56,10 @@ export default function AdminRegisterPage() {
         setTimeout(() => { window.location.href = '/admin'; }, 1500);
       } else {
         const data = await res.json();
-        setError(data.error || 'Registration failed');
+        setError(data.error || 'Помилка реєстрації');
       }
     } catch {
-      setError('Network error. Please try again.');
+      setError('Мережева помилка. Спробуйте ще раз.');
     } finally {
       setLoading(false);
     }
@@ -71,8 +71,8 @@ export default function AdminRegisterPage() {
     return (
       <div className={styles.loginWrapper}>
         <div className={styles.loginCard}>
-          <h1 className={styles.loginTitle}>✅ Account Created</h1>
-          <p className={styles.loginSubtitle}>Redirecting to admin panel…</p>
+          <h1 className={styles.loginTitle}>✅ Акаунт створено</h1>
+          <p className={styles.loginSubtitle}>Перенаправлення в адмін-панель…</p>
         </div>
       </div>
     );
@@ -81,14 +81,14 @@ export default function AdminRegisterPage() {
   return (
     <div className={styles.loginWrapper}>
       <div className={styles.loginCard}>
-        <h1 className={styles.loginTitle}>🛠️ Create Admin</h1>
-        <p className={styles.loginSubtitle}>Set up the first administrator account</p>
+        <h1 className={styles.loginTitle}>🛠️ Створення адміністратора</h1>
+        <p className={styles.loginSubtitle}>Налаштуйте перший обліковий запис адміністратора</p>
 
         {error && <div className={styles.loginError}>{error}</div>}
 
         <form onSubmit={handleSubmit} noValidate>
           <div>
-            <label htmlFor="email" className={styles.loginLabel}>Email</label>
+            <label htmlFor="email" className={styles.loginLabel}>Електронна пошта</label>
             <input
               type="email"
               name="email"
@@ -102,7 +102,7 @@ export default function AdminRegisterPage() {
           </div>
 
           <div>
-            <label htmlFor="password" className={styles.loginLabel}>Password</label>
+            <label htmlFor="password" className={styles.loginLabel}>Пароль</label>
             <input
               type={showPassword ? 'text' : 'password'}
               name="password"
@@ -110,12 +110,12 @@ export default function AdminRegisterPage() {
               required
               autoComplete="new-password"
               className={styles.loginInput}
-              placeholder="At least 6 characters"
+              placeholder="Щонайменше 6 символів"
             />
           </div>
 
           <div>
-            <label htmlFor="confirm" className={styles.loginLabel}>Confirm Password</label>
+            <label htmlFor="confirm" className={styles.loginLabel}>Підтвердьте пароль</label>
             <div style={{ position: 'relative' }}>
               <input
                 type={showPassword ? 'text' : 'password'}
@@ -124,7 +124,7 @@ export default function AdminRegisterPage() {
                 required
                 autoComplete="new-password"
                 className={styles.loginInput}
-                placeholder="Repeat password"
+                placeholder="Повторіть пароль"
                 style={{ marginBottom: 0 }}
               />
               <button
@@ -145,10 +145,10 @@ export default function AdminRegisterPage() {
                   display: 'flex',
                   alignItems: 'center',
                 }}
-                aria-label={showPassword ? 'Hide password' : 'Show password'}
+                aria-label={showPassword ? 'Приховати пароль' : 'Показати пароль'}
                 tabIndex={-1}
               >
-                {showPassword ? 'Hide' : 'Show'}
+                {showPassword ? 'Сховати' : 'Показати'}
               </button>
             </div>
           </div>
@@ -158,7 +158,7 @@ export default function AdminRegisterPage() {
             disabled={loading}
             className={styles.loginButton}
           >
-            {loading ? 'Creating…' : 'Create Admin Account'}
+            {loading ? 'Створення…' : 'Створити адміністратора'}
           </button>
         </form>
       </div>

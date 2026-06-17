@@ -40,10 +40,10 @@ export default function AdminLoginPage() {
         window.location.href = '/admin';
       } else {
         const data = await res.json();
-        setError(data.error || 'Invalid credentials');
+        setError(data.error || 'Невірний логін або пароль');
       }
     } catch {
-      setError('Network error. Please try again.');
+      setError('Мережева помилка. Спробуйте ще раз.');
     } finally {
       setLoading(false);
     }
@@ -54,15 +54,15 @@ export default function AdminLoginPage() {
   return (
     <div className={styles.loginWrapper}>
       <div className={styles.loginCard}>
-        <h1 className={styles.loginTitle}>🛠️ Mercy Admin</h1>
-        <p className={styles.loginSubtitle}>Sign in to manage your foundation</p>
+        <h1 className={styles.loginTitle}>🛠️ Адмін-панель</h1>
+        <p className={styles.loginSubtitle}>Увійдіть, щоб керувати фондом</p>
 
         {error && <div className={styles.loginError}>{error}</div>}
 
         <form onSubmit={handleSubmit} noValidate>
           <div>
             <label htmlFor="username" className={styles.loginLabel}>
-              Email
+              Електронна пошта
             </label>
             <input
               type="email"
@@ -78,7 +78,7 @@ export default function AdminLoginPage() {
 
           <div>
             <label htmlFor="password" className={styles.loginLabel}>
-              Password
+              Пароль
             </label>
             <div style={{ position: 'relative' }}>
               <input
@@ -109,10 +109,10 @@ export default function AdminLoginPage() {
                   display: 'flex',
                   alignItems: 'center',
                 }}
-                aria-label={showPassword ? 'Hide password' : 'Show password'}
+                aria-label={showPassword ? 'Приховати пароль' : 'Показати пароль'}
                 tabIndex={-1}
               >
-                {showPassword ? 'Hide' : 'Show'}
+                {showPassword ? 'Сховати' : 'Показати'}
               </button>
             </div>
           </div>
@@ -122,7 +122,7 @@ export default function AdminLoginPage() {
             disabled={loading}
             className={styles.loginButton}
           >
-            {loading ? 'Signing in…' : 'Sign In'}
+            {loading ? 'Вхід…' : 'Увійти'}
           </button>
         </form>
 
