@@ -63,6 +63,7 @@ export default async function ProjectDetailPage({
         shortDescription={project.short_description || ''}
         fullDescription={fullDescription}
         supportHref={`/${lang}/support`}
+        projectUrl={`/${lang}/projects/${project.id}`}
         dictionary={dictionary}
         locale={locale}
         links={project.links}

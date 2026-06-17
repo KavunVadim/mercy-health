@@ -106,7 +106,7 @@ export default function NewsDetailContent({ newsItem, dictionary, locale }: News
                   return <p key={idx} dangerouslySetInnerHTML={{ __html: html }} />;
                 })
               ) : (
-                <p dangerouslySetInnerHTML={{ __html: sanitizeHtml(newsItem.description) }} />
+                <div dangerouslySetInnerHTML={{ __html: sanitizeHtml(newsItem.description) }} />
               )}
             </div>
           </div>

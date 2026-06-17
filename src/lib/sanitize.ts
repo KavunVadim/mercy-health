@@ -1,11 +1,10 @@
 export function sanitizeHtml(html: string): string {
-  if (typeof window === 'undefined') {
-    return html
-      .replace(/<script\b[^<]*(?:(?!<\/script>)<[^<]*)*<\/script>/gi, '')
-      .replace(/\s+on\w+="[^"]*"/gi, '')
-      .replace(/\s+on\w+='[^']*'/gi, '')
-      .replace(/\s+on\w+=\S+/gi, '');
-  }
-  const purify = require('dompurify');
-  return purify.sanitize(html);
+  // Use consistent sanitization on both server and client
+  // Remove script tags
+  let result = html.replace(/<script\b[^<]*(?:(?!<\/script>)<[^<]*)*<\/script>/gi, '');
+  // Remove event handlers
+  result = result.replace(/\s+on\w+="[^"]*"/gi, '');
+  result = result.replace(/\s+on\w+='[^']*'/gi, '');
+  result = result.replace(/\s+on\w+=\S+/gi, '');
+  return result;
 }

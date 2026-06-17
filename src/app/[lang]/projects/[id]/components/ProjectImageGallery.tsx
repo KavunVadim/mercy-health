@@ -18,6 +18,7 @@ interface ProjectImageGalleryProps {
   shortDescription: string;
   fullDescription: string;
   supportHref: string;
+  projectUrl: string;
   dictionary: Dictionary;
   locale: Locale;
   links?: LinkItem[];
@@ -30,6 +31,7 @@ export default function ProjectImageGallery({
   shortDescription, 
   fullDescription, 
   supportHref,
+  projectUrl,
   dictionary,
   locale,
   links = [],
@@ -96,6 +98,7 @@ export default function ProjectImageGallery({
 
                   <ShareButtons 
                     title={title} 
+                    projectUrl={projectUrl}
                     dictionary={dictionary} 
                   />
 
@@ -124,7 +127,7 @@ export default function ProjectImageGallery({
                 viewport={{ once: true, margin: "-80px" }}
                 transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
               >
-                <p dangerouslySetInnerHTML={{ __html: sanitizeHtml(shortDescription) }} />
+                <div dangerouslySetInnerHTML={{ __html: sanitizeHtml(shortDescription) }} suppressHydrationWarning />
               </motion.div>
             )}
 
@@ -138,7 +141,7 @@ export default function ProjectImageGallery({
                 viewport={{ once: true, margin: "-60px" }}
                 transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
               >
-                <p dangerouslySetInnerHTML={{ __html: sanitizeHtml(fullDescription) }} />
+                <div dangerouslySetInnerHTML={{ __html: sanitizeHtml(fullDescription) }} suppressHydrationWarning />
               </motion.div>
             )}
 

@@ -66,6 +66,13 @@ function deepMerge<T extends Record<string, unknown>>(target: T, source: Record<
   return output as T;
 }
 
+function parseDateStr(str: string): Date {
+  if (!str) return new Date(0);
+  const parts = str.split('.');
+  if (parts.length === 3) return new Date(+parts[2], +parts[1] - 1, +parts[0]);
+  return new Date(str);
+}
+
 async function fetchMongoData(locale: Locale) {
     const db = await getDb();
 
@@ -127,7 +134,11 @@ async function fetchMongoData(locale: Locale) {
 
     const localizedProjects = localizeData(stripMongo(projectsDocs || []), locale);
     const localizedPartners = localizeData(stripMongo(partnersDocs || []), locale);
-    const localizedNews = localizeData(stripMongo(newsDocs || []), locale);
+    const localizedNews = (localizeData(stripMongo(newsDocs || []), locale) as Record<string, unknown>[]).sort((a, b) => {
+      const da = parseDateStr(a.date as string);
+      const db = parseDateStr(b.date as string);
+      return db.getTime() - da.getTime();
+    });
     const localizedReports = localizeData(stripMongo(reportsDocs || []), locale) as Record<string, unknown>[];
     const localizedSettings = settingsDoc ? localizeData(stripMongoOne(settingsDoc), locale) as Record<string, unknown> : {};
 

@@ -45,7 +45,7 @@ export default function ProjectCard({
             </div>
           ) : null}
           <h3 className={styles.title}>{title}</h3>
-          <p className={styles.description} dangerouslySetInnerHTML={{ __html: sanitizeHtml(description) }} />
+          <div className={styles.description} dangerouslySetInnerHTML={{ __html: sanitizeHtml(description) }} suppressHydrationWarning />
           
 
           <div className={styles.supportBtn}>
