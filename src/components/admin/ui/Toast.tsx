@@ -40,11 +40,10 @@ export function ToastProvider({ children }: { children: React.ReactNode }) {
     timers.current.set(id, timer);
   }, [remove]);
 
-  const ctx: ToastContextValue = {
-    toast: addToast,
-    success: (msg) => addToast(msg, 'success'),
-    error: (msg) => addToast(msg, 'error'),
-  };
+  const success = useCallback((msg: string) => addToast(msg, 'success'), [addToast]);
+  const error = useCallback((msg: string) => addToast(msg, 'error'), [addToast]);
+
+  const ctx: ToastContextValue = { toast: addToast, success, error };
 
   return (
     <ToastContext.Provider value={ctx}>

@@ -109,7 +109,7 @@ export default function AdminContentPage() {
       setBankAccounts(d.bank_accounts ? JSON.stringify(d.bank_accounts, null, 2) : '');
       setLoaded(true);
     }).catch(() => { setLoaded(true); error('Failed to load content'); });
-  }, [error]);
+  }, []);
 
   async function handleSave(e: React.FormEvent) {
     e.preventDefault();
