@@ -33,10 +33,18 @@ interface NewsItem {
   links?: { url: string; type?: 'video' | 'external'; label?: { uk: string; en: string } }[];
 }
 
-function arrToText(arr: string[] | undefined): string {
-  return Array.isArray(arr) ? arr.join('\n') : '';
+function arrToText(arr: string[] | string | undefined): string {
+  if (Array.isArray(arr)) return arr.join('\n');
+  return arr || '';
 }
 function textToArr(text: string): string[] {
+  if (!text) return [];
+  if (text.includes('<')) {
+    return text.match(/<p>([\s\S]*?)<\/p>/g)
+      ?.map(m => m.replace(/<\/?p>/g, '').trim())
+      .filter(Boolean)
+      || text.split('\n').filter(s => s.trim());
+  }
   return text.split('\n').filter(s => s.trim());
 }
 
