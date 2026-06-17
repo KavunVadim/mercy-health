@@ -22,9 +22,10 @@ interface MediaEditorProps {
   itemsEn: MediaItemData[];
   onItemsChange: (items: MediaItemData[]) => void;
   onItemsEnChange: (items: MediaItemData[]) => void;
+  onSave?: () => Promise<void>;
 }
 
-export default function MediaEditor({ items, itemsEn, onItemsChange, onItemsEnChange }: MediaEditorProps) {
+export default function MediaEditor({ items, itemsEn, onItemsChange, onItemsEnChange, onSave }: MediaEditorProps) {
   const [editingIndex, setEditingIndex] = useState<number | null>(null);
 
   useEffect(() => {
@@ -245,7 +246,10 @@ export default function MediaEditor({ items, itemsEn, onItemsChange, onItemsEnCh
               <button
                 type="button"
                 className={`${styles.btn} ${styles.btnPrimary}`}
-                onClick={() => setEditingIndex(null)}
+                onClick={async () => {
+                  await onSave?.();
+                  setEditingIndex(null);
+                }}
               >
                 Готово
               </button>

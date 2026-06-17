@@ -212,8 +212,7 @@ export default function AdminContentPage() {
     });
   }, [aboutHistoryImages.length, loaded]);
 
-  async function handleSave(e: React.FormEvent) {
-    e.preventDefault();
+  async function saveContent() {
     setSaving(true);
     try {
       let parsedAccounts = null;
@@ -236,6 +235,11 @@ export default function AdminContentPage() {
       else error('Не вдалося зберегти контент');
     } catch { error('Мережева помилка'); }
     finally { setSaving(false); }
+  }
+
+  async function handleSave(e: React.FormEvent) {
+    e.preventDefault();
+    await saveContent();
   }
 
   function addDocument() {
@@ -588,7 +592,7 @@ export default function AdminContentPage() {
               <p style={{ fontSize: '0.8rem', color: 'var(--admin-text-muted)', marginBottom: '0.75rem' }}>
                 Картки медіа про нас. Кожна картка містить зображення, назву видання, заголовок, опис, дату та посилання.
               </p>
-              <MediaEditor items={mediaLinks} itemsEn={mediaLinksEn} onItemsChange={setMediaLinks} onItemsEnChange={setMediaLinksEn} />
+              <MediaEditor items={mediaLinks} itemsEn={mediaLinksEn} onItemsChange={setMediaLinks} onItemsEnChange={setMediaLinksEn} onSave={saveContent} />
             </SectionCard>
           )}
 
