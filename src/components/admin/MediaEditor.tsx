@@ -1,11 +1,9 @@
 'use client';
 
-import { useState } from 'react';
-import { Plus, X, GripVertical, ChevronUp, ChevronDown } from 'lucide-react';
+import { Plus, X } from 'lucide-react';
 import styles from '@/app/admin/admin.module.css';
 import ExpandableCard from '@/components/admin/ui/ExpandableCard';
 import ImageUploader from '@/components/admin/ImageUploader';
-import { handleDragStart, handleDragOver, handleDragLeave, handleDrop, handleDragEnd } from '@/lib/dnd-reorder';
 
 interface MediaItemData {
   id: string;
@@ -26,8 +24,6 @@ interface MediaEditorProps {
 }
 
 export default function MediaEditor({ items, itemsEn, onItemsChange, onItemsEnChange }: MediaEditorProps) {
-  const [dragIndex, setDragIndex] = useState<number | null>(null);
-
   function addItem() {
     const id = `media-${Date.now()}`;
     const image = '';
@@ -58,29 +54,9 @@ export default function MediaEditor({ items, itemsEn, onItemsChange, onItemsEnCh
     onItemsEnChange(updated);
   }
 
-  function reorderItem(from: number, to: number) {
-    if (to < 0 || to >= items.length || from === to) return;
-    const updated = [...items];
-    const [moved] = updated.splice(from, 1);
-    updated.splice(to, 0, moved);
-    onItemsChange(updated);
-
-    const updatedEn = [...itemsEn];
-    const [movedEn] = updatedEn.splice(from, 1);
-    updatedEn.splice(to, 0, movedEn);
-    onItemsEnChange(updatedEn);
-  }
-
-  function moveItem(from: number, direction: -1 | 1) {
-    reorderItem(from, from + direction);
-  }
-
   function collapsedView(item: MediaItemData, i: number) {
     return (
       <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
-        <div style={{ color: 'var(--admin-text-muted)', display: 'flex', cursor: 'grab', flexShrink: 0 }}>
-          <GripVertical size={16} />
-        </div>
         <div style={{
           width: 52, height: 52, borderRadius: '8px',
           overflow: 'hidden', flexShrink: 0, background: 'var(--admin-secondary)',
@@ -95,41 +71,34 @@ export default function MediaEditor({ items, itemsEn, onItemsChange, onItemsEnCh
           )}
         </div>
         <div style={{ flex: 1, minWidth: 0 }}>
-          <div style={{ fontWeight: 600, fontSize: '0.85rem', color: 'var(--admin-text)' }}>
+          <div style={{ fontWeight: 600, fontSize: '0.85rem', color: 'var(--admin-text)', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>
             {item.title || `Медіа ${i + 1}`}
           </div>
-          <div style={{ fontSize: '0.75rem', color: 'var(--admin-text-muted)' }}>
-            {item.source || 'No source set'}
+          <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', marginTop: '0.2rem' }}>
+            <span style={{ fontSize: '0.75rem', color: 'var(--admin-text-muted)' }}>
+              {item.source || '—'}
+            </span>
+            {item.date && (
+              <span style={{ fontSize: '0.7rem', color: 'var(--admin-text-muted)', opacity: 0.7 }}>
+                {item.date}
+              </span>
+            )}
+            <span style={{
+              fontSize: '0.65rem', fontWeight: 600, textTransform: 'uppercase',
+              padding: '1px 6px', borderRadius: '4px', lineHeight: '1.4',
+              background: item.type === 'video' ? 'rgba(139,92,246,0.15)' : 'rgba(59,130,246,0.12)',
+              color: item.type === 'video' ? '#a78bfa' : '#60a5fa',
+            }}>
+              {item.type === 'video' ? 'Відео' : 'Стаття'}
+            </span>
           </div>
-        </div>
-        <div style={{ display: 'flex', gap: '0.2rem', flexShrink: 0 }}>
-          <button
-            type="button"
-            onClick={e => { e.stopPropagation(); moveItem(i, -1); }}
-            disabled={i === 0}
-            className={`${styles.btn} ${styles.btnSm} ${styles.btnIcon}`}
-            style={{ minWidth: 28, minHeight: 26, padding: 0 }}
-            title="Move up"
-          >
-            <ChevronUp size={13} />
-          </button>
-          <button
-            type="button"
-            onClick={e => { e.stopPropagation(); moveItem(i, 1); }}
-            disabled={i === items.length - 1}
-            className={`${styles.btn} ${styles.btnSm} ${styles.btnIcon}`}
-            style={{ minWidth: 28, minHeight: 26, padding: 0 }}
-            title="Move down"
-          >
-            <ChevronDown size={13} />
-          </button>
         </div>
         <button
           type="button"
           onClick={e => { e.stopPropagation(); removeItem(i); }}
           className={`${styles.btn} ${styles.btnSm} ${styles.btnDestructive}`}
           style={{ flexShrink: 0 }}
-          title="Remove item"
+          title="Видалити"
         >
           <X size={12} />
         </button>
@@ -252,16 +221,7 @@ export default function MediaEditor({ items, itemsEn, onItemsChange, onItemsEnCh
       ) : (
         <div style={{ display: 'flex', flexDirection: 'column', gap: '0.75rem' }}>
           {items.map((item, i) => (
-            <div
-              key={item.id}
-              draggable
-              onDragStart={e => { setDragIndex(i); handleDragStart(e, i); }}
-              onDragOver={e => { handleDragOver(e, i, dragIndex, reorderItem); }}
-              onDragLeave={handleDragLeave}
-              onDrop={e => { handleDrop(e, i, dragIndex, reorderItem); setDragIndex(null); }}
-              onDragEnd={e => { handleDragEnd(e); setDragIndex(null); }}
-              style={{ cursor: 'grab', userSelect: 'none' }}
-            >
+            <div key={item.id}>
               <ExpandableCard
                 collapsedContent={collapsedView(item, i)}
                 expandedContent={expandedView(item, i)}

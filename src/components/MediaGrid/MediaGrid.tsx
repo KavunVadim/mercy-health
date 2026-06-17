@@ -7,14 +7,27 @@ import type { MediaItem } from '@/types/content';
 const INITIAL_COUNT = 8;
 const LOAD_MORE_COUNT = 8;
 
+function parseDate(str?: string): Date {
+  if (!str) return new Date(0);
+  const parts = str.split('.');
+  if (parts.length === 3) return new Date(+parts[2], +parts[1] - 1, +parts[0]);
+  return new Date(str);
+}
+
 export default function MediaGrid({ items }: { items: MediaItem[] }) {
+  const sorted = [...items].sort((a, b) => {
+    const da = parseDate(a.date);
+    const db = parseDate(b.date);
+    return db.getTime() - da.getTime();
+  });
+
   const [visibleCount, setVisibleCount] = useState(INITIAL_COUNT);
 
-  const visible = items.slice(0, visibleCount);
-  const hasMore = visibleCount < items.length;
+  const visible = sorted.slice(0, visibleCount);
+  const hasMore = visibleCount < sorted.length;
 
   function handleLoadMore() {
-    setVisibleCount(prev => Math.min(prev + LOAD_MORE_COUNT, items.length));
+    setVisibleCount(prev => Math.min(prev + LOAD_MORE_COUNT, sorted.length));
   }
 
   return (
