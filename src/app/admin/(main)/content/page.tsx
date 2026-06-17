@@ -18,6 +18,36 @@ function syncArrayLength(arr: string[], targetLen: number): string[] {
   return arr.slice(0, targetLen);
 }
 
+function SectionCard({ icon: Icon, title, isOpen, onToggle, children }: { icon: React.ElementType; title: string; isOpen: boolean; onToggle: () => void; children: React.ReactNode }) {
+  return (
+    <div className={styles.settingsSection}>
+      <div
+        className={styles.settingsSectionHeader}
+        onClick={onToggle}
+        style={{ cursor: 'pointer', userSelect: 'none' }}
+      >
+        <Icon size={16} className={styles.settingsSectionIcon} strokeWidth={2} />
+        <h2 className={styles.settingsSectionTitle}>{title}</h2>
+        <ChevronDown
+          size={16}
+          strokeWidth={2}
+          style={{
+            marginLeft: 'auto',
+            color: 'var(--admin-text-muted)',
+            transition: 'transform 0.2s',
+            transform: isOpen ? 'rotate(180deg)' : 'rotate(0deg)',
+          }}
+        />
+      </div>
+      {isOpen && (
+        <div className={styles.settingsSectionBody}>
+          {children}
+        </div>
+      )}
+    </div>
+  );
+}
+
 interface Category {
   key: string;
   label: string;
@@ -239,37 +269,6 @@ export default function AdminContentPage() {
     setSubSection(sec);
   }
 
-  function SectionCard({ icon: Icon, title, sectionKey, children }: { icon: React.ElementType; title: string; sectionKey: string; children: React.ReactNode }) {
-    const open = expanded[sectionKey] || false;
-    return (
-      <div className={styles.settingsSection}>
-        <div
-          className={styles.settingsSectionHeader}
-          onClick={() => toggleSection(sectionKey)}
-          style={{ cursor: 'pointer', userSelect: 'none' }}
-        >
-          <Icon size={16} className={styles.settingsSectionIcon} strokeWidth={2} />
-          <h2 className={styles.settingsSectionTitle}>{title}</h2>
-          <ChevronDown
-            size={16}
-            strokeWidth={2}
-            style={{
-              marginLeft: 'auto',
-              color: 'var(--admin-text-muted)',
-              transition: 'transform 0.2s',
-              transform: open ? 'rotate(180deg)' : 'rotate(0deg)',
-            }}
-          />
-        </div>
-        {open && (
-          <div className={styles.settingsSectionBody}>
-            {children}
-          </div>
-        )}
-      </div>
-    );
-  }
-
   const currentCat = category ? categories.find(c => c.key === category) : null;
   const currentSection = currentCat?.sections?.find(s => s.key === subSection);
 
@@ -422,13 +421,13 @@ export default function AdminContentPage() {
           {/* ─── ABOUT: Hero ─── */}
           {category === 'about' && subSection === 'hero' && (
             <div style={{ display: 'flex', flexDirection: 'column', gap: '1.25rem' }}>
-              <SectionCard icon={Image} title="Фонове зображення Hero" sectionKey="about-hero-banner">
+              <SectionCard icon={Image} title="Фонове зображення Hero" isOpen={expanded["about-hero-banner"] || false} onToggle={() => toggleSection("about-hero-banner")}>
                 <p style={{ fontSize: '0.8rem', color: 'var(--admin-text-muted)', marginBottom: '1rem' }}>
                   Великий банер на всю ширину вгорі сторінки «Про фонд».
                 </p>
                 <ImageUploader value={aboutHeroImage} onChange={setAboutHeroImage} label="Фоновий банер Hero" />
               </SectionCard>
-              <SectionCard icon={SlidersHorizontal} title="Бейдж, статистика та цитата" sectionKey="about-hero-badge">
+              <SectionCard icon={SlidersHorizontal} title="Бейдж, статистика та цитата" isOpen={expanded["about-hero-badge"] || false} onToggle={() => toggleSection("about-hero-badge")}>
                 <div className={styles.formGrid}>
                   <div className={styles.formGroup}>
                     <label className={styles.label}>Бейдж «Рік» (UA)</label>
@@ -478,7 +477,7 @@ export default function AdminContentPage() {
           {/* ─── ABOUT: Story + Timeline + Gallery ─── */}
           {category === 'about' && subSection === 'story' && (
             <div style={{ display: 'flex', flexDirection: 'column', gap: '1.25rem' }}>
-              <SectionCard icon={FileText} title="Текст історії" sectionKey="about-story-text">
+              <SectionCard icon={FileText} title="Текст історії" isOpen={expanded["about-story-text"] || false} onToggle={() => toggleSection("about-story-text")}>
                 <div className={styles.formGrid}>
                   <div className={styles.formGroup}><label className={styles.label}>Заголовок (UA)</label><input className={styles.input} value={form.about_history_title_uk} onChange={e => setForm({ ...form, about_history_title_uk: e.target.value })} /></div>
                   <div className={styles.formGroup}><label className={styles.label}>Заголовок (EN)</label><input className={styles.input} value={form.about_history_title_en} onChange={e => setForm({ ...form, about_history_title_en: e.target.value })} /></div>
@@ -490,7 +489,7 @@ export default function AdminContentPage() {
                 <div className={styles.formGroup} style={{ marginTop: '1rem' }}><label className={styles.label}>Текст історії (UA)</label><textarea className={styles.textarea} rows={10} value={form.about_history_content_uk} onChange={e => setForm({ ...form, about_history_content_uk: e.target.value })} /></div>
                 <div className={styles.formGroup} style={{ marginTop: '0.75rem' }}><label className={styles.label}>Текст історії (EN)</label><textarea className={styles.textarea} rows={10} value={form.about_history_content_en} onChange={e => setForm({ ...form, about_history_content_en: e.target.value })} /></div>
               </SectionCard>
-              <SectionCard icon={FileText} title="Таймлайн" sectionKey="about-story-timeline">
+              <SectionCard icon={FileText} title="Таймлайн" isOpen={expanded["about-story-timeline"] || false} onToggle={() => toggleSection("about-story-timeline")}>
                 <ArrayEditor
                   label="Таймлайн (UA)"
                   itemLabel="подію"
@@ -516,7 +515,7 @@ export default function AdminContentPage() {
                   />
                 </div>
               </SectionCard>
-              <SectionCard icon={Image} title="Фотогалерея" sectionKey="about-story-gallery">
+              <SectionCard icon={Image} title="Фотогалерея" isOpen={expanded["about-story-gallery"] || false} onToggle={() => toggleSection("about-story-gallery")}>
                 <GalleryEditor value={aboutHistoryImages} onChange={setAboutHistoryImages} label="Зображення галереї" />
                 <div className={styles.formGrid} style={{ marginTop: '1.5rem' }}>
                   <div className={styles.formGroup}><label className={styles.label}>Eyebrow (UA)</label><input className={styles.input} value={form.about_gallery_eyebrow_uk} onChange={e => setForm({ ...form, about_gallery_eyebrow_uk: e.target.value })} placeholder="Хроніка" /></div>
@@ -560,7 +559,7 @@ export default function AdminContentPage() {
 
           {/* ─── ABOUT: Honor ─── */}
           {category === 'about' && subSection === 'honor' && (
-            <SectionCard icon={Image} title="Почесна варта" sectionKey="about-honor">
+            <SectionCard icon={Image} title="Почесна варта" isOpen={expanded["about-honor"] || false} onToggle={() => toggleSection("about-honor")}>
               <ImageUploader value={aboutPatchesImage} onChange={setAboutPatchesImage} label="Фото шевронів" />
               <div style={{ marginTop: '1.5rem', display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
                 <HonorEditor label="Дані (UA)" value={form.about_honor_uk} onChange={v => setForm({ ...form, about_honor_uk: v })} />
@@ -571,7 +570,7 @@ export default function AdminContentPage() {
 
           {/* ─── ABOUT: Mission + Media ─── */}
           {category === 'about' && subSection === 'mission-media' && (
-            <SectionCard icon={FileText} title="Місія + Медіа" sectionKey="about-mission-media">
+            <SectionCard icon={FileText} title="Місія + Медіа" isOpen={expanded["about-mission-media"] || false} onToggle={() => toggleSection("about-mission-media")}>
               <div className={styles.formGrid}>
                 <div className={styles.formGroup}><label className={styles.label}>Заголовок «Місія» (UA)</label><input className={styles.input} value={form.about_mission_title_uk} onChange={e => setForm({ ...form, about_mission_title_uk: e.target.value })} /></div>
                 <div className={styles.formGroup}><label className={styles.label}>Заголовок «Місія» (EN)</label><input className={styles.input} value={form.about_mission_title_en} onChange={e => setForm({ ...form, about_mission_title_en: e.target.value })} /></div>
@@ -595,7 +594,7 @@ export default function AdminContentPage() {
 
           {/* ─── HERO ─── */}
           {category === 'hero' && subSection === 'text' && (
-            <SectionCard icon={SlidersHorizontal} title="Текст головного банера" sectionKey="hero-text">
+            <SectionCard icon={SlidersHorizontal} title="Текст головного банера" isOpen={expanded["hero-text"] || false} onToggle={() => toggleSection("hero-text")}>
               <div className={styles.formGrid}>
                 <div className={styles.formGroup}><label className={styles.label}>Заголовок (UA)</label><input className={styles.input} value={form.hero_title_uk} onChange={e => setForm({ ...form, hero_title_uk: e.target.value })} /></div>
                 <div className={styles.formGroup}><label className={styles.label}>Заголовок (EN)</label><input className={styles.input} value={form.hero_title_en} onChange={e => setForm({ ...form, hero_title_en: e.target.value })} /></div>
@@ -609,14 +608,14 @@ export default function AdminContentPage() {
 
           {/* ─── SUPPORT: Cards ─── */}
           {category === 'support' && subSection === 'cards' && (
-            <SectionCard icon={HeartHandshake} title="Картки донатів" sectionKey="support-cards">
+            <SectionCard icon={HeartHandshake} title="Картки донатів" isOpen={expanded["support-cards"] || false} onToggle={() => toggleSection("support-cards")}>
               <SupportCardEditor cards={supportCards} cardsEn={supportCardsEn} onCardsChange={setSupportCards} onCardsEnChange={setSupportCardsEn} />
             </SectionCard>
           )}
 
           {/* ─── SUPPORT: Buttons ─── */}
           {category === 'support' && subSection === 'buttons' && (
-            <SectionCard icon={HeartHandshake} title="Текст кнопок на картках" sectionKey="support-buttons">
+            <SectionCard icon={HeartHandshake} title="Текст кнопок на картках" isOpen={expanded["support-buttons"] || false} onToggle={() => toggleSection("support-buttons")}>
               <div className={styles.formGrid}>
                 <div className={styles.formGroup}><label className={styles.label}>Monobank (UA)</label><input className={styles.input} value={form.card_label_monobank_uk} onChange={e => setForm({ ...form, card_label_monobank_uk: e.target.value })} placeholder="Підтримати на Monobank" /></div>
                 <div className={styles.formGroup}><label className={styles.label}>Monobank (EN)</label><input className={styles.input} value={form.card_label_monobank_en} onChange={e => setForm({ ...form, card_label_monobank_en: e.target.value })} placeholder="Support on Monobank" /></div>
@@ -630,7 +629,7 @@ export default function AdminContentPage() {
 
           {/* ─── STATS: Bank details ─── */}
           {category === 'stats' && subSection === 'details' && (
-            <SectionCard icon={CreditCard} title="Банківські реквізити" sectionKey="stats-details">
+            <SectionCard icon={CreditCard} title="Банківські реквізити" isOpen={expanded["stats-details"] || false} onToggle={() => toggleSection("stats-details")}>
               <div className={styles.formGrid}>
                 <div className={styles.formGroup}><label className={styles.label}>Отримувач (UA)</label><input className={styles.input} value={form.beneficiary_value_uk} onChange={e => setForm({ ...form, beneficiary_value_uk: e.target.value })} /></div>
                 <div className={styles.formGroup}><label className={styles.label}>Отримувач (EN)</label><input className={styles.input} value={form.beneficiary_value_en} onChange={e => setForm({ ...form, beneficiary_value_en: e.target.value })} /></div>
@@ -647,7 +646,7 @@ export default function AdminContentPage() {
 
           {/* ─── STATS: Stats form ─── */}
           {category === 'stats' && subSection === 'stats-form' && (
-            <SectionCard icon={CreditCard} title="Статистика (головна сторінка)" sectionKey="stats-form">
+            <SectionCard icon={CreditCard} title="Статистика (головна сторінка)" isOpen={expanded["stats-form"] || false} onToggle={() => toggleSection("stats-form")}>
               <div className={styles.formGrid3}>
                 <div className={styles.formGroup}><label className={styles.label}>Проєкти</label><input className={styles.input} value={form.stats_projects} onChange={e => setForm({ ...form, stats_projects: e.target.value })} placeholder="12" /></div>
                 <div className={styles.formGroup}><label className={styles.label}>Дороги (км)</label><input className={styles.input} value={form.stats_roads} onChange={e => setForm({ ...form, stats_roads: e.target.value })} placeholder="550 000+" /></div>
@@ -658,7 +657,7 @@ export default function AdminContentPage() {
 
           {/* ─── STATS: Accounts ─── */}
           {category === 'stats' && subSection === 'accounts' && (
-            <SectionCard icon={CreditCard} title="Рахунки (IBAN / Crypto)" sectionKey="stats-accounts">
+            <SectionCard icon={CreditCard} title="Рахунки (IBAN / Crypto)" isOpen={expanded["stats-accounts"] || false} onToggle={() => toggleSection("stats-accounts")}>
               <p className={styles.pageSubtitle} style={{ marginBottom: '0.75rem' }}>
                 Редагуйте банківські рахунки у форматі JSON. Формат: {'{'}"ua": [{'{'}"id": "ua_privat", "label": "PrivatBank", "value": "UA..."{'}'}]{'}'}
               </p>
@@ -674,7 +673,7 @@ export default function AdminContentPage() {
 
           {/* ─── DOCS ─── */}
           {category === 'docs' && subSection === 'list' && (
-            <SectionCard icon={FileBadge} title="Звіти / Документи" sectionKey="docs-list">
+            <SectionCard icon={FileBadge} title="Звіти / Документи" isOpen={expanded["docs-list"] || false} onToggle={() => toggleSection("docs-list")}>
               <div style={{ display: 'flex', justifyContent: 'flex-end', marginBottom: '1rem' }}>
                 <button type="button" onClick={addDocument} className={`${styles.btn} ${styles.btnSm} ${styles.btnPrimary}`}>
                   <Plus size={14} /> Додати документ
