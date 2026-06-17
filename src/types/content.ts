@@ -187,6 +187,7 @@ export interface Dictionary {
       eyebrow: string;
       big_number: string;
       num_label: string;
+      text?: string;
       tags: string[];
       caption: string;
       patch_alt: string;

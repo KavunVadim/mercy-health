@@ -7,6 +7,7 @@ interface HonorData {
   eyebrow?: string;
   big_number?: string;
   num_label?: string;
+  text?: string;
   tags?: string[];
   caption?: string;
   patch_alt?: string;
@@ -57,6 +58,10 @@ export default function HonorEditor({ value, onChange, label }: HonorEditorProps
         <div className={styles.formGroup}>
           <label className={styles.label} style={{ fontSize: '0.75rem' }}>Підпис під цифрою</label>
           <textarea className={styles.textarea} rows={2} value={value.num_label || ''} onChange={e => setField('num_label', e.target.value)} placeholder="спеціалізованих авто доставлено на фронт..." />
+        </div>
+        <div className={styles.formGroup}>
+          <label className={styles.label} style={{ fontSize: '0.75rem' }}>Основний текст (абзац)</label>
+          <textarea className={styles.textarea} rows={4} value={value.text || ''} onChange={e => setField('text', e.target.value)} placeholder="Сьогодні ми є одним із найбільших постачальників спеціалізованої техніки..." />
         </div>
         <div className={styles.formGroup}>
           <label className={styles.label} style={{ fontSize: '0.75rem' }}>Підпис під фото</label>

@@ -176,7 +176,7 @@ export default function WhoWeAreRedesign({ dictionary }: WhoWeAreRedesignProps) 
               <p className={styles.honorEyebrow}>{about.honor.eyebrow}</p>
               <div className={styles.honorBigNum}>{about.honor.big_number}<span className={styles.honorPlus}>+</span></div>
               <p className={styles.honorNumLabel}>{about.honor.num_label}</p>
-              <p className={styles.honorText}>{historyParagraphs[3] ?? historyParagraphs[0]}</p>
+              <p className={styles.honorText}>{about.honor.text || historyParagraphs[3] || historyParagraphs[0]}</p>
               <div className={styles.honorTags}>
                 {honorTags.map((tag, ti) => (
                   <span key={ti} className={styles.honorTag}>{tag}</span>
