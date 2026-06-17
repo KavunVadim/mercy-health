@@ -73,10 +73,11 @@ export default function Footer({
         </div>
 
         <div className={styles.navCol}>
-          <h4 className={styles.colTitle}>{dictionary.navigation.projects}</h4>
+          <h4 className={styles.colTitle}>{dictionary.footer.columns.projects}</h4>
           <ul className={styles.list}>
-            <li><Link href={`/${lang}/projects/rehab`}>{dictionary.navigation.rehab}</Link></li>
-            <li><Link href={`/${lang}/projects/medics`}>{dictionary.navigation.medical_aid}</Link></li>
+            {(dictionary.projects.items || []).slice(0, 6).map(p => (
+              <li key={p.id}><Link href={`/${lang}/projects/${p.id}`}>{p.title}</Link></li>
+            ))}
           </ul>
         </div>
 
