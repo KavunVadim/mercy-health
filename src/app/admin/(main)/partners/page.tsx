@@ -8,26 +8,18 @@ import ImageUploader from '@/components/admin/ImageUploader';
 import { useToast } from '@/components/admin/ui/Toast';
 import ConfirmDialog from '@/components/admin/ui/ConfirmDialog';
 import { SkeletonRows } from '@/components/admin/ui/Skeleton';
-
-interface Partner {
-  _id?: string;
-  id: string;
-  name?: { uk: string; en: string };
-  logo?: string;
-  url?: string;
-  category?: string;
-}
+import type { AdminPartner } from '@/types/admin';
 
 const CATEGORIES = ['other', 'media', 'medical', 'charity', 'government'];
 
 export default function AdminPartnersPage() {
-  const [items, setItems] = useState<Partner[]>([]);
+  const [items, setItems] = useState<AdminPartner[]>([]);
   const [loading, setLoading] = useState(true);
-  const [editing, setEditing] = useState<Partner | null>(null);
+  const [editing, setEditing] = useState<AdminPartner | null>(null);
   const [showForm, setShowForm] = useState(false);
   const [form, setForm] = useState({ name_uk: '', name_en: '', logo: '', url: '', category: 'other' });
   const [saving, setSaving] = useState(false);
-  const [deleteTarget, setDeleteTarget] = useState<Partner | null>(null);
+  const [deleteTarget, setDeleteTarget] = useState<AdminPartner | null>(null);
   const [deleting, setDeleting] = useState(false);
   const { success, error } = useToast();
 
@@ -68,9 +60,9 @@ export default function AdminPartnersPage() {
     finally { setDeleting(false); setDeleteTarget(null); }
   }
 
-  function openEdit(item: Partner) {
+  function openEdit(item: AdminPartner) {
     setEditing(item);
-    setForm({ name_uk: (item.name as any)?.uk || '', name_en: (item.name as any)?.en || '', logo: item.logo || '', url: item.url || '', category: item.category || 'other' });
+    setForm({ name_uk: item.name?.uk || '', name_en: item.name?.en || '', logo: item.logo || '', url: item.url || '', category: item.category || 'other' });
     setShowForm(true);
   }
 
@@ -133,7 +125,7 @@ export default function AdminPartnersPage() {
       <ConfirmDialog
         open={!!deleteTarget}
         title="Delete partner?"
-        message={`"${(deleteTarget?.name as any)?.uk || deleteTarget?.id}" will be removed.`}
+        message={`"${deleteTarget?.name?.uk || deleteTarget?.id}" will be removed.`}
         confirmLabel="Delete"
         loading={deleting}
         onConfirm={handleDeleteConfirm}
@@ -155,16 +147,16 @@ export default function AdminPartnersPage() {
             <div key={item.id} className={styles.cardItem} style={{ textAlign: 'center', padding: '1rem' }}>
               <div style={{ display: 'flex', justifyContent: 'center', marginBottom: '1rem', marginTop: '0.5rem' }}>
                 {item.logo ? (
-                  <img src={item.logo} alt={(item.name as any)?.uk} style={{ width: '80px', height: '80px', objectFit: 'contain', background: 'rgba(255,255,255,0.05)', borderRadius: '12px', padding: '0.5rem', border: '1px solid var(--admin-border)' }} />
+                  <img src={item.logo} alt={item.name?.uk || ''} style={{ width: '80px', height: '80px', objectFit: 'contain', background: 'rgba(255,255,255,0.05)', borderRadius: '12px', padding: '0.5rem', border: '1px solid var(--admin-border)' }} />
                 ) : (
                   <div style={{ width: '80px', height: '80px', background: 'var(--admin-secondary)', borderRadius: '12px', border: '1px solid var(--admin-border)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
                     <Users size={32} color="var(--admin-text-muted)" />
                   </div>
                 )}
               </div>
-              <h3 className={styles.cardTitle} style={{ fontSize: '1rem' }}>{(item.name as any)?.uk}</h3>
-              {(item.name as any)?.en && (
-                <div style={{ fontSize: '0.8rem', color: 'var(--admin-text-muted)', marginBottom: '0.5rem' }}>{(item.name as any).en}</div>
+              <h3 className={styles.cardTitle} style={{ fontSize: '1rem' }}>{item.name?.uk}</h3>
+              {item.name?.en && (
+                <div style={{ fontSize: '0.8rem', color: 'var(--admin-text-muted)', marginBottom: '0.5rem' }}>{item.name.en}</div>
               )}
               <div style={{ margin: '0.75rem 0' }}>
                 <span className={`${styles.badge} ${styles.badgeSecondary}`}>{item.category || 'other'}</span>

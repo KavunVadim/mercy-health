@@ -8,20 +8,7 @@ import RichEditor from '@/components/admin/RichEditor';
 import { useToast } from '@/components/admin/ui/Toast';
 import ConfirmDialog from '@/components/admin/ui/ConfirmDialog';
 import { SkeletonRows } from '@/components/admin/ui/Skeleton';
-
-interface Report {
-  id: string;
-  title?: { uk: string; en: string };
-  period?: string;
-  year?: number;
-  date?: string;
-  url?: string;
-  pdf_url?: string;
-  total_collected?: number;
-  donations_count?: number;
-  summary?: { uk: string; en: string };
-  stats?: { raised?: number; spent?: number; projects_count?: number };
-}
+import type { AdminReport } from '@/types/admin';
 
 function formatMoney(n?: number) {
   if (!n) return '—';
@@ -37,13 +24,13 @@ const emptyForm = () => ({
 });
 
 export default function AdminReportsPage() {
-  const [items, setItems] = useState<Report[]>([]);
+  const [items, setItems] = useState<AdminReport[]>([]);
   const [loading, setLoading] = useState(true);
-  const [editing, setEditing] = useState<Report | null>(null);
+  const [editing, setEditing] = useState<AdminReport | null>(null);
   const [showForm, setShowForm] = useState(false);
   const [form, setForm] = useState(emptyForm());
   const [saving, setSaving] = useState(false);
-  const [deleteTarget, setDeleteTarget] = useState<Report | null>(null);
+  const [deleteTarget, setDeleteTarget] = useState<AdminReport | null>(null);
   const [deleting, setDeleting] = useState(false);
   const { success, error } = useToast();
 
@@ -95,18 +82,17 @@ export default function AdminReportsPage() {
     finally { setDeleting(false); setDeleteTarget(null); }
   }
 
-  function openEdit(item: Report) {
+  function openEdit(item: AdminReport) {
     setEditing(item);
-    const t = item.title as any, s = item.summary as any, st = item.stats as any;
     setForm({
-      title_uk: t?.uk || '', title_en: t?.en || '',
+      title_uk: item.title?.uk || '', title_en: item.title?.en || '',
       period: item.period || '', year: (item.year || '').toString(),
       date: item.date || '', url: item.url || '',
       total_collected: (item.total_collected || '').toString(),
       donations_count: (item.donations_count || '').toString(),
-      summary_uk: s?.uk || '', summary_en: s?.en || '',
-      raised: (st?.raised || '').toString(), spent: (st?.spent || '').toString(),
-      projects_count: (st?.projects_count || '').toString(),
+      summary_uk: item.summary?.uk || '', summary_en: item.summary?.en || '',
+      raised: (item.stats?.raised || '').toString(), spent: (item.stats?.spent || '').toString(),
+      projects_count: (item.stats?.projects_count || '').toString(),
     });
     setShowForm(true);
   }
@@ -194,7 +180,7 @@ export default function AdminReportsPage() {
       <ConfirmDialog
         open={!!deleteTarget}
         title="Delete report?"
-        message={`"${(deleteTarget?.title as any)?.uk || deleteTarget?.id}" will be permanently removed.`}
+        message={`"${deleteTarget?.title?.uk || deleteTarget?.id}" will be permanently removed.`}
         confirmLabel="Delete"
         loading={deleting}
         onConfirm={handleDeleteConfirm}
@@ -226,10 +212,10 @@ export default function AdminReportsPage() {
                 </div>
               </div>
               <div className={styles.cardBody}>
-                <h3 className={styles.cardTitle}>{(item.title as any)?.uk || item.id}</h3>
-                {(item.title as any)?.en && (
+                <h3 className={styles.cardTitle}>{item.title?.uk || item.id}</h3>
+                {item.title?.en && (
                   <div style={{ fontSize: '0.85rem', color: 'var(--admin-text-muted)' }}>
-                    {(item.title as any).en}
+                    {item.title.en}
                   </div>
                 )}
                 

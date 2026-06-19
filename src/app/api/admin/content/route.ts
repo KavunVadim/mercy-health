@@ -1,6 +1,6 @@
 import { NextResponse } from 'next/server';
 import { revalidatePath } from 'next/cache';
-import { getDb } from '@/lib/mongodb';
+import { getContent, setContent } from '@/lib/content-db';
 
 interface ContentFields {
   about?: {
@@ -42,26 +42,9 @@ interface ContentFields {
   hero_slider?: unknown[];
 }
 
-async function getContent(locale: string): Promise<ContentFields> {
-  const db = await getDb();
-  const col = locale === 'uk' ? 'content_uk' : 'content_en';
-  const doc = await db.collection(col).findOne<ContentFields>({ key: 'main' });
-  return doc || {};
-}
-
-async function setContent(locale: string, data: Record<string, unknown>) {
-  const db = await getDb();
-  const col = locale === 'uk' ? 'content_uk' : 'content_en';
-  await db.collection(col).updateOne(
-    { key: 'main' },
-    { $set: { key: 'main', ...data, updatedAt: new Date() } },
-    { upsert: true }
-  );
-}
-
 export async function GET() {
   try {
-    const [ukDoc, enDoc] = await Promise.all([getContent('uk'), getContent('en')]);
+    const [ukDoc, enDoc] = await Promise.all([getContent<ContentFields>('uk'), getContent<ContentFields>('en')]);
 
     return NextResponse.json({
       about_history_title_uk: ukDoc.about?.history?.title || '',
@@ -131,7 +114,7 @@ export async function GET() {
 export async function PUT(request: Request) {
   try {
     const body = await request.json();
-    const [ukDoc, enDoc] = await Promise.all([getContent('uk'), getContent('en')]);
+    const [ukDoc, enDoc] = await Promise.all([getContent<ContentFields>('uk'), getContent<ContentFields>('en')]);
 
     let about_hero_stats_uk = body.about_hero_stats_uk;
     if (typeof about_hero_stats_uk === 'string') { try { about_hero_stats_uk = JSON.parse(about_hero_stats_uk); } catch { about_hero_stats_uk = []; } }

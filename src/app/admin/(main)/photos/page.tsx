@@ -8,20 +8,10 @@ import ConfirmDialog from '@/components/admin/ui/ConfirmDialog';
 import { SkeletonPhotoGrid } from '@/components/admin/ui/Skeleton';
 import { saveReorder, handleDragStart, handleDragOver, handleDragLeave, handleDrop, handleDragEnd } from '@/lib/dnd-reorder';
 import { uploadFile } from '@/lib/upload';
-
-interface PhotoRecord {
-  _id: string;
-  title: string;
-  url: string;
-  alt?: string;
-  hash?: string;
-  size?: number;
-  visible?: boolean;
-  inGallery?: boolean;
-}
+import type { AdminPhoto } from '@/types/admin';
 
 export default function AdminPhotosPage() {
-  const [items, setItems] = useState<PhotoRecord[]>([]);
+  const [items, setItems] = useState<AdminPhoto[]>([]);
   const [loading, setLoading] = useState(true);
   const [search, setSearch] = useState('');
   const [filter, setFilter] = useState<'all' | 'gallery' | 'visible'>('all');
@@ -30,7 +20,7 @@ export default function AdminPhotosPage() {
   const [progress, setProgress] = useState(0);
   const [draggingOver, setDraggingOver] = useState(false);
   const [dragIndex, setDragIndex] = useState<number | null>(null);
-  const [deleteTarget, setDeleteTarget] = useState<PhotoRecord | null>(null);
+  const [deleteTarget, setDeleteTarget] = useState<AdminPhoto | null>(null);
   const [deleting, setDeleting] = useState(false);
   const fileRef = useRef<HTMLInputElement>(null);
   const { success, error } = useToast();

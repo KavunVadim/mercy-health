@@ -8,35 +8,17 @@ import ImageUploader from '@/components/admin/ImageUploader';
 import GalleryEditor from '@/components/admin/GalleryEditor';
 import RichEditor from '@/components/admin/RichEditor';
 import { saveReorder, handleDragStart, handleDragOver, handleDragLeave, handleDrop, handleDragEnd } from '@/lib/dnd-reorder';
-import { slugify } from '@/lib/data-utils';
+import { slugify, arrToText, textToArr } from '@/lib/data-utils';
 import { useToast } from '@/components/admin/ui/Toast';
 import ConfirmDialog from '@/components/admin/ui/ConfirmDialog';
 import { SkeletonRows } from '@/components/admin/ui/Skeleton';
+import type { AdminProject } from '@/types/admin';
 
-interface LinkEntry {
+interface FormLink {
   url: string;
   type: 'video' | 'external';
   label_uk: string;
   label_en: string;
-}
-
-interface ProjectItem {
-  _id?: string;
-  id: string;
-  title?: { uk: string; en: string };
-  description?: { uk: string; en: string };
-  full_description?: { uk: string; en: string };
-  image?: string;
-  gallery?: string[];
-  status?: string;
-  links?: { url: string; type?: 'video' | 'external'; label?: { uk: string; en: string } }[];
-}
-
-function arrToText(arr: string[] | undefined): string {
-  return Array.isArray(arr) ? arr.join('\n') : '';
-}
-function textToArr(text: string): string[] {
-  return text.split('\n').filter(s => s.trim());
 }
 
 const STATUS_LABELS: Record<string, { label: string; badge: string }> = {
@@ -50,18 +32,18 @@ const emptyForm = () => ({
   description_uk: '', description_en: '',
   full_description_uk: '', full_description_en: '',
   image: '', image_focus: '', gallery: '', status: 'active',
-  links: [] as LinkEntry[],
+  links: [] as FormLink[],
 });
 
 export default function AdminProjectsPage() {
-  const [items, setItems] = useState<ProjectItem[]>([]);
+  const [items, setItems] = useState<AdminProject[]>([]);
   const [loading, setLoading] = useState(true);
-  const [editing, setEditing] = useState<ProjectItem | null>(null);
+  const [editing, setEditing] = useState<AdminProject | null>(null);
   const [showForm, setShowForm] = useState(false);
   const [form, setForm] = useState(emptyForm());
   const [saving, setSaving] = useState(false);
   const [dragIndex, setDragIndex] = useState<number | null>(null);
-  const [deleteTarget, setDeleteTarget] = useState<ProjectItem | null>(null);
+  const [deleteTarget, setDeleteTarget] = useState<AdminProject | null>(null);
   const [deleting, setDeleting] = useState(false);
   const { success, error } = useToast();
 
@@ -130,20 +112,20 @@ export default function AdminProjectsPage() {
     await saveReorder('projects', updated);
   }
 
-  function openEdit(item: ProjectItem) {
+  function openEdit(item: AdminProject) {
     setEditing(item);
     setForm({
-      title_uk: (item.title as any)?.uk || '',
-      title_en: (item.title as any)?.en || '',
-      description_uk: (item.description as any)?.uk || '',
-      description_en: (item.description as any)?.en || '',
-      full_description_uk: (item.full_description as any)?.uk || '',
-      full_description_en: (item.full_description as any)?.en || '',
+      title_uk: item.title?.uk || '',
+      title_en: item.title?.en || '',
+      description_uk: item.description?.uk || '',
+      description_en: item.description?.en || '',
+      full_description_uk: item.full_description?.uk || '',
+      full_description_en: item.full_description?.en || '',
       image: item.image || '',
-      image_focus: (item as any).image_focus || '',
+      image_focus: item.image_focus || '',
       gallery: arrToText(item.gallery),
       status: item.status || 'active',
-      links: (item.links || []).map((l: any) => ({ url: l.url || '', type: l.type || 'external', label_uk: l.label?.uk || '', label_en: l.label?.en || '' })),
+      links: (item.links || []).map(l => ({ url: l.url || '', type: l.type || 'external', label_uk: l.label?.uk || '', label_en: l.label?.en || '' })),
     });
     setShowForm(true);
   }
@@ -265,7 +247,7 @@ export default function AdminProjectsPage() {
       <ConfirmDialog
         open={!!deleteTarget}
         title="Delete project?"
-        message={`"${(deleteTarget?.title as any)?.uk || deleteTarget?.id}" will be permanently removed.`}
+        message={`"${deleteTarget?.title?.uk || deleteTarget?.id}" will be permanently removed.`}
         confirmLabel="Delete"
         loading={deleting}
         onConfirm={handleDeleteConfirm}
@@ -315,10 +297,10 @@ export default function AdminProjectsPage() {
                   </div>
                 </div>
                 <div className={styles.cardBody}>
-                  <h3 className={styles.cardTitle}>{(item.title as any)?.uk || item.id}</h3>
-                  {(item.title as any)?.en && (
+                  <h3 className={styles.cardTitle}>{item.title?.uk || item.id}</h3>
+                  {item.title?.en && (
                     <div style={{ fontSize: '0.85rem', color: 'var(--admin-text-muted)' }}>
-                      {(item.title as any).en}
+                      {item.title.en}
                     </div>
                   )}
                   <div className={styles.cardActions}>

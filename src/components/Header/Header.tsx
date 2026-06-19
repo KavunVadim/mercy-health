@@ -8,6 +8,7 @@ import LocaleSwitcher from "../LocaleSwitcher/LocaleSwitcher";
 import ThemeToggle from "../ThemeToggle/ThemeToggle";
 import MobileMenu from "./MobileMenu";
 import LogoIcon from "../LogoIcon/LogoIcon";
+import { splitSiteName } from "@/lib/site-name";
 
 import type { Locale } from "@/i18n-config";
 import type { Dictionary } from "@/types/content";
@@ -68,9 +69,9 @@ export default function Header({
             className={styles.logoMark}
           />
           <span className={styles.logoText}>
-            {dictionary.common.site_name.split(" & ")[0]}{" "}
+            {splitSiteName(dictionary.common.site_name).before}{" "}
             <span className={styles.logoAmp}>&</span>{" "}
-            {dictionary.common.site_name.split(" & ")[1]}
+            {splitSiteName(dictionary.common.site_name).after}
           </span>
         </Link>
 

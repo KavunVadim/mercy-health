@@ -1,5 +1,6 @@
 import LogoIcon from "../LogoIcon/LogoIcon";
 import Link from "next/link";
+import { splitSiteName } from "@/lib/site-name";
 import { Mail, Phone, MapPin } from "lucide-react";
 import { FaFacebookF, FaInstagram, FaTelegramPlane, FaTiktok } from "react-icons/fa";
 import styles from "./Footer.module.css";
@@ -27,9 +28,9 @@ export default function Footer({
               className={styles.logoMark}
             />
             <span className={styles.logoText}>
-              {dictionary.common.site_name.split(" & ")[0]}{" "}
+              {splitSiteName(dictionary.common.site_name).before}{" "}
               <span className={styles.logoAmp}>&</span>{" "}
-              {dictionary.common.site_name.split(" & ")[1]}
+              {splitSiteName(dictionary.common.site_name).after}
             </span>
           </Link>
           <p className={styles.description}>

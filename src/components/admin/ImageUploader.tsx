@@ -5,14 +5,7 @@ import { createPortal } from 'react-dom';
 import { X } from 'lucide-react';
 import styles from '@/app/admin/admin.module.css';
 import { uploadFile } from '@/lib/upload';
-
-interface PhotoRecord {
-  _id: string;
-  title: string;
-  url: string;
-  alt?: string;
-  hash?: string;
-}
+import type { AdminPhoto } from '@/types/admin';
 
 interface ImageUploaderProps {
   value: string;
@@ -24,7 +17,7 @@ export default function ImageUploader({ value, onChange, label }: ImageUploaderP
   const [uploading, setUploading] = useState(false);
   const [progress, setProgress] = useState(0);
   const [showGallery, setShowGallery] = useState(false);
-  const [gallery, setGallery] = useState<PhotoRecord[]>([]);
+  const [gallery, setGallery] = useState<AdminPhoto[]>([]);
   const [loadingGallery, setLoadingGallery] = useState(false);
   const [previewError, setPreviewError] = useState(false);
   const inputRef = useRef<HTMLInputElement>(null);
@@ -79,7 +72,7 @@ export default function ImageUploader({ value, onChange, label }: ImageUploaderP
     }
   }
 
-  function selectFromGallery(photo: PhotoRecord) {
+  function selectFromGallery(photo: AdminPhoto) {
     onChange(photo.url);
     setShowGallery(false);
   }

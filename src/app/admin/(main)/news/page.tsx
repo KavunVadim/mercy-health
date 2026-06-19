@@ -8,43 +8,17 @@ import ImageUploader from '@/components/admin/ImageUploader';
 import GalleryEditor from '@/components/admin/GalleryEditor';
 import RichEditor from '@/components/admin/RichEditor';
 import { handleDragStart, handleDragOver, handleDragLeave, handleDrop, handleDragEnd, saveReorder } from '@/lib/dnd-reorder';
-import { slugify } from '@/lib/data-utils';
+import { slugify, arrToText, textToArr } from '@/lib/data-utils';
 import { useToast } from '@/components/admin/ui/Toast';
 import ConfirmDialog from '@/components/admin/ui/ConfirmDialog';
 import { SkeletonRows } from '@/components/admin/ui/Skeleton';
+import type { AdminNews } from '@/types/admin';
 
-interface LinkEntry {
+interface FormLink {
   url: string;
   type: 'video' | 'external';
   label_uk: string;
   label_en: string;
-}
-
-interface NewsItem {
-  _id?: string;
-  id: string;
-  title?: { uk: string; en: string };
-  description?: { uk: string; en: string };
-  content?: { uk: string[]; en: string[] };
-  date?: string;
-  image?: string;
-  image_focus?: string;
-  gallery?: string[];
-  links?: { url: string; type?: 'video' | 'external'; label?: { uk: string; en: string } }[];
-}
-
-function arrToText(arr: string[] | string | undefined): string {
-  if (Array.isArray(arr)) return arr.join('\n');
-  return arr || '';
-}
-function textToArr(text: string): string[] {
-  if (!text) return [];
-  if (text.includes('<')) {
-    const blocks = text.match(/<p>[\s\S]*?<\/p>|<h[23]>[\s\S]*?<\/h[23]>|<blockquote>[\s\S]*?<\/blockquote>|<ul>[\s\S]*?<\/ul>|<ol>[\s\S]*?<\/ol>|<li>[\s\S]*?<\/li>|<pre>[\s\S]*?<\/pre>/g);
-    if (blocks) return blocks.map(b => b.trim()).filter(Boolean);
-    return [text];
-  }
-  return text.split('\n').filter(s => s.trim());
 }
 
 const emptyForm = () => ({
@@ -53,18 +27,18 @@ const emptyForm = () => ({
   image: '', image_focus: '',
   description_uk: '', description_en: '',
   content_uk: '', content_en: '',
-  gallery: '', links: [] as LinkEntry[],
+  gallery: '', links: [] as FormLink[],
 });
 
 export default function AdminNewsPage() {
-  const [items, setItems] = useState<NewsItem[]>([]);
+  const [items, setItems] = useState<AdminNews[]>([]);
   const [loading, setLoading] = useState(true);
-  const [editing, setEditing] = useState<NewsItem | null>(null);
+  const [editing, setEditing] = useState<AdminNews | null>(null);
   const [showForm, setShowForm] = useState(false);
   const [form, setForm] = useState(emptyForm());
   const [saving, setSaving] = useState(false);
   const [dragIndex, setDragIndex] = useState<number | null>(null);
-  const [deleteTarget, setDeleteTarget] = useState<NewsItem | null>(null);
+  const [deleteTarget, setDeleteTarget] = useState<AdminNews | null>(null);
   const [deleting, setDeleting] = useState(false);
   const { success, error } = useToast();
 
@@ -151,20 +125,20 @@ export default function AdminNewsPage() {
     }
   }
 
-  function openEdit(item: NewsItem) {
+  function openEdit(item: AdminNews) {
     setEditing(item);
     setForm({
-      title_uk: (item.title as any)?.uk || '',
-      title_en: (item.title as any)?.en || '',
+      title_uk: item.title?.uk || '',
+      title_en: item.title?.en || '',
       date: item.date || '',
       image: item.image || '',
       image_focus: item.image_focus || '',
-      description_uk: (item.description as any)?.uk || '',
-      description_en: (item.description as any)?.en || '',
-      content_uk: arrToText((item.content as any)?.uk),
-      content_en: arrToText((item.content as any)?.en),
+      description_uk: item.description?.uk || '',
+      description_en: item.description?.en || '',
+      content_uk: arrToText(item.content?.uk),
+      content_en: arrToText(item.content?.en),
       gallery: arrToText(item.gallery),
-      links: (item.links || []).map((l: any) => ({
+      links: (item.links || []).map(l => ({
         url: l.url || '', type: l.type || 'external',
         label_uk: l.label?.uk || '', label_en: l.label?.en || '',
       })),
@@ -335,7 +309,7 @@ export default function AdminNewsPage() {
       <ConfirmDialog
         open={!!deleteTarget}
         title="Delete news article?"
-        message={`"${(deleteTarget?.title as any)?.uk || deleteTarget?.id}" will be permanently removed.`}
+        message={`"${deleteTarget?.title?.uk || deleteTarget?.id}" will be permanently removed.`}
         confirmLabel="Delete"
         loading={deleting}
         onConfirm={handleDeleteConfirm}
@@ -382,10 +356,10 @@ export default function AdminNewsPage() {
                     {item.date || 'No Date'}
                   </span>
                 </div>
-                <h3 className={styles.cardTitle}>{(item.title as any)?.uk || item.id}</h3>
-                {(item.title as any)?.en && (
+                <h3 className={styles.cardTitle}>{item.title?.uk || item.id}</h3>
+                {item.title?.en && (
                   <div style={{ fontSize: '0.85rem', color: 'var(--admin-text-muted)' }}>
-                    {(item.title as any).en}
+                    {item.title.en}
                   </div>
                 )}
                 <div className={styles.cardActions}>

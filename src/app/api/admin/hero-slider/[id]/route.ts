@@ -1,23 +1,6 @@
 import { NextResponse } from 'next/server';
 import { revalidatePath } from 'next/cache';
-import { getDb } from '@/lib/mongodb';
-
-async function getContent(locale: string): Promise<any> {
-  const db = await getDb();
-  const col = locale === 'uk' ? 'content_uk' : 'content_en';
-  const doc = await db.collection(col).findOne({ key: 'main' });
-  return doc || {};
-}
-
-async function setContent(locale: string, data: any) {
-  const db = await getDb();
-  const col = locale === 'uk' ? 'content_uk' : 'content_en';
-  await db.collection(col).updateOne(
-    { key: 'main' },
-    { $set: { key: 'main', ...data, updatedAt: new Date() } },
-    { upsert: true }
-  );
-}
+import { getContent, setContent } from '@/lib/content-db';
 
 export async function PUT(request: Request, { params }: { params: Promise<{ id: string }> }) {
   try {

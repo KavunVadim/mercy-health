@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import LogoIcon from "../LogoIcon/LogoIcon";
+import { splitSiteName } from "@/lib/site-name";
 import { useEffect, useState } from "react";
 import { createPortal } from "react-dom";
 import { motion, AnimatePresence } from "framer-motion";
@@ -82,9 +83,9 @@ export default function MobileMenu({
                     height={50}
                   />
                   <span className={styles.logoText}>
-                    {dictionary.common.site_name.split(" & ")[0]}{" "}
+                    {splitSiteName(dictionary.common.site_name).before}{" "}
                     <span className={styles.logoAmp}>&</span>{" "}
-                    {dictionary.common.site_name.split(" & ")[1]}
+                    {splitSiteName(dictionary.common.site_name).after}
                   </span>
                 </Link>
                 <button className={styles.closeBtn} onClick={close} aria-label="Close menu">

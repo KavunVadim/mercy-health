@@ -10,17 +10,7 @@ import { handleDragStart, handleDragOver, handleDragLeave, handleDrop, handleDra
 import { useToast } from '@/components/admin/ui/Toast';
 import ConfirmDialog from '@/components/admin/ui/ConfirmDialog';
 import { SkeletonRows } from '@/components/admin/ui/Skeleton';
-
-interface Slide {
-  id: string;
-  badge_uk: string; badge_en: string;
-  title_uk: string; title_en: string;
-  description_uk: string; description_en: string;
-  image: string; href: string; focus: string;
-  cta_uk: string; cta_en: string;
-  _id?: string;
-  order?: number;
-}
+import type { AdminSlide } from '@/types/admin';
 
 const emptyForm = () => ({
   badge_uk: '', badge_en: '', title_uk: '', title_en: '',
@@ -29,14 +19,14 @@ const emptyForm = () => ({
 });
 
 export default function AdminHeroSliderPage() {
-  const [items, setItems] = useState<Slide[]>([]);
+  const [items, setItems] = useState<AdminSlide[]>([]);
   const [loading, setLoading] = useState(true);
-  const [editing, setEditing] = useState<Slide | null>(null);
+  const [editing, setEditing] = useState<AdminSlide | null>(null);
   const [showForm, setShowForm] = useState(false);
   const [form, setForm] = useState(emptyForm());
   const [saving, setSaving] = useState(false);
   const [dragIndex, setDragIndex] = useState<number | null>(null);
-  const [deleteTarget, setDeleteTarget] = useState<Slide | null>(null);
+  const [deleteTarget, setDeleteTarget] = useState<AdminSlide | null>(null);
   const [deleting, setDeleting] = useState(false);
   const { success, error } = useToast();
 
@@ -96,7 +86,7 @@ export default function AdminHeroSliderPage() {
     finally { setDeleting(false); setDeleteTarget(null); }
   }
 
-  function openEdit(item: Slide) {
+  function openEdit(item: AdminSlide) {
     setEditing(item);
     setForm({ badge_uk: item.badge_uk, badge_en: item.badge_en, title_uk: item.title_uk, title_en: item.title_en, description_uk: item.description_uk, description_en: item.description_en, image: item.image, href: item.href, focus: item.focus, cta_uk: item.cta_uk, cta_en: item.cta_en });
     setShowForm(true);
