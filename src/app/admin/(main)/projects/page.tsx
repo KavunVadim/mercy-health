@@ -281,7 +281,7 @@ export default function AdminProjectsPage() {
               >
                 <div className={styles.cardImageWrapper}>
                   {item.image ? (
-                    <img src={item.image} alt="" />
+                    <img src={item.image} alt={item.title?.en || item.title?.uk || ''} loading="lazy" />
                   ) : (
                     <div className={styles.cardImagePlaceholder}>
                       <FolderOpen size={32} />

@@ -22,7 +22,7 @@ export function textToArr(text: string): string[] {
 
 export function slugify(text: string, fallback = "item"): string {
   let result = text.toLowerCase().trim();
-  result = result.replace(/[ьъ]/g, "");
+  result = result.replace(/[ьъ']/g, "");
   result = result.replace(/[а-яґєіїюя]/g, (ch) => UKRAINIAN_MAP[ch] || ch);
   result = result.replace(/[^a-z0-9]+/g, "-");
   result = result.replace(/^-+|-+$/g, "");

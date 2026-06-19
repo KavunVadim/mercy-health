@@ -4,6 +4,8 @@ import type { Locale } from "./i18n-config";
 import type { Dictionary } from "./types/content";
 import { getDb } from "@/lib/mongodb";
 
+const MAX_LIST_ITEMS = 200;
+
 
 function isRecord(value: unknown): value is Record<string, unknown> {
   return value !== null && typeof value === "object" && !Array.isArray(value);
@@ -81,12 +83,12 @@ async function fetchMongoData(locale: Locale) {
     const [contentDoc, ukContentDoc, newsDocs, projectsDocs, partnersDocs, reportsDocs, settingsDoc, galleryPhotos] = await Promise.all([
       db.collection(contentCol).findOne({ key: "main" }),
       db.collection(ukContentCol).findOne({ key: "main" }),
-      db.collection("news").find({}).sort({ order: -1, createdAt: -1 }).toArray(),
-      db.collection("projects").find({}).sort({ order: -1, createdAt: -1 }).toArray(),
-      db.collection("partners").find({}).sort({ order: -1, createdAt: -1 }).toArray(),
-      db.collection("reports").find({}).sort({ order: -1, createdAt: -1 }).toArray(),
+      db.collection("news").find({}).sort({ order: -1, createdAt: -1 }).limit(MAX_LIST_ITEMS).toArray(),
+      db.collection("projects").find({}).sort({ order: -1, createdAt: -1 }).limit(MAX_LIST_ITEMS).toArray(),
+      db.collection("partners").find({}).sort({ order: -1, createdAt: -1 }).limit(MAX_LIST_ITEMS).toArray(),
+      db.collection("reports").find({}).sort({ order: -1, createdAt: -1 }).limit(MAX_LIST_ITEMS).toArray(),
       db.collection("settings").findOne({ key: "main" }),
-      db.collection("photos").find({ inGallery: true, visible: { $ne: false } }).sort({ order: -1, createdAt: -1 }).toArray(),
+      db.collection("photos").find({ inGallery: true, visible: { $ne: false } }).sort({ order: -1, createdAt: -1 }).limit(MAX_LIST_ITEMS).toArray(),
     ]);
 
     if (locale === "en" && ukContentDoc && contentDoc) {

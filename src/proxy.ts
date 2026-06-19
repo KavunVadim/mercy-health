@@ -21,6 +21,22 @@ function getLocale(request: NextRequest): string {
 
 export async function proxy(request: NextRequest) {
   const { pathname } = request.nextUrl;
+  const method = request.method;
+  const start = Date.now();
+
+  function logResponse(response: NextResponse) {
+    const duration = Date.now() - start;
+    console.log(JSON.stringify({
+      level: 'info',
+      message: `${method} ${pathname}`,
+      method,
+      path: pathname,
+      status: response.status,
+      duration,
+      ts: new Date().toISOString(),
+    }));
+    return response;
+  }
 
   // Locale detection — redirect missing locale to default
   if (
@@ -36,19 +52,19 @@ export async function proxy(request: NextRequest) {
 
     if (pathnameIsMissingLocale) {
       const locale = getLocale(request);
-      return NextResponse.redirect(
+      return logResponse(NextResponse.redirect(
         new URL(`/${locale}${pathname}`, request.url),
-      );
+      ));
     }
   }
 
   // Auth protection for admin routes
   if (pathname.startsWith("/api/auth")) {
-    return NextResponse.next();
+    return logResponse(NextResponse.next());
   }
 
   if (pathname === "/admin/login" || pathname.endsWith("/admin/login")) {
-    return NextResponse.next();
+    return logResponse(NextResponse.next());
   }
 
   const token = request.cookies.get("accessToken")?.value;
@@ -57,32 +73,32 @@ export async function proxy(request: NextRequest) {
     if (!token) {
       const loginUrl = request.nextUrl.clone();
       loginUrl.pathname = "/admin/login";
-      return NextResponse.redirect(loginUrl);
+      return logResponse(NextResponse.redirect(loginUrl));
     }
 
     const payload = await verifyToken(token);
     if (!payload) {
       const loginUrl = request.nextUrl.clone();
       loginUrl.pathname = "/admin/login";
-      return NextResponse.redirect(loginUrl);
+      return logResponse(NextResponse.redirect(loginUrl));
     }
 
     const response = NextResponse.next();
     response.headers.set("x-admin-id", payload.sub);
-    return response;
+    return logResponse(response);
   }
 
   if (pathname.startsWith("/api/admin")) {
     if (!token) {
-      return new NextResponse("Unauthorized", { status: 401 });
+      return logResponse(new NextResponse("Unauthorized", { status: 401 }));
     }
 
     const payload = await verifyToken(token);
     if (!payload) {
-      return new NextResponse("Unauthorized", { status: 401 });
+      return logResponse(new NextResponse("Unauthorized", { status: 401 }));
     }
 
-    return NextResponse.next();
+    return logResponse(NextResponse.next());
   }
 }
 

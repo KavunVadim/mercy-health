@@ -201,7 +201,7 @@ export default function AdminHeroSliderPage() {
             >
               <div className={styles.cardImageWrapper}>
                 {item.image ? (
-                  <img src={item.image} alt="" />
+                  <img src={item.image} alt={item.title_en || item.title_uk || ''} loading="lazy" />
                 ) : (
                   <div className={styles.cardImagePlaceholder}>
                     <SlidersHorizontal size={28} strokeWidth={1.5} />

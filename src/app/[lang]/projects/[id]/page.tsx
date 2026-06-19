@@ -1,11 +1,14 @@
 export const dynamic = 'force-dynamic';
 
+import type { Metadata } from "next";
 import { getDictionary } from "@/get-dictionary";
 import type { Locale } from "@/i18n-config";
 import { notFound } from "next/navigation";
 import styles from "./page.module.css";
 import ProjectImageGallery from "./components/ProjectImageGallery";
 import Breadcrumbs from "@/components/Breadcrumbs/Breadcrumbs";
+import { BreadcrumbJsonLd } from "@/components/JsonLd";
+import { siteUrl } from "@/lib/config";
 import type { LinkItem } from "@/types/content";
 
 interface Project {
@@ -17,6 +20,29 @@ interface Project {
   description?: string;
   gallery?: string[];
   links?: LinkItem[];
+}
+
+export async function generateMetadata({ params }: { params: Promise<{ lang: string; id: string }> }): Promise<Metadata> {
+  const { lang, id } = await params;
+  const dictionary = await getDictionary(lang as Locale);
+  const project = (dictionary.projects.items as Project[]).find((p) => p.id === id);
+  if (!project) return {};
+  return {
+    title: `${project.title} | ${dictionary.metadata.title}`,
+    description: project.short_description || project.description || "",
+    alternates: {
+      canonical: siteUrl(`/${lang}/projects/${id}`),
+      languages: {
+        uk: siteUrl(`/uk/projects/${id}`),
+        en: siteUrl(`/en/projects/${id}`),
+      },
+    },
+    openGraph: {
+      title: project.title,
+      description: project.short_description || project.description || "",
+      images: project.image ? [{ url: project.image }] : undefined,
+    },
+  };
 }
 
 export default async function ProjectDetailPage({
@@ -38,6 +64,11 @@ export default async function ProjectDetailPage({
 
   return (
     <main className={styles.main}>
+      <BreadcrumbJsonLd items={[
+        { name: dictionary.navigation.home, url: siteUrl(`/${lang}`) },
+        { name: dictionary.navigation.projects, url: siteUrl(`/${lang}/projects`) },
+        { name: project.title, url: siteUrl(`/${lang}/projects/${project.id}`) },
+      ]} />
       <header className={styles.header}>
         <div className="container">
           <div className={styles.topActions}>

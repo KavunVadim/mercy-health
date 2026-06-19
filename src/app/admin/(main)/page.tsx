@@ -6,7 +6,6 @@ import {
   Users,
   FileText,
   ArrowUpRight,
-  Activity,
   Database,
 } from 'lucide-react';
 import styles from '@/app/admin/admin.module.css';
@@ -95,8 +94,6 @@ export default async function AdminDashboard() {
     },
   ];
 
-  const total = stats.news + stats.projects + stats.photos + stats.partners + stats.reports;
-
   return (
     <div>
       {/* Header */}
@@ -126,89 +123,9 @@ export default async function AdminDashboard() {
         </div>
       </div>
 
-      {/* Summary row */}
-      <div style={{
-        display: 'grid',
-        gridTemplateColumns: '1fr auto',
-        gap: '1.5rem',
-        marginBottom: '2rem',
-        alignItems: 'stretch',
-      }}>
-        {/* Total items card */}
-        <div className={styles.card} style={{
-          padding: '1.5rem',
-          background: 'linear-gradient(135deg, rgba(20, 184, 166, 0.08) 0%, rgba(20, 184, 166, 0.02) 100%)',
-          borderColor: 'rgba(20, 184, 166, 0.15)',
-          display: 'flex',
-          alignItems: 'center',
-          gap: '1.5rem',
-        }}>
-          <div style={{
-            width: 56,
-            height: 56,
-            borderRadius: 14,
-            background: 'var(--admin-accent-light)',
-            border: '1px solid rgba(20, 184, 166, 0.2)',
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-            color: 'var(--admin-accent)',
-            flexShrink: 0,
-          }}>
-            <Activity size={24} strokeWidth={1.75} />
-          </div>
-          <div>
-            <div style={{
-              fontSize: '2.5rem',
-              fontWeight: 800,
-              color: 'var(--admin-text)',
-              fontFamily: 'var(--admin-mono)',
-              letterSpacing: '-0.04em',
-              lineHeight: 1,
-            }}>{total}</div>
-            <div style={{ fontSize: '0.875rem', color: 'var(--admin-text-secondary)', marginTop: '0.25rem', fontWeight: 500 }}>
-              Всього записів у базі даних
-            </div>
-          </div>
-        </div>
-
-        {/* Quick info */}
-        <div className={styles.card} style={{ padding: '1.5rem', minWidth: 200 }}>
-          <div style={{ fontSize: '0.7rem', fontWeight: 700, color: 'var(--admin-text-muted)', textTransform: 'uppercase', letterSpacing: '0.08em', marginBottom: '0.75rem' }}>
-            Швидка інформація
-          </div>
-          <div style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
-            {[
-              { label: 'Новини', val: stats.news },
-              { label: 'Проєкти', val: stats.projects },
-              { label: 'Звіти', val: stats.reports },
-            ].map(r => (
-              <div key={r.label} style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', gap: '1.5rem' }}>
-                <span style={{ fontSize: '0.8125rem', color: 'var(--admin-text-secondary)' }}>{r.label}</span>
-                <span style={{ fontSize: '0.875rem', fontWeight: 700, color: 'var(--admin-text)', fontFamily: 'var(--admin-mono)' }}>{r.val}</span>
-              </div>
-            ))}
-          </div>
-        </div>
-      </div>
-
-      {/* Stat Cards Grid */}
-      <div style={{ marginBottom: '0.75rem' }}>
-        <div className={styles.sectionTitle}>Розділи контенту</div>
-      </div>
-      <div style={{
-        display: 'grid',
-        gridTemplateColumns: 'repeat(auto-fit, minmax(210px, 1fr))',
-        gap: '1rem',
-      }}>
-        {cards.map(card => (
-          <StatCard key={card.href} {...card} />
-        ))}
-      </div>
-
       {/* Quick Actions */}
-      <div style={{ marginTop: '2.5rem' }}>
-        <div className={styles.sectionTitle} style={{ marginBottom: '1rem' }}>Швидкі дії</div>
+      <div style={{ marginBottom: '2rem' }}>
+        <div className={styles.sectionTitle} style={{ marginBottom: '0.75rem' }}>Швидкі дії</div>
         <div style={{ display: 'flex', gap: '0.625rem', flexWrap: 'wrap' }}>
           {[
             { href: '/admin/news', label: 'Додати новину', icon: Newspaper },
@@ -227,6 +144,20 @@ export default async function AdminDashboard() {
             </Link>
           ))}
         </div>
+      </div>
+
+      {/* Stat Cards Grid */}
+      <div style={{ marginBottom: '0.75rem' }}>
+        <div className={styles.sectionTitle}>Розділи контенту</div>
+      </div>
+      <div style={{
+        display: 'grid',
+        gridTemplateColumns: 'repeat(auto-fit, minmax(210px, 1fr))',
+        gap: '1rem',
+      }}>
+        {cards.map(card => (
+          <StatCard key={card.href} {...card} />
+        ))}
       </div>
     </div>
   );

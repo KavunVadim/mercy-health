@@ -50,7 +50,7 @@ export default function DonationCards({ dictionary }: { dictionary: Dictionary }
   function renderLogo(item: DonationCard) {
     if (item.image) {
       return (
-        <img src={item.image} alt={item.bank} className={styles.bankLogoImage} />
+        <Image src={item.image} alt={item.bank} width={52} height={52} className={styles.bankLogoImage} unoptimized />
       );
     }
 

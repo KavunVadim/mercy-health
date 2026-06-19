@@ -1,8 +1,9 @@
-import type { Viewport } from "next";
+import type { Metadata, Viewport } from "next";
 import localFont from "next/font/local";
 import "./globals.css";
 import ThemeScript from "@/components/ThemeScript";
 import { ThemeProvider } from "@/components/ThemeProvider";
+import { siteConfig } from "@/lib/config";
 
 const eUkraine = localFont({
   src: [
@@ -17,6 +18,18 @@ const eUkraineHead = localFont({
   src: [{ path: "../../public/fonts/e-UkraineHead-Bold.woff2", weight: "700", style: "normal" }],
   variable: "--font-e-ukraine-head",
 });
+
+export const metadata: Metadata = {
+  metadataBase: new URL(siteConfig.url),
+  robots: { index: true, follow: true },
+  icons: {
+    icon: [
+      { url: "/fond-emblem.png", sizes: "32x32", type: "image/png" },
+      { url: "/fond-emblem.svg", sizes: "any", type: "image/svg+xml" },
+    ],
+    apple: [{ url: "/fond-emblem.png", sizes: "180x180", type: "image/png" }],
+  },
+};
 
 export const viewport: Viewport = {
   width: "device-width",

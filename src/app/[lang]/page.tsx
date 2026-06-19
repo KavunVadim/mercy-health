@@ -24,6 +24,7 @@ export default async function Home({
   return (
     <div className={styles.page}>
       <main className={`${styles.main} home-main`}>
+        <h1 className="sr-only">{dictionary.common.site_name}</h1>
         <HeroSlider slides={dictionary.hero_slider} />
 
         <section className={styles.projectsSection}>

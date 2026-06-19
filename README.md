@@ -1,36 +1,121 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Mercy & Health Foundation
 
-## Getting Started
+Сайт благодійного фонду «Милосердя та Здоров'я». Двомовний (UK/EN), з адмін-панеллю, новинами, проектами та звітами.
 
-First, run the development server:
+## Технології
+
+- **Next.js 16** (App Router, Turbopack)
+- **MongoDB** (через `mongodb` driver)
+- **JWT** аутентифікація (httpOnly cookies)
+- **AWS S3** для завантаження зображень
+- **Sharp** для оптимізації зображень (WebP, resize)
+- **Vitest** для тестів
+- **Framer Motion** + **Embla Carousel** для анімацій
+
+## Розробка
 
 ```bash
+# Встановити залежності
+npm install
+
+# Запустити dev-сервер
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+
+# Запустити тести
+npm test                  # одноразово
+npm run test:watch        # в watch-режимі
+
+# Перевірити типи
+npm run typecheck
+
+# Лінтінг
+npm run lint
+
+# Зібрати production-білд
+npm run build
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Змінні оточення
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+Скопіюйте `.env.example` в `.env.local`:
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+```
+# MongoDB
+MONGODB_URI=mongodb+srv://...
+MONGODB_DB=mercy-health
 
-## Learn More
+# JWT
+JWT_SECRET=...
 
-To learn more about Next.js, take a look at the following resources:
+# Публічна URL (для OG, sitemap)
+NEXT_PUBLIC_SITE_URL=https://example.com
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+# AWS S3 (опціонально — для завантаження фото)
+AWS_ACCESS_KEY_ID=...
+AWS_SECRET_ACCESS_KEY=...
+AWS_REGION=eu-central-1
+S3_BUCKET=...
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+# Telegram (опціонально — для сповіщень про помилки)
+TELEGRAM_BOT_TOKEN=...
+TELEGRAM_CHAT_ID=...
 
-## Deploy on Vercel
+# Gemini (опціонально — для AI-функцій)
+GEMINI_API_KEY=...
+```
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+**Обов'язкові:** `MONGODB_URI`, `MONGODB_DB`, `JWT_SECRET`, `NEXT_PUBLIC_SITE_URL`.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## Індекси MongoDB
+
+Перед деплоєм створіть індекси:
+
+```bash
+npm run ensure-indexes
+```
+
+## Сценарії
+
+| Команда | Призначення |
+|---------|-------------|
+| `npm run dev` | Dev-сервер |
+| `npm run build` | Production-білд |
+| `npm run start` | Запуск production-сервера |
+| `npm run test` | Запуск тестів |
+| `npm run typecheck` | Перевірка TypeScript |
+| `npm run lint` | Лінтінг |
+| `npm run seed` | Заповнення MongoDB початковими даними |
+| `npm run ensure-indexes` | Створення індексів MongoDB |
+| `npm run images:optimize` | Оптимізація зображень |
+
+## Деплой на Vercel
+
+1. Підключіть репозиторій до Vercel
+2. Додайте всі змінні з `.env.local` в **Environment Variables** (Vercel Dashboard → Project → Settings → Environment Variables)
+3. Деплой — Vercel автоматично визначить Next.js
+4. **Важливо:** всі секрети (MongoDB, JWT, AWS, Telegram) мають бути замінені на production-значення
+
+### Після деплою
+
+1. Зайдіть на `/admin/register` щоб створити першого адміна
+2. Заповніть контент через `/admin/content`
+3. Перевірте `/api/health` — має повернути `{ "status": "ok" }`
+
+## Структура проекту
+
+```
+src/
+├── app/
+│   ├── [lang]/          # Публічні сторінки (uk/en)
+│   ├── admin/           # Адмін-панель
+│   └── api/             # API-маршрути
+│       ├── admin/       #   адмін API
+│       ├── auth/        #   аутентифікація
+│       ├── contact/     #   контактна форма
+│       └── health/      #   health-check
+├── components/          # Спільні компоненти
+├── lib/                 # Утиліти, helpers
+├── types/               # TypeScript типи
+└── dictionaries/        # Статичні JSON-словники (uk/en)
+```
+

@@ -2,6 +2,8 @@ import { getDictionary } from "@/get-dictionary";
 import { i18n, isLocale } from "@/i18n-config";
 import { notFound } from "next/navigation";
 import Breadcrumbs from "@/components/Breadcrumbs/Breadcrumbs";
+import { BreadcrumbJsonLd } from "@/components/JsonLd";
+import { siteUrl } from "@/lib/config";
 import NewsDetailContent from "./components/NewsDetailContent";
 import styles from "./page.module.css";
 import type { Metadata } from "next";
@@ -51,6 +53,19 @@ export async function generateMetadata({
   return {
     title: `${newsItem.title} | ${dictionary.metadata.title}`,
     description: newsItem.description,
+    alternates: {
+      canonical: siteUrl(`/${lang}/news/${id}`),
+      languages: {
+        uk: siteUrl(`/uk/news/${id}`),
+        en: siteUrl(`/en/news/${id}`),
+      },
+    },
+    openGraph: {
+      title: newsItem.title,
+      description: newsItem.description,
+      images: newsItem.image ? [{ url: newsItem.image }] : undefined,
+      type: "article",
+    },
   };
 }
 
@@ -75,6 +90,11 @@ export default async function NewsDetailPage({
 
   return (
     <main className={styles.main}>
+      <BreadcrumbJsonLd items={[
+        { name: dictionary.navigation.home, url: siteUrl(`/${locale}`) },
+        { name: dictionary.navigation.materials, url: siteUrl(`/${locale}/news`) },
+        { name: newsItem.title, url: siteUrl(`/${locale}/news/${newsItem.id}`) },
+      ]} />
       <header className={styles.header}>
         <div className="container">
           <div className={styles.topActions}>

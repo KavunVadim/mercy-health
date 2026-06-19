@@ -2,10 +2,12 @@ import { NextResponse } from 'next/server';
 import { revalidatePath } from 'next/cache';
 import { getDb } from '@/lib/mongodb';
 import { uploadToS3, computeFileHash } from '@/lib/s3';
+import { captureError } from '@/lib/error-monitoring';
 
 export const maxDuration = 60;
 
 const MAX_FILE_SIZE = 15 * 1024 * 1024;
+const ALLOWED_MIME_TYPES = ['image/jpeg', 'image/png', 'image/webp', 'image/gif', 'image/avif', 'image/svg+xml'];
 
 async function compressImage(buf: Buffer, mime: string): Promise<{ buffer: Buffer; mime: string }> {
   if (!mime.startsWith('image/')) return { buffer: buf, mime };
@@ -46,6 +48,13 @@ export async function POST(request: Request) {
       return NextResponse.json(
         { error: 'Файл занадто великий. Максимальний розмір — 15 МБ.' },
         { status: 413 },
+      );
+    }
+
+    if (!ALLOWED_MIME_TYPES.includes(file.type)) {
+      return NextResponse.json(
+        { error: `Недопустимий тип файлу: ${file.type}. Дозволені лише зображення.` },
+        { status: 415 },
       );
     }
 
@@ -103,7 +112,7 @@ export async function POST(request: Request) {
 
     return NextResponse.json({ ...doc, _id: result.insertedId, dedup: false }, { status: 201 });
   } catch (e: any) {
-    console.error('Upload failed:', e);
+    await captureError(e, { route: '/api/admin/upload' });
     return NextResponse.json({ error: e.message || 'Upload failed' }, { status: 500 });
   }
 }

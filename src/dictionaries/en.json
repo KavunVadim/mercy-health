@@ -5,7 +5,7 @@
   },
   "metadata": {
     "title": "Mercy & Health | Foundation",
-    "description": "Volunteer medical support foundation"
+    "description": "Mercy & Health Foundation — medical aid for war-affected victims in Ukraine. Supporting hospitals, rehabilitation, evacuation, and humanitarian relief since 2022."
   },
   "navigation": {
     "about": "About Us",
@@ -31,6 +31,7 @@
   },
   "about": {
     "title": "About Foundation",
+    "description": "Learn about Mercy & Health Foundation: our history, mission, team, partners, and daily work saving lives through medical aid in Ukraine.",
     "partners_description": "Together we can do more. We thank our partners for their constant support.",
     "tabs": {
       "about_us": "About Us",
@@ -107,6 +108,7 @@
   },
   "projects": {
     "title": "Our Projects",
+    "description": "Explore Mercy & Health Foundation projects: ambulances for the front line, military rehabilitation, medical aid, and humanitarian initiatives.",
     "more": "All Projects",
     "collected": "Collected",
     "goal": "Goal",
@@ -120,6 +122,7 @@
   },
   "news": {
     "title": "News",
+    "description": "Latest news, reports, and materials from Mercy & Health Foundation. Stories of rescue, rehabilitation, and humanitarian aid.",
     "no_articles": "News articles will be listed here soon.",
     "tabs": {
       "news": "News",

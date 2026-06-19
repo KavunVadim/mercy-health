@@ -21,28 +21,28 @@ export default function HistoryGallery({ images }: HistoryGalleryProps) {
     >
       {images.length === 1 && (
         <div className={styles.single}>
-          <Image src={images[0]} alt="" fill className={styles.img} sizes="(max-width: 768px) 100vw, 800px" />
+          <Image src={images[0]} alt="Фото з історії фонду" fill className={styles.img} sizes="(max-width: 768px) 100vw, 800px" />
         </div>
       )}
       {images.length === 2 && (
         <>
           <div className={styles.dualItem}>
-            <Image src={images[0]} alt="" fill className={styles.img} sizes="(max-width: 768px) 100vw, 400px" />
+            <Image src={images[0]} alt="Фото з історії фонду 1" fill className={styles.img} sizes="(max-width: 768px) 100vw, 400px" />
           </div>
           <div className={styles.dualItem}>
-            <Image src={images[1]} alt="" fill className={styles.img} sizes="(max-width: 768px) 100vw, 400px" />
+            <Image src={images[1]} alt="Фото з історії фонду 2" fill className={styles.img} sizes="(max-width: 768px) 100vw, 400px" />
           </div>
         </>
       )}
       {images.length >= 3 && (
         <>
           <div className={styles.featured}>
-            <Image src={images[0]} alt="" fill className={styles.img} sizes="(max-width: 768px) 100vw, 700px" />
+            <Image src={images[0]} alt="Фото з історії фонду" fill className={styles.img} sizes="(max-width: 768px) 100vw, 700px" />
           </div>
           <div className={styles.sideCol}>
             {images.slice(1, 3).map((src, i) => (
               <div key={i} className={styles.sideItem}>
-                <Image src={src} alt="" fill className={styles.img} sizes="(max-width: 768px) 100vw, 350px" />
+                <Image src={src} alt={`Фото з історії фонду ${i + 2}`} fill className={styles.img} sizes="(max-width: 768px) 100vw, 350px" />
               </div>
             ))}
           </div>
@@ -50,7 +50,7 @@ export default function HistoryGallery({ images }: HistoryGalleryProps) {
             <div className={styles.bottomRow}>
               {images.slice(3).map((src, i) => (
                 <div key={i} className={styles.bottomItem}>
-                  <Image src={src} alt="" fill className={styles.img} sizes="(max-width: 768px) 50vw, 250px" />
+                  <Image src={src} alt={`Фото з історії фонду ${i + 4}`} fill className={styles.img} sizes="(max-width: 768px) 50vw, 250px" />
                 </div>
               ))}
             </div>

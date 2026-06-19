@@ -136,6 +136,7 @@ export interface Dictionary {
   hero_slider: HeroSlide[];
   projects: {
     title: string;
+    description?: string;
     more: string;
     support: string;
     support_project: string;
@@ -156,6 +157,7 @@ export interface Dictionary {
   };
   news: {
     title: string;
+    description?: string;
     more: string;
     items: NewsItem[];
     no_articles: string;
@@ -173,6 +175,7 @@ export interface Dictionary {
   };
   about: {
     title: string;
+    description?: string;
     tabs: {
       about_us: string;
       partners: string;
@@ -273,6 +276,7 @@ export interface Dictionary {
   };
   support: {
     title: string;
+    description?: string;
     tabs: {
       once: string;
       requisites: string;

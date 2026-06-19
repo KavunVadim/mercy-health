@@ -14,13 +14,19 @@ export async function GET() {
   }
 }
 
+const ALLOWED_SETTINGS = ['siteName', 'siteDescription', 'logo', 'favicon', 'socialLinks', 'contactEmail', 'contactPhone', 'address'];
+
 export async function PUT(request: Request) {
   try {
     const body = await request.json();
     const db = await getDb();
+    const allowed: Record<string, unknown> = {};
+    for (const key of ALLOWED_SETTINGS) {
+      if (key in body) allowed[key] = body[key];
+    }
     await db.collection('settings').updateOne(
       { key: 'main' },
-      { $set: { key: 'main', ...body, updatedAt: new Date() } },
+      { $set: { ...allowed, updatedAt: new Date() } },
       { upsert: true }
     );
     revalidatePath('/uk');

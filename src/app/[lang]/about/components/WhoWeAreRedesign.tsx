@@ -80,7 +80,7 @@ export default function WhoWeAreRedesign({ dictionary }: WhoWeAreRedesignProps) 
 
               {/* Bottom content */}
               <div className={styles.heroContent}>
-                <h1
+                <h2
                   className={styles.heroTitle}
                   dangerouslySetInnerHTML={{
                     __html: pathOfMercyTitle

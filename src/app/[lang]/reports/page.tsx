@@ -1,10 +1,29 @@
 export const dynamic = 'force-dynamic';
 
+import type { Metadata } from "next";
 import styles from "./page.module.css";
 import { getDictionary } from "@/get-dictionary";
 import type { Locale } from "@/i18n-config";
 import Breadcrumbs from "@/components/Breadcrumbs/Breadcrumbs";
+import { BreadcrumbJsonLd } from "@/components/JsonLd";
+import { siteUrl } from "@/lib/config";
 import type { Report, ReportDocument } from "@/types/content";
+
+export async function generateMetadata({ params }: { params: Promise<{ lang: string }> }): Promise<Metadata> {
+  const { lang } = await params;
+  const dictionary = await getDictionary(lang as Locale);
+  return {
+    title: `${dictionary.reports.title} | ${dictionary.metadata.title}`,
+    description: dictionary.reports.description || dictionary.metadata.description,
+    alternates: {
+      canonical: siteUrl(`/${lang}/reports`),
+      languages: {
+        uk: siteUrl("/uk/reports"),
+        en: siteUrl("/en/reports"),
+      },
+    },
+  };
+}
 
 export default async function ReportsPage({
   params,
@@ -31,6 +50,10 @@ export default async function ReportsPage({
 
   return (
     <main className={styles.main}>
+      <BreadcrumbJsonLd items={[
+        { name: dictionary.navigation.home, url: siteUrl(`/${locale}`) },
+        { name: dictionary.reports.title, url: siteUrl(`/${locale}/reports`) },
+      ]} />
       <header className={styles.header}>
         <div className="container">
           <Breadcrumbs lang={locale} dictionary={dictionary} className={styles.breadcrumbs} />

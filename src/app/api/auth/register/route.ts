@@ -2,9 +2,19 @@ import { NextResponse } from 'next/server';
 import { getDb } from '@/lib/mongodb';
 import { signAccessToken, signRefreshToken } from '@/lib/auth/jwt';
 import bcrypt from 'bcryptjs';
+import { rateLimit } from '@/lib/rate-limit';
 
 export async function POST(request: Request) {
   try {
+    const ip = request.headers.get('x-forwarded-for')?.split(',')[0]?.trim() || 'unknown';
+    const rl = rateLimit({ interval: 60_000, max: 5, key: `register:${ip}` });
+    if (!rl.allowed) {
+      return NextResponse.json({ error: 'Too many requests' }, {
+        status: 429,
+        headers: { 'Retry-After': String(Math.ceil(rl.resetInMs / 1000)) },
+      });
+    }
+
     const db = await getDb();
     const adminCount = await db.collection('users').countDocuments({ role: 'admin' });
 
