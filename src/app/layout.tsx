@@ -3,6 +3,7 @@ import localFont from "next/font/local";
 import "./globals.css";
 import ThemeScript from "@/components/ThemeScript";
 import { ThemeProvider } from "@/components/ThemeProvider";
+import { GoogleAnalytics } from "@/components/GoogleAnalytics";
 import { siteConfig } from "@/lib/config";
 
 const eUkraine = localFont({
@@ -44,6 +45,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       <head />
       <body>
         <ThemeScript />
+        <GoogleAnalytics />
         <ThemeProvider>
           {children}
         </ThemeProvider>

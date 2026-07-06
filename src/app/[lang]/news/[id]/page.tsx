@@ -2,7 +2,7 @@ import { getDictionary } from "@/get-dictionary";
 import { i18n, isLocale } from "@/i18n-config";
 import { notFound } from "next/navigation";
 import Breadcrumbs from "@/components/Breadcrumbs/Breadcrumbs";
-import { BreadcrumbJsonLd } from "@/components/JsonLd";
+import { BreadcrumbJsonLd, NewsArticleJsonLd } from "@/components/JsonLd";
 import { siteUrl } from "@/lib/config";
 import NewsDetailContent from "./components/NewsDetailContent";
 import styles from "./page.module.css";
@@ -95,6 +95,13 @@ export default async function NewsDetailPage({
         { name: dictionary.navigation.materials, url: siteUrl(`/${locale}/news`) },
         { name: newsItem.title, url: siteUrl(`/${locale}/news/${newsItem.id}`) },
       ]} />
+      <NewsArticleJsonLd
+        title={newsItem.title}
+        description={newsItem.description}
+        image={newsItem.image ? siteUrl(newsItem.image) : undefined}
+        datePublished={(newsItem as any).date || (newsItem as any).publishedAt}
+        url={siteUrl(`/${locale}/news/${newsItem.id}`)}
+      />
       <header className={styles.header}>
         <div className="container">
           <div className={styles.topActions}>

@@ -28,6 +28,54 @@ export function OrganizationJsonLd() {
   );
 }
 
+export function NewsArticleJsonLd({
+  title,
+  description,
+  image,
+  datePublished,
+  dateModified,
+  url,
+  author = "Mercy & Health Foundation",
+}: {
+  title: string;
+  description?: string;
+  image?: string;
+  datePublished?: string;
+  dateModified?: string;
+  url: string;
+  author?: string;
+}) {
+  const schema: Record<string, unknown> = {
+    "@context": "https://schema.org",
+    "@type": "NewsArticle",
+    headline: title,
+    description: description || undefined,
+    image: image ? [image] : undefined,
+    datePublished: datePublished || undefined,
+    dateModified: dateModified || datePublished || undefined,
+    url,
+    author: {
+      "@type": "Organization",
+      name: author,
+    },
+    publisher: {
+      "@type": "Organization",
+      name: "Mercy & Health Foundation",
+      logo: {
+        "@type": "ImageObject",
+        url: siteUrl(siteConfig.logo),
+      },
+    },
+  };
+
+  return (
+    <script
+      type="application/ld+json"
+      dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }}
+    />
+  );
+}
+
 export function BreadcrumbJsonLd({ items }: { items: { name: string; url: string }[] }) {
   const schema = {
     "@context": "https://schema.org",

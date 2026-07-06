@@ -178,23 +178,28 @@
   }
 
   .logo {
-    align-items: flex-start;
-    gap: 0.5rem;
+    align-items: center;
+    gap: 0.4rem;
     min-width: 0;
   }
 
-  .logoText {
-    display: block;
-    font-size: 0.78rem;
-    line-height: 1.2;
-    font-weight: 700;
-    letter-spacing: 0.03em;
-    text-transform: uppercase;
-    max-width: 10rem;
-    white-space: normal;
-    overflow-wrap: anywhere;
+  .logoMark {
+    flex-shrink: 0;
   }
 
+  .logoText {
+    display: flex;
+    align-items: center;
+    font-size: 0.72rem;
+    line-height: 1.1;
+    font-weight: 700;
+    letter-spacing: 0.02em;
+    text-transform: uppercase;
+    max-width: 8.5rem;
+    white-space: normal;
+    overflow-wrap: anywhere;
+    word-break: break-word;
+  }
   .logoMark {
     width: 36px;
     height: 36px;
