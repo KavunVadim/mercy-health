@@ -190,15 +190,12 @@
   .logoText {
     display: flex;
     align-items: center;
-    font-size: 0.72rem;
+    font-size: 0.62rem;
     line-height: 1.1;
     font-weight: 700;
-    letter-spacing: 0.02em;
+    letter-spacing: 0.005em;
     text-transform: uppercase;
-    max-width: 8.5rem;
-    white-space: normal;
-    overflow-wrap: anywhere;
-    word-break: break-word;
+    white-space: nowrap;
   }
   .logoMark {
     width: 36px;
@@ -210,8 +207,8 @@
   }
 
   .supportBtn {
-    padding: 0.65rem 1rem;
-    font-size: 0.72rem;
+    padding: 0.6rem 0.85rem;
+    font-size: 0.68rem;
     border-radius: 10px;
   }
 }

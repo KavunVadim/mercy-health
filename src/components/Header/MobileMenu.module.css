@@ -54,13 +54,14 @@
 
 .logoText {
   font-family: var(--font-e-ukraine-head), sans-serif;
-  font-size: 1rem;
+  font-size: 0.9rem;
   font-weight: 800;
   color: var(--foreground);
   letter-spacing: -0.01em;
-  white-space: normal;
-  overflow-wrap: anywhere;
-  max-width: calc(100vw - 150px);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: calc(100vw - 140px);
   line-height: 1.2;
 }
 

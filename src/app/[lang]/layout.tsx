@@ -9,6 +9,7 @@ import { getDictionary } from "@/get-dictionary";
 import Preloader from "@/components/Preloader/Preloader";
 import { OrganizationJsonLd } from "@/components/JsonLd";
 import { siteUrl } from "@/lib/config";
+import LangScript from "./LangScript";
 
 export async function generateStaticParams() {
   return i18n.locales.map((locale) => ({ lang: locale }));
@@ -62,11 +63,7 @@ export default async function LocaleLayout({
 
   return (
     <>
-      <script
-        dangerouslySetInnerHTML={{
-          __html: `document.documentElement.lang="${lang}"`,
-        }}
-      />
+      <LangScript lang={lang} />
       <OrganizationJsonLd />
       <a
         href="#main-content"
