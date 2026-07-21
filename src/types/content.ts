@@ -238,8 +238,11 @@ export interface Dictionary {
       };
     };
     partners_description: string;
+    memorandums_title: string;
+    memorandums_description: string;
   };
   partners: Partner[];
+  memorandums: Partner[];
   footer: {
     social_links: {
       facebook?: string;

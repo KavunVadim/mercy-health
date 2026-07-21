@@ -10,6 +10,7 @@ import {
   Images,
   LogOut,
   Users,
+  BookOpenText,
   FileText,
   Settings,
   SlidersHorizontal,
@@ -17,7 +18,6 @@ import {
   ChevronLeft,
   Menu,
   X,
-  Plus,
   Heart,
 } from 'lucide-react';
 import { createPortal } from 'react-dom';
@@ -51,6 +51,7 @@ const navSections = [
     label: 'Сайт',
     items: [
       { href: '/admin/partners', label: 'Партнери', icon: Users },
+      { href: '/admin/memorandums', label: 'Меморандуми', icon: BookOpenText },
       { href: '/admin/content', label: 'Сторінки', icon: FileEdit },
       { href: '/admin/settings', label: 'Налаштування', icon: Settings },
     ],

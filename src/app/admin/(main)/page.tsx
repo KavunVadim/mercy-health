@@ -4,6 +4,7 @@ import {
   FolderOpen,
   Images,
   Users,
+  BookOpenText,
   FileText,
   ArrowUpRight,
   Database,
@@ -38,19 +39,20 @@ function StatCard({ href, icon: Icon, count, label, description }: StatCardProps
 }
 
 export default async function AdminDashboard() {
-  let stats = { news: 0, projects: 0, photos: 0, partners: 0, reports: 0 };
+  let stats = { news: 0, projects: 0, photos: 0, partners: 0, memorandums: 0, reports: 0 };
   let dbOk = false;
 
   try {
     const db = await getDb();
-    const [news, projects, photos, partners, reports] = await Promise.all([
+    const [news, projects, photos, partners, memorandums, reports] = await Promise.all([
       db.collection('news').countDocuments(),
       db.collection('projects').countDocuments(),
       db.collection('photos').countDocuments(),
       db.collection('partners').countDocuments(),
+      db.collection('memorandums').countDocuments(),
       db.collection('reports').countDocuments(),
     ]);
-    stats = { news, projects, photos, partners, reports };
+    stats = { news, projects, photos, partners, memorandums, reports };
     dbOk = true;
   } catch (e) {
     console.error('Dashboard: failed to load stats', e);
@@ -84,6 +86,13 @@ export default async function AdminDashboard() {
       count: stats.partners,
       label: 'Партнери',
       description: 'Організації-партнери',
+    },
+    {
+      href: '/admin/memorandums',
+      icon: BookOpenText,
+      count: stats.memorandums,
+      label: 'Меморандуми',
+      description: 'Офіційні партнерства та меморандуми',
     },
     {
       href: '/admin/reports',

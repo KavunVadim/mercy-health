@@ -1,52 +1,76 @@
+import { ObjectId } from 'mongodb';
 import { NextResponse } from 'next/server';
 import { revalidatePath } from 'next/cache';
 import { getDb } from '@/lib/mongodb';
-import { ObjectId } from 'mongodb';
 
-export async function PATCH(request: Request) {
+const ALLOWED_COLLECTIONS = ['news', 'projects', 'partners', 'memorandums', 'reports', 'photos'];
+
+function revalidatePublicPages() {
+  revalidatePath('/uk');
+  revalidatePath('/en');
+  revalidatePath('/uk/about', 'page');
+  revalidatePath('/en/about', 'page');
+  revalidatePath('/uk/projects', 'page');
+  revalidatePath('/en/projects', 'page');
+  revalidatePath('/uk/news', 'page');
+  revalidatePath('/en/news', 'page');
+}
+
+function isObjectId(value: string) {
+  return ObjectId.isValid(value) && new ObjectId(value).toString() === value;
+}
+
+async function reorderByMongoIds(collection: string, ids: string[]) {
+  const db = await getDb();
+  const bulkOps = ids.map((id, index) => ({
+    updateOne: {
+      filter: { _id: isObjectId(id) ? new ObjectId(id) : (id as unknown as ObjectId) },
+      update: { $set: { order: ids.length - index, updatedAt: new Date() } },
+    },
+  }));
+
+  if (bulkOps.length > 0) await db.collection(collection).bulkWrite(bulkOps);
+}
+
+async function reorderByPublicIds(collection: string, order: string[]) {
+  const db = await getDb();
+  const bulkOps = order.map((id, index) => ({
+    updateOne: {
+      filter: { id },
+      update: { $set: { order: order.length - index, updatedAt: new Date() } },
+    },
+  }));
+
+  if (bulkOps.length > 0) await db.collection(collection).bulkWrite(bulkOps);
+}
+
+async function handleReorder(request: Request) {
   try {
-    const { collection, ids } = await request.json();
+    const { collection, ids, order } = await request.json();
 
-    if (!collection || !Array.isArray(ids)) {
-      return NextResponse.json({ error: 'collection and ids[] required' }, { status: 400 });
+    if (!ALLOWED_COLLECTIONS.includes(collection)) {
+      return NextResponse.json({ error: 'Invalid collection' }, { status: 400 });
     }
 
-    const allowed = ['news', 'projects', 'partners', 'reports', 'photos'];
-    if (!allowed.includes(collection)) {
-      return NextResponse.json({ error: `Invalid collection: ${collection}` }, { status: 400 });
+    if (Array.isArray(ids)) {
+      await reorderByMongoIds(collection, ids);
+    } else if (Array.isArray(order)) {
+      await reorderByPublicIds(collection, order);
+    } else {
+      return NextResponse.json({ error: 'Missing ids/order array' }, { status: 400 });
     }
 
-    const invalid = ids.filter((id: string) => !ObjectId.isValid(id));
-    if (invalid.length > 0) {
-      return NextResponse.json({ error: 'Invalid id list for reorder', invalid }, { status: 400 });
-    }
-
-    const db = await getDb();
-    const total = ids.length;
-    const ops = ids.map((id: string, index: number) => {
-      if (!ObjectId.isValid(id)) {
-        throw new Error(`Invalid id in ids[]: ${id}`);
-      }
-      return {
-        updateOne: {
-          filter: { _id: new ObjectId(id) },
-          update: { $set: { order: total - 1 - index, updatedAt: new Date() } },
-        },
-      };
-    });
-
-    await db.collection(collection).bulkWrite(ops);
-    revalidatePath('/uk/news', 'page');
-    revalidatePath('/en/news', 'page');
-    revalidatePath('/uk/projects', 'page');
-    revalidatePath('/en/projects', 'page');
-    revalidatePath('/uk/reports', 'page');
-    revalidatePath('/en/reports', 'page');
-    revalidatePath('/uk', 'page');
-    revalidatePath('/en', 'page');
+    revalidatePublicPages();
     return NextResponse.json({ success: true });
   } catch (e) {
-    console.error('Reorder failed:', e);
-    return NextResponse.json({ error: 'Reorder failed' }, { status: 500 });
+    return NextResponse.json({ error: 'Failed to reorder' }, { status: 500 });
   }
+}
+
+export async function PATCH(request: Request) {
+  return handleReorder(request);
+}
+
+export async function POST(request: Request) {
+  return handleReorder(request);
 }

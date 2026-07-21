@@ -5,6 +5,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import Tabs from "@/components/Tabs/Tabs";
 import AboutUs from "./components/AboutUs";
 import Partners from "./components/Partners";
+import Memorandums from "./components/Memorandums";
 import Contacts from "./components/Contacts";
 import styles from "./page.module.css";
 import type { Dictionary } from "@/types/content";
@@ -38,7 +39,12 @@ export default function AboutContent({ dictionary }: { dictionary: Dictionary })
           className={styles.tabContent}
         >
             {activeTab === "about_us" && <AboutUs dictionary={dictionary} />}
-            {activeTab === "partners" && <Partners dictionary={dictionary} />}
+            {activeTab === "partners" && (
+              <>
+                <Partners dictionary={dictionary} />
+                <Memorandums dictionary={dictionary} />
+              </>
+            )}
             {activeTab === "contacts" && <Contacts dictionary={dictionary} />}
         </motion.div>
       </AnimatePresence>

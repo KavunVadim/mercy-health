@@ -67,27 +67,62 @@
     "story_eyebrow": "Our Mission",
     "hero_year": "Since 2016",
     "hero_stats": [
-      { "number": "130+", "label": "ambulances to the front" },
-      { "number": "300+", "label": "military rehabilitated" },
-      { "number": "8.3K", "label": "people helped" },
-      { "number": "45.2K", "label": "donors" }
+      {
+        "number": "130+",
+        "label": "ambulances to the front"
+      },
+      {
+        "number": "300+",
+        "label": "military rehabilitated"
+      },
+      {
+        "number": "8.3K",
+        "label": "people helped"
+      },
+      {
+        "number": "45.2K",
+        "label": "donors"
+      }
     ],
     "pull_quote": "We don't wait for better conditions. We work in the conditions we have — for those who need it.",
     "timeline": [
-      { "year": "2016", "label": "Start", "text": "Foundation established. Medicines, clothing, food — for the population and medical institutions of all forms of ownership." },
-      { "year": "2022", "label": "Turning Point", "text": "Since February 24 — full-scale invasion. Together with the BeForUkraine NGO (Belgium), the project \"Ambulances for the Front\" was launched. International donors were engaged." },
-      { "year": "2026", "label": "Today", "text": "130+ specialized vehicles for the Armed Forces. Rehabilitation center — trips to front-line territories. 12 active projects." }
+      {
+        "year": "2016",
+        "label": "Start",
+        "text": "Foundation established. Medicines, clothing, food — for the population and medical institutions of all forms of ownership."
+      },
+      {
+        "year": "2022",
+        "label": "Turning Point",
+        "text": "Since February 24 — full-scale invasion. Together with the BeForUkraine NGO (Belgium), the project \"Ambulances for the Front\" was launched. International donors were engaged."
+      },
+      {
+        "year": "2026",
+        "label": "Today",
+        "text": "130+ specialized vehicles for the Armed Forces. Rehabilitation center — trips to front-line territories. 12 active projects."
+      }
     ],
     "honor": {
       "eyebrow": "Flagship Project",
       "big_number": "130",
       "num_label": "specialized vehicles delivered to the front together with BeForUkraine",
-      "tags": ["Ambulances to the Front", "On the Shield", "Auto Workshop", "Disability Assistance"],
+      "tags": [
+        "Ambulances to the Front",
+        "On the Shield",
+        "Auto Workshop",
+        "Disability Assistance"
+      ],
       "caption": "Wall of gratitude from our defenders",
       "patch_alt": "Wall of Honor"
     },
     "gallery_eyebrow": "Chronicle",
-    "gallery_captions": ["Delivering aid", "Water supply", "Ambulance", "Medical evacuation", "Helping children"],
+    "gallery_captions": [
+      "Delivering aid",
+      "Water supply",
+      "Ambulance",
+      "Medical evacuation",
+      "Helping children"
+    ],
     "contacts_tab": {
       "title": "Get in Touch",
       "form": {
@@ -104,7 +139,9 @@
         "email": "Email",
         "address": "Address"
       }
-    }
+    },
+    "memorandums_title": "Memorandums of Cooperation",
+    "memorandums_description": "Official partnerships that unite efforts to save lives and support those who need it most."
   },
   "projects": {
     "title": "Our Projects",
@@ -236,5 +273,6 @@
     "description": "Subscribe to our newsletter to receive news about projects and reports.",
     "placeholder": "E-mail",
     "button": "Subscribe"
-  }
+  },
+  "memorandums": []
 }

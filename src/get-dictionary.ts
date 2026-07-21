@@ -80,12 +80,13 @@ async function fetchMongoData(locale: Locale) {
 
     const contentCol = locale === "uk" ? "content_uk" : "content_en";
     const ukContentCol = "content_uk";
-    const [contentDoc, ukContentDoc, newsDocs, projectsDocs, partnersDocs, reportsDocs, settingsDoc, galleryPhotos] = await Promise.all([
+    const [contentDoc, ukContentDoc, newsDocs, projectsDocs, partnersDocs, memorandumsDocs, reportsDocs, settingsDoc, galleryPhotos] = await Promise.all([
       db.collection(contentCol).findOne({ key: "main" }),
       db.collection(ukContentCol).findOne({ key: "main" }),
       db.collection("news").find({}).sort({ order: -1, createdAt: -1 }).limit(MAX_LIST_ITEMS).toArray(),
       db.collection("projects").find({}).sort({ order: -1, createdAt: -1 }).limit(MAX_LIST_ITEMS).toArray(),
       db.collection("partners").find({}).sort({ order: -1, createdAt: -1 }).limit(MAX_LIST_ITEMS).toArray(),
+      db.collection("memorandums").find({}).sort({ order: -1, createdAt: -1 }).limit(MAX_LIST_ITEMS).toArray(),
       db.collection("reports").find({}).sort({ order: -1, createdAt: -1 }).limit(MAX_LIST_ITEMS).toArray(),
       db.collection("settings").findOne({ key: "main" }),
       db.collection("photos").find({ inGallery: true, visible: { $ne: false } }).sort({ order: -1, createdAt: -1 }).limit(MAX_LIST_ITEMS).toArray(),
@@ -136,6 +137,7 @@ async function fetchMongoData(locale: Locale) {
 
     const localizedProjects = localizeData(stripMongo(projectsDocs || []), locale);
     const localizedPartners = localizeData(stripMongo(partnersDocs || []), locale);
+    const localizedMemorandums = localizeData(stripMongo(memorandumsDocs || []), locale);
     const localizedNews = (localizeData(stripMongo(newsDocs || []), locale) as Record<string, unknown>[]).sort((a, b) => {
       const da = parseDateStr(a.date as string);
       const db = parseDateStr(b.date as string);
@@ -146,13 +148,13 @@ async function fetchMongoData(locale: Locale) {
 
     const newsGalleryImages = (galleryPhotos || []).map((p) => (p as unknown as { url: string }).url);
 
-    return { contentData, localizedProjects, localizedPartners, localizedNews, localizedReports, localizedSettings, newsGalleryImages };
+    return { contentData, localizedProjects, localizedPartners, localizedMemorandums, localizedNews, localizedReports, localizedSettings, newsGalleryImages };
 }
 
 export const getDictionary = cache(async (locale: Locale): Promise<Dictionary> => {
   const baseDictionary = await (dictionaries[locale]?.() ?? dictionaries.uk());
 
-  const { contentData, localizedProjects, localizedPartners, localizedNews, localizedReports, localizedSettings, newsGalleryImages } = await fetchMongoData(locale);
+  const { contentData, localizedProjects, localizedPartners, localizedMemorandums, localizedNews, localizedReports, localizedSettings, newsGalleryImages } = await fetchMongoData(locale);
 
   const mergedDictionary = contentData
     ? deepMerge(baseDictionary, contentData)
@@ -180,6 +182,7 @@ export const getDictionary = cache(async (locale: Locale): Promise<Dictionary> =
       },
     },
     partners: localizedPartners || [],
+    memorandums: localizedMemorandums || [],
     reports: {
       ...(finalDictionary.reports || {}),
       ...(reportsData || {}),
