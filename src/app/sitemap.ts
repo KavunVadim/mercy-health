@@ -1,6 +1,7 @@
 import { i18n } from "@/i18n-config";
 import { getDb } from "@/lib/mongodb";
 import { siteUrl } from "@/lib/config";
+import { cache } from "react";
 
 const staticRoutes = [
   "",
@@ -18,7 +19,8 @@ type SitemapEntry = {
   priority?: number;
 };
 
-async function getDynamicRoutes(): Promise<{ news: string[]; projects: string[] }> {
+// Кешуємо функцію отримання даних на 1 годину (3600 секунд)
+const getDynamicRoutes = cache(async (): Promise<{ news: string[]; projects: string[] }> => {
   const newsIds: string[] = [];
   const projectIds: string[] = [];
 
@@ -28,7 +30,9 @@ async function getDynamicRoutes(): Promise<{ news: string[]; projects: string[] 
     for (const doc of newsDocs) {
       if (doc.id) newsIds.push(doc.id);
     }
-  } catch { }
+  } catch (e) {
+    console.error("Sitemap dynamic routes fetch error:", e);
+  }
 
   try {
     const ukContent = await getDb().then(db => db.collection("content_uk").findOne({ key: "main" }));
@@ -37,10 +41,12 @@ async function getDynamicRoutes(): Promise<{ news: string[]; projects: string[] 
         if (item.id) projectIds.push(item.id);
       }
     }
-  } catch { }
+  } catch (e) {
+    console.error("Sitemap project content fetch error:", e);
+  }
 
   return { news: newsIds, projects: projectIds };
-}
+});
 
 export default async function sitemap(): Promise<SitemapEntry[]> {
   const { news, projects } = await getDynamicRoutes();
