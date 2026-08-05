@@ -38,13 +38,26 @@ export async function generateMetadata({ params }: { params: Promise<{ lang: str
       siteName: dictionary.common.site_name,
       locale: lang === "uk" ? "uk_UA" : "en_US",
       type: "website",
-      images: [{ url: siteUrl("/opengraph-image"), width: 1200, height: 627 }],
+      images: [{ 
+        url: siteUrl("/opengraph-image"), 
+        width: 1200, 
+        height: 627,
+        alt: dictionary.common.site_name
+      }],
     },
     twitter: {
       card: "summary_large_image",
       title: dictionary.metadata.title,
       description: dictionary.metadata.description,
       images: [siteUrl("/opengraph-image")],
+    },
+    icons: {
+      icon: "/favicon.ico",
+      apple: "/apple-touch-icon.png",
+      shortcut: "/favicon.ico",
+    },
+    other: {
+      "google-site-verification": "2ezYQRXWLDFi4_ZFR_X91tMsmFu5ty8fVn4LRWm85SM", 
     },
   };
 }

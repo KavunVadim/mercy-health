@@ -7,7 +7,12 @@ export function OrganizationJsonLd() {
     name: "Mercy & Health Foundation",
     alternateName: "Благодійний фонд Mercy & Health",
     url: siteConfig.url,
-    logo: siteUrl(siteConfig.logo),
+    logo: {
+      "@type": "ImageObject",
+      url: siteUrl(siteConfig.logo),
+      width: 512,
+      height: 512,
+    },
     description: "Благодійний фонд допомоги постраждалим від війни в Україні",
     address: {
       "@type": "PostalAddress",
