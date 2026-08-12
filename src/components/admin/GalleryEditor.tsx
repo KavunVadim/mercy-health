@@ -6,6 +6,7 @@ import { Plus, Trash2, X, GripVertical } from 'lucide-react';
 import styles from '@/app/admin/admin.module.css';
 import { handleDragStart, handleDragOver, handleDragLeave, handleDrop, handleDragEnd } from '@/lib/dnd-reorder';
 import { uploadFile } from '@/lib/upload';
+import { compressImageBeforeUpload } from '@/lib/client-image';
 
 interface GalleryEditorProps {
   value: string[];
@@ -54,9 +55,10 @@ export default function GalleryEditor({ value, onChange, label }: GalleryEditorP
     const accumulated = [...value];
     try {
       for (let i = 0; i < files.length; i++) {
+        const processed = await compressImageBeforeUpload(files[i]);
         const fd = new FormData();
-        fd.append('file', files[i]);
-        fd.append('title', files[i].name);
+        fd.append('file', processed);
+        fd.append('title', processed.name);
         const res = await uploadFile(fd, (p) => {
           const overall = Math.round(((i * 100) + p) / files.length);
           setProgress(overall);
@@ -72,6 +74,8 @@ export default function GalleryEditor({ value, onChange, label }: GalleryEditorP
           }
           accumulated.push(data.url);
           onChange([...accumulated]);
+        } else if (res.status === 413) {
+          alert(`Файл "${processed.name}" занадто великий. Спробуйте обрати фото меншого розміру.`);
         }
       }
     } catch (e) { console.error(e); } finally { setUploading(false); setProgress(0); if (fileRef.current) fileRef.current.value = ''; }

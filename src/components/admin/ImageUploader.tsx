@@ -5,6 +5,7 @@ import { createPortal } from 'react-dom';
 import { X } from 'lucide-react';
 import styles from '@/app/admin/admin.module.css';
 import { uploadFile } from '@/lib/upload';
+import { compressImageBeforeUpload } from '@/lib/client-image';
 import type { AdminPhoto } from '@/types/admin';
 
 interface ImageUploaderProps {
@@ -39,9 +40,10 @@ export default function ImageUploader({ value, onChange, label }: ImageUploaderP
     setUploading(true);
     setProgress(0);
     try {
+      const processed = await compressImageBeforeUpload(file);
       const formData = new FormData();
-      formData.append('file', file);
-      formData.append('title', file.name);
+      formData.append('file', processed);
+      formData.append('title', processed.name);
 
       const res = await uploadFile(formData, setProgress);
       const data = await res.json();
@@ -49,6 +51,8 @@ export default function ImageUploader({ value, onChange, label }: ImageUploaderP
         onChange(data.url);
         if (data.dedup) {
         }
+      } else if (res.status === 413) {
+        alert('Файл занадто великий. Спробуйте обрати зображення меншого розміру.');
       } else {
         alert(data.error || 'Upload failed');
       }

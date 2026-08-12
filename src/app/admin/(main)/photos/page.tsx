@@ -8,6 +8,7 @@ import ConfirmDialog from '@/components/admin/ui/ConfirmDialog';
 import { SkeletonPhotoGrid } from '@/components/admin/ui/Skeleton';
 import { saveReorder, handleDragStart, handleDragOver, handleDragLeave, handleDrop, handleDragEnd } from '@/lib/dnd-reorder';
 import { uploadFile } from '@/lib/upload';
+import { compressImageBeforeUpload } from '@/lib/client-image';
 import type { AdminPhoto } from '@/types/admin';
 
 export default function AdminPhotosPage() {
@@ -49,14 +50,19 @@ export default function AdminPhotosPage() {
     let uploaded = 0;
     try {
       for (let i = 0; i < files.length; i++) {
+        const processed = await compressImageBeforeUpload(files[i]);
         const fd = new FormData();
-        fd.append('file', files[i]);
-        fd.append('title', files[i].name);
+        fd.append('file', processed);
+        fd.append('title', processed.name);
         const res = await uploadFile(fd, (p) => {
           const overall = Math.round(((i * 100) + p) / files.length);
           setProgress(overall);
         });
-        if (!res.ok) throw new Error('Upload failed');
+        if (!res.ok) {
+          if (res.status !== 413) throw new Error('Upload failed');
+          error(`Файл "${processed.name}" занадто великий для завантаження.`);
+          continue;
+        }
         uploaded++;
       }
       fetchItems();
