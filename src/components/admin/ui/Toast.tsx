@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useCallback, createContext, useContext, useState, useRef } from 'react';
+import { useCallback, createContext, useContext, useState, useRef } from 'react';
 import { CheckCircle, XCircle, Info, X } from 'lucide-react';
 import styles from '@/app/admin/admin.module.css';
 

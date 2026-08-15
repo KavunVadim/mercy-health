@@ -18,7 +18,7 @@ export async function PUT(request: Request, { params }: { params: Promise<{ id: 
     revalidatePath('/uk/about', 'page');
     revalidatePath('/en/about', 'page');
     return NextResponse.json(value);
-  } catch (e) {
+  } catch {
     return NextResponse.json({ error: 'Failed to update partner' }, { status: 500 });
   }
 }
@@ -34,7 +34,7 @@ export async function DELETE(_request: Request, { params }: { params: Promise<{ 
     revalidatePath('/uk/about', 'page');
     revalidatePath('/en/about', 'page');
     return NextResponse.json({ success: true });
-  } catch (e) {
+  } catch {
     return NextResponse.json({ error: 'Failed to delete partner' }, { status: 500 });
   }
 }

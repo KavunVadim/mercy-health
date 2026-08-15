@@ -1,12 +1,13 @@
 'use client';
 
-import { useState, useRef, useEffect } from 'react';
+import { useState, useRef } from 'react';
 import { createPortal } from 'react-dom';
 import { Plus, Trash2, X, GripVertical } from 'lucide-react';
 import styles from '@/app/admin/admin.module.css';
 import { handleDragStart, handleDragOver, handleDragLeave, handleDrop, handleDragEnd } from '@/lib/dnd-reorder';
 import { uploadFile } from '@/lib/upload';
 import { compressImageBeforeUpload } from '@/lib/client-image';
+import type { AdminPhoto } from '@/types/admin';
 
 interface GalleryEditorProps {
   value: string[];
@@ -18,7 +19,7 @@ export default function GalleryEditor({ value, onChange, label }: GalleryEditorP
   const [uploading, setUploading] = useState(false);
   const [progress, setProgress] = useState(0);
   const [showPicker, setShowPicker] = useState(false);
-  const [photos, setPhotos] = useState<any[]>([]);
+  const [photos, setPhotos] = useState<AdminPhoto[]>([]);
   const [loadingPhotos, setLoadingPhotos] = useState(false);
   const [dragIndex, setDragIndex] = useState<number | null>(null);
   const [deleting, setDeleting] = useState<string | null>(null);
@@ -89,7 +90,7 @@ export default function GalleryEditor({ value, onChange, label }: GalleryEditorP
     onChange(value.filter(u => u !== url));
   }
 
-  async function deletePhoto(photo: any) {
+  async function deletePhoto(photo: AdminPhoto) {
     if (!window.confirm(`Delete "${photo.title || photo.url.split('/').pop()}" permanently? This cannot be undone.`)) return;
     setDeleting(photo._id);
     try {
@@ -139,7 +140,7 @@ export default function GalleryEditor({ value, onChange, label }: GalleryEditorP
               key={`${url}-${idx}`}
               draggable
               onDragStart={e => { setDragIndex(idx); handleDragStart(e, idx); }}
-              onDragOver={e => handleDragOver(e, idx, dragIndex, reorder)}
+              onDragOver={e => handleDragOver(e, idx, dragIndex)}
               onDragLeave={handleDragLeave}
               onDrop={e => { handleDrop(e, idx, dragIndex, reorder); setDragIndex(null); }}
               onDragEnd={e => { handleDragEnd(e); setDragIndex(null); }}

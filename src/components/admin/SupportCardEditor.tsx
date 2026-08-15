@@ -40,19 +40,19 @@ export default function SupportCardEditor({ cards, cardsEn, onCardsChange, onCar
 
   function updateCard(i: number, field: string, value: string) {
     const updated = [...cards];
-    (updated[i] as any)[field] = value;
+    updated[i] = { ...updated[i], [field]: value };
     onCardsChange(updated);
     const sharedFields = ['image', 'bank', 'link'];
     if (sharedFields.includes(field)) {
       const updatedEn = [...cardsEn];
-      (updatedEn[i] as any)[field] = value;
+      updatedEn[i] = { ...updatedEn[i], [field]: value };
       onCardsEnChange(updatedEn);
     }
   }
 
   function updateCardEn(i: number, field: string, value: string) {
     const updated = [...cardsEn];
-    (updated[i] as any)[field] = value;
+    updated[i] = { ...updated[i], [field]: value };
     onCardsEnChange(updated);
   }
 
@@ -223,7 +223,7 @@ export default function SupportCardEditor({ cards, cardsEn, onCardsChange, onCar
               key={card.id}
               draggable
               onDragStart={e => { setDragIndex(i); handleDragStart(e, i); }}
-              onDragOver={e => { handleDragOver(e, i, dragIndex, reorderCard); }}
+              onDragOver={e => { handleDragOver(e, i, dragIndex); }}
               onDragLeave={handleDragLeave}
               onDrop={e => { handleDrop(e, i, dragIndex, reorderCard); setDragIndex(null); }}
               onDragEnd={e => { handleDragEnd(e); setDragIndex(null); }}

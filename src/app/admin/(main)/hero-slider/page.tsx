@@ -59,7 +59,10 @@ export default function AdminHeroSliderPage() {
     finally { setLoading(false); }
   }, [error]);
 
-  useEffect(() => { loadItems(); }, [loadItems]);
+  useEffect(() => {
+    const load = async () => { await loadItems(); };
+    void load();
+  }, [loadItems]);
 
   async function handleSave(e: React.FormEvent) {
     e.preventDefault();
@@ -192,7 +195,7 @@ export default function AdminHeroSliderPage() {
               key={item.id}
               draggable
               onDragStart={e => { setDragIndex(idx); handleDragStart(e, idx); }}
-              onDragOver={e => { handleDragOver(e, idx, dragIndex, reorderItem); }}
+              onDragOver={e => { handleDragOver(e, idx, dragIndex); }}
               onDragLeave={handleDragLeave}
               onDrop={e => { handleDrop(e, idx, dragIndex, reorderItem); setDragIndex(null); }}
               onDragEnd={e => { handleDragEnd(e); setDragIndex(null); }}

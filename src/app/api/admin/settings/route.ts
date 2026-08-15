@@ -7,9 +7,11 @@ export async function GET() {
     const db = await getDb();
     const doc = await db.collection('settings').findOne({ key: 'main' });
     if (!doc) return NextResponse.json({});
-    const { _id, key, ...data } = doc;
+    const data: Record<string, unknown> = { ...doc };
+    delete data._id;
+    delete data.key;
     return NextResponse.json(data);
-  } catch (e) {
+  } catch {
     return NextResponse.json({ error: 'Failed to fetch settings' }, { status: 500 });
   }
 }
@@ -32,7 +34,7 @@ export async function PUT(request: Request) {
     revalidatePath('/uk');
     revalidatePath('/en');
     return NextResponse.json({ success: true });
-  } catch (e) {
+  } catch {
     return NextResponse.json({ error: 'Failed to update settings' }, { status: 500 });
   }
 }

@@ -72,7 +72,10 @@ export default function AdminNewsPage() {
     }
   }, [error]);
 
-  useEffect(() => { fetchItems(); }, [fetchItems]);
+  useEffect(() => {
+    const load = async () => { await fetchItems(); };
+    void load();
+  }, [fetchItems]);
 
   async function handleSave(e: React.FormEvent) {
     e.preventDefault();
@@ -103,7 +106,7 @@ export default function AdminNewsPage() {
         const data = await res.json().catch(() => ({}));
         error(data.error || `Save failed (${res.status})`);
       }
-    } catch (e: any) {
+    } catch {
       error('Network error');
     } finally {
       setSaving(false);
@@ -333,7 +336,7 @@ export default function AdminNewsPage() {
               className={styles.cardItem}
               draggable
               onDragStart={e => { setDragIndex(idx); handleDragStart(e, idx); }}
-              onDragOver={e => handleDragOver(e, idx, dragIndex, reorderItem)}
+              onDragOver={e => handleDragOver(e, idx, dragIndex)}
               onDragLeave={handleDragLeave}
               onDrop={e => { handleDrop(e, idx, dragIndex, reorderItem); setDragIndex(null); }}
               onDragEnd={e => { handleDragEnd(e); setDragIndex(null); }}

@@ -43,7 +43,10 @@ export default function AdminReportsPage() {
     finally { setLoading(false); }
   }, [error]);
 
-  useEffect(() => { loadItems(); }, [loadItems]);
+  useEffect(() => {
+    const load = async () => { await loadItems(); };
+    void load();
+  }, [loadItems]);
 
   async function handleSave(e: React.FormEvent) {
     e.preventDefault();

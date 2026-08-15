@@ -106,7 +106,7 @@ export async function GET() {
       hero_description_uk: ukDoc.hero?.description || '',
       hero_description_en: enDoc.hero?.description || '',
     });
-  } catch (e) {
+  } catch {
     return NextResponse.json({ error: 'Failed to fetch content' }, { status: 500 });
   }
 }
@@ -239,7 +239,7 @@ export async function PUT(request: Request) {
     revalidatePath('/en');
 
     return NextResponse.json({ success: true });
-  } catch (e) {
+  } catch {
     return NextResponse.json({ error: 'Failed to update content' }, { status: 500 });
   }
 }

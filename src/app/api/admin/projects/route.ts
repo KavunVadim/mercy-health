@@ -23,7 +23,7 @@ export async function GET(request: Request) {
         'X-Limit': String(limit),
       },
     });
-  } catch (e) {
+  } catch {
     return NextResponse.json({ error: 'Failed to fetch projects' }, { status: 500 });
   }
 }
@@ -37,7 +37,7 @@ export async function POST(request: Request) {
     revalidatePath('/uk/projects', 'page');
     revalidatePath('/en/projects', 'page');
     return NextResponse.json({ ...doc, _id: result.insertedId }, { status: 201 });
-  } catch (e) {
+  } catch {
     return NextResponse.json({ error: 'Failed to create project' }, { status: 500 });
   }
 }

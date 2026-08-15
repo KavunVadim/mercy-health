@@ -1,12 +1,24 @@
 "use client";
 
 import { useState } from "react";
-import { Copy, Check, Landmark, CreditCard, Receipt, FileText, Info, Globe, Building2, Wallet, Zap } from "lucide-react";
+import { Copy, Check, Landmark, Globe, Building2, Wallet, Zap } from "lucide-react";
 import styles from "./SupportComponents.module.css";
 import { motion, AnimatePresence } from "framer-motion";
+import type { ComponentType } from "react";
 import type { Dictionary, PaymentItem, PaymentTab } from "@/types/content";
 
 type TabType = "ua" | "intl" | "crypto";
+
+interface AccountOverride {
+  label: string;
+  value: string;
+  id: string;
+  extra?: string;
+  icon: string;
+}
+
+type IconType = ComponentType<{ size?: number; strokeWidth?: number }>;
+type AccountsOverride = Partial<Record<TabType, AccountOverride[]>>;
 
 export default function BankDetails({ dictionary }: { dictionary: Dictionary }) {
   const { bank_details } = dictionary.support;
@@ -25,12 +37,13 @@ export default function BankDetails({ dictionary }: { dictionary: Dictionary }) 
     { id: "crypto", label: dictionary.support.bank_details.tabs.crypto, icon: Wallet },
   ];
 
-  const rawAccounts = (dictionary.support.bank_details as any)?.accounts || null;
-  const iconMap: Record<string, any> = { Landmark, Globe, Wallet };
+  const rawAccounts = (dictionary.support.bank_details.accounts as unknown as AccountsOverride | undefined) ?? null;
+  const iconMap: Record<string, IconType> = { Landmark, Globe, Wallet };
 
   function buildAccounts(tab: TabType): PaymentItem[] {
-    if (rawAccounts?.[tab]) {
-      return rawAccounts[tab].map((a: any) => ({
+    const overridden = rawAccounts?.[tab];
+    if (overridden) {
+      return overridden.map((a) => ({
         label: a.label,
         value: a.value,
         id: a.id,

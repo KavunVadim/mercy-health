@@ -35,7 +35,10 @@ export default function AdminPhotosPage() {
     finally { setLoading(false); }
   }, [error]);
 
-  useEffect(() => { fetchItems(); }, [fetchItems]);
+  useEffect(() => {
+    const load = async () => { await fetchItems(); };
+    void load();
+  }, [fetchItems]);
 
   async function handleUpload(files: FileList | null) {
     if (!files?.length) return;
@@ -67,8 +70,8 @@ export default function AdminPhotosPage() {
       }
       fetchItems();
       success(`${uploaded} photo${uploaded !== 1 ? 's' : ''} uploaded`);
-    } catch (e: any) {
-      error(e.message || 'Upload failed');
+    } catch (e: unknown) {
+      error(e instanceof Error ? e.message : 'Upload failed');
     } finally {
       setUploading(false);
       setProgress(0);
@@ -260,7 +263,7 @@ export default function AdminPhotosPage() {
               key={item._id}
               draggable
               onDragStart={e => { setDragIndex(idx); handleDragStart(e, idx); }}
-              onDragOver={e => { handleDragOver(e, idx, dragIndex, reorderItem); }}
+              onDragOver={e => { handleDragOver(e, idx, dragIndex); }}
               onDragLeave={handleDragLeave}
               onDrop={e => { handleDrop(e, idx, dragIndex, reorderItem); setDragIndex(null); }}
               onDragEnd={e => { handleDragEnd(e); setDragIndex(null); }}

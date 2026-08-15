@@ -3,6 +3,8 @@
 import React from "react";
 import { motion } from "framer-motion";
 import Image from "next/image";
+import Link from "next/link";
+import { useParams } from "next/navigation";
 import styles from "./WhoWeAreRedesign.module.css";
 import clsx from "clsx";
 import { GalleryProvider, GalleryItem } from "@/components/ui/GalleryProvider";
@@ -29,6 +31,8 @@ const staggerFadeUp = (idx: number) => ({
 });
 
 export default function WhoWeAreRedesign({ dictionary }: WhoWeAreRedesignProps) {
+  const params = useParams();
+  const locale = typeof params.lang === "string" ? params.lang : "uk";
   const { about } = dictionary;
   const historyTitle = about.history.title || "НАША ІСТОРІЯ";
   const pathOfMercyTitle = about.sidebar.path_of_mercy || "ШЛЯХ МИЛОСЕРДЯ";
@@ -119,8 +123,7 @@ export default function WhoWeAreRedesign({ dictionary }: WhoWeAreRedesignProps) 
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true, margin: "-60px" }}
               transition={{ duration: 0.7, delay: 0.15, ease }}
-            >
-              <span className={styles.pullQuoteMark}>"</span>
+            >              
               {about.pull_quote}
             </motion.blockquote>
           </div>
@@ -178,9 +181,13 @@ export default function WhoWeAreRedesign({ dictionary }: WhoWeAreRedesignProps) 
               <p className={styles.honorNumLabel}>{about.honor.num_label}</p>
               <p className={styles.honorText}>{about.honor.text || historyParagraphs[3] || historyParagraphs[0]}</p>
               <div className={styles.honorTags}>
-                {honorTags.map((tag, ti) => (
-                  <span key={ti} className={styles.honorTag}>{tag}</span>
-                ))}
+                {honorTags.map((tag, ti) => {
+                  const href = tag.href
+                    ? `/${locale}/projects/${tag.href}`
+                    : null;
+                  const inner = <span key={ti} className={styles.honorTag}>{tag.label}</span>;
+                  return href ? <Link key={ti} href={href} className={styles.honorTagLink}>{inner}</Link> : inner;
+                })}
               </div>
             </motion.div>
 

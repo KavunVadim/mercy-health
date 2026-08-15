@@ -9,7 +9,7 @@ export function handleDragStart(e: React.DragEvent, index: number) {
   el.style.opacity = '0.4';
 }
 
-export function handleDragOver(e: React.DragEvent, index: number, dragIndex: number | null, onReorder: (from: number, to: number) => void) {
+export function handleDragOver(e: React.DragEvent, index: number, dragIndex: number | null) {
   e.preventDefault();
   e.dataTransfer.dropEffect = 'move';
   if (dragIndex === null || dragIndex === index) return;

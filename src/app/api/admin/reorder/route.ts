@@ -62,7 +62,7 @@ async function handleReorder(request: Request) {
 
     revalidatePublicPages();
     return NextResponse.json({ success: true });
-  } catch (e) {
+  } catch {
     return NextResponse.json({ error: 'Failed to reorder' }, { status: 500 });
   }
 }

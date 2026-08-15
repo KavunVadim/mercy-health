@@ -4,37 +4,37 @@ import { useState, useCallback } from 'react';
 import { Plus, X, GripVertical } from 'lucide-react';
 import styles from '@/app/admin/admin.module.css';
 
-interface ArrayEditorProps {
-  value: any[];
-  onChange: (value: any[]) => void;
+interface ArrayEditorProps<T extends Record<string, string>> {
+  value: T[];
+  onChange: (value: T[]) => void;
   fields: { key: string; label: string; placeholder?: string; type?: 'text' | 'textarea' }[];
   label: string;
   itemLabel?: string;
 }
 
-export default function ArrayEditor({ value, onChange, fields, label, itemLabel }: ArrayEditorProps) {
+export default function ArrayEditor<T extends Record<string, string>>({ value, onChange, fields, label, itemLabel }: ArrayEditorProps<T>) {
   const [dragIdx, setDragIdx] = useState<number | null>(null);
 
   function addItem() {
-    const item: Record<string, string> = {};
+    const item = {} as Record<string, string>;
     fields.forEach(f => item[f.key] = '');
-    onChange([...value, item]);
+    onChange([...value, item as T]);
   }
 
   function updateItem(index: number, key: string, val: string) {
-    const updated = value.map((item: any, i: number) => i === index ? { ...item, [key]: val } : item);
+    const updated = value.map((item, i) => i === index ? { ...item, [key]: val } : item);
     onChange(updated);
   }
 
   function removeItem(index: number) {
-    onChange(value.filter((_: any, i: number) => i !== index));
+    onChange(value.filter((_, i) => i !== index));
   }
 
   const handleDragStart = useCallback((index: number) => {
     setDragIdx(index);
   }, []);
 
-  const handleDragOver = useCallback((e: React.DragEvent, index: number) => {
+  const handleDragOver = useCallback((e: React.DragEvent) => {
     e.preventDefault();
     e.dataTransfer.dropEffect = 'move';
   }, []);
@@ -67,12 +67,12 @@ export default function ArrayEditor({ value, onChange, fields, label, itemLabel 
         </p>
       ) : (
         <div style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
-          {value.map((item: any, idx: number) => (
+          {value.map((item, idx) => (
             <div
               key={idx}
               draggable
               onDragStart={() => handleDragStart(idx)}
-              onDragOver={(e) => handleDragOver(e, idx)}
+              onDragOver={(e) => handleDragOver(e)}
               onDrop={(e) => handleDrop(e, idx)}
               onDragEnd={handleDragEnd}
               style={{

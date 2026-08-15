@@ -38,7 +38,7 @@ describe("rateLimit", () => {
   it("resets after interval", () => {
     const key = `d-${n}`;
     rateLimit({ interval: 100, max: 1, key });
-    let blocked = rateLimit({ interval: 100, max: 1, key });
+    const blocked = rateLimit({ interval: 100, max: 1, key });
     expect(blocked.allowed).toBe(false);
 
     vi.advanceTimersByTime(101);

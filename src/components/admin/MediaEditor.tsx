@@ -53,19 +53,19 @@ export default function MediaEditor({ items, itemsEn, onItemsChange, onItemsEnCh
 
   function updateItem(i: number, field: string, value: string) {
     const updated = [...items];
-    (updated[i] as any)[field] = value;
+    updated[i] = { ...updated[i], [field]: value };
     onItemsChange(updated);
     const sharedFields = ['image', 'url', 'date', 'type'];
     if (sharedFields.includes(field)) {
       const updatedEn = [...itemsEn];
-      (updatedEn[i] as any)[field] = value;
+      updatedEn[i] = { ...updatedEn[i], [field]: value };
       onItemsEnChange(updatedEn);
     }
   }
 
   function updateItemEn(i: number, field: string, value: string) {
     const updated = [...itemsEn];
-    (updated[i] as any)[field] = value;
+    updated[i] = { ...updated[i], [field]: value };
     onItemsEnChange(updated);
   }
 

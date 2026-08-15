@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useRef, useEffect } from 'react';
+import { useState, useRef } from 'react';
 import { createPortal } from 'react-dom';
 import { X } from 'lucide-react';
 import styles from '@/app/admin/admin.module.css';
@@ -20,12 +20,8 @@ export default function ImageUploader({ value, onChange, label }: ImageUploaderP
   const [showGallery, setShowGallery] = useState(false);
   const [gallery, setGallery] = useState<AdminPhoto[]>([]);
   const [loadingGallery, setLoadingGallery] = useState(false);
-  const [previewError, setPreviewError] = useState(false);
+  const [previewErrorUrl, setPreviewErrorUrl] = useState<string | null>(null);
   const inputRef = useRef<HTMLInputElement>(null);
-
-  useEffect(() => {
-    setPreviewError(false);
-  }, [value]);
 
   async function handleFile(e: React.ChangeEvent<HTMLInputElement>) {
     const file = e.target.files?.[0];
@@ -56,7 +52,7 @@ export default function ImageUploader({ value, onChange, label }: ImageUploaderP
       } else {
         alert(data.error || 'Upload failed');
       }
-    } catch (err) {
+    } catch {
       alert('Upload failed');
     } finally {
       setUploading(false);
@@ -133,13 +129,13 @@ export default function ImageUploader({ value, onChange, label }: ImageUploaderP
         )}
       </div>
 
-      {value && !previewError && (
+      {value && previewErrorUrl !== value && (
         <div style={{ marginTop: '0.5rem', position: 'relative', display: 'inline-block', borderRadius: '8px', overflow: 'hidden', border: '1px solid #e2e8f0' }}>
           <img
             src={value}
             alt=""
             style={{ maxWidth: '240px', maxHeight: '160px', display: 'block', objectFit: 'cover' }}
-            onError={() => setPreviewError(true)}
+            onError={() => setPreviewErrorUrl(value)}
           />
         </div>
       )}

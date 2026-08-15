@@ -1,14 +1,14 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import { Check, Plus, X, FileText, SlidersHorizontal, HeartHandshake, CreditCard, FileBadge, ChevronRight, ChevronLeft, Image, ArrowLeft, ChevronDown } from 'lucide-react';
+import { Check, Plus, X, FileText, SlidersHorizontal, HeartHandshake, CreditCard, FileBadge, ChevronRight, Image, ArrowLeft, ChevronDown } from 'lucide-react';
 import styles from '@/app/admin/admin.module.css';
 import { useToast } from '@/components/admin/ui/Toast';
 import SupportCardEditor from '@/components/admin/SupportCardEditor';
 import GalleryEditor from '@/components/admin/GalleryEditor';
 import ImageUploader from '@/components/admin/ImageUploader';
 import ArrayEditor from '@/components/admin/ArrayEditor';
-import HonorEditor from '@/components/admin/HonorEditor';
+import HonorEditor, { type HonorData } from '@/components/admin/HonorEditor';
 import RichEditor from '@/components/admin/RichEditor';
 import MediaEditor from '@/components/admin/MediaEditor';
 
@@ -95,8 +95,8 @@ export default function AdminContentPage() {
     about_pull_quote_uk: '', about_pull_quote_en: '',
     about_timeline_uk: [] as { year: string; label: string; text: string }[],
     about_timeline_en: [] as { year: string; label: string; text: string }[],
-    about_honor_uk: {} as any,
-    about_honor_en: {} as any,
+    about_honor_uk: {} as HonorData,
+    about_honor_en: {} as HonorData,
     about_gallery_eyebrow_uk: '', about_gallery_eyebrow_en: '',
     about_gallery_captions_uk: [] as string[],
     about_gallery_captions_en: [] as string[],
@@ -199,7 +199,7 @@ export default function AdminContentPage() {
 
   useEffect(() => {
     if (!loaded) return;
-    setForm(prev => {
+    const syncCaptions = () => setForm(prev => {
       const ukLen = prev.about_gallery_captions_uk.length;
       const enLen = prev.about_gallery_captions_en.length;
       const targetLen = aboutHistoryImages.length;
@@ -210,6 +210,7 @@ export default function AdminContentPage() {
         about_gallery_captions_en: syncArrayLength(prev.about_gallery_captions_en, targetLen),
       };
     });
+    syncCaptions();
   }, [aboutHistoryImages.length, loaded]);
 
   async function saveContent() {
@@ -274,7 +275,6 @@ export default function AdminContentPage() {
   }
 
   const currentCat = category ? categories.find(c => c.key === category) : null;
-  const currentSection = currentCat?.sections?.find(s => s.key === subSection);
 
   if (!loaded) {
     return (
@@ -566,8 +566,8 @@ export default function AdminContentPage() {
             <SectionCard icon={Image} title="Почесна варта" isOpen={expanded["about-honor"] || false} onToggle={() => toggleSection("about-honor")}>
               <ImageUploader value={aboutPatchesImage} onChange={setAboutPatchesImage} label="Фото шевронів" />
               <div style={{ marginTop: '1.5rem', display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
-                <HonorEditor label="Дані (UA)" value={form.about_honor_uk} onChange={v => setForm({ ...form, about_honor_uk: v })} />
-                <HonorEditor label="Дані (EN)" value={form.about_honor_en} onChange={v => setForm({ ...form, about_honor_en: v })} />
+                <HonorEditor label="Дані (UA)" lang="uk" value={form.about_honor_uk} onChange={v => setForm({ ...form, about_honor_uk: v })} />
+                <HonorEditor label="Дані (EN)" lang="en" value={form.about_honor_en} onChange={v => setForm({ ...form, about_honor_en: v })} />
               </div>
             </SectionCard>
           )}
@@ -663,7 +663,7 @@ export default function AdminContentPage() {
           {category === 'stats' && subSection === 'accounts' && (
             <SectionCard icon={CreditCard} title="Рахунки (IBAN / Crypto)" isOpen={expanded["stats-accounts"] || false} onToggle={() => toggleSection("stats-accounts")}>
               <p className={styles.pageSubtitle} style={{ marginBottom: '0.75rem' }}>
-                Редагуйте банківські рахунки у форматі JSON. Формат: {'{'}"ua": [{'{'}"id": "ua_privat", "label": "PrivatBank", "value": "UA..."{'}'}]{'}'}
+                {String.raw`Редагуйте банківські рахунки у форматі JSON. Формат: {"ua": [{"id": "ua_privat", "label": "PrivatBank", "value": "UA..."}]}`}
               </p>
               <textarea
                 className={styles.input}

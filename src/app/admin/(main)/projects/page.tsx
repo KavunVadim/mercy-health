@@ -56,7 +56,10 @@ export default function AdminProjectsPage() {
     finally { setLoading(false); }
   }, [error]);
 
-  useEffect(() => { fetchItems(); }, [fetchItems]);
+  useEffect(() => {
+    const load = async () => { await fetchItems(); };
+    void load();
+  }, [fetchItems]);
 
   async function handleSave(e: React.FormEvent) {
     e.preventDefault();
@@ -272,7 +275,7 @@ export default function AdminProjectsPage() {
                 key={item._id || item.id}
                 draggable
                 onDragStart={e => { setDragIndex(idx); handleDragStart(e, idx); }}
-                onDragOver={e => { handleDragOver(e, idx, dragIndex, reorderItem); }}
+                onDragOver={e => { handleDragOver(e, idx, dragIndex); }}
                 onDragLeave={handleDragLeave}
                 onDrop={e => { handleDrop(e, idx, dragIndex, reorderItem); setDragIndex(null); }}
                 onDragEnd={e => { handleDragEnd(e); setDragIndex(null); }}

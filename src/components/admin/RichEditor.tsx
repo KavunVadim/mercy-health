@@ -15,6 +15,32 @@ interface RichEditorProps {
   height?: number;
 }
 
+interface ToolBtnProps {
+  action: () => void;
+  active?: boolean;
+  label: React.ReactNode;
+  title: string;
+}
+
+function ToolBtn({ action, active, label, title }: ToolBtnProps) {
+  return (
+    <button
+      type="button"
+      onClick={(e) => { e.preventDefault(); action(); }}
+      title={title}
+      className={`${styles.btn} ${styles.btnSm}`}
+      style={{
+        border: active ? '1px solid var(--admin-accent)' : '1px solid var(--admin-border)',
+        background: active ? 'var(--admin-accent-light)' : 'transparent',
+        color: active ? 'var(--admin-accent)' : 'var(--admin-text-secondary)',
+        fontWeight: 600, fontSize: '0.8rem', minWidth: 32, padding: '0.3rem 0.45rem', minHeight: 30,
+      }}
+    >
+      {label}
+    </button>
+  );
+}
+
 export default function RichEditor({ value, onChange, label, height = 300 }: RichEditorProps) {
   const [linkUrl, setLinkUrl] = useState('');
   const [showLinkInput, setShowLinkInput] = useState(false);
@@ -61,23 +87,6 @@ export default function RichEditor({ value, onChange, label, height = 300 }: Ric
   }, [editor, linkUrl]);
 
   if (!editor) return null;
-
-  const ToolBtn = ({ action, active, label, title }: { action: () => void; active?: boolean; label: React.ReactNode; title: string }) => (
-    <button
-      type="button"
-      onClick={(e) => { e.preventDefault(); action(); }}
-      title={title}
-      className={`${styles.btn} ${styles.btnSm}`}
-      style={{
-        border: active ? '1px solid var(--admin-accent)' : '1px solid var(--admin-border)',
-        background: active ? 'var(--admin-accent-light)' : 'transparent',
-        color: active ? 'var(--admin-accent)' : 'var(--admin-text-secondary)',
-        fontWeight: 600, fontSize: '0.8rem', minWidth: 32, padding: '0.3rem 0.45rem', minHeight: 30,
-      }}
-    >
-      {label}
-    </button>
-  );
 
   return (
     <div>

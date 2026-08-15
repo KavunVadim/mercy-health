@@ -8,7 +8,7 @@ export async function GET() {
     const db = await getDb();
     const docs = await db.collection('memorandums').find({}).sort({ order: -1, createdAt: -1 }).toArray();
     return NextResponse.json(docs);
-  } catch (e) {
+  } catch {
     return NextResponse.json({ error: 'Failed to fetch memorandums' }, { status: 500 });
   }
 }
@@ -30,7 +30,7 @@ export async function POST(request: Request) {
     revalidatePath('/uk/about', 'page');
     revalidatePath('/en/about', 'page');
     return NextResponse.json({ ...doc, _id: result.insertedId }, { status: 201 });
-  } catch (e) {
+  } catch {
     return NextResponse.json({ error: 'Failed to create memorandum' }, { status: 500 });
   }
 }

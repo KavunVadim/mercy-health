@@ -11,6 +11,15 @@ function isRecord(value: unknown): value is Record<string, unknown> {
   return value !== null && typeof value === "object" && !Array.isArray(value);
 }
 
+function getCardsItems(doc: Record<string, unknown>): Record<string, unknown>[] | undefined {
+  const support = doc["support"];
+  const supportRec = support && isRecord(support) ? support : undefined;
+  const cards = supportRec?.["cards"];
+  const cardsRec = cards && isRecord(cards) ? cards : undefined;
+  const items = cardsRec?.["items"];
+  return Array.isArray(items) ? items as Record<string, unknown>[] : undefined;
+}
+
 const LOCALE_KEYS = new Set(["uk", "en"]);
 
 function isLocalizedField(data: Record<string, unknown>): boolean {
@@ -92,9 +101,9 @@ async function fetchMongoData(locale: Locale) {
       db.collection("photos").find({ inGallery: true, visible: { $ne: false } }).sort({ order: -1, createdAt: -1 }).limit(MAX_LIST_ITEMS).toArray(),
     ]);
 
-    if (locale === "en" && ukContentDoc && contentDoc) {
-      const ukCards = (ukContentDoc as any).support?.cards?.items as Record<string, unknown>[] | undefined;
-      const enCards = (contentDoc as any).support?.cards?.items as Record<string, unknown>[] | undefined;
+    if (locale === "en" && ukContentDoc && contentDoc && isRecord(ukContentDoc) && isRecord(contentDoc)) {
+      const ukCards = getCardsItems(ukContentDoc);
+      const enCards = getCardsItems(contentDoc);
       if (ukCards && enCards) {
         const mergedCards = enCards.map((card, i) => {
           const ukCard = ukCards[i];
@@ -106,7 +115,12 @@ async function fetchMongoData(locale: Locale) {
             link: card.link || ukCard.link || '',
           };
         });
-        (contentDoc as any).support.cards.items = mergedCards;
+        const enSupport = contentDoc["support"];
+        const enSupportRec = enSupport && isRecord(enSupport) ? enSupport : undefined;
+        const enCardsRec = enSupportRec?.["cards"];
+        if (enSupportRec && enCardsRec && isRecord(enCardsRec)) {
+          enCardsRec["items"] = mergedCards;
+        }
       }
     }
 
@@ -120,7 +134,10 @@ async function fetchMongoData(locale: Locale) {
     function stripMongo(docs: unknown[]): Record<string, unknown>[] {
       return docs.map((d) => {
         if (d && typeof d === "object" && !Array.isArray(d)) {
-          const { _id, createdAt, updatedAt, ...rest } = d as Record<string, unknown>;
+          const rest = { ...d as Record<string, unknown> };
+          delete rest["_id"];
+          delete rest["createdAt"];
+          delete rest["updatedAt"];
           return rest;
         }
         return {};
@@ -129,7 +146,11 @@ async function fetchMongoData(locale: Locale) {
 
     function stripMongoOne(doc: Record<string, unknown> | null): Record<string, unknown> {
       if (doc && typeof doc === "object") {
-        const { _id, key, updatedAt, createdAt, ...rest } = doc;
+        const rest = { ...doc };
+        delete rest["_id"];
+        delete rest["key"];
+        delete rest["updatedAt"];
+        delete rest["createdAt"];
         return rest;
       }
       return {};

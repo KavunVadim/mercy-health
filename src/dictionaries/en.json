@@ -107,10 +107,10 @@
       "big_number": "130",
       "num_label": "specialized vehicles delivered to the front together with BeForUkraine",
       "tags": [
-        "Ambulances to the Front",
-        "On the Shield",
-        "Auto Workshop",
-        "Disability Assistance"
+        { "label": "Ambulances to the Front", "href": "reanimobili-na-front" },
+        { "label": "On the Shield", "href": "na-shchyti" },
+        { "label": "Auto Workshop", "href": "mobile-workshop" },
+        { "label": "Disability Assistance", "href": "dopomoha-lyudyam-z-invalidnistyu" }
       ],
       "caption": "Wall of gratitude from our defenders",
       "patch_alt": "Wall of Honor"

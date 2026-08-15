@@ -17,11 +17,13 @@ export default function ShareButtons({ title, projectUrl, shareLabel, dictionary
   const [currentUrl, setCurrentUrl] = useState("");
 
   useEffect(() => {
-    setCurrentUrl(
-      projectUrl
-        ? window.location.origin + projectUrl
-        : window.location.href
-    );
+    const resolveUrl = () =>
+      setCurrentUrl(
+        projectUrl
+          ? window.location.origin + projectUrl
+          : window.location.href
+      );
+    resolveUrl();
   }, [projectUrl]);
 
   const shareDict = dictionary?.share || {

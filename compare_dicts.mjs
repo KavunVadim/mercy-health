@@ -1,8 +1,7 @@
-const fs = require('fs');
-const path = require('path');
+import { readFileSync } from 'fs';
 
-const uk = JSON.parse(fs.readFileSync('src/dictionaries/uk.json', 'utf8'));
-const en = JSON.parse(fs.readFileSync('src/dictionaries/en.json', 'utf8'));
+const uk = JSON.parse(readFileSync('src/dictionaries/uk.json', 'utf8'));
+const en = JSON.parse(readFileSync('src/dictionaries/en.json', 'utf8'));
 
 function getKeys(obj, prefix = '') {
   let keys = [];

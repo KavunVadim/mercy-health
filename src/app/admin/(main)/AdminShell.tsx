@@ -25,7 +25,7 @@ import styles from '@/app/admin/admin.module.css';
 import AuthCheck from './AuthCheck';
 import { ToastProvider } from '@/components/admin/ui/Toast';
 
-const navSections = [
+const navSections: { label: string; items: { href: string; label: string; icon: React.ComponentType<{ size?: number; strokeWidth?: number; className?: string }>; exact?: boolean }[] }[] = [
   {
     label: 'Огляд',
     items: [
@@ -65,7 +65,8 @@ export default function AdminShell({ children }: { children: React.ReactNode }) 
   const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
-    setMounted(true);
+    const markMounted = () => setMounted(true);
+    markMounted();
     const handleResize = () => {
       if (window.innerWidth < 768) {
         setMobileOpen(false);
@@ -149,7 +150,7 @@ export default function AdminShell({ children }: { children: React.ReactNode }) 
                 <div key={section.label}>
                   <div className={styles.navSectionLabel}>{section.label}</div>
                   {section.items.map(item => {
-                    const active = isActive(item.href, (item as any).exact);
+                    const active = isActive(item.href, item.exact);
                     return (
                       <Link
                         key={item.href}

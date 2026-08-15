@@ -23,7 +23,7 @@ export async function GET(request: Request) {
         'X-Limit': String(limit),
       },
     });
-  } catch (e) {
+  } catch {
     return NextResponse.json({ error: 'Failed to fetch news' }, { status: 500 });
   }
 }
@@ -37,7 +37,7 @@ export async function POST(request: Request) {
     revalidatePath('/uk/news', 'page');
     revalidatePath('/en/news', 'page');
     return NextResponse.json({ ...doc, _id: result.insertedId }, { status: 201 });
-  } catch (e) {
+  } catch {
     return NextResponse.json({ error: 'Failed to create news' }, { status: 500 });
   }
 }

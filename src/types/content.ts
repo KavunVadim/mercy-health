@@ -202,7 +202,7 @@ export interface Dictionary {
       big_number: string;
       num_label: string;
       text?: string;
-      tags: string[];
+      tags: Array<{ label: string; href?: string }>;
       caption: string;
       patch_alt: string;
     };

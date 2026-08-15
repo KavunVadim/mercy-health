@@ -5,7 +5,6 @@ import { motion, AnimatePresence } from "framer-motion";
 import styles from "./AboutUs.module.css";
 import clsx from "clsx";
 import type { Dictionary } from "@/types/content";
-import HistoryGallery from "./HistoryGallery";
 import WhoWeAreRedesign from "./WhoWeAreRedesign";
 import MediaGrid from "@/components/MediaGrid/MediaGrid";
 

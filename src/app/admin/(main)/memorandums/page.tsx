@@ -32,7 +32,10 @@ export default function AdminMemorandumsPage() {
     finally { setLoading(false); }
   }, [error]);
 
-  useEffect(() => { loadItems(); }, [loadItems]);
+  useEffect(() => {
+    const load = async () => { await loadItems(); };
+    void load();
+  }, [loadItems]);
 
   function moveItem(from: number, direction: -1 | 1) {
     const to = from + direction;
@@ -166,7 +169,7 @@ export default function AdminMemorandumsPage() {
               style={{ textAlign: 'center', padding: '1rem', position: 'relative' }}
               draggable
               onDragStart={e => { setDragIndex(idx); handleDragStart(e, idx); }}
-              onDragOver={e => { handleDragOver(e, idx, dragIndex, reorderItem); }}
+              onDragOver={e => { handleDragOver(e, idx, dragIndex); }}
               onDragLeave={handleDragLeave}
               onDrop={e => { handleDrop(e, idx, dragIndex, reorderItem); setDragIndex(null); }}
               onDragEnd={e => { handleDragEnd(e); setDragIndex(null); }}

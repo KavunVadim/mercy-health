@@ -16,7 +16,7 @@ export async function PUT(request: Request, { params }: { params: Promise<{ id: 
     revalidatePath('/uk/reports');
     revalidatePath('/en/reports');
     return NextResponse.json(value);
-  } catch (e) {
+  } catch {
     return NextResponse.json({ error: 'Failed to update report' }, { status: 500 });
   }
 }
@@ -30,7 +30,7 @@ export async function DELETE(_request: Request, { params }: { params: Promise<{ 
     revalidatePath('/uk/reports');
     revalidatePath('/en/reports');
     return NextResponse.json({ success: true });
-  } catch (e) {
+  } catch {
     return NextResponse.json({ error: 'Failed to delete report' }, { status: 500 });
   }
 }

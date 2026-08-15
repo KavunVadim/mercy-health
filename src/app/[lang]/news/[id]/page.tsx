@@ -99,7 +99,7 @@ export default async function NewsDetailPage({
         title={newsItem.title}
         description={newsItem.description}
         image={newsItem.image ? siteUrl(newsItem.image) : undefined}
-        datePublished={(newsItem as any).date || (newsItem as any).publishedAt}
+        datePublished={newsItem.date}
         url={siteUrl(`/${locale}/news/${newsItem.id}`)}
       />
       <header className={styles.header}>

@@ -12,7 +12,7 @@ export async function GET(_request: Request, { params }: { params: Promise<{ id:
     );
     if (!doc) return NextResponse.json({ error: 'Not found' }, { status: 404 });
     return NextResponse.json(doc);
-  } catch (e) {
+  } catch {
     return NextResponse.json({ error: 'Failed to fetch project' }, { status: 500 });
   }
 }
@@ -36,7 +36,7 @@ export async function PUT(request: Request, { params }: { params: Promise<{ id: 
     revalidatePath('/uk', 'page');
     revalidatePath('/en', 'page');
     return NextResponse.json(value);
-  } catch (e) {
+  } catch {
     return NextResponse.json({ error: 'Failed to update project' }, { status: 500 });
   }
 }
@@ -52,7 +52,7 @@ export async function DELETE(_request: Request, { params }: { params: Promise<{ 
     revalidatePath('/uk/projects', 'page');
     revalidatePath('/en/projects', 'page');
     return NextResponse.json({ success: true });
-  } catch (e) {
+  } catch {
     return NextResponse.json({ error: 'Failed to delete project' }, { status: 500 });
   }
 }

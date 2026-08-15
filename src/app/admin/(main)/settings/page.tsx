@@ -1,7 +1,7 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import { Phone, Mail, Share2, Globe, Navigation, Check } from 'lucide-react';
+import { Phone, Share2, Globe, Navigation, Check } from 'lucide-react';
 import styles from '@/app/admin/admin.module.css';
 import { useToast } from '@/components/admin/ui/Toast';
 

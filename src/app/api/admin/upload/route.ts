@@ -111,8 +111,9 @@ export async function POST(request: Request) {
     revalidatePath('/en');
 
     return NextResponse.json({ ...doc, _id: result.insertedId, dedup: false }, { status: 201 });
-  } catch (e: any) {
-    await captureError(e, { route: '/api/admin/upload' });
-    return NextResponse.json({ error: e.message || 'Upload failed' }, { status: 500 });
+  } catch (error: unknown) {
+    const err = error instanceof Error ? error : new Error(String(error));
+    await captureError(err, { route: '/api/admin/upload' });
+    return NextResponse.json({ error: err.message || 'Upload failed' }, { status: 500 });
   }
 }

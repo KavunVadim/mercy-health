@@ -107,10 +107,10 @@
       "big_number": "130",
       "num_label": "спеціалізованих авто доставлено на фронт разом з BeForUkraine",
       "tags": [
-        "Реанімобілі на фронт",
-        "На Щиті",
-        "Авто-майстерня",
-        "Допомога з інвалідністю"
+        { "label": "Реанімобілі на фронт", "href": "reanimobili-na-front" },
+        { "label": "На Щиті", "href": "na-shchyti" },
+        { "label": "Авто-майстерня", "href": "mobile-workshop" },
+        { "label": "Допомога з інвалідністю", "href": "dopomoha-lyudyam-z-invalidnistyu" }
       ],
       "caption": "Стіна подяк від наших захисників",
       "patch_alt": "Стіна пошани"

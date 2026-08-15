@@ -44,7 +44,7 @@ export async function GET() {
     });
 
     return NextResponse.json(merged);
-  } catch (e) {
+  } catch {
     return NextResponse.json({ error: 'Failed to fetch hero slides' }, { status: 500 });
   }
 }
@@ -80,7 +80,7 @@ export async function POST(request: Request) {
     revalidatePath('/en');
 
     return NextResponse.json({ ...body, id }, { status: 201 });
-  } catch (e) {
+  } catch {
     return NextResponse.json({ error: 'Failed to create hero slide' }, { status: 500 });
   }
 }
@@ -110,7 +110,7 @@ export async function PATCH(request: Request) {
     revalidatePath('/en');
 
     return NextResponse.json({ success: true });
-  } catch (e) {
+  } catch {
     return NextResponse.json({ error: 'Failed to reorder hero slides' }, { status: 500 });
   }
 }

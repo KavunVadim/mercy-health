@@ -85,8 +85,9 @@ export default function HeroSlider({ slides }: { slides: Slide[] }) {
 
   // View Transitions API для плавної зміни контенту
   const handleSlideChange = (index: number) => {
-    if (typeof document !== 'undefined' && (document as any).startViewTransition) {
-      (document as any).startViewTransition(() => {
+    const doc = document as Document & { startViewTransition?: (cb: () => void) => { ready?: Promise<void> } };
+    if (typeof document !== 'undefined' && doc.startViewTransition) {
+      doc.startViewTransition(() => {
         scrollTo(index);
       });
     } else {
