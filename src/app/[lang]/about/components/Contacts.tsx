@@ -5,12 +5,22 @@ import { FaFacebookF, FaInstagram, FaTelegramPlane, FaLinkedinIn } from "react-i
 import { Mail, Phone, MapPin } from "lucide-react";
 import styles from "./Contacts.module.css";
 import type { Dictionary } from "@/types/content";
+import { formatPhoneDisplay, formatPhoneLink } from "@/lib/format-phone";
 
 export default function Contacts({ dictionary }: { dictionary: Dictionary }) {
   const dict = dictionary;
   const formDict = dict.about.contacts_tab.form;
   const footerDict = dict.footer;
   const socials = footerDict.social_links || {};
+  
+  const fundPhoneRaw = footerDict.foundation_phone || "";
+  const fundPhoneDisplay = formatPhoneDisplay(fundPhoneRaw);
+  const fundPhoneLink = formatPhoneLink(fundPhoneRaw);
+  
+  const rehabPhoneRaw = footerDict.rehab_phone || "0961451155";
+  const rehabPhoneDisplay = formatPhoneDisplay(rehabPhoneRaw);
+  const rehabPhoneLink = formatPhoneLink(rehabPhoneRaw);
+
   const [sending, setSending] = useState(false);
   const [sent, setSent] = useState(false);
   const [error, setError] = useState('');
@@ -53,11 +63,19 @@ export default function Contacts({ dictionary }: { dictionary: Dictionary }) {
             <ul className={styles.contactList}>
               <li>
                 <div className={styles.icon}><Phone size={24} /></div>
-                <div>
-                  <span className={styles.label}>{dict.about.contacts_tab.labels.phone}</span>
-                  <a href={`tel:${footerDict.foundation_phone}`} className={styles.value}>
-                    {footerDict.foundation_phone}
-                  </a>
+                <div style={{ display: 'flex', flexDirection: 'column', gap: '1.25rem' }}>
+                  <div>
+                    <span className={styles.label}>{dict.footer.columns.foundation}</span>
+                    <a href={`tel:${fundPhoneLink}`} className={styles.value}>
+                      {fundPhoneDisplay}
+                    </a>
+                  </div>
+                  <div>
+                    <span className={styles.label}>{dict.navigation.rehab || 'Реабілітація'}</span>
+                    <a href={`tel:${rehabPhoneLink}`} className={styles.value}>
+                      {rehabPhoneDisplay}
+                    </a>
+                  </div>
                 </div>
               </li>
               <li>

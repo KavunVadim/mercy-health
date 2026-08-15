@@ -6,6 +6,7 @@ import { FaFacebookF, FaInstagram, FaTelegramPlane, FaTiktok } from "react-icons
 import styles from "./Footer.module.css";
 import type { Locale } from "@/i18n-config";
 import type { Dictionary } from "@/types/content";
+import { formatPhoneDisplay, formatPhoneLink } from "@/lib/format-phone";
 
 export default function Footer({
   dictionary,
@@ -16,6 +17,14 @@ export default function Footer({
 }) {
   const footer = dictionary.footer;
   const socialLinks = footer.social_links || {};
+  
+  const fundPhoneRaw = dictionary.footer.foundation_phone || "";
+  const fundPhoneDisplay = formatPhoneDisplay(fundPhoneRaw);
+  const fundPhoneLink = formatPhoneLink(fundPhoneRaw);
+  
+  const rehabPhoneRaw = dictionary.footer.rehab_phone || "0961451155";
+  const rehabPhoneDisplay = formatPhoneDisplay(rehabPhoneRaw);
+  const rehabPhoneLink = formatPhoneLink(rehabPhoneRaw);
 
   return (
     <footer className={styles.footer}>
@@ -95,7 +104,17 @@ export default function Footer({
           <ul className={styles.contactsList}>
             <li>
               <Phone size={16} />
-              <a href={`tel:${dictionary.footer.foundation_phone}`}>{dictionary.footer.foundation_phone}</a>
+              <div className={styles.contactTextGroup}>
+                <span className={styles.contactLabel}>{lang === 'uk' ? 'Фонд' : 'Foundation'}</span>
+                <a href={`tel:${fundPhoneLink}`}>{fundPhoneDisplay}</a>
+              </div>
+            </li>
+            <li>
+              <Phone size={16} />
+              <div className={styles.contactTextGroup}>
+                <span className={styles.contactLabel}>{dictionary.navigation.rehab || (lang === 'uk' ? 'Реабілітаційний центр' : 'Rehabilitation Center')}</span>
+                <a href={`tel:${rehabPhoneLink}`}>{rehabPhoneDisplay}</a>
+              </div>
             </li>
             <li>
               <Mail size={16} />

@@ -260,6 +260,7 @@ export interface Dictionary {
       legal: string;
     };
     foundation_phone: string;
+    rehab_phone?: string;
     foundation_email?: string;
     address_foundation: string;
     rights: string;

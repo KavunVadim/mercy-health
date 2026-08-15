@@ -13,6 +13,7 @@ import type { Locale } from "@/i18n-config";
 import type { Dictionary } from "@/types/content";
 import LocaleSwitcher from "../LocaleSwitcher/LocaleSwitcher";
 import ThemeToggle from "../ThemeToggle/ThemeToggle";
+import { formatPhoneDisplay, formatPhoneLink } from "@/lib/format-phone";
 
 export default function MobileMenu({
   dictionary,
@@ -59,6 +60,14 @@ export default function MobileMenu({
     { icon: FaTiktok, href: socialLinks.tiktok },
     { icon: FaTelegramPlane, href: socialLinks.telegram },
   ];
+
+  const fundPhoneRaw = dictionary.footer.foundation_phone || "";
+  const fundPhoneDisplay = formatPhoneDisplay(fundPhoneRaw);
+  const fundPhoneLink = formatPhoneLink(fundPhoneRaw);
+  
+  const rehabPhoneRaw = dictionary.footer.rehab_phone || "0961451155";
+  const rehabPhoneDisplay = formatPhoneDisplay(rehabPhoneRaw);
+  const rehabPhoneLink = formatPhoneLink(rehabPhoneRaw);
 
   return (
     <div className={styles.wrap}>
@@ -124,10 +133,24 @@ export default function MobileMenu({
                     initial={{ opacity: 0, y: 10 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ delay: 0.4 }}
+                    className={styles.contactGroup}
                   >
-                    <a href={`tel:${dictionary.footer.foundation_phone}`} className={styles.contactLink}>
+                    <div className={styles.contactLabel}>{lang === 'uk' ? 'Фонд' : 'Foundation'}</div>
+                    <a href={`tel:${fundPhoneLink}`} className={styles.contactLink}>
                       <Phone size={20} />
-                      <span>{dictionary.footer.foundation_phone}</span>
+                      <span>{fundPhoneDisplay}</span>
+                    </a>
+                  </motion.div>
+                  <motion.div
+                    initial={{ opacity: 0, y: 10 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ delay: 0.45 }}
+                    className={styles.contactGroup}
+                  >
+                    <div className={styles.contactLabel}>{dictionary.navigation.rehab || (lang === 'uk' ? 'Реабілітаційний центр' : 'Rehabilitation Center')}</div>
+                    <a href={`tel:${rehabPhoneLink}`} className={styles.contactLink}>
+                      <Phone size={20} />
+                      <span>{rehabPhoneDisplay}</span>
                     </a>
                   </motion.div>
                   <motion.div
