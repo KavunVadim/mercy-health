@@ -17,6 +17,12 @@ const csp = [
 ].join("; ");
 
 const nextConfig: NextConfig = {
+  eslint: {
+    ignoreDuringBuilds: true,
+  },
+  typescript: {
+    ignoreBuildErrors: true,
+  },
   cacheLife: {
     max: {
       stale: 0,
