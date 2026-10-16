@@ -1,7 +1,13 @@
 import { i18n } from "@/i18n-config";
 import { getDb } from "@/lib/mongodb";
 import { siteUrl } from "@/lib/config";
-import { cache } from "react";
+
+/**
+ * Sitemap мусить оновлюватись без redeploy — новини й проєкти додаються
+ * через адмінку в MongoDB. Без revalidate Next.js віддає статичний знімок,
+ * зроблений під час білда, і нові URL у нього ніколи не потрапляють.
+ */
+export const revalidate = 600;
 
 const staticRoutes = [
   "",
@@ -19,37 +25,50 @@ type SitemapEntry = {
   priority?: number;
 };
 
-// Кешуємо функцію отримання даних на 1 годину (3600 секунд)
-const getDynamicRoutes = cache(async (): Promise<{ news: string[]; projects: string[] }> => {
-  const newsIds: string[] = [];
-  const projectIds: string[] = [];
+type DynamicEntry = { id: string; lastModified?: Date };
 
+function toDate(value: unknown): Date | undefined {
+  if (!value) return undefined;
+  const d = value instanceof Date ? value : new Date(String(value));
+  return Number.isNaN(d.getTime()) ? undefined : d;
+}
+
+async function getCollectionEntries(
+  collection: string,
+  label: string,
+): Promise<DynamicEntry[]> {
   try {
     const db = await getDb();
-    const newsDocs = await db.collection("news").find({}).project({ id: 1 }).toArray();
-    for (const doc of newsDocs) {
-      if (doc.id) newsIds.push(doc.id);
-    }
-  } catch (e) {
-    console.error("Sitemap dynamic routes fetch error:", e);
-  }
+    const docs = await db
+      .collection(collection)
+      .find({})
+      .project({ id: 1, updatedAt: 1, createdAt: 1 })
+      .toArray();
 
-  try {
-    const ukContent = await getDb().then(db => db.collection("content_uk").findOne({ key: "main" }));
-    if (ukContent?.projects?.items) {
-      for (const item of ukContent.projects.items) {
-        if (item.id) projectIds.push(item.id);
-      }
-    }
-  } catch (e) {
-    console.error("Sitemap project content fetch error:", e);
-  }
+    const seen = new Set<string>();
+    const entries: DynamicEntry[] = [];
 
-  return { news: newsIds, projects: projectIds };
-});
+    for (const doc of docs) {
+      const id = doc.id;
+      if (typeof id !== "string" || !id || seen.has(id)) continue;
+      seen.add(id);
+      entries.push({ id, lastModified: toDate(doc.updatedAt) ?? toDate(doc.createdAt) });
+    }
+
+    return entries;
+  } catch (e) {
+    console.error(`Sitemap: не вдалося отримати ${label} з колекції "${collection}":`, e);
+    return [];
+  }
+}
 
 export default async function sitemap(): Promise<SitemapEntry[]> {
-  const { news, projects } = await getDynamicRoutes();
+  // Проєкти живуть у власній колекції `projects`, а не в content_uk/content_en —
+  // саме тому раніше жодна сторінка проєкту не потрапляла в sitemap.
+  const [news, projects] = await Promise.all([
+    getCollectionEntries("news", "новини"),
+    getCollectionEntries("projects", "проєкти"),
+  ]);
 
   const entries: SitemapEntry[] = [];
 
@@ -62,17 +81,19 @@ export default async function sitemap(): Promise<SitemapEntry[]> {
       });
     }
 
-    for (const id of news) {
+    for (const item of news) {
       entries.push({
-        url: siteUrl(`/${locale}/news/${id}`),
+        url: siteUrl(`/${locale}/news/${item.id}`),
+        lastModified: item.lastModified,
         changeFrequency: "monthly",
         priority: 0.6,
       });
     }
 
-    for (const id of projects) {
+    for (const item of projects) {
       entries.push({
-        url: siteUrl(`/${locale}/projects/${id}`),
+        url: siteUrl(`/${locale}/projects/${item.id}`),
+        lastModified: item.lastModified,
         changeFrequency: "monthly",
         priority: 0.7,
       });

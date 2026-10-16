@@ -71,6 +71,25 @@ const nextConfig: NextConfig = {
       },
     ],
   },
+  async redirects() {
+    // Без цього / (і старі шляхи без локалі) віддавали 200 з порожнім каркасом
+    // через клієнтський redirect() — Google бачив дубль головної.
+    const legacyRoutes = ["about", "news", "projects", "reports", "support"];
+
+    return [
+      { source: "/", destination: "/uk", permanent: true },
+      ...legacyRoutes.map((route) => ({
+        source: `/${route}`,
+        destination: `/uk/${route}`,
+        permanent: true,
+      })),
+      ...legacyRoutes.map((route) => ({
+        source: `/${route}/:path*`,
+        destination: `/uk/${route}/:path*`,
+        permanent: true,
+      })),
+    ];
+  },
   async headers() {
     return [
       {
