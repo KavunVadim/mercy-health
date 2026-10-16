@@ -20,6 +20,7 @@ export async function generateMetadata({ params }: { params: Promise<{ lang: str
       languages: {
         uk: siteUrl("/uk/support"),
         en: siteUrl("/en/support"),
+        "x-default": siteUrl("/en/support"),
       },
     },
   };

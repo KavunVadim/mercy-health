@@ -58,6 +58,7 @@ export async function generateMetadata({
       languages: {
         uk: siteUrl(`/uk/news/${id}`),
         en: siteUrl(`/en/news/${id}`),
+        "x-default": siteUrl(`/en/news/${id}`),
       },
     },
     openGraph: {

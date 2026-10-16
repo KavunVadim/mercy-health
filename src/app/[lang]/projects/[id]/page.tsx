@@ -35,6 +35,7 @@ export async function generateMetadata({ params }: { params: Promise<{ lang: str
       languages: {
         uk: siteUrl(`/uk/projects/${id}`),
         en: siteUrl(`/en/projects/${id}`),
+        "x-default": siteUrl(`/en/projects/${id}`),
       },
     },
     openGraph: {
