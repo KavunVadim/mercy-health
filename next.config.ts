@@ -76,8 +76,24 @@ const nextConfig: NextConfig = {
     // через клієнтський redirect() — Google бачив дубль головної.
     const legacyRoutes = ["about", "news", "projects", "reports", "support"];
 
+    // Слаги, змінені після правок транслітерації (і→ї тощо). Google досі тримає
+    // старі адреси в черзі сканування, тому вони мають віддавати постійне
+    // переспрямування (Next для permanent:true віддає 308 — для Google це той самий
+    // постійний редирект, що й 301), а не 404.
+    const legacySlugs: { from: string; to: string }[] = [
+      {
+        from: "blahodina-i-oha-my-poruch-na-vdnh",
+        to: "blahodiina-ioha-my-poruch-na-vdnh",
+      },
+    ];
+
     return [
       { source: "/", destination: "/uk", permanent: true },
+      // Специфічні правила для старих слагів — вище за загальні wildcard-и.
+      ...legacySlugs.flatMap(({ from, to }) => [
+        { source: `/:lang(uk|en)/news/${from}`, destination: `/:lang/news/${to}`, permanent: true },
+        { source: `/news/${from}`, destination: `/uk/news/${to}`, permanent: true },
+      ]),
       ...legacyRoutes.map((route) => ({
         source: `/${route}`,
         destination: `/uk/${route}`,

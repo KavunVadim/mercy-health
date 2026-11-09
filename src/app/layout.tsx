@@ -22,7 +22,6 @@ const eUkraineHead = localFont({
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteConfig.url),
-  robots: { index: true, follow: true },
   icons: {
     icon: [
       { url: "/fond-emblem.png", sizes: "32x32", type: "image/png" },
