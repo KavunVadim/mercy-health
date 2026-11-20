@@ -173,7 +173,11 @@
   font-size: 1.05rem;
   line-height: 1.8;
   color: var(--muted-foreground);
-  text-align: justify;
+  /* Justified text on narrow Ukrainian copy leaves rivers of whitespace:
+     no hyphenation dictionary is active, so lines get stretched between words. */
+  text-align: left;
+  hyphens: auto;
+  -webkit-hyphens: auto;
 }
 
 .description p {
@@ -181,6 +185,32 @@
 }
 
 .description p:last-child {
+  margin-bottom: 0;
+}
+
+/* Real lists (content may send <ul><li>): the global reset zeroes list padding,
+   so markers have to be re-enabled explicitly. */
+.description ul,
+.description ol {
+  margin: 0 0 20px;
+  padding-left: 1.15em;
+}
+
+.description ul:last-child,
+.description ol:last-child {
+  margin-bottom: 0;
+}
+
+.description li {
+  margin-bottom: 6px;
+  list-style: disc;
+}
+
+.description ol li {
+  list-style: decimal;
+}
+
+.description li:last-child {
   margin-bottom: 0;
 }
 
