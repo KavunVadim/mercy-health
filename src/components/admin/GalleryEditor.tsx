@@ -66,13 +66,8 @@ export default function GalleryEditor({ value, onChange, label }: GalleryEditorP
         });
         if (res.ok) {
           const data = await res.json();
-          if (!data.dedup) {
-            await fetch(`/api/admin/photos/${data._id}`, {
-              method: 'PUT',
-              headers: { 'Content-Type': 'application/json' },
-              body: JSON.stringify({ inGallery: true }),
-            });
-          }
+          // NOTE: uploading here must NOT flag the photo for the public gallery
+          // (photos.inGallery). Gallery membership is set manually on the Photos page only.
           accumulated.push(data.url);
           onChange([...accumulated]);
         } else if (res.status === 413) {
