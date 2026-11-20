@@ -87,12 +87,34 @@ const nextConfig: NextConfig = {
       },
     ];
 
+    // Новини, у яких адмінка перегенерувала slug після редагування заголовка.
+    // Старі адреси вже розійшлися по соцмережах і в індексах, тому віддаємо
+    // саме 301 (а не 404).
+    const renamedNewsSlugs: { from: string; to: string }[] = [
+      {
+        from: "nova-reanimatsiia-na-kolesakh-dlia-khersonshchyny",
+        to: "blahodiinyi-fond-myloserdya-ta-zdorov-ya-peredav-reanimobil-khersonskii-oblasnii-klinichnii-likarni",
+      },
+      {
+        from: "peredacha-reanimobilia-dlia-bryhady-khartiia",
+        to: "peredacha-reanimobilya-dlya-bryhady-khartiya",
+      },
+      {
+        from: "nova-avtivka-dlia-malomobilnykh-patsiientiv-peredana-viiskovo-medychnomu-klinichnomu-tsentru-skhidnoho-rehionu",
+        to: "nova-avtivka-dlya-malomobilnykh-patsiyentiv-peredana-viiskovo-medychnomu-klinichnomu-tsentru-skhidnoho-rehionu",
+      },
+    ];
+
     return [
       { source: "/", destination: "/uk", permanent: true },
       // Специфічні правила для старих слагів — вище за загальні wildcard-и.
       ...legacySlugs.flatMap(({ from, to }) => [
         { source: `/:lang(uk|en)/news/${from}`, destination: `/:lang/news/${to}`, permanent: true },
         { source: `/news/${from}`, destination: `/uk/news/${to}`, permanent: true },
+      ]),
+      ...renamedNewsSlugs.flatMap(({ from, to }) => [
+        { source: `/:lang(uk|en)/news/${from}`, destination: `/:lang/news/${to}`, statusCode: 301 },
+        { source: `/news/${from}`, destination: `/uk/news/${to}`, statusCode: 301 },
       ]),
       ...legacyRoutes.map((route) => ({
         source: `/${route}`,
