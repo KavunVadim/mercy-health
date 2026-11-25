@@ -1985,3 +1985,144 @@
     display: none !important;
   }
 }
+
+/* ═══════════════════════════════════════════════════
+   SECURITY PAGE (зміна пароля адміністратора)
+═══════════════════════════════════════════════════ */
+.settingsNarrow {
+  max-width: 760px;
+}
+
+.stackTop {
+  margin-top: 1rem;
+}
+
+.formHint {
+  font-size: 0.75rem;
+  line-height: 1.6;
+  color: var(--admin-text-muted);
+  margin: 0 0 1rem 0;
+}
+
+.formHint code {
+  font-family: var(--admin-mono);
+  font-size: 0.7rem;
+  padding: 0.125rem 0.375rem;
+  border-radius: 4px;
+  background: var(--admin-secondary);
+  color: var(--admin-text-secondary);
+  word-break: break-all;
+}
+
+.passwordField {
+  position: relative;
+  display: flex;
+}
+
+.passwordField .input {
+  padding-right: 2.75rem;
+}
+
+.passwordToggle {
+  position: absolute;
+  top: 50%;
+  right: 0.375rem;
+  transform: translateY(-50%);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2rem;
+  height: 2rem;
+  padding: 0;
+  border: none;
+  border-radius: var(--admin-radius-sm);
+  background: transparent;
+  color: var(--admin-text-muted);
+  cursor: pointer;
+  transition: color var(--admin-transition), background var(--admin-transition);
+}
+
+.passwordToggle:hover {
+  color: var(--admin-text);
+  background: var(--admin-secondary);
+}
+
+.passwordToggle:focus-visible {
+  outline: 2px solid var(--admin-accent);
+  outline-offset: 1px;
+}
+
+.alertError,
+.alertSuccess {
+  display: flex;
+  gap: 0.5rem;
+  align-items: flex-start;
+  padding: 0.75rem 0.875rem;
+  border-radius: var(--admin-radius-sm);
+  border: 1px solid transparent;
+  font-size: 0.8125rem;
+  line-height: 1.55;
+}
+
+.alertError {
+  background: var(--admin-danger-bg);
+  border-color: rgba(220, 38, 38, 0.25);
+  color: var(--admin-danger);
+}
+
+.alertSuccess {
+  background: var(--admin-success-bg);
+  border-color: rgba(5, 150, 105, 0.25);
+  color: var(--admin-success);
+}
+
+.requirements {
+  list-style: none;
+  margin: 0.125rem 0 0 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  font-size: 0.75rem;
+  color: var(--admin-text-muted);
+}
+
+.requirement {
+  display: flex;
+  align-items: center;
+  gap: 0.375rem;
+  transition: color var(--admin-transition);
+}
+
+.requirementOk {
+  color: var(--admin-success);
+}
+
+.formActions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+  margin-top: 1.5rem;
+}
+
+@media (max-width: 768px) {
+  .formActions .btn {
+    width: 100%;
+    min-height: 44px;
+  }
+}
+
+.codeBlock {
+  margin: 0 0 1rem 0;
+  padding: 0.75rem 0.875rem;
+  border-radius: var(--admin-radius-sm);
+  border: 1px solid var(--admin-border);
+  background: var(--admin-secondary);
+  color: var(--admin-text-secondary);
+  font-family: var(--admin-mono);
+  font-size: 0.75rem;
+  line-height: 1.5;
+  overflow-x: auto;
+  white-space: pre;
+}

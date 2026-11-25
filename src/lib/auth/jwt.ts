@@ -10,6 +10,8 @@ const REFRESH_TOKEN_EXPIRES_IN = 7 * 24 * 60 * 60; // 7 days in seconds
 export interface JwtPayload {
   sub: string;
   role: string;
+  /** Час видачі токена (секунди epoch). Потрібен, щоб відсікати токени, старші за зміну пароля. */
+  iat?: number;
 }
 
 function getSecretKey(): Uint8Array {
@@ -41,7 +43,11 @@ export async function signRefreshToken(payload: JwtPayload): Promise<string> {
 export async function verifyToken(token: string): Promise<JwtPayload | null> {
   try {
     const { payload } = await jwtVerify(token, getSecretKey());
-    return { sub: payload.sub as string, role: payload.role as string };
+    return {
+      sub: payload.sub as string,
+      role: payload.role as string,
+      iat: typeof payload.iat === 'number' ? payload.iat : undefined,
+    };
   } catch {
     return null;
   }

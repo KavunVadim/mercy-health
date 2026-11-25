@@ -3,6 +3,7 @@ import { getDb } from '@/lib/mongodb';
 import { signAccessToken, signRefreshToken } from '@/lib/auth/jwt';
 import bcrypt from 'bcryptjs';
 import { rateLimit } from '@/lib/rate-limit';
+import { PASSWORD_MIN_LENGTH } from '@/lib/auth/password';
 
 export async function POST(request: Request) {
   try {
@@ -29,8 +30,11 @@ export async function POST(request: Request) {
       return NextResponse.json({ error: 'Email and password are required' }, { status: 400 });
     }
 
-    if (password.length < 6) {
-      return NextResponse.json({ error: 'Password must be at least 6 characters' }, { status: 400 });
+    if (password.length < PASSWORD_MIN_LENGTH) {
+      return NextResponse.json(
+        { error: `Password must be at least ${PASSWORD_MIN_LENGTH} characters` },
+        { status: 400 },
+      );
     }
 
     const existing = await db.collection('users').findOne({ email });

@@ -19,6 +19,7 @@ import {
   Menu,
   X,
   Heart,
+  ShieldCheck,
 } from 'lucide-react';
 import { createPortal } from 'react-dom';
 import styles from '@/app/admin/admin.module.css';
@@ -54,6 +55,12 @@ const navSections: { label: string; items: { href: string; label: string; icon: 
       { href: '/admin/memorandums', label: 'Меморандуми', icon: BookOpenText },
       { href: '/admin/content', label: 'Сторінки', icon: FileEdit },
       { href: '/admin/settings', label: 'Налаштування', icon: Settings },
+    ],
+  },
+  {
+    label: 'Акаунт',
+    items: [
+      { href: '/admin/security', label: 'Безпека', icon: ShieldCheck },
     ],
   },
 ];
